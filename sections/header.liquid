@@ -648,6 +648,31 @@
     --header-group-height: calc(var(--header-height) + var(--announcement-bar-height, 0px));
   }
 
+  #header-component[sticky] {
+    box-shadow: 0 8px 30px rgb(0 0 0 / 0.06);
+    backdrop-filter: saturate(150%) blur(14px);
+  }
+
+  #header-component .header__row--top {
+    transition: background-color 220ms ease, box-shadow 220ms ease;
+  }
+
+  #header-component .header-actions__action,
+  #header-component .header__icon--menu,
+  #header-component .search-action {
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 999px;
+  }
+
+  @media (hover: hover) {
+    #header-component .header-actions__action:hover,
+    #header-component .header__icon--menu:hover,
+    #header-component .search-action:hover {
+      background: rgb(17 17 17 / 0.06);
+    }
+  }
+
   /* Announcement bar */
   .announcement-bar {
     display: flex;

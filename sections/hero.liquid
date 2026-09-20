@@ -1,6 +1,6 @@
 {% schema %}
 {
-  "name": "Adymize Carousel",
+  "name": "Premium Hero Slider",
   "settings": [
     {
       "type": "header",
@@ -21,6 +21,16 @@
       "step": 1,
       "unit": "sec",
       "default": 5
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "label": "Slide transition speed",
+      "min": 300,
+      "max": 1200,
+      "step": 100,
+      "unit": "ms",
+      "default": 600
     },
     {
       "type": "checkbox",
@@ -156,7 +166,7 @@
       "type": "color",
       "id": "button_bg_color",
       "label": "Button Background Color",
-      "default": "#ffffff"
+      "default": "#b3ff00"
     },
     {
       "type": "color",
@@ -204,15 +214,49 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop Image"
+    },
         {
-          "type": "image_picker",
-          "id": "desktop_image",
-          "label": "Desktop Image"
+          "type": "video",
+          "id": "desktop_video",
+          "label": "Desktop video",
+          "info": "Optional. Video is used instead of the desktop image."
         },
         {
           "type": "image_picker",
           "id": "mobile_image",
           "label": "Mobile Image"
+        },
+        {
+          "type": "video",
+          "id": "mobile_video",
+          "label": "Mobile video",
+          "info": "Optional portrait video. Falls back to the desktop video."
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Desktop media position",
+          "default": "center center",
+          "options": [
+            { "value": "left center", "label": "Left" },
+            { "value": "center center", "label": "Center" },
+            { "value": "right center", "label": "Right" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "mobile_image_position",
+          "label": "Mobile media position",
+          "default": "center center",
+          "options": [
+            { "value": "left center", "label": "Left" },
+            { "value": "center center", "label": "Center" },
+            { "value": "right center", "label": "Right" }
+          ]
         },
         {
           "type": "range",
@@ -223,6 +267,11 @@
           "step": 5,
           "unit": "%",
           "default": 20
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow"
         },
         {
           "type": "text",
@@ -246,13 +295,30 @@
           "type": "url",
           "id": "slide_link",
           "label": "Slide Link"
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Content position",
+          "default": "middle-left",
+          "options": [
+            { "value": "top-left", "label": "Top left" },
+            { "value": "middle-left", "label": "Middle left" },
+            { "value": "bottom-left", "label": "Bottom left" },
+            { "value": "top-center", "label": "Top center" },
+            { "value": "middle-center", "label": "Middle center" },
+            { "value": "bottom-center", "label": "Bottom center" },
+            { "value": "top-right", "label": "Top right" },
+            { "value": "middle-right", "label": "Middle right" },
+            { "value": "bottom-right", "label": "Bottom right" }
+          ]
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Adymize Carousel"
+      "name": "Premium Hero Slider"
     }
   ],
   "max_blocks": 10
@@ -314,7 +380,8 @@
     display: flex;
     width: 100%;
     height: 100%;
-    transition: transform 0.6s ease;
+    transition: transform {{ section.settings.transition_speed }}ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
   }
 
   #adymize-carousel-{{ section.id }} .carousel-slide {
@@ -333,12 +400,13 @@
   }
 
   #adymize-carousel-{{ section.id }} .carousel-image,
+  #adymize-carousel-{{ section.id }} .carousel-video,
   #adymize-carousel-{{ section.id }} .placeholder-svg {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
+    object-position: var(--media-position, center center);
   }
 
   #adymize-carousel-{{ section.id }} .carousel-overlay {
@@ -366,14 +434,50 @@
   #adymize-carousel-{{ section.id }} .carousel-content {
     position: absolute;
     z-index: 3;
-    top: 50%;
-    left: 50%;
+    top: var(--content-y, 50%);
+    left: var(--content-x, 50%);
     width: 90%;
     max-width: 900px;
-    transform: translate(-50%, -50%);
+    transform: translate(var(--content-shift-x, -50%), var(--content-shift-y, -50%));
     text-align: {{ section.settings.text_alignment }};
     padding: 24px;
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
+  }
+
+  #adymize-carousel-{{ section.id }} .carousel-content[data-position$='left'] {
+    --content-x: max(var(--page-margin), calc((100% - 1440px) / 2 + var(--page-margin)));
+    --content-shift-x: 0;
+    max-width: 650px;
+  }
+
+  #adymize-carousel-{{ section.id }} .carousel-content[data-position$='right'] {
+    --content-x: calc(100% - max(var(--page-margin), calc((100% - 1440px) / 2 + var(--page-margin))));
+    --content-shift-x: -100%;
+    max-width: 650px;
+  }
+
+  #adymize-carousel-{{ section.id }} .carousel-content[data-position^='top'] {
+    --content-y: 14%;
+    --content-shift-y: 0;
+  }
+
+  #adymize-carousel-{{ section.id }} .carousel-content[data-position^='bottom'] {
+    --content-y: 86%;
+    --content-shift-y: -100%;
+  }
+
+  #adymize-carousel-{{ section.id }} .carousel-eyebrow {
+    display: inline-flex;
+    margin: 0 0 14px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-shadow: none;
   }
 
   #adymize-carousel-{{ section.id }} .carousel-content h2 {
@@ -404,7 +508,8 @@
   }
 
   #adymize-carousel-{{ section.id }} .carousel-btn:hover {
-    opacity: 0.8;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
   }
 
   #adymize-carousel-{{ section.id }} .carousel-arrow {
@@ -477,9 +582,13 @@
   }
 
   #adymize-carousel-{{ section.id }} .carousel-dot.active::after {
-    background: #ffffff;
-    transform: scale(1.2);
+    width: 28px;
+    border-radius: 999px;
+    background: {{ section.settings.button_bg_color }};
+    transform: translateX(-8px);
   }
+
+  #adymize-carousel-{{ section.id }} .carousel-video--mobile { display: none; }
 
   @media screen and (max-width: 767px) {
     #adymize-carousel-{{ section.id }} {
@@ -508,18 +617,28 @@
     }
 
     #adymize-carousel-{{ section.id }} .carousel-image,
+    #adymize-carousel-{{ section.id }} .carousel-video,
     #adymize-carousel-{{ section.id }} .placeholder-svg {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center center;
+      object-position: var(--mobile-media-position, var(--media-position, center center));
     }
 
     #adymize-carousel-{{ section.id }} .carousel-content {
       width: 92%;
+      max-width: none;
+      left: 4%;
+      right: auto;
+      top: auto;
+      bottom: 54px;
+      transform: none;
       padding: 0 10px;
       text-align: left;
     }
+
+    #adymize-carousel-{{ section.id }} .carousel-video--desktop:has(+ .carousel-video--mobile) { display: none; }
+    #adymize-carousel-{{ section.id }} .carousel-video--mobile { display: block; }
 
     #adymize-carousel-{{ section.id }} .carousel-content h2 {
       font-size: {{ section.settings.heading_size_mobile }}px !important;
@@ -546,12 +665,21 @@
       bottom: 16px;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    #adymize-carousel-{{ section.id }} .carousel-track { transition: none; }
+  }
 </style>
 
 <div
   id="adymize-carousel-{{ section.id }}"
+  class="premium-hero"
   data-autoplay="{{ section.settings.auto_play }}"
   data-speed="{{ section.settings.auto_play_time | times: 1000 }}"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Homepage promotions"
+  tabindex="0"
 >
   {% if section.settings.show_arrows %}
     <button class="carousel-arrow prev" type="button" aria-label="Previous Slide">
@@ -567,7 +695,15 @@
       {% if hero_link == blank %}
         {% assign hero_link = routes.root_url | append: 'collections/earbuds' %}
       {% endif %}
-      <div class="carousel-slide" {{ block.shopify_attributes }}>
+      <div
+        class="carousel-slide"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="{{ forloop.index }} of {{ forloop.length }}"
+        aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+        style="--media-position: {{ block.settings.image_position }}; --mobile-media-position: {{ block.settings.mobile_image_position }};"
+        {{ block.shopify_attributes }}
+      >
         {% if hero_link != blank and block.settings.button_label == blank %}
           <a href="{{ hero_link }}" class="carousel-link" aria-label="{{ block.settings.heading | default: 'Shop earbuds' | escape }}"></a>
         {% endif %}
@@ -577,16 +713,22 @@
           style="background: rgba(0,0,0,{{ block.settings.overlay_opacity | divided_by: 100.0 }});"
         ></div>
 
-        <picture>
-          {% if block.settings.mobile_image != blank %}
-            <source
-              media="(max-width: 767px)"
-              srcset="{{ block.settings.mobile_image | image_url: width: 360 }} 360w, {{ block.settings.mobile_image | image_url: width: 540 }} 540w, {{ block.settings.mobile_image | image_url: width: 750 }} 750w, {{ block.settings.mobile_image | image_url: width: 900 }} 900w"
-              sizes="100vw"
-            >
+        {% if block.settings.desktop_video != blank %}
+          {{ block.settings.desktop_video | video_tag: class: 'carousel-video carousel-video--desktop', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '2000x' }}
+          {% if block.settings.mobile_video != blank %}
+            {{ block.settings.mobile_video | video_tag: class: 'carousel-video carousel-video--mobile', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '900x' }}
           {% endif %}
+        {% else %}
+          <picture>
+            {% if block.settings.mobile_image != blank %}
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ block.settings.mobile_image | image_url: width: 360 }} 360w, {{ block.settings.mobile_image | image_url: width: 540 }} 540w, {{ block.settings.mobile_image | image_url: width: 750 }} 750w, {{ block.settings.mobile_image | image_url: width: 900 }} 900w"
+                sizes="100vw"
+              >
+            {% endif %}
 
-          {% if block.settings.desktop_image != blank %}
+            {% if block.settings.desktop_image != blank %}
             <img
               class="carousel-image"
               src="{{ block.settings.desktop_image | image_url: width: 1440 }}"
@@ -602,13 +744,17 @@
                 loading="lazy"
               {% endif %}
             >
-          {% else %}
-            {{ 'lifestyle-2' | placeholder_svg_tag: 'carousel-image placeholder-svg' }}
-          {% endif %}
-        </picture>
+            {% else %}
+              {{ 'lifestyle-2' | placeholder_svg_tag: 'carousel-image placeholder-svg' }}
+            {% endif %}
+          </picture>
+        {% endif %}
 
-        {% if block.settings.heading != blank or block.settings.subheading != blank or block.settings.button_label != blank %}
-          <div class="carousel-content">
+        {% if block.settings.eyebrow != blank or block.settings.heading != blank or block.settings.subheading != blank or block.settings.button_label != blank %}
+          <div class="carousel-content" data-position="{{ block.settings.content_position }}">
+            {% if block.settings.eyebrow != blank %}
+              <div class="carousel-eyebrow">{{ block.settings.eyebrow | escape }}</div>
+            {% endif %}
             {% if block.settings.heading != blank %}
               <h2>{{ block.settings.heading }}</h2>
             {% endif %}
@@ -642,6 +788,7 @@
           class="carousel-dot {% if forloop.first %}active{% endif %}"
           data-index="{{ forloop.index0 }}"
           aria-label="Go To Slide {{ forloop.index }}"
+          aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
         ></button>
       {% endfor %}
     </div>
@@ -681,6 +828,18 @@
       function updateSlide(index) {
         currentSlide = index;
         track.style.transform = 'translateX(-' + currentSlide * 100 + '%)';
+        slides.forEach((slide, slideIndex) => {
+          const active = slideIndex === currentSlide;
+          slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+          slide.querySelectorAll('video').forEach(video => {
+            if (active && !reducedMotion) {
+              const playPromise = video.play();
+              if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        });
         dots.forEach((dot, index) => {
           dot.classList.toggle('active', index === currentSlide);
           dot.setAttribute('aria-current', index === currentSlide ? 'true' : 'false');
@@ -717,6 +876,24 @@
         if (endX - startX > 50) { prevSlide(); resetAutoplay(); }
       }, { passive: true });
 
+      carousel.addEventListener('keydown', event => {
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          nextSlide();
+          resetAutoplay();
+        }
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          prevSlide();
+          resetAutoplay();
+        }
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopAutoplay();
+        else startAutoplay();
+      });
+
       carousel.addEventListener('mouseenter', stopAutoplay);
       carousel.addEventListener('mouseleave', startAutoplay);
       carousel.addEventListener('focusin', () => {
@@ -752,6 +929,20 @@
           clearInterval(parseInt(carousel.dataset.intervalId));
         }
       }
+    });
+
+    document.addEventListener('shopify:block:select', function(event) {
+      const carousel = document.querySelector('#adymize-carousel-{{ section.id }}');
+      if (!carousel || !carousel.contains(event.target)) return;
+      const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+      const selected = slides.indexOf(event.target.closest('.carousel-slide'));
+      if (selected < 0) return;
+      carousel.querySelector('.carousel-track').style.transform = 'translateX(-' + selected * 100 + '%)';
+      slides.forEach((slide, index) => slide.setAttribute('aria-hidden', index === selected ? 'false' : 'true'));
+      carousel.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === selected);
+        dot.setAttribute('aria-current', index === selected ? 'true' : 'false');
+      });
     });
   })();
 </script>

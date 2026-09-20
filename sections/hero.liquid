@@ -260,11 +260,6 @@
 {% endschema %}
 
 <style>
-  #shopify-section-{{ section.id }} {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-
   {% if section.settings.full_width %}
     #shopify-section-{{ section.id }} {
       width: 100% !important;
@@ -287,10 +282,10 @@
   #adymize-carousel-{{ section.id }} {
     position: relative;
     {% if section.settings.full_width %}
-      width: 100%;
-      max-width: 100%;
-      margin-left: 0;
-      margin-right: 0;
+      width: 100vw;
+      max-width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
     {% else %}
       width: 100%;
       max-width: {{ section.settings.max_width }}px;
@@ -328,6 +323,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    isolation: isolate;
   }
 
   #adymize-carousel-{{ section.id }} picture {
@@ -352,6 +348,15 @@
     pointer-events: none;
   }
 
+  #adymize-carousel-{{ section.id }} .carousel-slide::after {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.24) 48%, rgba(0, 0, 0, 0.04) 100%);
+    content: '';
+    pointer-events: none;
+  }
+
   #adymize-carousel-{{ section.id }} .carousel-link {
     position: absolute;
     inset: 0;
@@ -367,6 +372,8 @@
     max-width: 900px;
     transform: translate(-50%, -50%);
     text-align: {{ section.settings.text_alignment }};
+    padding: 24px;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
   }
 
   #adymize-carousel-{{ section.id }} .carousel-content h2 {
@@ -385,7 +392,6 @@
 
   #adymize-carousel-{{ section.id }} .carousel-btn {
     display: inline-block;
-    min-height: 48px;
     padding: 14px 34px;
     background: {{ section.settings.button_bg_color }} !important;
     color: {{ section.settings.button_text_color }} !important;
@@ -393,6 +399,8 @@
     font-weight: 700;
     border-radius: {{ section.settings.button_radius }}px !important;
     transition: opacity 0.3s ease;
+    min-height: 48px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
   }
 
   #adymize-carousel-{{ section.id }} .carousel-btn:hover {
@@ -442,28 +450,35 @@
   #adymize-carousel-{{ section.id }} .carousel-dot {
     width: 44px;
     height: 44px;
-    padding: 0;
-    border: 14px solid transparent;
+    padding: 16px;
+    border: none;
     border-radius: 50%;
-    background: rgba(255,255,255,0.5);
-    background-clip: padding-box;
+    background: transparent;
     cursor: pointer;
+    position: relative;
+  }
+
+  #adymize-carousel-{{ section.id }} .carousel-dot::after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+  }
+
+  #adymize-carousel-{{ section.id }} .carousel-dot:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
   }
 
   #adymize-carousel-{{ section.id }} .carousel-dot.active {
-    background: #fff;
-    background-clip: padding-box;
+    background: transparent;
   }
 
-  #adymize-carousel-{{ section.id }} :focus-visible {
-    outline: 3px solid #ffffff;
-    outline-offset: 3px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #adymize-carousel-{{ section.id }} .carousel-track {
-      transition: none;
-    }
+  #adymize-carousel-{{ section.id }} .carousel-dot.active::after {
+    background: #ffffff;
+    transform: scale(1.2);
   }
 
   @media screen and (max-width: 767px) {
@@ -502,9 +517,8 @@
 
     #adymize-carousel-{{ section.id }} .carousel-content {
       width: 92%;
-      max-width: calc(100% - 32px);
       padding: 0 10px;
-      overflow-wrap: anywhere;
+      text-align: left;
     }
 
     #adymize-carousel-{{ section.id }} .carousel-content h2 {
@@ -593,23 +607,15 @@
           {% endif %}
         </picture>
 
-        {% if block.settings.heading != blank or block.settings.subheading != blank or block.settings.button_label != blank %}
-          <div class="carousel-content">
-            {% if block.settings.heading != blank or forloop.first %}
-              <h2>{{ block.settings.heading | default: 'Sound for your day. Power for your devices.' }}</h2>
-            {% endif %}
+        <div class="carousel-content">
+          <h2>{{ block.settings.heading | default: 'Sound for your day. Power for your devices.' }}</h2>
 
-            {% if block.settings.subheading != blank or forloop.first %}
-              <p>{{ block.settings.subheading | default: 'Explore earbuds, headphones and everyday charging essentials.' }}</p>
-            {% endif %}
+          <p>{{ block.settings.subheading | default: 'Explore earbuds, headphones and everyday charging essentials.' }}</p>
 
-            {% if block.settings.button_label != blank or forloop.first %}
-              <a href="{{ hero_link }}" class="carousel-btn">
-                {{ block.settings.button_label | default: 'Shop earbuds' }}
-              </a>
-            {% endif %}
-          </div>
-        {% endif %}
+          <a href="{{ hero_link }}" class="carousel-btn">
+            {{ block.settings.button_label | default: 'Shop earbuds' }}
+          </a>
+        </div>
       </div>
     {% endfor %}
   </div>
@@ -651,11 +657,12 @@
       
       const totalSlides = slides.length;
       const autoplay = carousel.dataset.autoplay === 'true';
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const speed = parseInt(carousel.dataset.speed, 10) || 5000;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       let currentSlide = 0;
       let autoplayInterval;
       let startX = 0;
+      let isFocused = false;
 
       if (totalSlides <= 1) {
         if (prevBtn) prevBtn.style.display = 'none';
@@ -668,15 +675,17 @@
       function updateSlide(index) {
         currentSlide = index;
         track.style.transform = 'translateX(-' + currentSlide * 100 + '%)';
-        dots.forEach(dot => dot.classList.remove('active'));
-        if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentSlide);
+          dot.setAttribute('aria-current', index === currentSlide ? 'true' : 'false');
+        });
       }
 
       function nextSlide() { updateSlide((currentSlide + 1) % totalSlides); }
       function prevSlide() { updateSlide((currentSlide - 1 + totalSlides) % totalSlides); }
 
       function startAutoplay() {
-        if (!autoplay || reduceMotion) return;
+        if (!autoplay || reducedMotion || isFocused) return;
         stopAutoplay();
         autoplayInterval = setInterval(nextSlide, speed);
         carousel.dataset.intervalId = autoplayInterval;
@@ -704,11 +713,18 @@
 
       carousel.addEventListener('mouseenter', stopAutoplay);
       carousel.addEventListener('mouseleave', startAutoplay);
-      carousel.addEventListener('focusin', stopAutoplay);
+      carousel.addEventListener('focusin', () => {
+        isFocused = true;
+        stopAutoplay();
+      });
       carousel.addEventListener('focusout', event => {
-        if (!carousel.contains(event.relatedTarget)) startAutoplay();
+        if (!carousel.contains(event.relatedTarget)) {
+          isFocused = false;
+          startAutoplay();
+        }
       });
 
+      updateSlide(0);
       startAutoplay();
     }
 

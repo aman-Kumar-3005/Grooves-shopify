@@ -1,6 +1,7 @@
 {%- liquid
   assign breadcrumb_title = product.title | default: collection.title
   assign breadcrumb_url = product.url | default: collection.url
+  assign breadcrumb_home = 'Home'
   assign parent_collection = blank
 
   if product != blank
@@ -13,17 +14,17 @@
 
 <nav class="grooves-breadcrumbs" aria-label="Breadcrumb">
   <ol>
-    <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t | default: 'Home' }}</a></li>
+    <li><a href="{{ routes.root_url }}">{{ breadcrumb_home }}</a></li>
     {%- if parent_collection != blank -%}
       <li aria-hidden="true">/</li>
-      <li><a href="{{ parent_collection.url }}">{{ parent_collection.title }}</a></li>
+      <li><a href="{{ parent_collection.url }}">{{ parent_collection.title | escape }}</a></li>
     {%- elsif collection != blank and collection.handle != blank -%}
       <li aria-hidden="true">/</li>
-      <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+      <li><a href="{{ collection.url }}">{{ collection.title | escape }}</a></li>
     {%- endif -%}
     {%- if breadcrumb_title != blank -%}
       <li aria-hidden="true">/</li>
-      <li aria-current="page">{{ breadcrumb_title }}</li>
+      <li aria-current="page">{{ breadcrumb_title | escape }}</li>
     {%- endif -%}
   </ol>
 </nav>
@@ -37,7 +38,7 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": {{ 'general.breadcrumbs.home' | t | default: 'Home' | json }},
+          "name": {{ breadcrumb_home | json }},
           "item": {{ request.origin | append: routes.root_url | json }}
         }{% if parent_collection != blank or collection != blank %},
         {
@@ -68,14 +69,18 @@
   .grooves-breadcrumbs {
     max-width: var(--page-width, 1280px);
     margin: 0 auto;
-    padding: 16px 24px;
+    padding: 12px 24px;
     font-size: 14px;
+    line-height: 1.4;
+    overflow: hidden;
   }
 
   .grooves-breadcrumbs ol {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    align-items: baseline;
+    overflow-wrap: anywhere;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -84,5 +89,16 @@
   .grooves-breadcrumbs a {
     text-decoration: underline;
     text-underline-offset: 2px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .grooves-breadcrumbs {
+      padding: 10px 16px;
+      font-size: 12px;
+    }
+
+    .grooves-breadcrumbs ol {
+      gap: 5px;
+    }
   }
 {% endstylesheet %}

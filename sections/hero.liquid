@@ -260,6 +260,11 @@
 {% endschema %}
 
 <style>
+  #shopify-section-{{ section.id }} {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
   {% if section.settings.full_width %}
     #shopify-section-{{ section.id }} {
       width: 100% !important;
@@ -302,7 +307,7 @@
     
     overflow: hidden;
     background: transparent;
-    margin-top: max(16px, {{ section.settings.margin_top }}px) !important;
+    margin-top: {{ section.settings.margin_top }}px !important;
     margin-bottom: {{ section.settings.margin_bottom }}px !important;
   }
 

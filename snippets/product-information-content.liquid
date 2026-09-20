@@ -94,6 +94,9 @@
     {% assign product_href = '#ProductInformation-' | append: section_id %}
     {% render 'skip-to-content-link', href: product_href, text: 'accessibility.skip_to_product_info' %}
   {% endif %}
+  {% if request.page_type == 'product' %}
+    {% render 'grooves-breadcrumbs', product: product %}
+  {% endif %}
   <product-component
     class="{{ product_grid_class }}"
     data-product-grid-content

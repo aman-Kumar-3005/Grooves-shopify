@@ -4,8 +4,6 @@
   {{ closest.product | structured_data }}
 </script>
 
-{% render 'grooves-breadcrumbs', product: closest.product %}
-
 {% capture media_gallery %}
   {%- content_for 'block',
     type: '_product-media-gallery',

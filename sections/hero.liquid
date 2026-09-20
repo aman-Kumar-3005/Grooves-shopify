@@ -282,10 +282,10 @@
   #adymize-carousel-{{ section.id }} {
     position: relative;
     {% if section.settings.full_width %}
-      width: 100vw;
-      max-width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
     {% else %}
       width: 100%;
       max-width: {{ section.settings.max_width }}px;
@@ -607,15 +607,21 @@
           {% endif %}
         </picture>
 
-        <div class="carousel-content">
-          <h2>{{ block.settings.heading | default: 'Sound for your day. Power for your devices.' }}</h2>
-
-          <p>{{ block.settings.subheading | default: 'Explore earbuds, headphones and everyday charging essentials.' }}</p>
-
-          <a href="{{ hero_link }}" class="carousel-btn">
-            {{ block.settings.button_label | default: 'Shop earbuds' }}
-          </a>
-        </div>
+        {% if block.settings.heading != blank or block.settings.subheading != blank or block.settings.button_label != blank %}
+          <div class="carousel-content">
+            {% if block.settings.heading != blank %}
+              <h2>{{ block.settings.heading }}</h2>
+            {% endif %}
+            {% if block.settings.subheading != blank %}
+              <p>{{ block.settings.subheading }}</p>
+            {% endif %}
+            {% if block.settings.button_label != blank %}
+              <a href="{{ hero_link }}" class="carousel-btn">
+                {{ block.settings.button_label }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
     {% endfor %}
   </div>

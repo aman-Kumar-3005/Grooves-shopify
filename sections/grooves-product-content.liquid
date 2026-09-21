@@ -1,0 +1,189 @@
+<section class="g-section" style="background:{{ section.settings.background }};color:{{ section.settings.text_color }};--g-spacing:{{ section.settings.padding }}px"><div class="g-container g-product-content">
+{% for block in section.blocks %}{% case block.type %}
+{% when '@app' %}{% render block %}
+{% when 'accordion' %}{% if block.settings.content != blank or block.settings.page.content != blank %}<details class="g-accordion" {% if block.settings.open %}open{% endif %} {{ block.shopify_attributes }}><summary>{{ block.settings.heading | escape }}<span>+</span></summary><div class="g-accordion-content rte">{{ block.settings.content }}{{ block.settings.page.content }}</div></details>{% elsif request.design_mode %}<div class="g-editor-note" {{ block.shopify_attributes }}>Add content or connect a product metafield for {{ block.settings.heading | escape }}.</div>{% endif %}
+{% when 'box' %}<details class="g-accordion" {{ block.shopify_attributes }}><summary>{{ block.settings.heading | escape }}<span>+</span></summary><div class="g-box-grid">{% for i in (1..4) %}{% assign label_key = 'label_' | append:i %}{% assign image_key = 'image_' | append:i %}{% if block.settings[label_key] != blank %}<div>{% if block.settings[image_key] != blank %}{{ block.settings[image_key] | image_url:width:180 | image_tag: loading:'lazy', widths:'90,180', sizes:'80px' }}{% else %}{% render 'grooves-icon',name:'box' %}{% endif %}<p>{{ block.settings[label_key] | escape }}</p></div>{% endif %}{% endfor %}</div></details>
+{% when 'image' %}{% if block.settings.image != blank %}<div class="g-product-story" {{ block.shopify_attributes }}>{{ block.settings.image | image_url:width:1800 | image_tag: loading:'lazy', widths:'480,750,1100,1800', sizes:'100vw' }}</div>{% endif %}
+{% when 'review' %}{% if block.settings.name != blank and block.settings.review != blank %}<figure class="g-review" {{ block.shopify_attributes }}><div class="g-rating" aria-label="{{ block.settings.rating }} out of 5 stars">{% for i in (1..5) %}{% if i <= block.settings.rating %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}</div><blockquote>{{ block.settings.review | escape }}</blockquote><figcaption><strong>{{ block.settings.name | escape }}</strong>{% if block.settings.verified %}<span>Verified purchase</span>{% endif %}</figcaption></figure>{% endif %}
+{% endcase %}{% endfor %}</div></section>
+
+{% schema %}
+{
+  "name": "Grooves product details",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#151515"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Vertical spacing",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "accordion",
+      "name": "Specifications or FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Technical specifications"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "info": "Connect a product metafield for specifications unique to each product."
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Content from page"
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "box",
+      "name": "In the box",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "What's in the box"
+        },
+        {
+          "type": "text",
+          "id": "label_1",
+          "label": "Item 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Item 1 icon"
+        },
+        {
+          "type": "text",
+          "id": "label_2",
+          "label": "Item 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Item 2 icon"
+        },
+        {
+          "type": "text",
+          "id": "label_3",
+          "label": "Item 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Item 3 icon"
+        },
+        {
+          "type": "text",
+          "id": "label_4",
+          "label": "Item 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Item 4 icon"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Feature image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Customer review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name"
+        },
+        {
+          "type": "textarea",
+          "id": "review",
+          "label": "Review"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Order independently verified",
+          "default": false
+        },
+        {
+          "type": "paragraph",
+          "content": "Only enable verified purchase when matched to a real order. For automatic verification, add your review app block."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves product details",
+      "blocks": [
+        {
+          "type": "accordion"
+        },
+        {
+          "type": "box"
+        },
+        {
+          "type": "accordion",
+          "settings": {
+            "heading": "FAQs"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

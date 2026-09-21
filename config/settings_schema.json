@@ -2116,5 +2116,68 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Grooves design",
+    "settings": [
+      {
+        "type": "color",
+        "id": "grooves_accent",
+        "label": "Accent",
+        "default": "#b3ff00"
+      },
+      {
+        "type": "range",
+        "id": "grooves_radius",
+        "label": "Card corners",
+        "min": 0,
+        "max": 32,
+        "step": 2,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "checkbox",
+        "id": "grooves_confetti",
+        "label": "Celebrate successful cart additions",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "grooves_checkout_label",
+        "label": "Checkout label",
+        "default": "Secure checkout"
+      },
+      {
+        "type": "text",
+        "id": "grooves_cart_payment_text",
+        "label": "Cart payment note"
+      },
+      {
+        "type": "image_picker",
+        "id": "grooves_payment_image",
+        "label": "Extra payment logos"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube_link",
+        "label": "YouTube"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter_link",
+        "label": "X"
+      }
+    ]
   }
 ]

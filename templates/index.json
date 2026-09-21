@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero_RkimKJ": {
@@ -21,7 +12,7 @@
             "heading": "",
             "subheading": "",
             "button_label": "",
-            "slide_link": ""
+            "slide_link": "shopify://collections/all"
           }
         },
         "slide_cJdV3y": {
@@ -33,7 +24,7 @@
             "heading": "",
             "subheading": "",
             "button_label": "",
-            "slide_link": ""
+            "slide_link": "shopify://collections/all"
           }
         }
       },
@@ -50,9 +41,9 @@
         "max_width": 1600,
         "full_height": false,
         "desktop_height": 560,
-        "mobile_height": 500,
-        "text_alignment": "center",
-        "heading_size_desktop": 72,
+        "mobile_height": 360,
+        "text_alignment": "left",
+        "heading_size_desktop": 64,
         "heading_size_mobile": 36,
         "subheading_size_desktop": 24,
         "subheading_size_mobile": 16,
@@ -60,111 +51,62 @@
         "subheading_color": "#ffffff",
         "button_bg_color": "#b3ff00",
         "button_text_color": "#000000",
-        "button_radius": 5,
+        "button_radius": 24,
         "margin_top": 0,
-        "margin_bottom": 0
+        "margin_bottom": 0,
+        "show_gradient": false
       }
     },
-    "marque_sec_LQxK4R": {
-      "type": "marque-sec",
-      "blocks": {
-        "text_Wpneba": {
-          "type": "text",
-          "settings": {
-            "new_text": "⭐ India’s Fastest Growing Audio Brand | Over 2.5 Crore+ Happy Customers."
-          }
-        },
-        "text_cPy8Ge": {
-          "type": "text",
-          "settings": {
-            "new_text": "🎁 Use Coupon Code PREPAID at Checkout for an Extra 5% OFF!"
-          }
-        },
-        "text_BFYbqL": {
-          "type": "text",
-          "settings": {
-            "new_text": "🛡️ 100% Secure Checkout & 24-Hour Easy Replacement Policy."
-          }
-        },
-        "text_yUGK98": {
-          "type": "text",
-          "settings": {
-            "new_text": "⚡ Special Launch Offer: Flat 50% OFF on All Wireless Earbuds & Headphones!"
-          }
-        },
-        "text_AqxUJe": {
-          "type": "text",
-          "settings": {
-            "new_text": "🚀 Fast & Secure Delivery: Free Shipping on All Prepaid Orders."
-          }
-        },
-        "text_TbTibz": {
-          "type": "text",
-          "settings": {
-            "new_text": "🔥 High Demand Alert: Grab Your True Wireless Stereo Before Stock Runs Out!"
-          }
-        }
-      },
-      "block_order": [
-        "text_Wpneba",
-        "text_cPy8Ge",
-        "text_BFYbqL",
-        "text_yUGK98",
-        "text_AqxUJe",
-        "text_TbTibz"
-      ],
-      "name": "Marquee",
-      "settings": {
-        "marquee_meta": "",
-        "colorBackground": "#000",
-        "marquee_speed": 164,
-        "colorText": "#fff",
-        "link": "",
-        "marquee_height": 46,
-        "font_size": 24
-      }
-    },
-    "dynamic_collection_slider_cyxfNq": {
-      "type": "dynamic-collection-slider",
+    "grooves_categories": {
+      "type": "grooves-categories",
+      "settings": {},
       "blocks": {
         "collection_TTrtLF": {
-          "type": "collection",
+          "type": "category",
           "settings": {
             "collection": "power-bank",
-            "card_bg_color": "#e6f2f5",
-            "custom_title": ""
+            "title": "",
+            "image": ""
           }
         },
         "collection_pGnq7k": {
-          "type": "collection",
+          "type": "category",
           "settings": {
             "collection": "accessories",
-            "card_bg_color": "#e6f2f5",
-            "custom_title": ""
+            "title": "",
+            "image": ""
           }
         },
         "collection_rwWTTt": {
-          "type": "collection",
+          "type": "category",
           "settings": {
             "collection": "adaptor",
-            "card_bg_color": "#e6f2f5",
-            "custom_title": ""
+            "title": "",
+            "image": ""
           }
         },
         "collection_7jfDEn": {
-          "type": "collection",
+          "type": "category",
           "settings": {
             "collection": "combo",
-            "card_bg_color": "#e6f2f5",
-            "custom_title": ""
+            "title": "",
+            "image": ""
           }
         },
         "collection_VArjUk": {
-          "type": "collection",
+          "type": "category",
           "settings": {
             "collection": "earbuds",
-            "card_bg_color": "#e6f2f5",
-            "custom_title": ""
+            "title": "",
+            "image": ""
+          }
+        },
+        "headphones": {
+          "type": "category",
+          "settings": {
+            "collection": "headphones",
+            "title": "Headphones",
+            "icon": "audio"
           }
         }
       },
@@ -173,347 +115,33 @@
         "collection_pGnq7k",
         "collection_rwWTTt",
         "collection_7jfDEn",
-        "collection_VArjUk"
-      ],
-      "name": "3D Collection Slider",
-      "settings": {
-        "title": "GEAR UP YOUR LIFESTYLE",
-        "heading_alignment": "center",
-        "item_width_desktop": 90,
-        "item_width_mobile": 90,
-        "gap": 20,
-        "border_radius": 16,
-        "center_desktop": true,
-        "font_size": 13,
-        "font_weight": "600",
-        "text_color": "#121212",
-        "section_bg": "#ffffff",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+        "collection_VArjUk",
+        "headphones"
+      ]
     },
-    "custom_liquid_drfTpQ": {
-      "type": "custom-liquid",
-      "name": "t:names.custom_liquid",
+    "grooves_featured": {
+      "type": "grooves-products",
       "settings": {
-        "custom_liquid": "",
-        "background_color": "",
-        "section_width": "page-width",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "product_list_X8Q7bi": {
-      "type": "product-list",
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "static": true,
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 0,
-            "background_color": "{{ settings.color_palette.background }}",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_Gn6P7T": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "solid",
-                "border_width": 0,
-                "border_opacity": 0,
-                "border_color": "",
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "group_AUJmQt": {
-              "type": "_product-card-group",
-              "name": "t:names.group",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "space-between",
-                "vertical_alignment": "flex-start",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "space-between",
-                "gap": 4,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "background_media": "none",
-                "background_color": "",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0,
-                "link": "",
-                "open_in_new_tab": false,
-                "padding-block-start": 12,
-                "padding-block-end": 12,
-                "padding-inline-start": 12,
-                "padding-inline-end": 12
-              },
-              "blocks": {
-                "group_pLH7Cd": {
-                  "type": "_product-card-group",
-                  "name": "t:names.group",
-                  "settings": {
-                    "content_direction": "row",
-                    "vertical_on_mobile": true,
-                    "horizontal_alignment": "space-between",
-                    "vertical_alignment": "center",
-                    "align_baseline": false,
-                    "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "flex-start",
-                    "gap": 8,
-                    "width": "fill",
-                    "custom_width": 75,
-                    "width_mobile": "custom",
-                    "custom_width_mobile": 75,
-                    "height": "fit",
-                    "custom_height": 100,
-                    "background_media": "none",
-                    "background_color": "",
-                    "video_position": "cover",
-                    "background_image_position": "cover",
-                    "toggle_overlay": false,
-                    "overlay_color": "#00000026",
-                    "overlay_style": "solid",
-                    "gradient_direction": "to top",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_color": "",
-                    "border_radius": 0,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {
-                    "product_title_gtg38q": {
-                      "type": "product-title",
-                      "name": "t:names.product_title",
-                      "settings": {
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "h5",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    },
-                    "price_Vz3EzL": {
-                      "type": "price",
-                      "name": "t:names.product_price",
-                      "settings": {
-                        "show_sale_price_first": true,
-                        "show_installments": false,
-                        "show_tax_info": false,
-                        "type_preset": "paragraph",
-                        "width": "fit-content",
-                        "alignment": "right",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "text_color": "",
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "product_title_gtg38q",
-                    "price_Vz3EzL"
-                  ]
-                },
-                "group_3Fwdtp": {
-                  "type": "_product-card-group",
-                  "name": "t:names.group",
-                  "settings": {
-                    "content_direction": "column",
-                    "vertical_on_mobile": true,
-                    "horizontal_alignment": "flex-start",
-                    "vertical_alignment": "center",
-                    "align_baseline": false,
-                    "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "flex-start",
-                    "gap": 12,
-                    "width": "fit-content",
-                    "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 25,
-                    "height": "fit",
-                    "custom_height": 100,
-                    "background_media": "none",
-                    "background_color": "",
-                    "video_position": "cover",
-                    "background_image_position": "cover",
-                    "toggle_overlay": false,
-                    "overlay_color": "#00000026",
-                    "overlay_style": "solid",
-                    "gradient_direction": "to top",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_color": "",
-                    "border_radius": 0,
-                    "link": "",
-                    "open_in_new_tab": false,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {
-                    "text_JHMjjF": {
-                      "type": "text",
-                      "name": "t:names.text",
-                      "settings": {
-                        "text": "<p>{{ closest.product.metafields.descriptors.subtitle.value }}</p>",
-                        "width": "100%",
-                        "max_width": "none",
-                        "alignment": "left",
-                        "type_preset": "paragraph",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "text_JHMjjF"
-                  ]
-                }
-              },
-              "block_order": [
-                "group_pLH7Cd",
-                "group_3Fwdtp"
-              ]
-            }
-          },
-          "block_order": [
-            "product_card_gallery_Gn6P7T",
-            "group_AUJmQt"
-          ]
-        }
-      },
-      "name": "t:names.product_list",
-      "settings": {
-        "custom_heading": "Top Collection",
-        "custom_subheading": "",
-        "heading_alignment": "left",
-        "max_section_width": 1400,
-        "card_max_width": 300,
+        "heading": "Your everyday upgrades",
         "collection": "all",
-        "layout_type": "carousel",
-        "carousel_on_mobile": true,
-        "max_products": 16,
-        "columns": 6,
-        "mobile_columns": "1",
-        "mobile_card_size": "44cqw",
-        "columns_gap": 6,
-        "rows_gap": 1,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "full-width",
-        "horizontal_alignment": "center",
-        "gap": 20,
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "limit": 8
+      }
+    },
+    "grooves_banner": {
+      "type": "grooves-banner",
+      "settings": {
+        "eyebrow": "THE GROOVES EDIT",
+        "heading": "Good sound. Great days.",
+        "copy": "<p>Discover audio made for your everyday rhythm.</p>",
+        "link": "shopify://collections/earbuds"
+      }
+    },
+    "grooves_audio": {
+      "type": "grooves-products",
+      "settings": {
+        "heading": "Find your sound",
+        "collection": "earbuds",
+        "limit": 8
       }
     },
     "shoppable_videos_iPtCWY": {
@@ -610,1325 +238,67 @@
         "padding_bottom": 40
       }
     },
-    "custom_product_slider_GfVtUV": {
-      "type": "custom-product-slider",
-      "name": "Dynamic Product Slider",
+    "grooves_power": {
+      "type": "grooves-products",
       "settings": {
-        "title": "Newly In",
-        "heading_size": 24,
-        "collection": "accessories",
-        "products_to_show": 8,
-        "show_new_badge": true,
-        "new_badge_text": "Newly In",
-        "show_rating_badge": true,
-        "price_prefix": "Prebook @",
-        "card_radius": 8,
-        "btn_bg_color": "#121212",
-        "btn_text_color": "#ffffff",
-        "bg_color": "#ffffff",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "custom_trust_badges_JijKjw": {
-      "type": "custom-trust-badges",
-      "blocks": {
-        "feature_7YW7qf": {
-          "type": "feature",
-          "settings": {
-            "icon": "shipping",
-            "title": "⚡ Pan-India Free Shipping",
-            "text": "Fast & free delivery on all prepaid orders across India."
-          }
-        },
-        "feature_KdM7GL": {
-          "type": "feature",
-          "settings": {
-            "icon": "shield",
-            "title": "🛡️ 1-Year Replacement Warranty",
-            "text": "Complete peace of mind with our no-questions-asked claim process."
-          }
-        },
-        "feature_BDrR6A": {
-          "type": "feature",
-          "settings": {
-            "icon": "return",
-            "title": "🔄 7-Day Easy Returns",
-            "text": "Not fully satisfied? Get a fast and hassle-free exchange."
-          }
-        },
-        "feature_KDHKcX": {
-          "type": "feature",
-          "settings": {
-            "icon": "support",
-            "title": "🎧 24/7 Priority Support",
-            "text": "Our technical support team is always online to help you."
-          }
-        }
-      },
-      "block_order": [
-        "feature_7YW7qf",
-        "feature_KdM7GL",
-        "feature_BDrR6A",
-        "feature_KDHKcX"
-      ],
-      "name": "Trust Badges",
-      "settings": {
-        "bg_color": "#f8f9fa",
-        "icon_color": "#111111",
-        "text_color": "#111111",
-        "padding_y": 40
-      }
-    },
-    "custom_product_slider_CMMyHU": {
-      "type": "custom-product-slider",
-      "name": "Dynamic Product Slider",
-      "settings": {
-        "title": "Newly In",
-        "heading_size": 24,
+        "heading": "Power through your day",
         "collection": "adaptor",
-        "products_to_show": 8,
-        "show_new_badge": true,
-        "new_badge_text": "Newly In",
-        "show_rating_badge": true,
-        "price_prefix": "Prebook @",
-        "card_radius": 8,
-        "btn_bg_color": "#121212",
-        "btn_text_color": "#ffffff",
-        "bg_color": "#ffffff",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "limit": 8
       }
     },
-    "shoppabl_videos_tNnnHV": {
-      "type": "shoppabl-videos",
+    "grooves_support": {
+      "type": "grooves-support",
+      "settings": {},
       "blocks": {
-        "video_BNhBXG": {
-          "type": "video",
+        "support": {
+          "type": "feature",
           "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1740150136_3572960637669474566_64911717332.mp4",
-            "youtube_id": "",
-            "product": "",
-            "custom_title": ""
+            "title": "Customer Support",
+            "icon": "support",
+            "link": "shopify://pages/contact"
           }
         },
-        "video_7iYgwC": {
-          "type": "video",
+        "warranty": {
+          "type": "feature",
           "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1741417489_3583591983125800638_64911717332.mp4",
-            "youtube_id": "",
-            "product": "",
-            "custom_title": ""
+            "title": "Warranty",
+            "icon": "shield",
+            "link": "shopify://pages/contact"
           }
         },
-        "video_AMpfxC": {
-          "type": "video",
+        "faq": {
+          "type": "feature",
           "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1734701609_3527255152655824214_64911717332.mp4",
-            "youtube_id": "",
-            "product": "",
-            "custom_title": ""
+            "title": "FAQs",
+            "icon": "faq",
+            "link": "shopify://pages/contact"
           }
         },
-        "video_Bb9P7X": {
-          "type": "video",
+        "replacement": {
+          "type": "feature",
           "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1756390323_3709193233130703507_64911717332.mp4",
-            "youtube_id": "",
-            "product": "",
-            "custom_title": ""
-          }
-        },
-        "video_3b6bJP": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1789720206_3988779876240647754_64911717332.mp4",
-            "youtube_id": "",
-            "product": "",
-            "custom_title": ""
-          }
-        },
-        "video_zrifAX": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1789491006_3986859530377841130_64911717332.mp4",
-            "youtube_id": "",
-            "product": "daniel-wellington-4",
-            "custom_title": ""
-          }
-        },
-        "video_hCW9Bq": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1782331211_3926800424393116968_64911717332.mp4",
-            "youtube_id": "",
-            "product": "",
-            "custom_title": ""
+            "title": "Replacement",
+            "icon": "box",
+            "link": "shopify://pages/contact"
           }
         }
       },
       "block_order": [
-        "video_BNhBXG",
-        "video_7iYgwC",
-        "video_AMpfxC",
-        "video_Bb9P7X",
-        "video_3b6bJP",
-        "video_zrifAX",
-        "video_hCW9Bq"
-      ],
-      "name": "Shoppable VIDEO",
-      "settings": {
-        "full_width": true,
-        "title": "Shop the Trends Everyone’s Talking About.",
-        "heading_size": 24,
-        "heading_alignment": "left",
-        "card_width_desktop": 260,
-        "card_width_mobile": 220,
-        "card_radius": 16,
-        "bg_color": "#ffffff",
-        "text_color": "#121212",
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
-    },
-    "press_logos_slider_KftkNy": {
-      "type": "press-logos-slider",
-      "blocks": {
-        "logo_item_VwaxVx": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b31004c4e54_64ca0bb3-1bff-4937-93b3-8614e4a7dc00.webp",
-            "link": ""
-          }
-        },
-        "logo_item_xnNrAF": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b25fb4ebbf7_40cbf350-478f-4719-bf49-9b8e5eed965d.webp",
-            "link": ""
-          }
-        },
-        "logo_item_P6Ykdc": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b25f49763f9_27dc2b8d-d869-45b2-ae0b-f7300dfd8bbc.webp",
-            "link": ""
-          }
-        },
-        "logo_item_AgVyXe": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b25ff9d6f37_39eedc49-ae59-48e5-84b5-5df92d2e8bb7.webp",
-            "link": ""
-          }
-        },
-        "logo_item_iGPyhV": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b25fe63e0bf_9901ed4f-a30c-4556-ae4b-f403ea50a885.webp",
-            "link": ""
-          }
-        },
-        "logo_item_cMKfac": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b3101a37034_4e9d8982-384e-4d57-a9ad-97cea0eb865c.webp",
-            "link": ""
-          }
-        },
-        "logo_item_GraN6C": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b2350c63d71_7177f48a-bfff-4506-a3c4-bf2d3ed6a973.webp",
-            "link": ""
-          }
-        },
-        "logo_item_qTMfBY": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b25f2b2fe2c_faa436f4-9b7e-400f-a95d-02264449dae8.webp",
-            "link": ""
-          }
-        },
-        "logo_item_URwiFp": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b239b6c266f_528d9f3a-b5e5-4f8e-967c-a149f6354f7c.webp",
-            "link": ""
-          }
-        },
-        "logo_item_kJxcfH": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b23567ef7e7_f249453a-922d-47e9-9c9a-461049069c78.webp",
-            "link": ""
-          }
-        },
-        "logo_item_naxE9b": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b235304bfaa_a14f1b3e-5837-457c-9c9e-a865bfb3a50c.webp",
-            "link": ""
-          }
-        },
-        "logo_item_LHw7Uk": {
-          "type": "logo_item",
-          "settings": {
-            "image": "shopify://shop_images/66b234e4aee4b_1e701062-0e27-48f3-8cea-909694e168b2.webp",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "logo_item_VwaxVx",
-        "logo_item_xnNrAF",
-        "logo_item_P6Ykdc",
-        "logo_item_AgVyXe",
-        "logo_item_iGPyhV",
-        "logo_item_cMKfac",
-        "logo_item_GraN6C",
-        "logo_item_qTMfBY",
-        "logo_item_URwiFp",
-        "logo_item_kJxcfH",
-        "logo_item_naxE9b",
-        "logo_item_LHw7Uk"
-      ],
-      "name": "Press Logos Slider",
-      "settings": {
-        "subtitle": "Places where we have been featured",
-        "subtitle_color": "#3b82f6",
-        "title": "In The Press",
-        "heading_size": 36,
-        "text_color": "#1a1a1a",
-        "logo_width": 180,
-        "logo_height": 80,
-        "logo_gap": 30,
-        "logo_width_mobile": 140,
-        "logo_height_mobile": 60,
-        "bg_color": "#f8f9fa",
-        "card_bg": "rgba(0,0,0,0)",
-        "card_radius": 8,
-        "padding_top": 60,
-        "padding_bottom": 60
-      }
-    },
-    "section_RhpYRt": {
-      "type": "section",
-      "blocks": {
-        "video_NqWNaD": {
-          "type": "video",
-          "name": "t:names.video",
-          "settings": {
-            "source": "uploaded",
-            "video": "shopify://files/videos/GROOVES-premium-product-showcase-4K.mp4",
-            "video_url": "",
-            "video_autoplay": true,
-            "video_loop": true,
-            "cover_image": "shopify://shop_images/6a1036ff9935e_752f3ace-3251-4704-b114-117f37007f9a.webp",
-            "alt": "",
-            "custom_width": 100,
-            "custom_width_mobile": 100,
-            "aspect_ratio": "16/9",
-            "border": "solid",
-            "border_width": 0,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 10,
-            "padding-block-start": 10,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "group_TEanyT": {
-          "type": "group",
-          "name": "t:names.caption",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "custom",
-            "custom_width": 33,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 40,
-            "padding-block-end": 40,
-            "padding-inline-start": 40,
-            "padding-inline-end": 40
-          },
-          "blocks": {
-            "text_BRFzjN": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h3>Engineered for the Ultimate Audio Experience<br/><br/></h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_tKxhbY": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>We believe music should be felt, not just heard. Designed with cutting-edge acoustics, deep bass technology, and ergonomic comfort, our gear is built to power your daily hustle.<br/><br/></p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_BRFzjN",
-            "text_tKxhbY"
-          ]
-        }
-      },
-      "block_order": [
-        "video_NqWNaD",
-        "group_TEanyT"
-      ],
-      "name": "t:names.video_section",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "center",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "{{ settings.color_palette.color2 }}",
-        "enable_audio": false,
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "dynamic_brand_marquee_xGebdE": {
-      "type": "dynamic-brand-marquee",
-      "blocks": {
-        "logo_item_tVyteY": {
-          "type": "logo_item",
-          "settings": {
-            "logo_image": "shopify://shop_images/images.png"
-          }
-        },
-        "logo_item_ABBRBq": {
-          "type": "logo_item",
-          "settings": {
-            "logo_image": "shopify://shop_images/amazonlogorgba091.jpg"
-          }
-        },
-        "logo_item_yzYFEq": {
-          "type": "logo_item",
-          "settings": {
-            "logo_image": "shopify://shop_images/25071-flipkart1.webp"
-          }
-        },
-        "logo_item_CcHCTN": {
-          "type": "logo_item",
-          "settings": {
-            "logo_image": "shopify://shop_images/images.png"
-          }
-        },
-        "logo_item_M3YHA3": {
-          "type": "logo_item",
-          "settings": {
-            "logo_image": "shopify://shop_images/amazonlogorgba091.jpg"
-          }
-        },
-        "logo_item_piVJCz": {
-          "type": "logo_item",
-          "settings": {
-            "logo_image": "shopify://shop_images/25071-flipkart1.webp"
-          }
-        }
-      },
-      "block_order": [
-        "logo_item_tVyteY",
-        "logo_item_ABBRBq",
-        "logo_item_yzYFEq",
-        "logo_item_CcHCTN",
-        "logo_item_M3YHA3",
-        "logo_item_piVJCz"
-      ],
-      "name": "Brand Marquee Logos",
-      "settings": {
-        "title": "Best selling brand ON",
-        "heading_size": 22,
-        "heading_alignment": "left",
-        "logo_width": 150,
-        "logo_height": 60,
-        "logo_gap": 50,
-        "marquee_speed": 10,
-        "pause_on_hover": true,
-        "bg_color": "#ffffff",
-        "text_color": "#121212",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "custom_testimonials_Bzm6fH": {
-      "type": "custom-testimonials",
-      "blocks": {
-        "review_7cmAi8": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/logo__1_-removebg-preview.png",
-            "review_text": "The ANC on these earbuds is insane! The bass is deep, and the battery easily lasts me all week. Total value for money.",
-            "author_name": "Rahul S."
-          }
-        },
-        "review_LFdBh9": {
-          "type": "review",
-          "settings": {
-            "review_text": "Got the smartwatch combo. The display is super crisp, and the Bluetooth calling works flawlessly even in traffic.",
-            "author_name": "Amit V."
-          }
-        },
-        "review_APpaea": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/logo__1_-removebg-preview.png",
-            "review_text": "Delivery was super fast, and the build quality feels extremely premium. Definitely switching to this brand permanently.",
-            "author_name": "Sneha K."
-          }
-        },
-        "review_jJMY36": {
-          "type": "review",
-          "settings": {
-            "review_text": "Been using their headphones for my workouts and gaming. Zero audio lag, super comfortable on the ears, and the mic is crystal clear during calls.",
-            "author_name": "Priya M."
-          }
-        },
-        "review_hPFdTd": {
-          "type": "review",
-          "settings": {
-            "review_text": "The fast-charging adapter and power bank are lifesavers. Charges my phone super quick and the build is very sturdy. Highly recommend!",
-            "author_name": "Vikram D."
-          }
-        }
-      },
-      "block_order": [
-        "review_7cmAi8",
-        "review_LFdBh9",
-        "review_APpaea",
-        "review_jJMY36",
-        "review_hPFdTd"
-      ],
-      "name": "Customer Testimonials",
-      "settings": {
-        "heading": "What Our Customers Say",
-        "subheading": "Loved by thousands of music lovers across the country.",
-        "bg_color": "#f4f6f8",
-        "text_color": "#111111",
-        "padding_y": 60,
-        "auto_scroll": 3
-      }
-    },
-    "collection_list_CVPaqQ": {
-      "type": "collection-list",
-      "blocks": {
-        "group_YWmdqW": {
-          "type": "group",
-          "name": "t:names.header",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "text_E3qXQV": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<h3>Shop by collection</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 16,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_E3qXQV"
-          ]
-        },
-        "static-collection-card": {
-          "type": "_collection-card",
-          "name": "t:names.collection_card",
-          "static": true,
-          "settings": {
-            "placement": "below_image",
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "collection_card_gap": 8,
-            "background_color": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0
-          },
-          "blocks": {
-            "collection_title_9nPHV9": {
-              "type": "collection-title",
-              "name": "t:names.collection_title",
-              "settings": {
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "{{ settings.color_palette.background }}",
-                "text_color": "{{ settings.color_palette.foreground }}",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "collection-card-image": {
-              "type": "_collection-card-image",
-              "name": "t:names.collection_card_image",
-              "static": true,
-              "settings": {
-                "image_ratio": "adapt",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "collection_title_9nPHV9"
-          ]
-        }
-      },
-      "block_order": [
-        "group_YWmdqW"
-      ],
-      "disabled": true,
-      "name": "t:names.collections_carousel",
-      "settings": {
-        "collection_list": [
-          "accessories",
-          "adaptor",
-          "combo",
-          "earbuds",
-          "headphones",
-          "power-bank"
-        ],
-        "layout_type": "carousel",
-        "carousel_on_mobile": false,
-        "columns": 3,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "bento_gap": 8,
-        "rows_gap": 8,
-        "max_collections": 4,
-        "icons_style": "arrow",
-        "icons_shape": "circle",
-        "section_width": "page-width",
-        "gap": 12,
-        "background_color": "",
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      }
-    },
-    "secure_payment_badges_AK6DUM": {
-      "type": "secure-payment-badges",
-      "blocks": {
-        "payment_logo_JWVpxD": {
-          "type": "payment_logo",
-          "settings": {
-            "payment_logo": "shopify://shop_images/MasterCard_early_1990s_logo_svg.webp"
-          }
-        },
-        "payment_logo_BrKmeR": {
-          "type": "payment_logo",
-          "settings": {
-            "payment_logo": "shopify://shop_images/Paytm_Logo.png"
-          }
-        },
-        "payment_logo_Rm8kte": {
-          "type": "payment_logo",
-          "settings": {
-            "payment_logo": "shopify://shop_images/PhonePe_vertical-16158be8710408f3561e1d07d01d5d89.png"
-          }
-        },
-        "payment_logo_FhFGPg": {
-          "type": "payment_logo",
-          "settings": {
-            "payment_logo": "shopify://shop_images/Rupay-Logo.png"
-          }
-        },
-        "payment_logo_3qqAgb": {
-          "type": "payment_logo",
-          "settings": {
-            "payment_logo": "shopify://shop_images/unnamed.png"
-          }
-        },
-        "payment_logo_A4EGnE": {
-          "type": "payment_logo",
-          "settings": {
-            "payment_logo": "shopify://shop_images/upi-icon.webp"
-          }
-        }
-      },
-      "block_order": [
-        "payment_logo_JWVpxD",
-        "payment_logo_BrKmeR",
-        "payment_logo_Rm8kte",
-        "payment_logo_FhFGPg",
-        "payment_logo_3qqAgb",
-        "payment_logo_A4EGnE"
-      ],
-      "name": "Secure Payment Badges",
-      "settings": {
-        "full_width": true,
-        "title": "100% Secure Payment",
-        "heading_size": 18,
-        "heading_weight": "600",
-        "heading_alignment": "center",
-        "card_width": 110,
-        "card_height": 65,
-        "card_radius": 12,
-        "card_padding": 10,
-        "item_gap": 10,
-        "text_color": "#121212",
-        "card_bg": "#f4f4f5",
-        "section_bg": "#ffffff",
-        "padding_top": 16,
-        "padding_bottom": 16
-      }
-    },
-    "section_7AqHHM": {
-      "type": "section",
-      "blocks": {
-        "text_gA69qx": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h2>Frequently asked questions</h2>",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "alignment": "left",
-            "type_preset": "h3",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "accordion_hNzHmK": {
-          "type": "accordion",
-          "name": "t:names.accordion",
-          "settings": {
-            "icon": "caret",
-            "dividers": true,
-            "divider_color": "",
-            "type_preset": "h5",
-            "background_color": "",
-            "text_color": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "accordion_row_6bnQbg": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "What is the warranty and return policy?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_WEpxaN": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>All our products come with a standard 1-year replacement warranty against manufacturing defects. We also offer a 7-day hassle-free return window for your peace of mind.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_WEpxaN"
-              ]
-            },
-            "accordion_row_d839gn": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "Are these devices compatible with both iOS and Android?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_i7afM4": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Yes! Our audio and wearable devices feature universal Bluetooth 5.3 connectivity, ensuring instant and seamless pairing with all iOS, Android, and Windows devices.<br/><br/></p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_i7afM4"
-              ]
-            },
-            "accordion_row_YDaCVp": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_row",
-              "settings": {
-                "heading": "When will I get my order?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_jtDhxC": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<p>We dispatch all orders within 24 hours. Deliveries to metro cities take 2-3 days, while other regions take 4-5 working days. You will receive a live tracking link via SMS and Email.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_jtDhxC"
-              ]
-            },
-            "accordion_row_zj8xJC": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_row",
-              "settings": {
-                "heading": "Do you offer Cash on Delivery (COD)?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_kjACNk": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<p>Yes, COD is available across 15,000+ pin codes in India. However, we recommend choosing prepaid checkout to unlock an extra 5% discount and priority shipping!</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_kjACNk"
-              ]
-            },
-            "accordion_row_4Pj88D": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_row",
-              "settings": {
-                "heading": "How much does shipping cost?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_kK8Fhk": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<p>Shipping is calculated based on your location and the items in your order. You will always know the shipping price before you purchase.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_kK8Fhk"
-              ]
-            },
-            "accordion_row_epeK77": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_row",
-              "settings": {
-                "heading": "Are the products water and sweat resistant?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_dDLytn": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<p>Yes, most of our earbuds and smartwatches feature an IPX5 or higher water and sweat resistance rating. This makes them the perfect companion for your intense gym sessions and outdoor runs. (Please check individual product descriptions for exact IP ratings).</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_dDLytn"
-              ]
-            },
-            "accordion_row_8EAW3t": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_row",
-              "settings": {
-                "heading": "Do your wireless devices support fast charging?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_mWidP7": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<p>Absolutely! Our audio devices come equipped with advanced Type-C fast charging capabilities. A quick 10-minute charge can provide up to 2 hours of continuous playback, so you never miss a beat.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_mWidP7"
-              ]
-            }
-          },
-          "block_order": [
-            "accordion_row_6bnQbg",
-            "accordion_row_d839gn",
-            "accordion_row_YDaCVp",
-            "accordion_row_zj8xJC",
-            "accordion_row_4Pj88D",
-            "accordion_row_epeK77",
-            "accordion_row_8EAW3t"
-          ]
-        }
-      },
-      "block_order": [
-        "text_gA69qx",
-        "accordion_hNzHmK"
-      ],
-      "name": "t:names.faq_section",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 32,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "enable_audio": false,
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      }
-    },
-    "product_hotspots_KHVJR4": {
-      "type": "product-hotspots",
-      "blocks": {
-        "hotspot_product_4DaRQW": {
-          "type": "_hotspot-product",
-          "name": "t:names.hotspot_product",
-          "settings": {
-            "product": "daniel-wellington-blue",
-            "x-position": 86,
-            "y-position": 50
-          },
-          "blocks": {}
-        },
-        "hotspot_product_48Q3Ly": {
-          "type": "_hotspot-product",
-          "name": "t:names.hotspot_product",
-          "settings": {
-            "product": "daniel-wellington",
-            "x-position": 66,
-            "y-position": 50
-          },
-          "blocks": {}
-        },
-        "hotspot_product_6nLmjY": {
-          "type": "_hotspot-product",
-          "settings": {
-            "product": "daniel-wellington-4",
-            "x-position": 40,
-            "y-position": 40
-          },
-          "blocks": {}
-        },
-        "hotspot_product_bdbMcm": {
-          "type": "_hotspot-product",
-          "settings": {
-            "product": "daniel-wellington-blue",
-            "x-position": 60,
-            "y-position": 60
-          },
-          "blocks": {}
-        },
-        "heading": {
-          "type": "text",
-          "name": "t:names.heading",
-          "static": true,
-          "settings": {
-            "text": "<h2>THE GROOVES ECOSYSTEM<br/></h2>",
-            "width": "100%",
-            "max_width": "narrow",
-            "alignment": "center",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "hotspot_product_4DaRQW",
-        "hotspot_product_48Q3Ly",
-        "hotspot_product_6nLmjY",
-        "hotspot_product_bdbMcm"
-      ],
-      "name": "t:names.product_hotspots",
-      "settings": {
-        "image": "shopify://shop_images/cover_1.png",
-        "toggle_overlay": true,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "section_width": "page-width",
-        "section_height": "auto",
-        "hotspot_color": "#ffffff57",
-        "bullseye_color": "#ffffff",
-        "background_color": "",
-        "product_title_gap": 8,
-        "product_title_preset": "",
-        "product_price_preset": "",
-        "padding-block-start": 40,
-        "padding-block-end": 40
-      }
+        "support",
+        "warranty",
+        "faq",
+        "replacement"
+      ]
     }
   },
   "order": [
     "hero_RkimKJ",
-    "marque_sec_LQxK4R",
-    "dynamic_collection_slider_cyxfNq",
-    "custom_liquid_drfTpQ",
-    "product_list_X8Q7bi",
+    "grooves_categories",
+    "grooves_featured",
+    "grooves_banner",
+    "grooves_audio",
     "shoppable_videos_iPtCWY",
-    "custom_product_slider_GfVtUV",
-    "custom_trust_badges_JijKjw",
-    "custom_product_slider_CMMyHU",
-    "shoppabl_videos_tNnnHV",
-    "press_logos_slider_KftkNy",
-    "section_RhpYRt",
-    "dynamic_brand_marquee_xGebdE",
-    "custom_testimonials_Bzm6fH",
-    "collection_list_CVPaqQ",
-    "secure_payment_badges_AK6DUM",
-    "section_7AqHHM",
-    "product_hotspots_KHVJR4"
+    "grooves_power",
+    "grooves_support"
   ]
 }

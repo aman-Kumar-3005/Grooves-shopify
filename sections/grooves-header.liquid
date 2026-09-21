@@ -1,0 +1,150 @@
+{% render 'theme-drawer-styles' %}
+<style>#shopify-section-{{ section.id }}{position:sticky;top:0;z-index:30}#header-group:has(.g-header){display:contents}.g-header-{{ section.id }}{--g-header-bg:{{ section.settings.background }};--g-header-text:{{ section.settings.text_color }};--g-logo-width:{{ section.settings.logo_width }}px;--color-account-icon:{{ section.settings.text_color }};--color-cart-bubble-background:var(--g-accent);--color-cart-bubble-text:#111}</style>
+<grooves-header class="g-header g-header-{{ section.id }}" data-bottom="{{ section.settings.bottom_navigation }}">
+ {% if section.blocks.size > 0 %}<grooves-announcement class="g-announcement" data-interval="{{ section.settings.interval | times: 1000 }}" aria-label="Store announcements">
+ <div>{% for block in section.blocks %}<div data-message {% unless forloop.first %}hidden{% endunless %} {{ block.shopify_attributes }}>{% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif %}{{ block.settings.text | escape }}{% if block.settings.link != blank %}</a>{% endif %}</div>{% endfor %}</div>
+ {% if section.blocks.size > 1 %}<button type="button" class="g-announcement-pause" aria-label="Pause announcements" data-pause>&#8545;</button>{% endif %}
+ </grooves-announcement>{% endif %}
+ <div class="g-header-row g-container">
+ <div class="g-header-left"><button type="button" class="g-icon-button" data-menu-open aria-label="Open menu" aria-expanded="false" aria-controls="GroovesMenu-{{ section.id }}">{% render 'grooves-icon', name:'menu' %}</button>{% if section.settings.show_search %}{% render 'search', style:'modal', display_style:'icon' %}{% endif %}</div>
+ <a class="g-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 420 | image_tag: widths: '140,210,280,420', sizes: '160px', loading: 'eager' }}{% else %}<span>{{ section.settings.brand | default: shop.name | escape }}</span>{% endif %}</a>
+ <div class="g-header-right">{% render 'header-actions', display_style:'icon', section:section %}</div>
+ </div>
+ {% if section.settings.desktop_menu %}<nav class="g-desktop-nav" aria-label="Main navigation">{% for link in section.settings.menu.links %}{% if link.links != blank %}<details><summary>{{ link.title | escape }}</summary><div class="g-nav-submenu"><a href="{{ link.url }}">Shop {{ link.title | escape }}</a>{% for child in link.links %}<a href="{{ child.url }}">{{ child.title | escape }}</a>{% for grandchild in child.links %}<a href="{{ grandchild.url }}">— {{ grandchild.title | escape }}</a>{% endfor %}{% endfor %}</div></details>{% else %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endif %}{% endfor %}</nav>{% endif %}
+ <dialog id="GroovesMenu-{{ section.id }}" class="g-menu-dialog" aria-labelledby="GroovesMenuTitle-{{ section.id }}">
+ <div class="g-menu-top"><strong id="GroovesMenuTitle-{{ section.id }}">{{ section.settings.menu_title | escape }}</strong><button class="g-icon-button" type="button" data-menu-close aria-label="Close menu">{% render 'grooves-icon', name:'close' %}</button></div>
+ <nav class="g-drawer-nav" aria-label="Mobile navigation">{% for link in section.settings.menu.links %}{% if link.links != blank %}<details><summary>{{ link.title | escape }}<span>+</span></summary><a href="{{ link.url }}">Shop all {{ link.title | escape }}</a>{% for child in link.links %}{% if child.links != blank %}<details><summary>{{ child.title | escape }}<span>+</span></summary><a href="{{ child.url }}">Shop all</a>{% for grandchild in child.links %}<a href="{{ grandchild.url }}">{{ grandchild.title | escape }}</a>{% endfor %}</details>{% else %}<a href="{{ child.url }}">{{ child.title | escape }}</a>{% endif %}{% endfor %}</details>{% else %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endif %}{% endfor %}</nav>
+ {% if section.settings.support_url != blank %}<a class="g-button" href="{{ section.settings.support_url }}">{{ section.settings.support_label | escape }}</a>{% endif %}
+ </dialog>
+ {% if section.settings.bottom_navigation and section.settings.bottom_menu.links.size > 0 %}<nav class="g-bottom-nav" aria-label="Quick categories">{% for link in section.settings.bottom_menu.links limit:4 %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{% assign icon_index = forloop.index | modulo: 4 %}{% case icon_index %}{% when 1 %}{% render 'grooves-icon',name:'audio' %}{% when 2 %}{% render 'grooves-icon',name:'watch' %}{% when 3 %}{% render 'grooves-icon',name:'power' %}{% else %}{% render 'grooves-icon',name:'shield' %}{% endcase %}<span>{{ link.title | escape }}</span></a>{% endfor %}</nav>{% endif %}
+</grooves-header>
+<noscript><style>.g-header-left [data-menu-open]{display:none}.g-desktop-nav{display:flex;flex-wrap:wrap}</style></noscript>
+
+{% schema %}
+{
+  "name": "Grooves header",
+  "class": "g-header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (light version)"
+    },
+    {
+      "type": "text",
+      "id": "brand",
+      "label": "Text logo",
+      "default": "GROOVES"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 240,
+      "step": 10,
+      "unit": "px",
+      "default": 150
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main navigation",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "menu_title",
+      "label": "Drawer heading",
+      "default": "Explore Grooves"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_menu",
+      "label": "Show desktop navigation",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_navigation",
+      "label": "Show mobile bottom categories",
+      "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "bottom_menu",
+      "label": "Bottom category menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "support_label",
+      "label": "Support button",
+      "default": "Get support"
+    },
+    {
+      "type": "url",
+      "id": "support_url",
+      "label": "Support link"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Header background",
+      "default": "#080808"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Header text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "Announcement interval",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Message",
+          "default": "Find your everyday upgrade"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Grooves header",
+      "blocks": [
+        {
+          "type": "announcement"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

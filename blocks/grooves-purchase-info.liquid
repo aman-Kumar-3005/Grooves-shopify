@@ -1,0 +1,94 @@
+<div class="g-purchase-info" style="--g-offer-bg:{{ block.settings.offer_background }}" {{ block.shopify_attributes }}>
+{% if block.settings.coupon_code != blank %}<grooves-coupon class="g-coupon"><div><strong>{{ block.settings.offer_heading | escape }}</strong><p>{{ block.settings.offer_text | escape }}</p><code>{{ block.settings.coupon_code | escape }}</code></div><button type="button" class="g-button" data-copy="{{ block.settings.coupon_code | escape }}">Copy code</button><span role="status" data-status></span></grooves-coupon>{% endif %}
+{% if block.settings.emi_text != blank %}<div class="g-emi"><strong>{{ block.settings.emi_heading | escape }}</strong><p>{{ block.settings.emi_text | escape }}</p>{% if block.settings.emi_link != blank %}<a href="{{ block.settings.emi_link }}">{{ block.settings.emi_link_label | escape }} &rarr;</a>{% endif %}</div>{% endif %}
+{% if block.settings.show_delivery %}<grooves-delivery data-endpoint="{{ block.settings.delivery_endpoint | escape }}" data-pincodes="{{ block.settings.pincodes | escape }}" data-estimate="{{ block.settings.delivery_estimate | escape }}"><form class="g-delivery-form"><label for="Pincode-{{ block.id }}">{{ block.settings.delivery_heading | escape }}</label><div><input id="Pincode-{{ block.id }}" name="pincode" type="text" inputmode="numeric" pattern="[1-9][0-9]{5}" maxlength="6" autocomplete="postal-code" placeholder="Enter 6-digit pincode" required aria-describedby="DeliveryStatus-{{ block.id }}"><button type="submit">Check</button></div><p id="DeliveryStatus-{{ block.id }}" data-status role="status"></p></form><noscript>Delivery availability is confirmed at checkout.</noscript></grooves-delivery>{% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Offers and delivery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "offer_heading",
+      "label": "Offer heading",
+      "default": "Offers for you"
+    },
+    {
+      "type": "text",
+      "id": "coupon_code",
+      "label": "Active coupon code",
+      "info": "Create this discount in Shopify Admin first. Leave blank to hide."
+    },
+    {
+      "type": "text",
+      "id": "offer_text",
+      "label": "Offer terms"
+    },
+    {
+      "type": "color",
+      "id": "offer_background",
+      "label": "Offer background",
+      "default": "#f1f8df"
+    },
+    {
+      "type": "text",
+      "id": "emi_heading",
+      "label": "Payment heading",
+      "default": "Flexible payment options"
+    },
+    {
+      "type": "text",
+      "id": "emi_text",
+      "label": "EMI provider and terms",
+      "info": "Only display payment options actually enabled in your store."
+    },
+    {
+      "type": "text",
+      "id": "emi_link_label",
+      "label": "Payment details link label",
+      "default": "View plans"
+    },
+    {
+      "type": "url",
+      "id": "emi_link",
+      "label": "Payment provider details link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_delivery",
+      "label": "Show pincode checker",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "delivery_heading",
+      "label": "Delivery heading",
+      "default": "Estimated delivery"
+    },
+    {
+      "type": "text",
+      "id": "delivery_endpoint",
+      "label": "Delivery app proxy path",
+      "info": "Optional same-origin /apps/ endpoint. Response: {\"available\":true,\"message\":\"Estimated delivery: 3–5 days\"}."
+    },
+    {
+      "type": "textarea",
+      "id": "pincodes",
+      "label": "Serviced pincodes",
+      "info": "Optional comma-separated exact six-digit pincodes. Without a provider or this list, availability is deferred to checkout."
+    },
+    {
+      "type": "text",
+      "id": "delivery_estimate",
+      "label": "Estimate for listed pincodes",
+      "default": "Estimated delivery in 3–7 business days. Final dates confirmed at checkout."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Offers and delivery"
+    }
+  ]
+}
+{% endschema %}

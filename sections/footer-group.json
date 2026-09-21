@@ -1,1 +1,149 @@
-{"type":"footer","name":"t:names.footer","sections":{"footer_WnX4aJ":{"type":"footer","blocks":{"brand_info_XGHAcr":{"type":"brand_info","settings":{"logo":"shopify:\/\/shop_images\/logo_1.png","subtitle":"India | Saudi Arabia | Dubai","description":"<p><em><strong>MEWALT ELECTRONICS<\/strong><\/em><em>: An Indian brand delivering high-performance audio, smart wearables, and mobile accessories at affordable prices. Engineered for everyday life.<br\/><br\/><\/em><em><strong>High Definition Tech. Built for the Hustle.<\/strong><\/em><\/p>"}},"link_list_kWFjyG":{"type":"link_list","settings":{"heading":"Quick links","menu":"main-menu"}},"contact_info_CnB6qY":{"type":"contact_info","settings":{"heading":"Support","email":"support@grooveslifestyle.com","phone":"(+91) 9216-9216-61"}},"text_block_Vi6Fpx":{"type":"text_block","settings":{"heading":"Address","text":"<p>SB 68 \/ A95 SECTOR 63A NOIDA 201307<\/p>"}}},"block_order":["brand_info_XGHAcr","link_list_kWFjyG","contact_info_CnB6qY","text_block_Vi6Fpx"],"name":"t:names.footer","settings":{"bg_color":"#ffffff","heading_color":"#111111","text_color":"#666666","logo_max_width":120,"padding_top":40,"padding_bottom":40,"show_policies":true,"show_social":true,"copyright_name":"MEWALT ELECTRONICS PRIVATE LIMITED","show_payment_icons":true}},"utilities":{"type":"footer-utilities","blocks":{"copyright":{"type":"footer-copyright","settings":{"show_powered_by":false,"text_color":"","font_size":"0.75rem","case":"none"},"blocks":{}},"footer_policy_list_i3GaPF":{"type":"footer-policy-list","name":"t:names.policy_list","settings":{"text_color":"","font_size":"0.75rem","case":"none"},"blocks":{}},"social_links_Nyht3m":{"type":"social-links","name":"t:names.social_media_links","settings":{"icon_color":"","facebook_url":"https:\/\/facebook.com","instagram_url":"https:\/\/instagram.com","youtube_url":"https:\/\/youtube.com","tiktok_url":"https:\/\/www.tiktok.com\/","twitter_url":"https:\/\/x.com","threads_url":"","linkedin_url":"","bluesky_url":"","snapchat_url":"","pinterest_url":"","tumblr_url":"","vimeo_url":"","custom_url":""},"blocks":{}}},"block_order":["copyright","footer_policy_list_i3GaPF","social_links_Nyht3m"],"disabled":true,"settings":{"section_width":"page-width","gap":24,"background_color":"{{ settings.color_palette.color3 }}","divider_thickness":0,"divider_color":"","padding-block-start":20,"padding-block-end":20}}},"order":["footer_WnX4aJ","utilities"]}
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": {
+    "footer_WnX4aJ": {
+      "type": "footer",
+      "blocks": {
+        "brand_info_XGHAcr": {
+          "type": "brand_info",
+          "settings": {
+            "logo": "",
+            "subtitle": "India | Saudi Arabia | Dubai",
+            "description": "<p><em><strong>MEWALT ELECTRONICS</strong></em><em>: An Indian brand delivering high-performance audio, smart wearables, and mobile accessories at affordable prices. Engineered for everyday life.<br/><br/></em><em><strong>High Definition Tech. Built for the Hustle.</strong></em></p>"
+          }
+        },
+        "link_list_kWFjyG": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "main-menu"
+          }
+        },
+        "contact_info_CnB6qY": {
+          "type": "contact_info",
+          "settings": {
+            "heading": "Support",
+            "email": "support@grooveslifestyle.com",
+            "phone": "(+91) 9216-9216-61"
+          }
+        },
+        "text_block_Vi6Fpx": {
+          "type": "text_block",
+          "settings": {
+            "heading": "Address",
+            "text": "<p>SB 68 / A95 SECTOR 63A NOIDA 201307</p>"
+          }
+        },
+        "products": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Products",
+            "menu": "main-menu"
+          }
+        },
+        "company": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Company",
+            "menu": "footer"
+          }
+        },
+        "important": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Important",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "brand_info_XGHAcr",
+        "contact_info_CnB6qY",
+        "products",
+        "company",
+        "important",
+        "text_block_Vi6Fpx"
+      ],
+      "name": "t:names.footer",
+      "settings": {
+        "bg_color": "#202020",
+        "heading_color": "#ffffff",
+        "text_color": "#d5d5d5",
+        "logo_max_width": 120,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "show_policies": true,
+        "show_social": true,
+        "copyright_name": "MEWALT ELECTRONICS PRIVATE LIMITED",
+        "show_payment_icons": true,
+        "newsletter": true
+      }
+    },
+    "utilities": {
+      "type": "footer-utilities",
+      "blocks": {
+        "copyright": {
+          "type": "footer-copyright",
+          "settings": {
+            "show_powered_by": false,
+            "text_color": "",
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "footer_policy_list_i3GaPF": {
+          "type": "footer-policy-list",
+          "name": "t:names.policy_list",
+          "settings": {
+            "text_color": "",
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "social_links_Nyht3m": {
+          "type": "social-links",
+          "name": "t:names.social_media_links",
+          "settings": {
+            "icon_color": "",
+            "facebook_url": "https://facebook.com",
+            "instagram_url": "https://instagram.com",
+            "youtube_url": "https://youtube.com",
+            "tiktok_url": "https://www.tiktok.com/",
+            "twitter_url": "https://x.com",
+            "threads_url": "",
+            "linkedin_url": "",
+            "bluesky_url": "",
+            "snapchat_url": "",
+            "pinterest_url": "",
+            "tumblr_url": "",
+            "vimeo_url": "",
+            "custom_url": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "copyright",
+        "footer_policy_list_i3GaPF",
+        "social_links_Nyht3m"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_width": "page-width",
+        "gap": 24,
+        "background_color": "{{ settings.color_palette.color3 }}",
+        "divider_thickness": 0,
+        "divider_color": "",
+        "padding-block-start": 20,
+        "padding-block-end": 20
+      }
+    }
+  },
+  "order": [
+    "footer_WnX4aJ",
+    "utilities"
+  ]
+}

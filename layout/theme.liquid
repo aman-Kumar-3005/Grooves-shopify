@@ -26,10 +26,13 @@
       {%- render 'theme-editor' -%}
     {% endif %}
 
+    {{ 'grooves.css' | asset_url | stylesheet_tag }}
+    <style>:root{--g-accent:{{ settings.grooves_accent | default:'#b3ff00' }};--g-radius:{{ settings.grooves_radius | default:16 }}px}</style>
+    <script src="{{ 'grooves.js' | asset_url }}" type="module"></script>
     {{ content_for_header }}
   </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+  <body data-grooves-confetti="{{ settings.grooves_confetti }}" class="grooves-theme page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
 
     {% render 'chat-drawer' %}

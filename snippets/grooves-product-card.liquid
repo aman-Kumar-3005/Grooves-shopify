@@ -1,0 +1,15 @@
+{% liquid
+ assign variant = product.selected_or_first_available_variant
+ assign rating = product.metafields.reviews.rating.value
+ assign count = product.metafields.reviews.rating_count.value | default:0
+ assign badge = product.metafields.custom.card_badge.value
+ assign feature_badge = product.metafields.custom.feature_badge.value
+ %}
+<article class="g-product-card">
+<a class="g-product-image" href="{{ product.url }}">{% if product.featured_image != blank %}{{ product.featured_image | image_url:width:720 | image_tag: loading:'lazy', widths:'240,360,540,720', sizes:'(min-width:1000px) 22vw, 45vw' }}{% if product.images[1] != blank %}{{ product.images[1] | image_url:width:540 | image_tag: class:'g-product-hover', loading:'lazy', sizes:'(min-width:1000px) 22vw, 45vw' }}{% endif %}{% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}{% if badge != blank %}<span class="g-product-badge">{{ badge | escape }}</span>{% endif %}{% if feature_badge != blank %}<span class="g-product-badge g-product-badge--right">{{ feature_badge | escape }}</span>{% endif %}</a>
+<div class="g-product-info">{% if rating != blank and count > 0 %}<span class="g-rating" aria-label="Rated {{ rating.rating }} out of {{ rating.scale_max }} from {{ count }} reviews">&#9733; {{ rating.rating | round:1 }} <small>({{ count }})</small></span>{% endif %}<h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3><div class="g-product-prices"><strong>{{ variant.price | money }}</strong>{% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money }}</s><span class="g-discount">{{ variant.compare_at_price | minus:variant.price | times:100.0 | divided_by:variant.compare_at_price | round }}% Off</span>{% endif %}</div>
+{% if product.available and product.has_only_default_variant and product.requires_selling_plan == false %}
+<product-form-component data-section-id="{{ section.id }}" data-product-id="{{ product.id }}" data-product-url="{{ product.url }}" data-quantity-default="{{ variant.quantity_rule.min | default:1 }}" on:submit="/handleSubmit">
+{% assign form_id = 'GroovesForm-' | append:section.id | append:'-' | append:product.id %}{% form 'product',product,id:form_id,data-type:'add-to-cart-form' %}<input type="hidden" name="id" ref="variantId" value="{{ variant.id }}"><input type="hidden" name="quantity" value="{{ variant.quantity_rule.min | default:1 }}"><div ref="liveRegion" role="status" class="visually-hidden"></div><span ref="addToCartTextError" class="product-form-text__error hidden"></span><button class="g-button" type="submit">{{ section.settings.button_label | default:'Add to cart' | escape }}</button>{% endform %}</product-form-component>
+{% elsif product.available %}<a class="g-button" href="{{ product.url }}">Choose options</a>{% else %}<button class="g-button" type="button" disabled>Sold out</button>{% endif %}
+</div></article>

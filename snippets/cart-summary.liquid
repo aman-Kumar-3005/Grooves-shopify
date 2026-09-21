@@ -269,10 +269,12 @@
     form="cart-form"
   >
     <span class="button-text">
-      {{ 'content.checkout' | t }}
+      {{ settings.grooves_checkout_label | default: 'Secure checkout' | escape }}
     </span>
   </button>
 
+  {% if settings.grooves_cart_payment_text != blank %}<p class="g-cart-payment-note">{{ settings.grooves_cart_payment_text | escape }}</p>{% endif %}
+  <div class="g-payment-icons" aria-label="Accepted payment methods">{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}{% if settings.grooves_payment_image != blank %}{{ settings.grooves_payment_image | image_url:width:400 | image_tag:loading:'lazy',sizes:'200px' }}{% endif %}</div>
   {% if additional_checkout_buttons and settings.show_accelerated_checkout_buttons %}
     <div
       class="

@@ -1,35 +1,54 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
   "sections": {
     "grooves_header": {
       "type": "grooves-header",
-      "settings": {
-        "brand": "GROOVES",
-        "menu": "main-menu",
-        "bottom_menu": "main-menu",
-        "background": "#080808",
-        "text_color": "#ffffff",
-        "support_url": "shopify://pages/contact"
-      },
       "blocks": {
         "message1": {
           "type": "announcement",
           "settings": {
-            "text": "Discover your everyday upgrade"
+            "text": "Discover your everyday upgrade",
+            "link": ""
           }
         },
         "message2": {
           "type": "announcement",
           "settings": {
-            "text": "Audio. Power. Possibilities."
+            "text": "Audio. Power. Possibilities.",
+            "link": ""
           }
         }
       },
       "block_order": [
         "message1",
         "message2"
-      ]
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/logog-removebg-preview.png",
+        "brand": "GROOVES",
+        "logo_width": 150,
+        "menu": "main-menu",
+        "menu_title": "Explore Grooves",
+        "show_search": true,
+        "desktop_menu": true,
+        "bottom_navigation": true,
+        "bottom_menu": "main-menu",
+        "support_label": "Get support",
+        "support_url": "shopify://pages/contact",
+        "background": "#080808",
+        "text_color": "#ffffff",
+        "interval": 5
+      }
     }
   },
   "order": [

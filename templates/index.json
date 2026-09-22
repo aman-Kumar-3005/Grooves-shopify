@@ -44,12 +44,19 @@
         "slide_bold"
       ],
       "settings": {
+<<<<<<< HEAD
         "height_mode_desktop": "adapt",
         "desktop_height": 500,
         "desktop_image_fit": "contain",
         "desktop_banner_width": 100,
         "height_mode_mobile": "adapt",
         "mobile_height": 360,
+=======
+        "desktop_height": 500,
+        "desktop_image_fit": "contain",
+        "desktop_banner_width": 100,
+        "mobile_height": 350,
+>>>>>>> b56d527 (Update Grooves homepage and hero banner)
         "mobile_image_fit": "contain",
         "mobile_banner_width": 100,
         "slider_bg": "#000000",

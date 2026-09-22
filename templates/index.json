@@ -45,8 +45,8 @@
       ],
       "settings": {
         "desktop_height": 480,
-        "desktop_image_fit": "auto",
-        "desktop_banner_width": 95,
+        "desktop_image_fit": "cover",
+        "desktop_banner_width": 100,
         "mobile_height": 360,
         "mobile_image_fit": "contain",
         "mobile_banner_width": 100,

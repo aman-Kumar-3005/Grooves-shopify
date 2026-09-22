@@ -78,18 +78,18 @@
         "cat_translucent": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Translucent",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/sense__jpg.jpg?v=1776665934",
+            "collection": "earbuds",
+            "title": "",
+            "image_url": "",
             "url": "shopify://collections/all"
           }
         },
         "cat_powerbank": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Power Bank",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365",
+            "collection": "headphones",
+            "title": "",
+            "image_url": "",
             "url": "shopify://collections/all"
           }
         },

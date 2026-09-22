@@ -1,20 +1,46 @@
-<section class="tr-lifestyle-section" id="tr-lifestyle-{{ section.id }}" style="padding: 20px 0 40px;">
+<section class="tr-lifestyle-section" id="tr-lifestyle-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
   <div class="tr-container">
-    <div class="tr-section-badge-wrap">
-      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'Shop By Lifestyle' }}</span>
-    </div>
+    {% if section.settings.badge_title != blank %}
+      <div class="tr-section-badge-wrap">
+        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+      </div>
+    {% endif %}
 
     <div class="tr-lifestyle-grid">
       {% for block in section.blocks %}
-        <a href="{{ block.settings.link | default: '/collections/all' }}" class="tr-lifestyle-card">
+        {%- liquid
+          assign col = block.settings.collection
+          if col != blank
+            assign item_title = col.title
+            assign item_link = col.url
+            if block.settings.image != blank
+              assign item_img = block.settings.image | image_url: width: 400
+            elsif col.featured_image
+              assign item_img = col.featured_image | image_url: width: 400
+            else
+              assign item_img = block.settings.image_url
+            endif
+          else
+            assign item_title = block.settings.title
+            assign item_link = block.settings.link | default: '/collections/all'
+            if block.settings.image != blank
+              assign item_img = block.settings.image | image_url: width: 400
+            else
+              assign item_img = block.settings.image_url
+            endif
+          endif
+        -%}
+        <a href="{{ item_link }}" class="tr-lifestyle-card" {{ block.shopify_attributes }}>
           <div class="tr-lifestyle-img-wrap">
             <img 
-              src="{{ block.settings.image_url }}" 
-              alt="{{ block.settings.title }}"
+              src="{{ item_img }}" 
+              alt="{{ item_title }}"
               loading="lazy"
+              width="200"
+              height="260"
             >
           </div>
-          <span class="tr-lifestyle-label">{{ block.settings.title }}</span>
+          <span class="tr-lifestyle-label">{{ item_title }}</span>
         </a>
       {% endfor %}
     </div>
@@ -30,6 +56,26 @@
       "id": "badge_title",
       "label": "Badge Title",
       "default": "Shop By Lifestyle"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 40
     }
   ],
   "blocks": [
@@ -38,21 +84,31 @@
       "name": "Lifestyle Item",
       "settings": [
         {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection (Dynamic)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Image (Upload)"
+        },
+        {
           "type": "text",
           "id": "title",
-          "label": "Lifestyle Name",
+          "label": "Lifestyle Name Fallback",
           "default": "Movie Night"
         },
         {
           "type": "text",
           "id": "image_url",
-          "label": "Image URL",
+          "label": "Image URL Fallback",
           "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Collection Link"
+          "label": "Collection Link Fallback"
         }
       ]
     }

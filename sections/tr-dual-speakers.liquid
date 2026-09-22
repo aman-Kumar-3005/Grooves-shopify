@@ -1,33 +1,87 @@
-<section class="tr-dual-speakers-section" id="tr-dual-speakers-{{ section.id }}" style="padding: 10px 0 30px;">
+<section class="tr-dual-speakers-section" id="tr-dual-speakers-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 10 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 30 }}px;">
   <div class="tr-container">
     <div class="tr-dual-speakers-grid">
-      <!-- 30W RMS -->
-      <div class="tr-speaker-card">
-        <img 
-          src="{{ section.settings.speaker1_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_515_Chhetri.webp?v=1773487465' }}" 
-          alt="UP TO 30W RMS"
-          loading="lazy"
-        >
-        <div class="tr-speaker-card-content">
-          <a href="{{ section.settings.speaker1_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
-            BUY NOW
-          </a>
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {%- liquid
+            assign blk_prod = block.settings.product
+            if block.settings.image != blank
+              assign spk_img = block.settings.image | image_url: width: 800
+            elsif blk_prod != blank and blk_prod.featured_image
+              assign spk_img = blk_prod.featured_image | image_url: width: 800
+            else
+              assign spk_img = block.settings.image_url
+            endif
+            if block.settings.link != blank
+              assign spk_link = block.settings.link
+            elsif blk_prod != blank
+              assign spk_link = blk_prod.url
+            else
+              assign spk_link = '/collections/all'
+            endif
+          -%}
+          <div class="tr-speaker-card" {{ block.shopify_attributes }}>
+            <img 
+              src="{{ spk_img }}" 
+              alt="{{ block.settings.title | default: 'TR Party Speaker' }}"
+              loading="lazy"
+              width="600"
+              height="400"
+            >
+            <div class="tr-speaker-card-content">
+              <a href="{{ spk_link }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
+                {{ block.settings.button_label | default: 'BUY NOW' }}
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <!-- Speaker 1 (30W RMS) -->
+        {%- liquid
+          if section.settings.speaker1_img != blank
+            assign spk1_img = section.settings.speaker1_img | image_url: width: 800
+          else
+            assign spk1_img = section.settings.speaker1_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_515_Chhetri.webp?v=1773487465'
+          endif
+        -%}
+        <div class="tr-speaker-card">
+          <img 
+            src="{{ spk1_img }}" 
+            alt="UP TO 30W RMS"
+            loading="lazy"
+            width="600"
+            height="400"
+          >
+          <div class="tr-speaker-card-content">
+            <a href="{{ section.settings.speaker1_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
+              {{ section.settings.speaker1_btn | default: 'BUY NOW' }}
+            </a>
+          </div>
         </div>
-      </div>
 
-      <!-- 50W RMS -->
-      <div class="tr-speaker-card">
-        <img 
-          src="{{ section.settings.speaker2_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_717_Harsh.webp?v=1773487412' }}" 
-          alt="UP TO 50W RMS"
-          loading="lazy"
-        >
-        <div class="tr-speaker-card-content">
-          <a href="{{ section.settings.speaker2_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
-            BUY NOW
-          </a>
+        <!-- Speaker 2 (50W RMS) -->
+        {%- liquid
+          if section.settings.speaker2_img != blank
+            assign spk2_img = section.settings.speaker2_img | image_url: width: 800
+          else
+            assign spk2_img = section.settings.speaker2_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_717_Harsh.webp?v=1773487412'
+          endif
+        -%}
+        <div class="tr-speaker-card">
+          <img 
+            src="{{ spk2_img }}" 
+            alt="UP TO 50W RMS"
+            loading="lazy"
+            width="600"
+            height="400"
+          >
+          <div class="tr-speaker-card-content">
+            <a href="{{ section.settings.speaker2_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
+              {{ section.settings.speaker2_btn | default: 'BUY NOW' }}
+            </a>
+          </div>
         </div>
-      </div>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -37,10 +91,45 @@
   "name": "TR Dual Speaker Promos",
   "settings": [
     {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Speaker Promo Card 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "speaker1_img",
+      "label": "Speaker 1 Image (Upload)"
+    },
+    {
       "type": "text",
       "id": "speaker1_image",
-      "label": "Speaker 1 Image URL (30W)",
+      "label": "Or Speaker 1 Image URL (Fallback)",
       "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_515_Chhetri.webp?v=1773487465"
+    },
+    {
+      "type": "text",
+      "id": "speaker1_btn",
+      "label": "Button Label",
+      "default": "BUY NOW"
     },
     {
       "type": "url",
@@ -48,15 +137,70 @@
       "label": "Speaker 1 Link"
     },
     {
+      "type": "header",
+      "content": "Speaker Promo Card 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "speaker2_img",
+      "label": "Speaker 2 Image (Upload)"
+    },
+    {
       "type": "text",
       "id": "speaker2_image",
-      "label": "Speaker 2 Image URL (50W)",
+      "label": "Or Speaker 2 Image URL (Fallback)",
       "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_717_Harsh.webp?v=1773487412"
+    },
+    {
+      "type": "text",
+      "id": "speaker2_btn",
+      "label": "Button Label",
+      "default": "BUY NOW"
     },
     {
       "type": "url",
       "id": "speaker2_link",
       "label": "Speaker 2 Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "speaker_card",
+      "name": "Custom Speaker Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Speaker Banner Image"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Or Image URL"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Link To Product"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Or Custom URL"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title / Alt Text",
+          "default": "TR Audio Speaker"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "BUY NOW"
+        }
+      ]
     }
   ],
   "presets": [

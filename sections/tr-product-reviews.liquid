@@ -1,91 +1,131 @@
 {%- liquid
-  assign r_score = product.metafields.reviews.rating.value.rating | default: product.metafields.reviews.rating.value | default: product.metafields.custom.rating.value | default: product.metafields.custom.rating | default: "4.8"
-  assign r_count = product.metafields.reviews.rating_count | default: product.metafields.custom.review_count | default: "128"
+  assign r_score = section.settings.rating_score | default: product.metafields.reviews.rating.value.rating | default: product.metafields.reviews.rating.value | default: product.metafields.custom.rating.value | default: "4.8"
+  assign r_count = section.settings.reviews_count | default: product.metafields.reviews.rating_count | default: product.metafields.custom.review_count | default: "128 Verified Reviews"
 -%}
 
-<section class="tr-reviews-section" id="tr-reviews-{{ section.id }}" style="background: #0a0a0a; border-top: 1px solid #1f1f1f; position: relative; z-index: 20; clear: both;">
+<section class="tr-reviews-section" id="tr-reviews-{{ section.id }}" style="background: #0a0a0a; border-top: 1px solid #1f1f1f; position: relative; z-index: 20; clear: both; padding: 40px 0 60px;">
   <div class="tr-container">
     <div class="tr-reviews-container">
       <!-- Reviews Header -->
       <div class="tr-reviews-header">
         <div class="tr-section-badge-wrap" style="margin-top: 0;">
-          <span class="tr-section-pill">CUSTOMER REVIEWS</span>
+          <span class="tr-section-pill">{{ section.settings.badge_title | default: 'CUSTOMER REVIEWS' }}</span>
         </div>
         <div class="tr-reviews-score">{{ r_score }} <span style="font-size: 28px; color: var(--tr-gold);">★★★★★</span></div>
-        <p style="color: #888888; font-size: 15px; margin: 0;">Based on {{ r_count }} verified customer reviews</p>
+        <p style="color: #888888; font-size: 15px; margin: 0;">Based on {{ r_count }}</p>
       </div>
 
       <!-- Customer Photos Grid -->
-      <div class="tr-customer-photos-grid">
-        {% if product.metafields.custom.customer_photos.value != blank %}
-          {% for photo in product.metafields.custom.customer_photos.value limit: 6 %}
+      {% if section.settings.show_customer_photos %}
+        {% assign photo_blocks = section.blocks | where: "type", "photo" %}
+        <div class="tr-customer-photos-grid">
+          {% if photo_blocks.size > 0 %}
+            {% for block in photo_blocks %}
+              {%- liquid
+                if block.settings.image != blank
+                  assign p_url = block.settings.image | image_url: width: 400
+                else
+                  assign p_url = block.settings.image_url
+                endif
+              -%}
+              <div class="tr-customer-photo-card" {{ block.shopify_attributes }}>
+                <img src="{{ p_url }}" alt="Customer review photo" loading="lazy" width="200" height="200">
+              </div>
+            {% endfor %}
+          {% elsif product.metafields.custom.customer_photos.value != blank %}
+            {% for photo in product.metafields.custom.customer_photos.value limit: 6 %}
+              <div class="tr-customer-photo-card">
+                <img src="{{ photo | image_url: width: 300 }}" alt="Customer review photo" loading="lazy" width="200" height="200">
+              </div>
+            {% endfor %}
+          {% else %}
             <div class="tr-customer-photo-card">
-              <img src="{{ photo | image_url: width: 300 }}" alt="Customer review photo" loading="lazy">
+              <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="Customer review photo 1" loading="lazy" width="200" height="200">
             </div>
-          {% endfor %}
-        {% else %}
-          <div class="tr-customer-photo-card">
-            <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="Customer review photo 1" loading="lazy">
-          </div>
-          <div class="tr-customer-photo-card">
-            <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="Customer review photo 2" loading="lazy">
-          </div>
-          <div class="tr-customer-photo-card">
-            <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="Customer review photo 3" loading="lazy">
-          </div>
-          <div class="tr-customer-photo-card">
-            <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="Customer review photo 4" loading="lazy">
-          </div>
-          <div class="tr-customer-photo-card">
-            <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="Customer review photo 5" loading="lazy">
-          </div>
-          <div class="tr-customer-photo-card">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002" alt="Customer review photo 6" loading="lazy">
-          </div>
-        {% endif %}
-      </div>
+            <div class="tr-customer-photo-card">
+              <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="Customer review photo 2" loading="lazy" width="200" height="200">
+            </div>
+            <div class="tr-customer-photo-card">
+              <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="Customer review photo 3" loading="lazy" width="200" height="200">
+            </div>
+            <div class="tr-customer-photo-card">
+              <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="Customer review photo 4" loading="lazy" width="200" height="200">
+            </div>
+            <div class="tr-customer-photo-card">
+              <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="Customer review photo 5" loading="lazy" width="200" height="200">
+            </div>
+            <div class="tr-customer-photo-card">
+              <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002" alt="Customer review photo 6" loading="lazy" width="200" height="200">
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
 
       <!-- Review Cards Grid -->
-      <div class="tr-review-cards-grid">
-        <div class="tr-review-card">
-          <div class="tr-reviewer-header">
-            <span class="tr-reviewer-name">Rahul Sharma</span>
-            <span class="tr-verified-badge">✓ Verified Buyer</span>
-          </div>
-          <div class="tr-pdp-stars">★★★★★</div>
-          <h4 style="color: #fff; margin: 0; font-size: 15px;">2 Pairs in 1 Case is Pure Genius!</h4>
-          <p class="tr-review-text">
-            I was skeptical about two pairs fitting inside one pocket-sized case, but TR nailed the design! The in-ear pair gives punchy bass for gym sessions and the half-in-ear is so lightweight for office meetings. Wireless charging works flawlessly on my Qi pad.
-          </p>
-          <span style="font-size: 11px; color: #666;">Purchased: Moon White • 3 days ago</span>
-        </div>
+      {% if section.settings.show_reviews_list %}
+        {% assign review_blocks = section.blocks | where: "type", "review_card" %}
+        <div class="tr-review-cards-grid">
+          {% if review_blocks.size > 0 %}
+            {% for block in review_blocks %}
+              <div class="tr-review-card" {{ block.shopify_attributes }}>
+                <div class="tr-reviewer-header">
+                  <span class="tr-reviewer-name">{{ block.settings.reviewer_name }}</span>
+                  {% if block.settings.verified %}
+                    <span class="tr-verified-badge">✓ Verified Buyer</span>
+                  {% endif %}
+                </div>
+                <div class="tr-pdp-stars">{{ block.settings.stars | default: '★★★★★' }}</div>
+                <h4 style="color: #fff; margin: 0; font-size: 15px;">{{ block.settings.title }}</h4>
+                <p class="tr-review-text">
+                  {{ block.settings.review_text }}
+                </p>
+                {% if block.settings.variant_info != blank %}
+                  <span style="font-size: 11px; color: #666;">{{ block.settings.variant_info }}</span>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="tr-review-card">
+              <div class="tr-reviewer-header">
+                <span class="tr-reviewer-name">Rahul Sharma</span>
+                <span class="tr-verified-badge">✓ Verified Buyer</span>
+              </div>
+              <div class="tr-pdp-stars">★★★★★</div>
+              <h4 style="color: #fff; margin: 0; font-size: 15px;">2 Pairs in 1 Case is Pure Genius!</h4>
+              <p class="tr-review-text">
+                I was skeptical about two pairs fitting inside one pocket-sized case, but TR nailed the design! The in-ear pair gives punchy bass for gym sessions and the half-in-ear is so lightweight for office meetings. Wireless charging works flawlessly on my Qi pad.
+              </p>
+              <span style="font-size: 11px; color: #666;">Purchased: Moon White • 3 days ago</span>
+            </div>
 
-        <div class="tr-review-card">
-          <div class="tr-reviewer-header">
-            <span class="tr-reviewer-name">Ananya Verma</span>
-            <span class="tr-verified-badge">✓ Verified Buyer</span>
-          </div>
-          <div class="tr-pdp-stars">★★★★★</div>
-          <h4 style="color: #fff; margin: 0; font-size: 15px;">Unbeatable Battery & Sound Quality</h4>
-          <p class="tr-review-text">
-            Battery life easily lasts over a week without needing a recharge. Quad mic ENC does an outstanding job cutting down street noise when I'm on work calls outside. Definitely worth every rupee.
-          </p>
-          <span style="font-size: 11px; color: #666;">Purchased: Carbon Black • 1 week ago</span>
-        </div>
+            <div class="tr-review-card">
+              <div class="tr-reviewer-header">
+                <span class="tr-reviewer-name">Aman Patel</span>
+                <span class="tr-verified-badge">✓ Verified Buyer</span>
+              </div>
+              <div class="tr-pdp-stars">★★★★★</div>
+              <h4 style="color: #fff; margin: 0; font-size: 15px;">Gaming Latency & Battery Life 10/10</h4>
+              <p class="tr-review-text">
+                Game mode 45ms latency is legit. Zero audio sync lag while playing BGMI. Plus the laser engraving with my nickname on the case made it feel super premium. Delivery was done in 48 hours to Mumbai.
+              </p>
+              <span style="font-size: 11px; color: #666;">Purchased: Carbon Black • 1 week ago</span>
+            </div>
 
-        <div class="tr-review-card">
-          <div class="tr-reviewer-header">
-            <span class="tr-reviewer-name">Vikram Malhotra</span>
-            <span class="tr-verified-badge">✓ Verified Buyer</span>
-          </div>
-          <div class="tr-pdp-stars">★★★★★</div>
-          <h4 style="color: #fff; margin: 0; font-size: 15px;">Gaming Beast Mode is Real!</h4>
-          <p class="tr-review-text">
-            45ms low latency makes gaming super responsive. Zero delay in footsteps on BGMI. Fast delivery within 3 days to Bengaluru and solid premium packaging with all accessories included.
-          </p>
-          <span style="font-size: 11px; color: #666;">Purchased: Steel Blue • 2 weeks ago</span>
+            <div class="tr-review-card">
+              <div class="tr-reviewer-header">
+                <span class="tr-reviewer-name">Sneha Kulkarni</span>
+                <span class="tr-verified-badge">✓ Verified Buyer</span>
+              </div>
+              <div class="tr-pdp-stars">★★★★★</div>
+              <h4 style="color: #fff; margin: 0; font-size: 15px;">Best TWS purchase under ₹2,000</h4>
+              <p class="tr-review-text">
+                I share the second pair with my sister during travel. Sound quality has amazing bass and crystal clear calling. The Quad Mic ENC actually filters out bus and traffic noise. Highly recommended brand!
+              </p>
+              <span style="font-size: 11px; color: #666;">Purchased: Steel Blue • 2 weeks ago</span>
+            </div>
+          {% endif %}
         </div>
-      </div>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -93,7 +133,104 @@
 {% schema %}
 {
   "name": "TR PDP Reviews",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "CUSTOMER REVIEWS"
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating Score",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "reviews_count",
+      "label": "Reviews Count Text",
+      "default": "128 Verified Reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_customer_photos",
+      "label": "Show Customer Photos Grid",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews_list",
+      "label": "Show Review Cards",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer Name",
+          "default": "Rahul Sharma"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Buyer Badge",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "stars",
+          "label": "Star Rating",
+          "options": [
+            { "value": "★★★★★", "label": "5 Stars" },
+            { "value": "★★★★☆", "label": "4 Stars" },
+            { "value": "★★★☆☆", "label": "3 Stars" }
+          ],
+          "default": "★★★★★"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Heading",
+          "default": "Amazing Sound Quality & Design!"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Body",
+          "default": "TR delivers punchy bass and amazing battery life. Very comfortable for long listening sessions."
+        },
+        {
+          "type": "text",
+          "id": "variant_info",
+          "label": "Purchased Variant & Date",
+          "default": "Purchased: Moon White • 3 days ago"
+        }
+      ]
+    },
+    {
+      "type": "photo",
+      "name": "Customer Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Customer Photo (Upload)"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Or Photo URL (Fallback)",
+          "default": "//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "TR PDP Reviews"

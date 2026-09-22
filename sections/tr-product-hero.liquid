@@ -1,31 +1,49 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign prod_title = product.title | default: section.settings.product_title | default: "DwOTS Fire - Dual Sharing TWS with Wireless Charging"
+  assign prod_subtitle = product.metafields.custom.subtitle.value | default: product.metafields.custom.subtitle | default: section.settings.product_subtitle | default: "Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency"
+  assign p_price = current_variant.price | money | default: section.settings.fallback_price | default: "₹1,499"
+  assign p_compare = current_variant.compare_at_price | money | default: section.settings.fallback_compare_price | default: "₹4,999"
+-%}
+
 <section class="tr-pdp-top-wrapper" id="tr-pdp-hero-{{ section.id }}">
   <div class="tr-container">
     <div class="tr-pdp-grid">
       <!-- Media Gallery (Left) -->
       <div class="tr-pdp-gallery-wrap">
         <div class="tr-pdp-thumbnails">
-          <div class="tr-pdp-thumb-item active" data-media-src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="DwOTS Fire White" loading="lazy">
-          </div>
-          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="DwOTS Fire 3D" loading="lazy">
-          </div>
-          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="DwOTS Fire Rotating" loading="lazy">
-          </div>
-          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="DwOTS Fire Black Case" loading="lazy">
-          </div>
-          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="DwOTS Fire In Ear" loading="lazy">
-          </div>
+          {% if product.media.size > 0 %}
+            {% for media in product.media %}
+              <div class="tr-pdp-thumb-item {% if forloop.first %}active{% endif %}" data-media-src="{{ media | image_url: width: 1000 }}" data-type="{{ media.media_type }}">
+                <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | default: prod_title }}" loading="lazy" width="64" height="64">
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="tr-pdp-thumb-item active" data-media-src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" data-type="image">
+              <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="DwOTS Fire White" loading="lazy" width="64" height="64">
+            </div>
+            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" data-type="image">
+              <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="DwOTS Fire 3D" loading="lazy" width="64" height="64">
+            </div>
+            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" data-type="image">
+              <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="DwOTS Fire Rotating" loading="lazy" width="64" height="64">
+            </div>
+            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" data-type="image">
+              <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="DwOTS Fire Black Case" loading="lazy" width="64" height="64">
+            </div>
+            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" data-type="image">
+              <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="DwOTS Fire In Ear" loading="lazy" width="64" height="64">
+            </div>
+          {% endif %}
         </div>
 
         <div class="tr-pdp-main-media">
           <img 
             id="tr-main-display-img" 
-            src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" 
-            alt="DwOTS Fire Earbuds"
+            src="{% if product.featured_image %}{{ product.featured_image | image_url: width: 1000 }}{% else %}//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774{% endif %}" 
+            alt="{{ prod_title }}"
+            width="600"
+            height="600"
           >
         </div>
       </div>
@@ -33,21 +51,27 @@
       <!-- Product Info Column (Right) -->
       <div class="tr-pdp-details">
         <!-- Rating Row -->
-        <div class="tr-pdp-rating-row">
-          <span class="tr-pdp-stars">★★★★★</span>
-          <strong style="color: #fff;">4.8</strong>
-          <span class="tr-pdp-review-count">| 128 Verified Reviews</span>
-        </div>
+        {% if section.settings.show_rating %}
+          <div class="tr-pdp-rating-row">
+            <span class="tr-pdp-stars">★★★★★</span>
+            <strong style="color: #fff;">{{ section.settings.rating_score | default: '4.8' }}</strong>
+            <span class="tr-pdp-review-count">| {{ section.settings.reviews_count | default: '128 Verified Reviews' }}</span>
+          </div>
+        {% endif %}
 
         <!-- Title & Subtitle -->
-        <h1 class="tr-pdp-title">{{ section.settings.product_title | default: "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging" }}</h1>
-        <p class="tr-pdp-subtitle">Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency</p>
+        <h1 class="tr-pdp-title">{{ prod_title }}</h1>
+        {% if prod_subtitle != blank %}
+          <p class="tr-pdp-subtitle">{{ prod_subtitle }}</p>
+        {% endif %}
 
         <!-- Price Box -->
         <div class="tr-pdp-price-box">
-          <span class="tr-pdp-price">₹1,499</span>
-          <span class="tr-pdp-mrp">₹4,999</span>
-          <span class="tr-pdp-discount-badge">70% OFF</span>
+          <span class="tr-pdp-price" id="tr-pdp-price-val">{{ p_price }}</span>
+          {% if p_compare != blank and p_compare != '$0.00' %}
+            <span class="tr-pdp-mrp" id="tr-pdp-compare-val">{{ p_compare }}</span>
+            <span class="tr-pdp-discount-badge">{{ section.settings.discount_badge_text | default: '70% OFF' }}</span>
+          {% endif %}
         </div>
 
         <!-- Color Swatches -->
@@ -70,64 +94,72 @@
         </div>
 
         <!-- Personalise Engraving -->
-        <div class="tr-personalise-box">
-          <label for="tr-engrave-text">✨ Make Your Product Personalised (Optional Free Engraving)</label>
-          <input 
-            type="text" 
-            id="tr-engrave-text" 
-            class="tr-personalise-input" 
-            placeholder="Enter name or initials to engrave on case (Max 12 chars)" 
-            maxlength="12"
-          >
-        </div>
+        {% if section.settings.enable_personalisation %}
+          <div class="tr-personalise-box">
+            <label for="tr-engrave-text">✨ {{ section.settings.personalise_label | default: 'Make Your Product Personalised (Optional Free Engraving)' }}</label>
+            <input 
+              type="text" 
+              id="tr-engrave-text" 
+              class="tr-personalise-input" 
+              placeholder="{{ section.settings.personalise_placeholder | default: 'Enter name or initials to engrave on case (Max 12 chars)' }}" 
+              maxlength="12"
+            >
+          </div>
+        {% endif %}
 
         <!-- Offer Coupon Box -->
-        <div class="tr-coupon-banner">
-          <div class="tr-coupon-text">
-            <span>🏷️ Get 15% OFF on 2 or More Items</span>
+        {% if section.settings.show_coupon %}
+          <div class="tr-coupon-banner">
+            <div class="tr-coupon-text">
+              <span>🏷️ {{ section.settings.coupon_text | default: 'Get 15% OFF on 2 or More Items' }}</span>
+            </div>
+            <span class="tr-coupon-code-pill">{{ section.settings.coupon_code | default: 'Use Code: TR15' }}</span>
           </div>
-          <span class="tr-coupon-code-pill">Use Code: TR15</span>
-        </div>
+        {% endif %}
 
         <!-- Pincode Delivery Check -->
-        <div>
-          <label style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; display: block;">Check Estimated Delivery Date</label>
-          <div class="tr-pincode-wrap">
-            <input type="text" class="tr-pincode-input" id="tr-pincode-input" placeholder="Enter Delivery Pincode" maxlength="6">
-            <button type="button" class="tr-btn tr-btn-dark" style="padding: 10px 20px;" onclick="checkPincode()">CHECK</button>
+        {% if section.settings.show_pincode %}
+          <div>
+            <label style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; display: block;">{{ section.settings.pincode_label | default: 'Check Estimated Delivery Date' }}</label>
+            <div class="tr-pincode-wrap">
+              <input type="text" class="tr-pincode-input" id="tr-pincode-input" placeholder="Enter Delivery Pincode" maxlength="6">
+              <button type="button" class="tr-btn tr-btn-dark" style="padding: 10px 20px;" onclick="checkPincode()">CHECK</button>
+            </div>
+            <div id="tr-pincode-msg" style="font-size: 12px; margin-top: 6px; color: var(--tr-accent); display: none;">
+              ✓ Delivery expected in 2-4 business days. Free shipping eligible!
+            </div>
           </div>
-          <div id="tr-pincode-msg" style="font-size: 12px; margin-top: 6px; color: var(--tr-accent); display: none;">
-            ✓ Delivery expected in 2-4 business days. Free shipping eligible!
-          </div>
-        </div>
+        {% endif %}
 
         <!-- CTA Buttons -->
         <div class="tr-pdp-actions">
-          <button type="button" class="tr-btn-buy-now" onclick="alert('Proceeding to Instant Fast Checkout...')">
-            ⚡ BUY IT NOW - PAY ON DELIVERY / UPI
-          </button>
+          {% if section.settings.show_buy_now %}
+            <button type="button" class="tr-btn-buy-now" onclick="alert('Proceeding to Instant Fast Checkout...')">
+              ⚡ {{ section.settings.buy_now_label | default: 'BUY IT NOW - PAY ON DELIVERY / UPI' }}
+            </button>
+          {% endif %}
           <button type="button" class="tr-btn-add-cart" onclick="alert('Item added to cart!')">
-            ADD TO CART
+            {{ section.settings.add_to_cart_label | default: 'ADD TO CART' }}
           </button>
         </div>
 
         <!-- 4 PDP Trust Badges -->
         <div class="tr-pdp-badges-grid">
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Free Shipping">
-            <span>Free Shipping</span>
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Free Shipping" width="36" height="36">
+            <span>{{ section.settings.badge_1_text | default: 'Free Shipping' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="1 Year Warranty">
-            <span>1 Year Warranty</span>
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="1 Year Warranty" width="36" height="36">
+            <span>{{ section.settings.badge_2_text | default: '1 Year Warranty' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="72Hrs Replacement">
-            <span>72h Replacement</span>
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="72Hrs Replacement" width="36" height="36">
+            <span>{{ section.settings.badge_3_text | default: '72h Replacement' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="GST Billing">
-            <span>GST Billing</span>
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="GST Billing" width="36" height="36">
+            <span>{{ section.settings.badge_4_text | default: 'GST Billing' }}</span>
           </div>
         </div>
       </div>
@@ -146,7 +178,7 @@
     });
   });
 
-  // Color Swatch logic
+  // Color Swatches
   document.querySelectorAll('.tr-swatch-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.tr-swatch-btn').forEach(b => b.classList.remove('active'));
@@ -176,10 +208,174 @@
   "name": "TR PDP Hero",
   "settings": [
     {
+      "type": "header",
+      "content": "Product Title & Subtitle"
+    },
+    {
       "type": "text",
       "id": "product_title",
-      "label": "Product Title",
+      "label": "Product Title (Fallback)",
       "default": "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging"
+    },
+    {
+      "type": "text",
+      "id": "product_subtitle",
+      "label": "Product Subtitle",
+      "default": "Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency"
+    },
+    {
+      "type": "header",
+      "content": "Pricing"
+    },
+    {
+      "type": "text",
+      "id": "fallback_price",
+      "label": "Price (Fallback)",
+      "default": "₹1,499"
+    },
+    {
+      "type": "text",
+      "id": "fallback_compare_price",
+      "label": "Compare at Price (Fallback)",
+      "default": "₹4,999"
+    },
+    {
+      "type": "text",
+      "id": "discount_badge_text",
+      "label": "Discount Badge Text",
+      "default": "70% OFF"
+    },
+    {
+      "type": "header",
+      "content": "Star Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show Rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating Score",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "reviews_count",
+      "label": "Reviews Count Text",
+      "default": "128 Verified Reviews"
+    },
+    {
+      "type": "header",
+      "content": "Personalisation / Laser Engraving"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_personalisation",
+      "label": "Enable Personalisation Input",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "personalise_label",
+      "label": "Personalisation Label",
+      "default": "Make Your Product Personalised (Optional Free Engraving)"
+    },
+    {
+      "type": "text",
+      "id": "personalise_placeholder",
+      "label": "Input Placeholder",
+      "default": "Enter name or initials to engrave on case (Max 12 chars)"
+    },
+    {
+      "type": "header",
+      "content": "Offer Coupon Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_coupon",
+      "label": "Show Coupon Banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "coupon_text",
+      "label": "Coupon Text",
+      "default": "Get 15% OFF on 2 or More Items"
+    },
+    {
+      "type": "text",
+      "id": "coupon_code",
+      "label": "Coupon Code Badge",
+      "default": "Use Code: TR15"
+    },
+    {
+      "type": "header",
+      "content": "Pincode Checker"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pincode",
+      "label": "Show Pincode Checker",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pincode_label",
+      "label": "Pincode Label",
+      "default": "Check Estimated Delivery Date"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action Buttons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy_now",
+      "label": "Show Instant Buy Now Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "buy_now_label",
+      "label": "Buy Now Button Label",
+      "default": "BUY IT NOW - PAY ON DELIVERY / UPI"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to Cart Button Label",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "header",
+      "content": "Trust Badges"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_text",
+      "label": "Badge 1 Text",
+      "default": "Free Shipping"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_text",
+      "label": "Badge 2 Text",
+      "default": "1 Year Warranty"
+    },
+    {
+      "type": "text",
+      "id": "badge_3_text",
+      "label": "Badge 3 Text",
+      "default": "72h Replacement"
+    },
+    {
+      "type": "text",
+      "id": "badge_4_text",
+      "label": "Badge 4 Text",
+      "default": "GST Billing"
     }
   ],
   "presets": [

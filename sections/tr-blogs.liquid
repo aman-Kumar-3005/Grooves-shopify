@@ -1,14 +1,17 @@
-<section class="tr-blogs-section" id="tr-blogs-{{ section.id }}" style="padding: 20px 0 40px;">
+<section class="tr-blogs-section" id="tr-blogs-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
   <div class="tr-container">
-    <div class="tr-section-badge-wrap">
-      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'Blogs' }}</span>
-    </div>
+    {% if section.settings.badge_title != blank %}
+      <div class="tr-section-badge-wrap">
+        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+      </div>
+    {% endif %}
 
     {% assign real_blog = blogs[section.settings.blog] %}
+    {% assign limit_count = section.settings.articles_count | default: 4 %}
 
     <div class="tr-blogs-grid">
       {% if real_blog != blank and real_blog.articles_count > 0 %}
-        {% for article in real_blog.articles limit: 4 %}
+        {% for article in real_blog.articles limit: limit_count %}
           <article class="tr-blog-card">
             <a href="{{ article.url }}" class="tr-blog-img-wrap">
               {% if article.image %}
@@ -16,12 +19,16 @@
                   src="{{ article.image | image_url: width: 600 }}" 
                   alt="{{ article.title }}" 
                   loading="lazy"
+                  width="400"
+                  height="250"
                 >
               {% else %}
                 <img 
                   src="https://acwo.com/cdn/shop/articles/Best_OWS_Earbuds.webp?v=1789979303&width=533" 
                   alt="{{ article.title }}" 
                   loading="lazy"
+                  width="400"
+                  height="250"
                 >
               {% endif %}
             </a>
@@ -45,27 +52,55 @@
         {% endfor %}
       {% else %}
         {% for block in section.blocks %}
-          <article class="tr-blog-card">
-            <a href="{{ block.settings.link | default: '/blogs/news' }}" class="tr-blog-img-wrap">
+          {%- liquid
+            assign blk_article = articles[block.settings.article]
+            if blk_article != blank
+              assign art_title = blk_article.title
+              assign art_link = blk_article.url
+              assign art_desc = blk_article.excerpt_or_content | strip_html | truncatewords: 20
+              assign art_cat = blk_article.tags.first | default: 'AUDIO GUIDE'
+              if block.settings.image != blank
+                assign art_img = block.settings.image | image_url: width: 600
+              elsif blk_article.image
+                assign art_img = blk_article.image | image_url: width: 600
+              else
+                assign art_img = block.settings.image_url
+              endif
+            else
+              assign art_title = block.settings.title
+              assign art_link = block.settings.link | default: '/blogs/news'
+              assign art_desc = block.settings.excerpt
+              assign art_cat = block.settings.category | default: 'AUDIO GUIDE'
+              if block.settings.image != blank
+                assign art_img = block.settings.image | image_url: width: 600
+              else
+                assign art_img = block.settings.image_url
+              endif
+            endif
+          -%}
+          <article class="tr-blog-card" {{ block.shopify_attributes }}>
+            <a href="{{ art_link }}" class="tr-blog-img-wrap">
               <img 
-                src="{{ block.settings.image_url }}" 
-                alt="{{ block.settings.title }}" 
+                src="{{ art_img }}" 
+                alt="{{ art_title }}" 
                 loading="lazy"
+                width="400"
+                height="250"
               >
             </a>
             <div class="tr-blog-content">
               <span style="font-size: 11px; color: var(--tr-accent); font-weight: 700; text-transform: uppercase;">
-                {{ block.settings.category | default: 'AUDIO GUIDE' }}
+                {{ art_cat }}
               </span>
               <h3 class="tr-blog-title">
-                <a href="{{ block.settings.link | default: '/blogs/news' }}" style="color: inherit; text-decoration: none;">
-                  {{ block.settings.title }}
+                <a href="{{ art_link }}" style="color: inherit; text-decoration: none;">
+                  {{ art_title }}
                 </a>
               </h3>
               <p style="color: #888888; font-size: 13px; margin: 0; line-height: 1.5;">
-                {{ block.settings.excerpt }}
+                {{ art_desc }}
               </p>
-              <a href="{{ block.settings.link | default: '/blogs/news' }}" class="tr-blog-link">
+              <a href="{{ art_link }}" class="tr-blog-link">
                 Read more &rarr;
               </a>
             </div>
@@ -90,6 +125,35 @@
       "type": "blog",
       "id": "blog",
       "label": "Select Dynamic Blog"
+    },
+    {
+      "type": "range",
+      "id": "articles_count",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Articles to Display",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 40
     }
   ],
   "blocks": [
@@ -98,40 +162,70 @@
       "name": "Blog Article Fallback",
       "settings": [
         {
+          "type": "article",
+          "id": "article",
+          "label": "Select Specific Article"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Article Image (Upload)"
+        },
+        {
           "type": "text",
           "id": "title",
-          "label": "Article Title",
-          "default": "Best Open Ear Earbuds in 2026: Top Picks"
+          "label": "Article Title Fallback",
+          "default": "Best Wireless Earbuds Buying Guide 2026"
         },
         {
           "type": "text",
           "id": "category",
-          "label": "Category / Tag",
-          "default": "TECH & AUDIO"
+          "label": "Category Tag Fallback",
+          "default": "BUYING GUIDE"
         },
         {
-          "type": "text",
+          "type": "textarea",
           "id": "excerpt",
-          "label": "Short Excerpt",
-          "default": "Looking for the most comfortable open sound experience? Here is our comprehensive guide."
+          "label": "Excerpt Fallback",
+          "default": "Discover the key features to look for in ANC earbuds, battery life considerations, and dual driver technology."
         },
         {
           "type": "text",
           "id": "image_url",
-          "label": "Featured Image URL",
+          "label": "Image URL Fallback",
           "default": "https://acwo.com/cdn/shop/articles/Best_OWS_Earbuds.webp?v=1789979303&width=533"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Article Link"
+          "label": "Article Link Fallback"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "TR Blogs"
+      "name": "TR Blogs",
+      "blocks": [
+        {
+          "type": "article",
+          "settings": {
+            "title": "Best Wireless Earbuds Buying Guide 2026",
+            "category": "BUYING GUIDE",
+            "excerpt": "Discover the key features to look for in ANC earbuds, battery life considerations, and dual driver technology.",
+            "image_url": "https://acwo.com/cdn/shop/articles/Best_OWS_Earbuds.webp?v=1789979303&width=533"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "How Soundbars Transform Home Theatres",
+            "category": "TECH SPOTLIGHT",
+            "excerpt": "Cinematic audio made easy. Understand Dolby Atmos, optical inputs, and subwoofer placements.",
+            "image_url": "https://acwo.com/cdn/shop/articles/soundbar-guide.webp?v=1789979303&width=533"
+          }
+        }
+      ]
     }
   ]
 }

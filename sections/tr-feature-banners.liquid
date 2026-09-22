@@ -1,14 +1,42 @@
-<section class="tr-feature-banners-section" id="tr-banners-{{ section.id }}" style="padding: 10px 0 30px;">
+<section class="tr-feature-banners-section" id="tr-banners-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 10 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 30 }}px;">
   <div class="tr-container">
     {% for block in section.blocks %}
-      <div class="tr-showcase-banner">
-        <img 
-          src="{{ block.settings.image_url }}" 
-          alt="{{ block.settings.title | default: 'TR Product' }}" 
-          class="tr-showcase-img"
-          loading="lazy"
-        >
-        {% if block.settings.button_text != blank %}
+      {%- liquid
+        assign desk_img = block.settings.image
+        assign desk_url = block.settings.image_url | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/swirl-banner-desk.webp?v=1789043104'
+        assign mob_img = block.settings.mobile_image
+        assign mob_url = block.settings.mobile_image_url
+      -%}
+      <div class="tr-showcase-banner" {{ block.shopify_attributes }}>
+        <picture>
+          {% if mob_img != blank %}
+            <source media="(max-width: 768px)" srcset="{{ mob_img | image_url: width: 800 }}">
+          {% elsif mob_url != blank %}
+            <source media="(max-width: 768px)" srcset="{{ mob_url }}">
+          {% endif %}
+          
+          {% if desk_img != blank %}
+            <img 
+              src="{{ desk_img | image_url: width: 1600 }}" 
+              alt="{{ block.settings.title | default: 'TR Product' }}" 
+              class="tr-showcase-img"
+              loading="lazy"
+              width="1600"
+              height="auto"
+            >
+          {% else %}
+            <img 
+              src="{{ desk_url }}" 
+              alt="{{ block.settings.title | default: 'TR Product' }}" 
+              class="tr-showcase-img"
+              loading="lazy"
+              width="1600"
+              height="auto"
+            >
+          {% endif %}
+        </picture>
+
+        {% if block.settings.button_text != blank or block.settings.title != blank %}
           <div class="tr-showcase-overlay">
             {% if block.settings.tagline != blank %}
               <p style="color: var(--tr-accent); font-weight: 800; font-size: 14px; text-transform: uppercase; margin-bottom: 8px;">
@@ -20,9 +48,11 @@
                 {{ block.settings.title }}
               </h3>
             {% endif %}
-            <a href="{{ block.settings.button_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 12px 32px;">
-              {{ block.settings.button_text }}
-            </a>
+            {% if block.settings.button_text != blank %}
+              <a href="{{ block.settings.button_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 12px 32px;">
+                {{ block.settings.button_text }}
+              </a>
+            {% endif %}
           </div>
         {% endif %}
       </div>
@@ -33,17 +63,65 @@
 {% schema %}
 {
   "name": "TR Feature Banners",
-  "settings": [],
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 30
+    }
+  ],
   "blocks": [
     {
       "type": "banner",
       "name": "Showcase Banner",
       "settings": [
         {
+          "type": "header",
+          "content": "Desktop Banner"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Desktop Banner Image (Upload)"
+        },
+        {
           "type": "text",
           "id": "image_url",
-          "label": "Banner Image URL",
+          "label": "Or Desktop Image URL (Fallback)",
           "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/swirl-banner-desk.webp?v=1789043104"
+        },
+        {
+          "type": "header",
+          "content": "Mobile Banner (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Banner Image (Upload)"
+        },
+        {
+          "type": "text",
+          "id": "mobile_image_url",
+          "label": "Or Mobile Image URL (Fallback)"
+        },
+        {
+          "type": "header",
+          "content": "Text & Link"
         },
         {
           "type": "text",

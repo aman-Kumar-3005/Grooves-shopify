@@ -1,8 +1,10 @@
-<section class="tr-categories-section" id="tr-categories-{{ section.id }}">
+<section class="tr-categories-section" id="tr-categories-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 30 }}px;">
   <div class="tr-container">
-    <div class="tr-section-badge-wrap">
-      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'Shop By Categories' }}</span>
-    </div>
+    {% if section.settings.badge_title != blank %}
+      <div class="tr-section-badge-wrap">
+        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+      </div>
+    {% endif %}
 
     <div class="tr-categories-grid">
       {% for block in section.blocks %}
@@ -11,25 +13,33 @@
           if col != blank
             assign c_title = col.title
             assign c_url = col.url
-            if col.featured_image
-              assign c_img = col.featured_image | image_url: width: 200
+            if block.settings.image != blank
+              assign c_img = block.settings.image | image_url: width: 300
+            elsif col.featured_image
+              assign c_img = col.featured_image | image_url: width: 300
             elsif col.products.first.featured_image
-              assign c_img = col.products.first.featured_image | image_url: width: 200
+              assign c_img = col.products.first.featured_image | image_url: width: 300
             else
               assign c_img = block.settings.image_url
             endif
           else
             assign c_title = block.settings.title
             assign c_url = block.settings.url | default: '/collections/all'
-            assign c_img = block.settings.image_url
+            if block.settings.image != blank
+              assign c_img = block.settings.image | image_url: width: 300
+            else
+              assign c_img = block.settings.image_url
+            endif
           endif
         -%}
-        <a href="{{ c_url }}" class="tr-category-card">
+        <a href="{{ c_url }}" class="tr-category-card" {{ block.shopify_attributes }}>
           <div class="tr-category-icon-box">
             <img 
               src="{{ c_img }}" 
               alt="{{ c_title }}" 
               loading="lazy"
+              width="90"
+              height="90"
             >
           </div>
           <span class="tr-category-name">{{ c_title }}</span>
@@ -48,6 +58,26 @@
       "id": "badge_title",
       "label": "Badge Title",
       "default": "Shop By Categories"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 30
     }
   ],
   "blocks": [
@@ -61,28 +91,77 @@
           "label": "Select Collection (Dynamic)"
         },
         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Category Icon"
+        },
+        {
           "type": "text",
           "id": "title",
-          "label": "Category Name Fallback",
+          "label": "Category Name (Fallback if no collection selected)",
           "default": "Earbuds"
         },
         {
           "type": "text",
           "id": "image_url",
-          "label": "Icon Image URL Fallback",
+          "label": "Icon Image URL (Fallback)",
           "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198"
         },
         {
           "type": "url",
           "id": "url",
-          "label": "Category Link Fallback"
+          "label": "Category Link (Fallback)"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "TR Categories"
+      "name": "TR Categories",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Bestseller",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Portable Fan",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/portable-fan-category_jpg.jpg?v=1782898913"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Smartwatches",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/smartwatch.jpg?v=1781096198"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Wireless Audio",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/wireless-audio.jpg?v=1781096198"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Soundbars",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-theatre-category_jpg.jpg?v=1782898913"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Speakers",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/speakers.jpg?v=1781096198"
+          }
+        }
+      ]
     }
   ]
 }

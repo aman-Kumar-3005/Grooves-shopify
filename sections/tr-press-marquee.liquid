@@ -1,17 +1,42 @@
-<section class="tr-press-section" id="tr-press-{{ section.id }}" style="padding: 20px 0 30px;">
+<section class="tr-press-section" id="tr-press-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 30 }}px;">
   <div class="tr-container">
-    <div class="tr-section-badge-wrap">
-      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'As Featured On' }}</span>
-    </div>
+    {% if section.settings.badge_title != blank %}
+      <div class="tr-section-badge-wrap">
+        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+      </div>
+    {% endif %}
 
     <div class="tr-press-grid">
       {% for block in section.blocks %}
-        <img 
-          src="{{ block.settings.logo_url }}" 
-          alt="{{ block.settings.name | default: 'Press Media' }}" 
-          class="tr-press-logo"
-          loading="lazy"
-        >
+        {%- liquid
+          if block.settings.image != blank
+            assign p_img = block.settings.image | image_url: width: 300
+          else
+            assign p_img = block.settings.logo_url
+          endif
+        -%}
+        {% if block.settings.link != blank %}
+          <a href="{{ block.settings.link }}" target="_blank" rel="noopener noreferrer" {{ block.shopify_attributes }}>
+            <img 
+              src="{{ p_img }}" 
+              alt="{{ block.settings.name | default: 'Press Media' }}" 
+              class="tr-press-logo"
+              loading="lazy"
+              width="150"
+              height="40"
+            >
+          </a>
+        {% else %}
+          <img 
+            src="{{ p_img }}" 
+            alt="{{ block.settings.name | default: 'Press Media' }}" 
+            class="tr-press-logo"
+            loading="lazy"
+            width="150"
+            height="40"
+            {{ block.shopify_attributes }}
+          >
+        {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -26,6 +51,26 @@
       "id": "badge_title",
       "label": "Badge Title",
       "default": "As Featured On"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 30
     }
   ],
   "blocks": [
@@ -40,10 +85,20 @@
           "default": "Media Outlet"
         },
         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo Image (Upload)"
+        },
+        {
           "type": "text",
           "id": "logo_url",
-          "label": "Logo Image URL",
+          "label": "Or Logo URL (Fallback)",
           "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-01.webp?v=1762587441"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Article / Media Link"
         }
       ]
     }

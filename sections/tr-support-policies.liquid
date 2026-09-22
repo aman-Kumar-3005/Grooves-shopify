@@ -1,17 +1,28 @@
-<section class="tr-support-section" id="tr-support-{{ section.id }}" style="padding: 20px 0 0;">
+<section class="tr-support-section" id="tr-support-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 0 }}px;">
   <div class="tr-container">
-    <div class="tr-section-badge-wrap">
-      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'TR Support' }}</span>
-    </div>
+    {% if section.settings.badge_title != blank %}
+      <div class="tr-section-badge-wrap">
+        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+      </div>
+    {% endif %}
 
-    <!-- 6 Support Cards -->
+    <!-- Support Cards -->
     <div class="tr-support-grid">
       {% for block in section.blocks %}
-        <a href="{{ block.settings.link | default: '/pages/contact' }}" class="tr-support-card" style="text-decoration: none;">
+        {%- liquid
+          if block.settings.image != blank
+            assign sup_icon = block.settings.image | image_url: width: 120
+          else
+            assign sup_icon = block.settings.icon_url
+          endif
+        -%}
+        <a href="{{ block.settings.link | default: '/pages/contact' }}" class="tr-support-card" style="text-decoration: none;" {{ block.shopify_attributes }}>
           <img 
-            src="{{ block.settings.icon_url }}" 
+            src="{{ sup_icon }}" 
             alt="{{ block.settings.title }}" 
             loading="lazy"
+            width="50"
+            height="50"
           >
           <h4 class="tr-support-title">{{ block.settings.title }}</h4>
           {% if block.settings.subtitle != blank %}
@@ -23,32 +34,34 @@
   </div>
 
   <!-- Bottom Policy Strip -->
-  <div class="tr-policy-strip">
-    <div class="tr-container">
-      <div class="tr-policy-strip-inner">
-        <div class="tr-policy-item">
-          <span>🚚</span>
-          <span>Pan India Delivery</span>
-        </div>
-        <div class="tr-policy-item">
-          <span>🛡️</span>
-          <span>1 Year Warranty</span>
-        </div>
-        <div class="tr-policy-item">
-          <span>💵</span>
-          <span>COD Available</span>
-        </div>
-        <div class="tr-policy-item">
-          <span>🔄</span>
-          <span>72 Hours Replacement</span>
-        </div>
-        <div class="tr-policy-item">
-          <span>🔒</span>
-          <span>100% Secure Checkout</span>
+  {% if section.settings.show_policy_strip %}
+    <div class="tr-policy-strip">
+      <div class="tr-container">
+        <div class="tr-policy-strip-inner">
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_1_icon | default: '🚚' }}</span>
+            <span>{{ section.settings.policy_1_text | default: 'Pan India Delivery' }}</span>
+          </div>
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_2_icon | default: '🛡️' }}</span>
+            <span>{{ section.settings.policy_2_text | default: '1 Year Warranty' }}</span>
+          </div>
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_3_icon | default: '💵' }}</span>
+            <span>{{ section.settings.policy_3_text | default: 'COD Available' }}</span>
+          </div>
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_4_icon | default: '🔄' }}</span>
+            <span>{{ section.settings.policy_4_text | default: '72 Hours Replacement' }}</span>
+          </div>
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_5_icon | default: '🔒' }}</span>
+            <span>{{ section.settings.policy_5_text | default: '100% Secure Checkout' }}</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  {% endif %}
 </section>
 
 {% schema %}
@@ -60,6 +73,96 @@
       "id": "badge_title",
       "label": "Badge Title",
       "default": "TR Support"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Bottom Policy Strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy_strip",
+      "label": "Show Bottom Policy Strip",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "policy_1_icon",
+      "label": "Policy 1 Icon",
+      "default": "🚚"
+    },
+    {
+      "type": "text",
+      "id": "policy_1_text",
+      "label": "Policy 1 Text",
+      "default": "Pan India Delivery"
+    },
+    {
+      "type": "text",
+      "id": "policy_2_icon",
+      "label": "Policy 2 Icon",
+      "default": "🛡️"
+    },
+    {
+      "type": "text",
+      "id": "policy_2_text",
+      "label": "Policy 2 Text",
+      "default": "1 Year Warranty"
+    },
+    {
+      "type": "text",
+      "id": "policy_3_icon",
+      "label": "Policy 3 Icon",
+      "default": "💵"
+    },
+    {
+      "type": "text",
+      "id": "policy_3_text",
+      "label": "Policy 3 Text",
+      "default": "COD Available"
+    },
+    {
+      "type": "text",
+      "id": "policy_4_icon",
+      "label": "Policy 4 Icon",
+      "default": "🔄"
+    },
+    {
+      "type": "text",
+      "id": "policy_4_text",
+      "label": "Policy 4 Text",
+      "default": "72 Hours Replacement"
+    },
+    {
+      "type": "text",
+      "id": "policy_5_icon",
+      "label": "Policy 5 Icon",
+      "default": "🔒"
+    },
+    {
+      "type": "text",
+      "id": "policy_5_text",
+      "label": "Policy 5 Text",
+      "default": "100% Secure Checkout"
     }
   ],
   "blocks": [
@@ -80,9 +183,14 @@
           "default": "24/7 Dedicated Help"
         },
         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon Image (Upload)"
+        },
+        {
           "type": "text",
           "id": "icon_url",
-          "label": "Icon Image URL",
+          "label": "Or Icon Image URL (Fallback)",
           "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Support.png?v=1745498991"
         },
         {
@@ -101,48 +209,48 @@
           "type": "support_item",
           "settings": {
             "title": "Customer Support",
-            "subtitle": "+91 Support Desk",
+            "subtitle": "24/7 Dedicated Help",
             "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Support.png?v=1745498991"
           }
         },
         {
           "type": "support_item",
           "settings": {
-            "title": "1 Year Warranty",
-            "subtitle": "Hassle-Free Coverage",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Warranty.png?v=1745498983"
+            "title": "Free Shipping",
+            "subtitle": "On All Prepaid Orders",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Track-order.png?v=1745498991"
           }
         },
         {
           "type": "support_item",
           "settings": {
-            "title": "FAQs",
-            "subtitle": "Instant Answers",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-FAQ.png?v=1745499001"
+            "title": "Doorstep Warranty",
+            "subtitle": "1 Year Free Replacement",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/warranty_7c995ef0-7603-4c91-9e2c-358aa029fbf7.png?v=1745498991"
           }
         },
         {
           "type": "support_item",
           "settings": {
-            "title": "Instagram",
-            "subtitle": "@tr.audio",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Instagram.png?v=1745498977"
+            "title": "Easy Return Policy",
+            "subtitle": "7 Days Hassle-Free",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Return_product.png?v=1745498991"
           }
         },
         {
           "type": "support_item",
           "settings": {
-            "title": "YouTube",
-            "subtitle": "Unboxing & Reviews",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/youtube_icon_2c00e3ce-9090-4bb1-bbce-dfc9d1286d63.png?v=1758871384"
+            "title": "Personalise Your Audio",
+            "subtitle": "Laser Name Engraving",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Personalised.png?v=1745498991"
           }
         },
         {
           "type": "support_item",
           "settings": {
-            "title": "72Hrs Replacement",
-            "subtitle": "No Questions Asked",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254"
+            "title": "Made In India",
+            "subtitle": "Proudly Crafted For You",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/corporate_gift.png?v=1745498991"
           }
         }
       ]

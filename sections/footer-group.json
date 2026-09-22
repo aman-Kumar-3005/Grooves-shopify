@@ -15,7 +15,11 @@
       "type": "tr-footer",
       "settings": {
         "brand_name": "TR",
-        "brand_desc": "High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging."
+        "brand_desc": "High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging.",
+        "menu": "main-menu",
+        "menu_heading": "Quick Links",
+        "footer_menu": "footer",
+        "footer_menu_heading": "Customer Support"
       }
     }
   },

@@ -1,19 +1,31 @@
-<section class="tr-explore-range-section" id="tr-explore-{{ section.id }}" style="padding: 20px 0 40px;">
+<section class="tr-explore-range-section" id="tr-explore-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
   <div class="tr-container">
-    <div style="text-align: center; margin-bottom: 30px;">
-      <div class="tr-section-title-box">
-        <h2>{{ section.settings.section_title | default: "EXPLORE INDIA'S FIRST AUDIO RANGE" }}</h2>
+    {% if section.settings.section_title != blank %}
+      <div style="text-align: center; margin-bottom: 30px;">
+        <div class="tr-section-title-box">
+          <h2>{{ section.settings.section_title }}</h2>
+        </div>
       </div>
-    </div>
+    {% endif %}
 
     {%- liquid
       assign hero_prod = section.settings.hero_product
       if hero_prod != blank
-        assign hero_img = hero_prod.featured_image | image_url: width: 800
+        if section.settings.hero_image_file != blank
+          assign hero_img = section.settings.hero_image_file | image_url: width: 800
+        elsif hero_prod.featured_image
+          assign hero_img = hero_prod.featured_image | image_url: width: 800
+        else
+          assign hero_img = section.settings.hero_image
+        endif
         assign hero_title = hero_prod.title
         assign hero_link = hero_prod.url
       else
-        assign hero_img = section.settings.hero_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002'
+        if section.settings.hero_image_file != blank
+          assign hero_img = section.settings.hero_image_file | image_url: width: 800
+        else
+          assign hero_img = section.settings.hero_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002'
+        endif
         assign hero_title = section.settings.hero_title | default: 'DwOTS 107 Pro - Fast Charging Wireless Earbuds'
         assign hero_link = section.settings.hero_link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white'
       endif
@@ -27,11 +39,15 @@
           alt="{{ hero_title }}"
           class="tr-explore-hero-bg"
           loading="lazy"
+          width="600"
+          height="600"
         >
         <div class="tr-explore-hero-content">
-          <span style="color: var(--tr-accent); font-weight: 800; font-size: 13px; text-transform: uppercase;">
-            {{ section.settings.hero_tag | default: 'SUPER FAST CHARGING' }}
-          </span>
+          {% if section.settings.hero_tag != blank %}
+            <span style="color: var(--tr-accent); font-weight: 800; font-size: 13px; text-transform: uppercase;">
+              {{ section.settings.hero_tag }}
+            </span>
+          {% endif %}
           <h3 style="font-size: 24px; font-weight: 900; color: #fff; margin: 6px 0 14px;">
             {{ hero_title }}
           </h3>
@@ -51,7 +67,13 @@
               assign c_price = blk_prod.price | money
               assign c_compare = blk_prod.compare_at_price | money
               assign c_link = blk_prod.url
-              assign c_img = blk_prod.featured_image | image_url: width: 400
+              if block.settings.image != blank
+                assign c_img = block.settings.image | image_url: width: 400
+              elsif blk_prod.featured_image
+                assign c_img = blk_prod.featured_image | image_url: width: 400
+              else
+                assign c_img = block.settings.image_url
+              endif
               if blk_prod.compare_at_price > blk_prod.price
                 assign c_discount = blk_prod.compare_at_price | minus: blk_prod.price | times: 100 | divided_by: blk_prod.compare_at_price | append: '% OFF'
               else
@@ -62,17 +84,23 @@
               assign c_price = block.settings.price
               assign c_compare = block.settings.compare_price
               assign c_discount = block.settings.discount_tag
-              assign c_img = block.settings.image_url
+              if block.settings.image != blank
+                assign c_img = block.settings.image | image_url: width: 400
+              else
+                assign c_img = block.settings.image_url
+              endif
               assign c_link = block.settings.link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white'
             endif
           -%}
-          <div class="tr-product-mini-card">
+          <div class="tr-product-mini-card" {{ block.shopify_attributes }}>
             <a href="{{ c_link }}">
               <img 
                 src="{{ c_img }}" 
                 alt="{{ c_title }}" 
                 class="tr-product-thumb"
                 loading="lazy"
+                width="200"
+                height="200"
               >
             </a>
             <div class="tr-product-info">
@@ -106,9 +134,44 @@
       "default": "EXPLORE INDIA'S FIRST AUDIO RANGE"
     },
     {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Hero Featured Card (Left)"
+    },
+    {
       "type": "product",
       "id": "hero_product",
-      "label": "Select Hero Product (Optional)"
+      "label": "Select Hero Product (Dynamic)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_file",
+      "label": "Hero Image (Upload)"
+    },
+    {
+      "type": "text",
+      "id": "hero_image",
+      "label": "Or Hero Image URL (Fallback)",
+      "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002"
     },
     {
       "type": "text",
@@ -121,12 +184,6 @@
       "id": "hero_tag",
       "label": "Hero Tagline",
       "default": "SUPER FAST CHARGING"
-    },
-    {
-      "type": "text",
-      "id": "hero_image",
-      "label": "Hero Image URL Fallback",
-      "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002"
     },
     {
       "type": "url",
@@ -149,6 +206,11 @@
           "type": "product",
           "id": "product",
           "label": "Select Product (Dynamic)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Product Image (Upload)"
         },
         {
           "type": "text",
@@ -190,7 +252,49 @@
   ],
   "presets": [
     {
-      "name": "TR Explore Range"
+      "name": "TR Explore Range",
+      "blocks": [
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "DwOTS Fire",
+            "price": "₹1,499",
+            "compare_price": "₹4,999",
+            "discount_tag": "70% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-Fire-new.webp?v=1770725157"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "DwOTS 107 Pro",
+            "price": "₹1,199",
+            "compare_price": "₹3,999",
+            "discount_tag": "70% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/DwOTS_107_New.webp?v=1770725157"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "DwOTS Prime",
+            "price": "₹1,299",
+            "compare_price": "₹4,499",
+            "discount_tag": "71% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-Fire-new.webp?v=1770725157"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "DwOTS Bold",
+            "price": "₹1,699",
+            "compare_price": "₹5,499",
+            "discount_tag": "69% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/DwOTS_107_New.webp?v=1770725157"
+          }
+        }
+      ]
     }
   ]
 }

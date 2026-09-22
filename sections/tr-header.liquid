@@ -3,6 +3,13 @@
   assign logo_url = section.settings.logo_url
   assign logo_w_desk = section.settings.logo_width | default: 130
   assign logo_w_mob = section.settings.logo_width_mobile | default: 85
+
+  assign header_menu = section.settings.menu | default: linklists['main-menu']
+  if header_menu != blank and header_menu.links.size > 0
+    assign nav_links = header_menu.links
+  elsif linklists['main-menu'].links.size > 0
+    assign nav_links = linklists['main-menu'].links
+  endif
 -%}
 
 <header class="tr-header" id="tr-header-{{ section.id }}" style="--tr-logo-w-desk: {{ logo_w_desk }}px; --tr-logo-w-mob: {{ logo_w_mob }}px;">
@@ -93,18 +100,37 @@
           {% endif %}
         </a>
 
-        <!-- Desktop Navigation Menu (Neon Lime Links) -->
+        <!-- Desktop Navigation Menu (Connected to Shopify Main Menu) -->
         <nav class="tr-nav-menu" aria-label="Main Navigation">
-          {% for block in section.blocks %}
-            {% if block.type == 'nav_item' %}
+          {%- if nav_links != blank and nav_links.size > 0 -%}
+            {% for link in nav_links %}
               <a 
-                href="{{ block.settings.url | default: '/collections/all' }}" 
-                class="tr-nav-link {% if block.settings.is_active or forloop.first %}active{% endif %}"
+                href="{{ link.url }}" 
+                class="tr-nav-link {% if link.current or forloop.first %}active{% endif %}"
               >
-                {{ block.settings.title }}
+                {{ link.title }}
               </a>
-            {% endif %}
-          {% endfor %}
+            {% endfor %}
+          {%- elsif section.blocks.size > 0 -%}
+            {% for block in section.blocks %}
+              {% if block.type == 'nav_item' %}
+                <a 
+                  href="{{ block.settings.url | default: '/collections/all' }}" 
+                  class="tr-nav-link {% if block.settings.is_active or forloop.first %}active{% endif %}"
+                >
+                  {{ block.settings.title }}
+                </a>
+              {% endif %}
+            {% endfor %}
+          {%- else -%}
+            <a href="/" class="tr-nav-link active">Home</a>
+            <a href="/collections/all" class="tr-nav-link">Accessories</a>
+            <a href="/collections/all" class="tr-nav-link">Combo</a>
+            <a href="/collections/all" class="tr-nav-link">Earbuds</a>
+            <a href="/collections/all" class="tr-nav-link">Headphones</a>
+            <a href="/pages/contact" class="tr-nav-link">Contact</a>
+            <a href="/pages/about-us" class="tr-nav-link">About Us</a>
+          {%- endif -%}
         </nav>
       </div>
 
@@ -144,7 +170,7 @@
     </div>
   </div>
 
-  <!-- Mobile Slideout Navigation Drawer -->
+  <!-- Mobile Slideout Navigation Drawer (Connected to Shopify Main Menu) -->
   <div class="tr-mobile-drawer-overlay" onclick="document.body.classList.remove('tr-mobile-nav-active')"></div>
   <div class="tr-mobile-drawer" id="tr-mobile-drawer">
     <div class="tr-mobile-drawer-header">
@@ -163,14 +189,31 @@
       </button>
     </div>
     <nav class="tr-mobile-drawer-nav">
-      {% for block in section.blocks %}
-        {% if block.type == 'nav_item' %}
-          <a href="{{ block.settings.url | default: '/collections/all' }}" class="tr-mobile-drawer-link {% if block.settings.is_active or forloop.first %}active{% endif %}">
-            <span>{{ block.settings.title }}</span>
+      {%- if nav_links != blank and nav_links.size > 0 -%}
+        {% for link in nav_links %}
+          <a href="{{ link.url }}" class="tr-mobile-drawer-link {% if link.current or forloop.first %}active{% endif %}">
+            <span>{{ link.title }}</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
           </a>
-        {% endif %}
-      {% endfor %}
+        {% endfor %}
+      {%- elsif section.blocks.size > 0 -%}
+        {% for block in section.blocks %}
+          {% if block.type == 'nav_item' %}
+            <a href="{{ block.settings.url | default: '/collections/all' }}" class="tr-mobile-drawer-link {% if block.settings.is_active or forloop.first %}active{% endif %}">
+              <span>{{ block.settings.title }}</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          {% endif %}
+        {% endfor %}
+      {%- else -%}
+        <a href="/" class="tr-mobile-drawer-link active"><span>Home</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Accessories</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Combo</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Earbuds</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Headphones</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/pages/contact" class="tr-mobile-drawer-link"><span>Contact</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/pages/about-us" class="tr-mobile-drawer-link"><span>About Us</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+      {%- endif -%}
     </nav>
     <div class="tr-mobile-drawer-footer">
       <a href="/account" class="tr-mobile-drawer-btn">
@@ -200,6 +243,16 @@
 {
   "name": "TR Header",
   "settings": [
+    {
+      "type": "header",
+      "content": "Navigation Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
     {
       "type": "header",
       "content": "Logo Settings"
@@ -244,7 +297,7 @@
   "blocks": [
     {
       "type": "nav_item",
-      "name": "Navigation Link",
+      "name": "Custom Navigation Link",
       "settings": [
         {
           "type": "text",
@@ -269,16 +322,9 @@
   "presets": [
     {
       "name": "TR Header",
-      "blocks": [
-        { "type": "nav_item", "settings": { "title": "Wireless Audio", "is_active": true } },
-        { "type": "nav_item", "settings": { "title": "Home Theatre" } },
-        { "type": "nav_item", "settings": { "title": "Portable Fan" } },
-        { "type": "nav_item", "settings": { "title": "Portable Speaker" } },
-        { "type": "nav_item", "settings": { "title": "Personalization" } },
-        { "type": "nav_item", "settings": { "title": "India's First" } },
-        { "type": "nav_item", "settings": { "title": "Smartwatches" } },
-        { "type": "nav_item", "settings": { "title": "TR X Chhetri" } }
-      ]
+      "settings": {
+        "menu": "main-menu"
+      }
     }
   ]
 }

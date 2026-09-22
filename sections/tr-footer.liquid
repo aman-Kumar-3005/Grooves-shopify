@@ -2,6 +2,18 @@
   assign footer_logo = section.settings.logo | default: settings.logo
   assign footer_logo_url = section.settings.logo_url
   assign footer_logo_w = section.settings.logo_width | default: 110
+
+  assign footer_nav_menu = section.settings.menu | default: linklists['main-menu']
+  if footer_nav_menu != blank and footer_nav_menu.links.size > 0
+    assign footer_links = footer_nav_menu.links
+  elsif linklists['main-menu'].links.size > 0
+    assign footer_links = linklists['main-menu'].links
+  endif
+
+  assign sec_menu = section.settings.footer_menu | default: linklists['footer']
+  if sec_menu != blank and sec_menu.links.size > 0
+    assign sec_links = sec_menu.links
+  endif
 -%}
 
 <footer class="tr-footer" id="tr-footer-{{ section.id }}">
@@ -25,8 +37,13 @@
               loading="lazy"
             >
           {% else %}
-            <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
-            <span class="tr-logo-dot">.</span>
+            <div class="tr-brand-wordmark">
+              <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+              <span class="tr-logo-reg">&reg;</span>
+              <span class="tr-soundwave-bars">
+                <span></span><span></span><span></span><span></span><span></span>
+              </span>
+            </div>
           {% endif %}
         </a>
         <p>{{ section.settings.brand_desc | default: 'High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging.' }}</p>
@@ -38,29 +55,42 @@
         </div>
       </div>
 
-      <!-- Column 1: Products -->
+      <!-- Column 1: Main Menu (Connected to Shopify Main Menu) -->
       <div class="tr-footer-col">
-        <h4>Products</h4>
+        <h4>{{ section.settings.menu_heading | default: 'Quick Links' }}</h4>
         <ul>
-          <li><a href="/collections/all">True Wireless Earbuds</a></li>
-          <li><a href="/collections/all">Smartwatches</a></li>
-          <li><a href="/collections/all">Portable Fans</a></li>
-          <li><a href="/collections/all">Soundbars</a></li>
-          <li><a href="/collections/all">Power Banks</a></li>
-          <li><a href="/collections/all">Neckbands</a></li>
+          {%- if footer_links != blank and footer_links.size > 0 -%}
+            {% for link in footer_links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          {%- else -%}
+            <li><a href="/">Home</a></li>
+            <li><a href="/collections/all">Accessories</a></li>
+            <li><a href="/collections/all">Combo</a></li>
+            <li><a href="/collections/all">Earbuds</a></li>
+            <li><a href="/collections/all">Headphones</a></li>
+            <li><a href="/pages/contact">Contact</a></li>
+            <li><a href="/pages/about-us">About Us</a></li>
+          {%- endif -%}
         </ul>
       </div>
 
-      <!-- Column 2: Company -->
+      <!-- Column 2: Customer Support & Policies -->
       <div class="tr-footer-col">
-        <h4>Company</h4>
+        <h4>{{ section.settings.footer_menu_heading | default: 'Customer Support' }}</h4>
         <ul>
-          <li><a href="/pages/about-us">About TR</a></li>
-          <li><a href="/pages/contact">Contact Us</a></li>
-          <li><a href="/pages/warranty">Warranty Claim</a></li>
-          <li><a href="/pages/faqs">FAQs</a></li>
-          <li><a href="/pages/shipping-policy">Shipping Policy</a></li>
-          <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+          {%- if sec_links != blank and sec_links.size > 0 -%}
+            {% for link in sec_links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          {%- else -%}
+            <li><a href="/pages/warranty">Warranty Claim</a></li>
+            <li><a href="/pages/faqs">FAQs & Troubleshooting</a></li>
+            <li><a href="/pages/shipping-policy">Shipping Policy</a></li>
+            <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/pages/terms">Terms of Service</a></li>
+            <li><a href="/pages/contact">Support Helpdesk</a></li>
+          {%- endif -%}
         </ul>
       </div>
 
@@ -136,11 +166,43 @@
       "id": "brand_desc",
       "label": "Brand Description",
       "default": "High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging."
+    },
+    {
+      "type": "header",
+      "content": "Navigation Menus"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Primary Menu (Main menu)",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "menu_heading",
+      "label": "Primary Menu Heading",
+      "default": "Quick Links"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Secondary Menu (Policies / Support)",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "footer_menu_heading",
+      "label": "Secondary Menu Heading",
+      "default": "Customer Support"
     }
   ],
   "presets": [
     {
-      "name": "TR Footer"
+      "name": "TR Footer",
+      "settings": {
+        "menu": "main-menu",
+        "menu_heading": "Quick Links"
+      }
     }
   ]
 }

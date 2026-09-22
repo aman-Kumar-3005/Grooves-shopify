@@ -69,9 +69,9 @@
         "cat_soundbars": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Soundbars",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-sphorika.jpg?v=1781091487",
+            "collection": "combo",
+            "title": "",
+            "image_url": "",
             "url": "shopify://collections/all"
           }
         },

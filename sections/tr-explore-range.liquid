@@ -24,10 +24,11 @@
         if section.settings.hero_image_file != blank
           assign hero_img = section.settings.hero_image_file | image_url: width: 800
         else
-          assign hero_img = section.settings.hero_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002'
+          assign default_hero_img = 'campaign/grooves-audio-desktop-branded.png' | asset_url
+          assign hero_img = section.settings.hero_image | default: default_hero_img
         endif
-        assign hero_title = section.settings.hero_title | default: 'DwOTS 107 Pro - Fast Charging Wireless Earbuds'
-        assign hero_link = section.settings.hero_link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white'
+        assign hero_title = section.settings.hero_title | default: 'Grooves Pulse Pro ANC - Fast Wireless Charging Earbuds'
+        assign hero_link = section.settings.hero_link | default: '/collections/all'
       endif
     -%}
 
@@ -89,7 +90,7 @@
               else
                 assign c_img = block.settings.image_url
               endif
-              assign c_link = block.settings.link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white'
+              assign c_link = block.settings.link | default: '/collections/all'
             endif
           -%}
           <div class="tr-product-mini-card" {{ block.shopify_attributes }}>
@@ -125,13 +126,13 @@
 
 {% schema %}
 {
-  "name": "TR Explore Range",
+  "name": "Grooves Explore Range",
   "settings": [
     {
       "type": "text",
       "id": "section_title",
       "label": "Section Title",
-      "default": "EXPLORE INDIA'S FIRST AUDIO RANGE"
+      "default": "EXPLORE GROOVES AUDIO & POWER RANGE"
     },
     {
       "type": "range",
@@ -171,19 +172,19 @@
       "type": "text",
       "id": "hero_image",
       "label": "Or Hero Image URL (Fallback)",
-      "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002"
+      "default": ""
     },
     {
       "type": "text",
       "id": "hero_title",
       "label": "Hero Product Title Fallback",
-      "default": "DwOTS 107 Pro - Fast Charging Wireless Earbuds"
+      "default": "Grooves Pulse Pro ANC - Wireless Earbuds with Qi Fast Charging"
     },
     {
       "type": "text",
       "id": "hero_tag",
       "label": "Hero Tagline",
-      "default": "SUPER FAST CHARGING"
+      "default": "HYBRID ANC & FAST WIRELESS CHARGE"
     },
     {
       "type": "url",
@@ -216,7 +217,7 @@
           "type": "text",
           "id": "title",
           "label": "Product Title Fallback",
-          "default": "DwOTS Fire"
+          "default": "Grooves Pulse Pro ANC"
         },
         {
           "type": "text",
@@ -240,7 +241,7 @@
           "type": "text",
           "id": "image_url",
           "label": "Image URL Fallback",
-          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-Fire-new.webp?v=1770725157"
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673"
         },
         {
           "type": "url",
@@ -252,46 +253,46 @@
   ],
   "presets": [
     {
-      "name": "TR Explore Range",
+      "name": "Grooves Explore Range",
       "blocks": [
         {
           "type": "product_card",
           "settings": {
-            "title": "DwOTS Fire",
+            "title": "Grooves Pulse Pro ANC Earbuds",
             "price": "₹1,499",
             "compare_price": "₹4,999",
             "discount_tag": "70% OFF",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-Fire-new.webp?v=1770725157"
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673"
           }
         },
         {
           "type": "product_card",
           "settings": {
-            "title": "DwOTS 107 Pro",
-            "price": "₹1,199",
-            "compare_price": "₹3,999",
-            "discount_tag": "70% OFF",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/DwOTS_107_New.webp?v=1770725157"
+            "title": "Grooves SoundWave Studio Headphones",
+            "price": "₹2,199",
+            "compare_price": "₹5,999",
+            "discount_tag": "63% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/wireless-audio.jpg?v=1781096198"
           }
         },
         {
           "type": "product_card",
           "settings": {
-            "title": "DwOTS Prime",
+            "title": "Grooves Turbo Charge 20000mAh Power Bank",
             "price": "₹1,299",
-            "compare_price": "₹4,499",
-            "discount_tag": "71% OFF",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-Fire-new.webp?v=1770725157"
+            "compare_price": "₹3,499",
+            "discount_tag": "63% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365"
           }
         },
         {
           "type": "product_card",
           "settings": {
-            "title": "DwOTS Bold",
-            "price": "₹1,699",
-            "compare_price": "₹5,499",
-            "discount_tag": "69% OFF",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/DwOTS_107_New.webp?v=1770725157"
+            "title": "Grooves 65W GaN Dual Port Adaptor",
+            "price": "₹1,199",
+            "compare_price": "₹2,999",
+            "discount_tag": "60% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/soundbar.png?v=1742213430"
           }
         }
       ]

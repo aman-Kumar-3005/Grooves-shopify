@@ -18,7 +18,7 @@
           {% if desk_img != blank %}
             <img 
               src="{{ desk_img | image_url: width: 1600 }}" 
-              alt="{{ block.settings.title | default: 'TR Product' }}" 
+              alt="{{ block.settings.title | default: 'Grooves Lifestyle Product' }}" 
               class="tr-showcase-img"
               loading="lazy"
               width="1600"
@@ -27,7 +27,7 @@
           {% else %}
             <img 
               src="{{ desk_url }}" 
-              alt="{{ block.settings.title | default: 'TR Product' }}" 
+              alt="{{ block.settings.title | default: 'Grooves Lifestyle Product' }}" 
               class="tr-showcase-img"
               loading="lazy"
               width="1600"
@@ -62,7 +62,7 @@
 
 {% schema %}
 {
-  "name": "TR Feature Banners",
+  "name": "Grooves Feature Banners",
   "settings": [
     {
       "type": "range",
@@ -127,19 +127,19 @@
           "type": "text",
           "id": "tagline",
           "label": "Tagline / Badge",
-          "default": "TR SWIRL POWER"
+          "default": "GROOVES TURBO POWER"
         },
         {
           "type": "text",
           "id": "title",
           "label": "Banner Title",
-          "default": "The Rechargeable Power Fan"
+          "default": "Fast Charging Power Banks & 65W GaN Adaptors"
         },
         {
           "type": "text",
           "id": "button_text",
           "label": "Button Label",
-          "default": "BUY NOW"
+          "default": "EXPLORE POWER"
         },
         {
           "type": "url",
@@ -151,24 +151,24 @@
   ],
   "presets": [
     {
-      "name": "TR Feature Banners",
+      "name": "Grooves Feature Banners",
       "blocks": [
         {
           "type": "banner",
           "settings": {
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/swirl-banner-desk.webp?v=1789043104",
-            "tagline": "TR SWIRL POWER",
-            "title": "Smart Digital Fan With Device Powerbank",
-            "button_text": "BUY NOW"
+            "tagline": "GROOVES TURBO POWER",
+            "title": "Fast Charging Power Banks & 65W GaN Adaptors",
+            "button_text": "EXPLORE POWER"
           }
         },
         {
           "type": "banner",
           "settings": {
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Flow-Desktop.webp?v=1762508858",
-            "tagline": "DwOTS SERIES",
-            "title": "Welcome To The Future Of Audio",
-            "button_text": "BUY NOW"
+            "tagline": "GROOVES ACOUSTIC LAB",
+            "title": "Studio-Grade Spatial Audio & Hybrid ANC Earbuds",
+            "button_text": "EXPLORE AUDIO"
           }
         }
       ]

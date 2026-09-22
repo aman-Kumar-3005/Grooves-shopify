@@ -1,9 +1,9 @@
 <section class="tr-tabbed-tws-section" id="tr-tabbed-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
   <div class="tr-container">
     <div class="tr-tabs-header">
-      <h2 class="tr-tabs-title">{{ section.settings.section_title | default: 'TWS Earbuds built for seamless sound' }}</h2>
+      <h2 class="tr-tabs-title">{{ section.settings.section_title | default: 'Studio Acoustics & Portable Audio' }}</h2>
       <div class="tr-tabs-nav">
-        {% assign tabs = section.settings.tabs_list | default: "All,ANC / ENC,Translucent,Wireless Charging,Dual Mic,Display Earbuds,Gaming" | split: "," %}
+        {% assign tabs = section.settings.tabs_list | default: "All,ANC Earbuds,Studio Headphones,Fast Charging,Heavy Bass,Wireless Cases" | split: "," %}
         {% for tab in tabs %}
           <button class="tr-tab-btn {% if forloop.first %}active{% endif %}">{{ tab | strip }}</button>
         {% endfor %}
@@ -21,7 +21,7 @@
     <div class="tr-showcase-banner" style="margin-bottom: 24px;">
       <img 
         src="{{ eb_img }}" 
-        alt="{{ section.settings.earbuds_title | default: 'Open Sound Earbuds' }}" 
+        alt="{{ section.settings.earbuds_title | default: 'Grooves Earbuds Collection' }}" 
         class="tr-showcase-img"
         loading="lazy"
         width="1600"
@@ -29,7 +29,7 @@
       >
       <div class="tr-showcase-overlay" style="align-items: flex-start; padding: 40px 60px;">
         <h3 style="color: #000000; font-size: clamp(22px, 3.5vw, 42px); font-weight: 900; margin: 0 0 12px; text-shadow: 0 0 2px #fff;">
-          {{ section.settings.earbuds_title | default: 'Open sound that feels<br>Light . Natural . & Easy' }}
+          {{ section.settings.earbuds_title | default: 'Grooves Signature Sound<br>Precision . Power . & Comfort' }}
         </h3>
         <a href="{{ section.settings.earbuds_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 28px;">
           {{ section.settings.earbuds_btn | default: 'Shop Now' }}
@@ -48,7 +48,7 @@
     <div class="tr-showcase-banner">
       <img 
         src="{{ sb_img }}" 
-        alt="{{ section.settings.soundbar_title | default: 'Sphorika Cinematic Sound' }}" 
+        alt="{{ section.settings.soundbar_title | default: 'Grooves Cinema Audio' }}" 
         class="tr-showcase-img"
         loading="lazy"
         width="1600"
@@ -61,7 +61,7 @@
           </span>
         {% endif %}
         <h3 style="color: #ffffff; font-size: clamp(20px, 3vw, 36px); font-weight: 900; margin: 6px 0 16px;">
-          {{ section.settings.soundbar_title | default: 'Crafted for Cinematic Precision' }}
+          {{ section.settings.soundbar_title | default: 'Grooves Home Audio & Party Speakers' }}
         </h3>
         <a href="{{ section.settings.soundbar_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 28px;">
           {{ section.settings.soundbar_btn | default: 'BUY NOW' }}
@@ -73,19 +73,19 @@
 
 {% schema %}
 {
-  "name": "TR Tabbed TWS & Soundbar",
+  "name": "Grooves Audio & Soundbars",
   "settings": [
     {
       "type": "text",
       "id": "section_title",
       "label": "Section Heading",
-      "default": "TWS Earbuds built for seamless sound"
+      "default": "Studio Acoustics & Portable Audio"
     },
     {
       "type": "text",
       "id": "tabs_list",
       "label": "Tabs (Comma-Separated)",
-      "default": "All,ANC / ENC,Translucent,Wireless Charging,Dual Mic,Display Earbuds,Gaming"
+      "default": "All,ANC Earbuds,Studio Headphones,Fast Charging,Heavy Bass,Wireless Cases"
     },
     {
       "type": "range",
@@ -126,7 +126,7 @@
       "type": "text",
       "id": "earbuds_title",
       "label": "Banner Title",
-      "default": "Open sound that feels Light . Natural . & Easy"
+      "default": "Grooves Signature Sound<br>Precision . Power . & Comfort"
     },
     {
       "type": "text",
@@ -158,13 +158,13 @@
       "type": "text",
       "id": "soundbar_badge",
       "label": "Banner Badge Tagline",
-      "default": "CINEMATIC SOUND AT HOME"
+      "default": "IMMERSIVE AUDIO EXPERIENCE"
     },
     {
       "type": "text",
       "id": "soundbar_title",
       "label": "Banner Title",
-      "default": "Crafted for Cinematic Precision"
+      "default": "Grooves Home Audio & Party Speakers"
     },
     {
       "type": "text",
@@ -180,7 +180,7 @@
   ],
   "presets": [
     {
-      "name": "TR Tabbed TWS & Soundbar"
+      "name": "Grooves Audio & Soundbars"
     }
   ]
 }

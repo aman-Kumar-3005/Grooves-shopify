@@ -1,18 +1,9 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "pdp_hero": {
       "type": "tr-product-hero",
       "settings": {
-        "product_title": "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging"
+        "product_title": "Grooves Pulse Pro ANC - Wireless Earbuds with Qi Fast Charging"
       }
     },
     "pdp_story": {
@@ -30,8 +21,8 @@
           "type": "support_item",
           "settings": {
             "title": "Customer Support",
-            "subtitle": "+91 Support Desk",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Support.png?v=1745498991",
+            "subtitle": "support@grooveslifestyle.com",
+            "icon_url": "",
             "link": "shopify://pages/contact"
           }
         },
@@ -39,17 +30,17 @@
           "type": "support_item",
           "settings": {
             "title": "1 Year Warranty",
-            "subtitle": "Hassle-Free Coverage",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Warranty.png?v=1745498983",
+            "subtitle": "100% Brand Guarantee",
+            "icon_url": "",
             "link": "shopify://pages/contact"
           }
         },
         "sup_3": {
           "type": "support_item",
           "settings": {
-            "title": "FAQs",
-            "subtitle": "Instant Answers",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-FAQ.png?v=1745499001",
+            "title": "FAQs & Helpdesk",
+            "subtitle": "Instant Troubleshooting",
+            "icon_url": "",
             "link": "shopify://pages/contact"
           }
         },
@@ -57,26 +48,26 @@
           "type": "support_item",
           "settings": {
             "title": "Instagram",
-            "subtitle": "@tr.audio",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Instagram.png?v=1745498977",
-            "link": "shopify://pages/contact"
+            "subtitle": "@grooveslifestyle",
+            "icon_url": "",
+            "link": "https://instagram.com/grooveslifestyle"
           }
         },
         "sup_5": {
           "type": "support_item",
           "settings": {
             "title": "YouTube",
-            "subtitle": "Unboxing & Reviews",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/youtube_icon_2c00e3ce-9090-4bb1-bbce-dfc9d1286d63.png?v=1758871384",
-            "link": "shopify://pages/contact"
+            "subtitle": "@grooveslifestyle",
+            "icon_url": "",
+            "link": "https://youtube.com/@grooveslifestyle"
           }
         },
         "sup_6": {
           "type": "support_item",
           "settings": {
-            "title": "72Hrs Replacement",
-            "subtitle": "No Questions Asked",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254",
+            "title": "7 Days Replacement",
+            "subtitle": "Hassle-Free Returns",
+            "icon_url": "",
             "link": "shopify://pages/contact"
           }
         }
@@ -90,7 +81,7 @@
         "sup_6"
       ],
       "settings": {
-        "badge_title": "TR Support"
+        "badge_title": "GROOVES PROMISE & SUPPORT"
       }
     }
   },

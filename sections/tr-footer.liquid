@@ -1,7 +1,10 @@
 {%- liquid
   assign footer_logo = section.settings.logo | default: settings.logo
   assign footer_logo_url = section.settings.logo_url
-  assign footer_logo_w = section.settings.logo_width | default: 110
+  if footer_logo == blank and footer_logo_url == blank
+    assign footer_logo_url = 'campaign/grooves-brand-logo.png' | asset_url
+  endif
+  assign footer_logo_w = section.settings.logo_width | default: 140
 
   assign footer_nav_menu = section.settings.menu | default: linklists['main-menu']
   if footer_nav_menu != blank and footer_nav_menu.links.size > 0
@@ -25,20 +28,20 @@
           {% if footer_logo != blank %}
             <img 
               src="{{ footer_logo | image_url: width: 400 }}" 
-              alt="{{ section.settings.brand_name | default: 'TR' }}"
+              alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               style="width: {{ footer_logo_w }}px; height: auto; display: block;"
               loading="lazy"
             >
           {% elsif footer_logo_url != blank %}
             <img 
               src="{{ footer_logo_url }}" 
-              alt="{{ section.settings.brand_name | default: 'TR' }}"
+              alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               style="width: {{ footer_logo_w }}px; height: auto; display: block;"
               loading="lazy"
             >
           {% else %}
             <div class="tr-brand-wordmark">
-              <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+              <span class="tr-logo-text">{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}</span>
               <span class="tr-logo-reg">&reg;</span>
               <span class="tr-soundwave-bars">
                 <span></span><span></span><span></span><span></span><span></span>
@@ -46,12 +49,12 @@
             </div>
           {% endif %}
         </a>
-        <p>{{ section.settings.brand_desc | default: 'High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging.' }}</p>
+        <p>{{ section.settings.brand_desc | default: 'Grooves Lifestyle - High Definition Audio, Powerful Fast Chargers & Smart Everyday Gear. Engineered for bass lovers and modern tech enthusiasts.' }}</p>
         <div style="margin-top: 16px; display: flex; gap: 14px;">
-          <a href="#" style="color: #888; font-size: 18px;" aria-label="Instagram">📸</a>
-          <a href="#" style="color: #888; font-size: 18px;" aria-label="YouTube">▶️</a>
-          <a href="#" style="color: #888; font-size: 18px;" aria-label="Twitter">🐦</a>
-          <a href="#" style="color: #888; font-size: 18px;" aria-label="Facebook">📘</a>
+          <a href="https://instagram.com/grooveslifestyle" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="Instagram">📸</a>
+          <a href="https://youtube.com/@grooveslifestyle" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="YouTube">▶️</a>
+          <a href="https://twitter.com/grooveslife" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="Twitter">🐦</a>
+          <a href="https://facebook.com/grooveslifestyle" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="Facebook">📘</a>
         </div>
       </div>
 
@@ -65,10 +68,12 @@
             {% endfor %}
           {%- else -%}
             <li><a href="/">Home</a></li>
-            <li><a href="/collections/all">Accessories</a></li>
-            <li><a href="/collections/all">Combo</a></li>
-            <li><a href="/collections/all">Earbuds</a></li>
-            <li><a href="/collections/all">Headphones</a></li>
+            <li><a href="/collections/earbuds">Earbuds</a></li>
+            <li><a href="/collections/headphones">Headphones</a></li>
+            <li><a href="/collections/accessories">Accessories</a></li>
+            <li><a href="/collections/combo">Combo</a></li>
+            <li><a href="/collections/power-bank">Power Bank</a></li>
+            <li><a href="/collections/adaptor">Adaptor</a></li>
             <li><a href="/pages/contact">Contact</a></li>
             <li><a href="/pages/about-us">About Us</a></li>
           {%- endif -%}
@@ -100,7 +105,7 @@
         <p style="color: #888888; font-size: 13px; margin: 0 0 12px;">
           Subscribe for early product launches, secret discounts, and VIP updates.
         </p>
-        <form class="tr-newsletter-form" action="#" method="post" onsubmit="event.preventDefault(); alert('Thank you for subscribing to TR!');">
+        <form class="tr-newsletter-form" action="#" method="post" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Grooves Lifestyle!');">
           <input 
             type="email" 
             placeholder="Enter your email" 
@@ -117,7 +122,7 @@
     <!-- Footer Bottom -->
     <div class="tr-footer-bottom">
       <div>
-        &copy; {{ 'now' | date: '%Y' }} {{ section.settings.brand_name | default: 'TR' }} Lifestyle. All Rights Reserved.
+        &copy; {{ 'now' | date: '%Y' }} {{ section.settings.brand_name | default: 'Grooves Lifestyle' }}. All Rights Reserved. | grooveslifestyle.com
       </div>
       <div>
         <span style="color: #888888; font-size: 12px; margin-right: 12px;">100% SECURE PAYMENTS</span>
@@ -129,7 +134,7 @@
 
 {% schema %}
 {
-  "name": "TR Footer",
+  "name": "Grooves Footer",
   "settings": [
     {
       "type": "header",
@@ -153,19 +158,19 @@
       "step": 5,
       "unit": "px",
       "label": "Footer Logo Width",
-      "default": 110
+      "default": 140
     },
     {
       "type": "text",
       "id": "brand_name",
       "label": "Brand Name Fallback",
-      "default": "TR"
+      "default": "Grooves Lifestyle"
     },
     {
       "type": "textarea",
       "id": "brand_desc",
       "label": "Brand Description",
-      "default": "High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging."
+      "default": "Grooves Lifestyle - High Definition Audio, Powerful Fast Chargers & Smart Everyday Gear. Engineered for bass lovers and modern tech enthusiasts."
     },
     {
       "type": "header",
@@ -198,7 +203,7 @@
   ],
   "presets": [
     {
-      "name": "TR Footer",
+      "name": "Grooves Footer",
       "settings": {
         "menu": "main-menu",
         "menu_heading": "Quick Links"

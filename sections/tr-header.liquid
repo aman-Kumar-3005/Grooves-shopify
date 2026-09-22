@@ -40,7 +40,7 @@
           {% if logo_image != blank %}
             <img 
               src="{{ logo_image | image_url: width: 600 }}" 
-              alt="{{ shop.name | default: section.settings.brand_name | default: 'TR' }}"
+              alt="{{ shop.name | default: section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               class="tr-logo-image"
               width="{{ logo_w_desk }}"
               height="auto"
@@ -49,7 +49,7 @@
           {% elsif logo_url != blank %}
             <img 
               src="{{ logo_url }}" 
-              alt="{{ section.settings.brand_name | default: 'TR' }}"
+              alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               class="tr-logo-image"
               width="{{ logo_w_desk }}"
               height="auto"
@@ -57,7 +57,7 @@
             >
           {% else %}
             <div class="tr-brand-wordmark">
-              <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+              <span class="tr-logo-text">{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}</span>
               <span class="tr-logo-reg">&reg;</span>
               <span class="tr-soundwave-bars">
                 <span></span><span></span><span></span><span></span><span></span>
@@ -74,7 +74,7 @@
           {% if logo_image != blank %}
             <img 
               src="{{ logo_image | image_url: width: 600 }}" 
-              alt="{{ shop.name | default: section.settings.brand_name | default: 'TR' }}"
+              alt="{{ shop.name | default: section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               class="tr-logo-image"
               width="{{ logo_w_mob }}"
               height="auto"
@@ -83,7 +83,7 @@
           {% elsif logo_url != blank %}
             <img 
               src="{{ logo_url }}" 
-              alt="{{ section.settings.brand_name | default: 'TR' }}"
+              alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               class="tr-logo-image"
               width="{{ logo_w_mob }}"
               height="auto"
@@ -91,7 +91,7 @@
             >
           {% else %}
             <div class="tr-brand-wordmark">
-              <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+              <span class="tr-logo-text">{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}</span>
               <span class="tr-logo-reg">&reg;</span>
               <span class="tr-soundwave-bars">
                 <span></span><span></span><span></span><span></span><span></span>
@@ -175,7 +175,7 @@
   <div class="tr-mobile-drawer" id="tr-mobile-drawer">
     <div class="tr-mobile-drawer-header">
       <div class="tr-brand-wordmark">
-        <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+        <span class="tr-logo-text">{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}</span>
         <span class="tr-logo-reg">&reg;</span>
         <span class="tr-soundwave-bars">
           <span></span><span></span><span></span><span></span><span></span>
@@ -207,12 +207,13 @@
         {% endfor %}
       {%- else -%}
         <a href="/" class="tr-mobile-drawer-link active"><span>Home</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
-        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Accessories</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
-        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Combo</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
         <a href="/collections/all" class="tr-mobile-drawer-link"><span>Earbuds</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
         <a href="/collections/all" class="tr-mobile-drawer-link"><span>Headphones</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
-        <a href="/pages/contact" class="tr-mobile-drawer-link"><span>Contact</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
-        <a href="/pages/about-us" class="tr-mobile-drawer-link"><span>About Us</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Accessories</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Combo</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Power Bank</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/collections/all" class="tr-mobile-drawer-link"><span>Adaptor</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+        <a href="/pages/contact" class="tr-mobile-drawer-link"><span>Support</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
       {%- endif -%}
     </nav>
     <div class="tr-mobile-drawer-footer">
@@ -241,7 +242,7 @@
 
 {% schema %}
 {
-  "name": "TR Header",
+  "name": "Grooves Header",
   "settings": [
     {
       "type": "header",
@@ -291,7 +292,7 @@
       "type": "text",
       "id": "brand_name",
       "label": "Brand Name Fallback",
-      "default": "TR"
+      "default": "Grooves Lifestyle"
     }
   ],
   "blocks": [
@@ -321,7 +322,7 @@
   ],
   "presets": [
     {
-      "name": "TR Header",
+      "name": "Grooves Header",
       "settings": {
         "menu": "main-menu"
       }

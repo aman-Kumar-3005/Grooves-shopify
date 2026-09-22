@@ -3,7 +3,8 @@
     {% for block in section.blocks %}
       {%- liquid
         assign desk_img = block.settings.image
-        assign desk_url = block.settings.image_url | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187'
+        assign default_hero_asset = 'campaign/grooves-audio-desktop-branded.png' | asset_url
+        assign desk_url = block.settings.image_url | default: default_hero_asset
         assign mob_img = block.settings.mobile_image
         assign mob_url = block.settings.mobile_image_url
       -%}
@@ -20,7 +21,7 @@
               {% if desk_img != blank %}
                 <img 
                   src="{{ desk_img | image_url: width: 2000 }}" 
-                  alt="{{ block.settings.heading | default: 'TR Audio & Tech' }}" 
+                  alt="{{ block.settings.heading | default: 'Grooves Lifestyle Tech Essentials' }}" 
                   class="tr-hero-img"
                   loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                   width="1920"
@@ -29,7 +30,7 @@
               {% else %}
                 <img 
                   src="{{ desk_url }}" 
-                  alt="{{ block.settings.heading | default: 'TR Audio & Tech' }}" 
+                  alt="{{ block.settings.heading | default: 'Grooves Lifestyle Tech Essentials' }}" 
                   class="tr-hero-img"
                   loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                   width="1920"
@@ -133,7 +134,7 @@
 
 {% schema %}
 {
-  "name": "TR Hero Slider",
+  "name": "Grooves Hero Banner",
   "settings": [],
   "blocks": [
     {
@@ -189,49 +190,51 @@
           "type": "text",
           "id": "badge_text",
           "label": "Discount / Offer Badge",
-          "default": "FLAT 10% OFF | USE CODE: GET10OFF"
+          "default": "FLAT 10% OFF | USE CODE: GROOVES10"
         },
         {
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "SwIRL Series"
+          "default": "Grooves Pulse Pro ANC"
         },
         {
           "type": "text",
           "id": "subheading",
           "label": "Subheading",
-          "default": "The Rechargeable Power Fan"
+          "default": "Dual Drivers & Wireless Fast Charging"
         },
         {
           "type": "text",
           "id": "button_label",
           "label": "Button Label",
-          "default": "BUY NOW"
+          "default": "EXPLORE AUDIO"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "TR Hero Slider",
+      "name": "Grooves Hero Banner",
       "blocks": [
         {
           "type": "slide",
           "settings": {
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187",
-            "heading": "SwIRL Series",
-            "badge_text": "FLAT 10% OFF | USE CODE: GET10OFF",
-            "button_label": "BUY NOW"
+            "image_url": "",
+            "heading": "Grooves Pulse Pro ANC",
+            "subheading": "Dual Drivers & Wireless Fast Charging",
+            "badge_text": "FLAT 10% OFF | USE CODE: GROOVES10",
+            "button_label": "EXPLORE AUDIO"
           }
         },
         {
           "type": "slide",
           "settings": {
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_New_Bold.webp?v=1789042588",
-            "heading": "DwOTS Bold",
-            "badge_text": "NEXT-GEN AUDIO",
-            "button_label": "EXPLORE NOW"
+            "image_url": "",
+            "heading": "Grooves Turbo Power",
+            "subheading": "Ultra-Fast Portable Power Banks & GaN Adaptors",
+            "badge_text": "NEXT-GEN TECH",
+            "button_label": "EXPLORE POWER"
           }
         }
       ]

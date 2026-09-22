@@ -1,7 +1,7 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
-  assign prod_title = product.title | default: section.settings.product_title | default: "DwOTS Fire - Dual Sharing TWS with Wireless Charging"
-  assign prod_subtitle = product.metafields.custom.subtitle.value | default: product.metafields.custom.subtitle | default: section.settings.product_subtitle | default: "Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency"
+  assign prod_title = product.title | default: section.settings.product_title | default: "Grooves Pulse Pro ANC - Wireless Earbuds with Qi Fast Charging"
+  assign prod_subtitle = product.metafields.custom.subtitle.value | default: product.metafields.custom.subtitle | default: section.settings.product_subtitle | default: "Hybrid Active Noise Cancellation | 60-Hour Total Playtime | Quad-Mic ENC"
   assign p_price = current_variant.price | money | default: section.settings.fallback_price | default: "₹1,499"
   assign p_compare = current_variant.compare_at_price | money | default: section.settings.fallback_compare_price | default: "₹4,999"
 -%}
@@ -19,20 +19,17 @@
               </div>
             {% endfor %}
           {% else %}
-            <div class="tr-pdp-thumb-item active" data-media-src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" data-type="image">
-              <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="DwOTS Fire White" loading="lazy" width="64" height="64">
+            <div class="tr-pdp-thumb-item active" data-media-src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673" data-type="image">
+              <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673" alt="Grooves Pulse Pro White" loading="lazy" width="64" height="64">
             </div>
-            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" data-type="image">
-              <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="DwOTS Fire 3D" loading="lazy" width="64" height="64">
+            <div class="tr-pdp-thumb-item" data-media-src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/wireless-audio.jpg?v=1781096198" data-type="image">
+              <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/wireless-audio.jpg?v=1781096198" alt="Grooves Pulse Pro Carbon" loading="lazy" width="64" height="64">
             </div>
-            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" data-type="image">
-              <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="DwOTS Fire Rotating" loading="lazy" width="64" height="64">
+            <div class="tr-pdp-thumb-item" data-media-src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198" data-type="image">
+              <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198" alt="Grooves Pulse Pro Blue" loading="lazy" width="64" height="64">
             </div>
-            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" data-type="image">
-              <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="DwOTS Fire Black Case" loading="lazy" width="64" height="64">
-            </div>
-            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" data-type="image">
-              <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="DwOTS Fire In Ear" loading="lazy" width="64" height="64">
+            <div class="tr-pdp-thumb-item" data-media-src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365" data-type="image">
+              <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365" alt="Grooves Fast Charge Case" loading="lazy" width="64" height="64">
             </div>
           {% endif %}
         </div>
@@ -40,7 +37,7 @@
         <div class="tr-pdp-main-media">
           <img 
             id="tr-main-display-img" 
-            src="{% if product.featured_image %}{{ product.featured_image | image_url: width: 1000 }}{% else %}//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774{% endif %}" 
+            src="{% if product.featured_image %}{{ product.featured_image | image_url: width: 1000 }}{% else %}https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673{% endif %}" 
             alt="{{ prod_title }}"
             width="600"
             height="600"
@@ -78,15 +75,15 @@
         <div class="tr-swatch-section">
           <div class="tr-swatch-label">Color: <span id="tr-selected-color-name" style="color: var(--tr-accent);">Moon White</span></div>
           <div class="tr-swatches-row">
-            <button class="tr-swatch-btn active" data-color-name="Moon White" data-img-url="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774">
+            <button class="tr-swatch-btn active" data-color-name="Moon White" data-img-url="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673">
               <span class="tr-swatch-color-circle" style="background: #ffffff;"></span>
               Moon White
             </button>
-            <button class="tr-swatch-btn" data-color-name="Carbon Black" data-img-url="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073">
+            <button class="tr-swatch-btn" data-color-name="Carbon Black" data-img-url="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/wireless-audio.jpg?v=1781096198">
               <span class="tr-swatch-color-circle" style="background: #111111;"></span>
               Carbon Black
             </button>
-            <button class="tr-swatch-btn" data-color-name="Steel Blue" data-img-url="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131">
+            <button class="tr-swatch-btn" data-color-name="Steel Blue" data-img-url="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198">
               <span class="tr-swatch-color-circle" style="background: #3b5998;"></span>
               Steel Blue
             </button>
@@ -96,7 +93,7 @@
         <!-- Personalise Engraving -->
         {% if section.settings.enable_personalisation %}
           <div class="tr-personalise-box">
-            <label for="tr-engrave-text">✨ {{ section.settings.personalise_label | default: 'Make Your Product Personalised (Optional Free Engraving)' }}</label>
+            <label for="tr-engrave-text">✨ {{ section.settings.personalise_label | default: 'Make Your Product Personalised (Free Custom Engraving by Grooves Lifestyle)' }}</label>
             <input 
               type="text" 
               id="tr-engrave-text" 
@@ -111,9 +108,9 @@
         {% if section.settings.show_coupon %}
           <div class="tr-coupon-banner">
             <div class="tr-coupon-text">
-              <span>🏷️ {{ section.settings.coupon_text | default: 'Get 15% OFF on 2 or More Items' }}</span>
+              <span>🏷️ {{ section.settings.coupon_text | default: 'Get 10% OFF on Prepaid Orders' }}</span>
             </div>
-            <span class="tr-coupon-code-pill">{{ section.settings.coupon_code | default: 'Use Code: TR15' }}</span>
+            <span class="tr-coupon-code-pill">{{ section.settings.coupon_code | default: 'Use Code: GROOVES10' }}</span>
           </div>
         {% endif %}
 
@@ -146,16 +143,16 @@
         <!-- 4 PDP Trust Badges -->
         <div class="tr-pdp-badges-grid">
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Free Shipping" width="36" height="36">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Track-order.png?v=1745498991" alt="Free Shipping" width="36" height="36">
             <span>{{ section.settings.badge_1_text | default: 'Free Shipping' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="1 Year Warranty" width="36" height="36">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/warranty_7c995ef0-7603-4c91-9e2c-358aa029fbf7.png?v=1745498991" alt="1 Year Warranty" width="36" height="36">
             <span>{{ section.settings.badge_2_text | default: '1 Year Warranty' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="72Hrs Replacement" width="36" height="36">
-            <span>{{ section.settings.badge_3_text | default: '72h Replacement' }}</span>
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Return_product.png?v=1745498991" alt="7 Days Replacement" width="36" height="36">
+            <span>{{ section.settings.badge_3_text | default: '7 Days Replacement' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
             <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="GST Billing" width="36" height="36">
@@ -205,7 +202,7 @@
 
 {% schema %}
 {
-  "name": "TR PDP Hero",
+  "name": "Grooves Product Hero",
   "settings": [
     {
       "type": "header",
@@ -215,13 +212,13 @@
       "type": "text",
       "id": "product_title",
       "label": "Product Title (Fallback)",
-      "default": "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging"
+      "default": "Grooves Pulse Pro ANC - Wireless Earbuds with Qi Fast Charging"
     },
     {
       "type": "text",
       "id": "product_subtitle",
       "label": "Product Subtitle",
-      "default": "Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency"
+      "default": "Hybrid Active Noise Cancellation | 60-Hour Total Playtime | Quad-Mic ENC"
     },
     {
       "type": "header",
@@ -281,7 +278,7 @@
       "type": "text",
       "id": "personalise_label",
       "label": "Personalisation Label",
-      "default": "Make Your Product Personalised (Optional Free Engraving)"
+      "default": "Make Your Product Personalised (Free Custom Engraving by Grooves Lifestyle)"
     },
     {
       "type": "text",
@@ -303,13 +300,13 @@
       "type": "text",
       "id": "coupon_text",
       "label": "Coupon Text",
-      "default": "Get 15% OFF on 2 or More Items"
+      "default": "Get 10% OFF on Prepaid Orders"
     },
     {
       "type": "text",
       "id": "coupon_code",
       "label": "Coupon Code Badge",
-      "default": "Use Code: TR15"
+      "default": "Use Code: GROOVES10"
     },
     {
       "type": "header",
@@ -369,7 +366,7 @@
       "type": "text",
       "id": "badge_3_text",
       "label": "Badge 3 Text",
-      "default": "72h Replacement"
+      "default": "7 Days Replacement"
     },
     {
       "type": "text",
@@ -380,7 +377,7 @@
   ],
   "presets": [
     {
-      "name": "TR PDP Hero"
+      "name": "Grooves Product Hero"
     }
   ]
 }

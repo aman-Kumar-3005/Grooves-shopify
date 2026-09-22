@@ -14,9 +14,11 @@
     "tr_announcement": {
       "type": "tr-announcement-bar",
       "settings": {
-        "message": "FLAT 10% OFF ON PREPAID ORDERS",
-        "code_text": "USE CODE: TR10",
-        "secondary_message": "FREE SHIPPING ACROSS INDIA"
+        "text_part_1": "Guaranteed",
+        "highlight_part_1": "Safe Checkout",
+        "text_part_2": "Order Dispatched within",
+        "highlight_part_2": "24 Hours!!",
+        "show_emi": true
       }
     },
     "tr_header": {
@@ -27,7 +29,7 @@
           "settings": {
             "title": "HOT DEALS",
             "url": "shopify://collections/all",
-            "is_hot_deal": true
+            "is_active": false
           }
         },
         "nav_earbuds": {
@@ -35,23 +37,7 @@
           "settings": {
             "title": "EARBUDS",
             "url": "shopify://collections/all",
-            "is_hot_deal": false
-          }
-        },
-        "nav_smartwatch": {
-          "type": "nav_item",
-          "settings": {
-            "title": "SMARTWATCH",
-            "url": "shopify://collections/all",
-            "is_hot_deal": false
-          }
-        },
-        "nav_neckband": {
-          "type": "nav_item",
-          "settings": {
-            "title": "NECKBAND",
-            "url": "shopify://collections/all",
-            "is_hot_deal": false
+            "is_active": false
           }
         },
         "nav_headphones": {
@@ -59,42 +45,65 @@
           "settings": {
             "title": "HEADPHONES",
             "url": "shopify://collections/all",
-            "is_hot_deal": false
+            "is_active": false
           }
         },
-        "nav_speakers": {
+        "nav_accessories": {
           "type": "nav_item",
           "settings": {
-            "title": "SPEAKERS",
+            "title": "ACCESSORIES",
             "url": "shopify://collections/all",
-            "is_hot_deal": false
+            "is_active": false
           }
         },
-        "nav_more": {
+        "nav_combo": {
           "type": "nav_item",
           "settings": {
-            "title": "MORE",
+            "title": "COMBO",
             "url": "shopify://collections/all",
-            "is_hot_deal": false
+            "is_active": false
+          }
+        },
+        "nav_powerbank": {
+          "type": "nav_item",
+          "settings": {
+            "title": "POWER BANK",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
+        "nav_adaptor": {
+          "type": "nav_item",
+          "settings": {
+            "title": "ADAPTOR",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
+        "nav_support": {
+          "type": "nav_item",
+          "settings": {
+            "title": "SUPPORT",
+            "url": "shopify://pages/contact",
+            "is_active": false
           }
         }
       },
       "block_order": [
         "nav_hot_deals",
         "nav_earbuds",
-        "nav_smartwatch",
-        "nav_neckband",
         "nav_headphones",
-        "nav_speakers",
-        "nav_more"
+        "nav_accessories",
+        "nav_combo",
+        "nav_powerbank",
+        "nav_adaptor",
+        "nav_support"
       ],
       "settings": {
         "menu": "main-menu",
-        "logo": "shopify://shop_images/logog-removebg-preview.png",
-        "logo_url": "",
-        "logo_width": 120,
+        "logo_width": 130,
         "logo_width_mobile": 85,
-        "brand_name": "TR"
+        "brand_name": "Grooves Lifestyle"
       }
     }
   },

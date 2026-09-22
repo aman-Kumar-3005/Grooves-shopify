@@ -34,7 +34,7 @@
         <div class="tr-reel-card" {{ block.shopify_attributes }}>
           <img 
             src="{{ thumb }}" 
-            alt="{{ block.settings.creator_name | default: 'TR Community' }}"
+            alt="{{ block.settings.creator_name | default: 'Grooves Lifestyle Community' }}"
             loading="lazy"
             width="300"
             height="500"
@@ -65,7 +65,7 @@
 
 {% schema %}
 {
-  "name": "TR Social Reels",
+  "name": "Grooves Community Reels",
   "settings": [
     {
       "type": "text",
@@ -77,7 +77,7 @@
       "type": "text",
       "id": "subtitle",
       "label": "Section Subtitle",
-      "default": "See how creators and fans groove with TR"
+      "default": "See how creators and fans groove with Grooves Lifestyle"
     },
     {
       "type": "range",
@@ -131,7 +131,7 @@
           "type": "text",
           "id": "product_name",
           "label": "Product Name Fallback",
-          "default": "DwOTS Fire"
+          "default": "Grooves Pulse Pro"
         },
         {
           "type": "url",
@@ -149,21 +149,21 @@
   ],
   "presets": [
     {
-      "name": "TR Social Reels",
+      "name": "Grooves Community Reels",
       "blocks": [
         {
           "type": "reel",
           "settings": {
-            "creator_name": "@alex_sound",
-            "product_name": "DwOTS Fire Earbuds",
+            "creator_name": "@alex_audio",
+            "product_name": "Grooves Pulse Pro ANC",
             "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
           }
         },
         {
           "type": "reel",
           "settings": {
-            "creator_name": "@priya_vibes",
-            "product_name": "SwIRL Power Fan",
+            "creator_name": "@priya_lifestyle",
+            "product_name": "Grooves Turbo Power Bank",
             "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesNews.png?v=1782984314"
           }
         },
@@ -171,15 +171,15 @@
           "type": "reel",
           "settings": {
             "creator_name": "@rohit_fitness",
-            "product_name": "DwOTS 107 Pro",
+            "product_name": "Grooves SoundWave Headphones",
             "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesinnovators.png?v=1782984337"
           }
         },
         {
           "type": "reel",
           "settings": {
-            "creator_name": "@neha_beats",
-            "product_name": "Sphorika Soundbar",
+            "creator_name": "@tanya_beats",
+            "product_name": "Grooves GaN Adaptor",
             "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesParty.png?v=1782984388"
           }
         }

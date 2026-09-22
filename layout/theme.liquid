@@ -28,7 +28,7 @@
     {% endif %}
 
     {{ 'grooves.css' | asset_url | stylesheet_tag }}
-    {{ 'theme-acwo-style.css' | asset_url | stylesheet_tag }}
+    {{ 'theme-grooves-style.css' | asset_url | stylesheet_tag }}
     {{ 'tr-custom.css' | asset_url | stylesheet_tag }}
     <style>:root{--g-accent:{{ settings.grooves_accent | default:'#bbff0a' }};--g-radius:{{ settings.grooves_radius | default:16 }}px;--tr-accent:#bbff0a;}</style>
     <script src="{{ 'grooves.js' | asset_url }}" type="module"></script>

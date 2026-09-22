@@ -3,7 +3,8 @@
   if section.settings.box_image != blank
     assign box_content_img = section.settings.box_image | image_url: width: 1000
   else
-    assign box_content_img = product.metafields.custom.box_contents_image | default: section.settings.box_image_url | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/whats-in-the-box-DwOTS-Fire.webp?v=1743578870'
+    assign default_box_img = 'campaign/grooves-audio-desktop-branded.png' | asset_url
+    assign box_content_img = product.metafields.custom.box_contents_image | default: section.settings.box_image_url | default: default_box_img
   endif
 -%}
 
@@ -32,7 +33,7 @@
   <!-- Core Highlights Infographics -->
   {% if section.settings.show_features_grid %}
     <div>
-      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/fire-new-banner-2_02.webp?v=1742814093" alt="TR Sound Engineering" class="tr-story-img-full" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/fire-new-banner-2_02.webp?v=1742814093" alt="Grooves Sound Engineering" class="tr-story-img-full" loading="lazy">
       <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Dual-Pairing-banner-new-fire.webp?v=1742814093" alt="Dual Pairing Feature" class="tr-story-img-full" loading="lazy">
       <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Wireless-Charging-fire-new-4.webp?v=1742814093" alt="Wireless Qi Charging" class="tr-story-img-full" loading="lazy">
       <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Music-Playtime-fire-new-5.webp?v=1742814093" alt="Music Playtime" class="tr-story-img-full" loading="lazy">
@@ -44,7 +45,7 @@
   <!-- Comparison Graphic -->
   {% if section.settings.show_comparison %}
     <div>
-      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Regular-VS-Fire.webp?v=1743578870" alt="Regular vs Fire Earbuds" class="tr-story-img-full" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Regular-VS-Fire.webp?v=1743578870" alt="Grooves Pulse Pro Feature Comparison" class="tr-story-img-full" loading="lazy">
     </div>
   {% endif %}
 
@@ -55,7 +56,7 @@
         <h2 style="font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 24px;">{{ section.settings.box_title | default: "WHAT'S IN THE BOX" }}</h2>
         <img 
           src="{{ box_content_img }}" 
-          alt="Box Contents" 
+          alt="Grooves Pulse Pro Box Contents" 
           style="max-width: 900px; width: 100%; height: auto; border-radius: 16px;"
           loading="lazy"
         >
@@ -104,31 +105,31 @@
       {% else %}
         <div class="tr-accordion-item">
           <button class="tr-accordion-trigger" type="button">
-            <span>Q. What makes 4 in 1 TR DwOTS FIRE different from other earbuds?</span>
+            <span>Q. How does Grooves Pulse Pro Active Noise Cancellation work?</span>
             <span class="tr-accordion-icon">+</span>
           </button>
           <div class="tr-accordion-content">
-            TR DwOTS FIRE gives you two full pairs in one sleek case — one in-ear, one half-in-ear. Switch styles, share with someone, or connect both to your device with zero hassle.
+            Grooves Pulse Pro features Hybrid Active Noise Cancellation using dual internal and external microphones to suppress up to 35dB of ambient noise for pristine, uninterrupted listening.
           </div>
         </div>
 
         <div class="tr-accordion-item">
           <button class="tr-accordion-trigger" type="button">
-            <span>Q. Can I actually use wireless charging with this?</span>
+            <span>Q. Can I charge the Grooves case wirelessly?</span>
             <span class="tr-accordion-icon">+</span>
           </button>
           <div class="tr-accordion-content">
-            Yes — just place the case on any Qi wireless charging pad, and it starts charging immediately. It also features a Type-C fast charging port.
+            Yes — simply place the smart charging case on any Qi-certified wireless charging pad or use the included USB Type-C fast charging cable.
           </div>
         </div>
 
         <div class="tr-accordion-item">
           <button class="tr-accordion-trigger" type="button">
-            <span>Q. Is there a warranty if something goes wrong?</span>
+            <span>Q. What does the Grooves 1-Year Warranty cover?</span>
             <span class="tr-accordion-icon">+</span>
           </button>
           <div class="tr-accordion-content">
-            Yes — you are fully covered with TR's 1-Year Hassle-Free Replacement Warranty backed by our dedicated support team via WhatsApp and email.
+            All Grooves Lifestyle products include a 1-Year Comprehensive Replacement Warranty covering manufacturing defects with dedicated pan-India customer support.
           </div>
         </div>
       {% endif %}
@@ -159,17 +160,17 @@
                   <tr><td>{{ spec.label }}</td><td>{{ spec.value }}</td></tr>
                 {% endfor %}
               {% else %}
-                <tr><td>Speaker Driver</td><td>{{ product.metafields.custom.driver.value | default: '13mm BasS BooM X™ Drivers' }}</td></tr>
-                <tr><td>Bluetooth Version</td><td>{{ product.metafields.custom.bluetooth.value | default: 'v5.3 + EDR Instant Pairing' }}</td></tr>
+                <tr><td>Speaker Driver</td><td>{{ product.metafields.custom.driver.value | default: '13mm Dynamic Titanium Bass Drivers' }}</td></tr>
+                <tr><td>Bluetooth Version</td><td>{{ product.metafields.custom.bluetooth.value | default: 'v5.4 + Instant Fast Pair' }}</td></tr>
                 <tr><td>Wireless Range</td><td>10 meters (33 ft)</td></tr>
-                <tr><td>Total Playtime</td><td>{{ product.metafields.custom.playtime.value | default: 'Up to 52 Hours (with Case)' }}</td></tr>
-                <tr><td>Charging Tech</td><td>Qi Wireless Charging + Type-C Fast Fuel</td></tr>
-                <tr><td>Gaming Latency</td><td>{{ product.metafields.custom.latency.value | default: '45ms Ultra Low Latency Beast Mode' }}</td></tr>
+                <tr><td>Total Playtime</td><td>{{ product.metafields.custom.playtime.value | default: 'Up to 60 Hours (with Case)' }}</td></tr>
+                <tr><td>Charging Tech</td><td>Qi Wireless Fast Charging + Type-C Fast Fuel</td></tr>
+                <tr><td>Gaming Latency</td><td>{{ product.metafields.custom.latency.value | default: '40ms Ultra-Low Latency Mode' }}</td></tr>
                 <tr><td>Water Resistance</td><td>{{ product.metafields.custom.water_resistance.value | default: 'IPX5 Sweat & Splash Proof' }}</td></tr>
-                <tr><td>Microphones</td><td>Quad Mic ENC with Sonic Shield™</td></tr>
+                <tr><td>Microphones</td><td>Quad Mic ENC with ClearVoice™ AI</td></tr>
                 <tr><td>Compatibility</td><td>Android, iOS, Windows, macOS</td></tr>
                 <tr><td>Country of Origin</td><td>India</td></tr>
-                <tr><td>Brand</td><td>TR Lifestyle Pvt Ltd</td></tr>
+                <tr><td>Brand</td><td>Grooves Lifestyle (grooveslifestyle.com)</td></tr>
               {% endif %}
             </tbody>
           </table>
@@ -190,7 +191,7 @@
 
 {% schema %}
 {
-  "name": "TR PDP Story & Specs",
+  "name": "Grooves Product Story & Specs",
   "settings": [
     {
       "type": "text",
@@ -255,13 +256,13 @@
       "type": "text",
       "id": "box_image_url",
       "label": "Or Box Contents Image URL (Fallback)",
-      "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/whats-in-the-box-DwOTS-Fire.webp?v=1743578870"
+      "default": ""
     },
     {
       "type": "textarea",
       "id": "box_items_text",
       "label": "Box Items Description",
-      "default": "1x Charging Case, 2x In-Ear Earbuds, 2x Half-In-Ear Earbuds, 3x Silicone Ear-tip pairs, 1x Type-C Fast Cable, 1x User Manual & Warranty Card"
+      "default": "1x Grooves Pulse Pro Earbuds, 1x Wireless Fast-Charging Case, 3x Silicone Ear-Tip Pairs (S/M/L), 1x Type-C Fast Fuel Cable, 1x User Manual & Warranty Card"
     },
     {
       "type": "header",
@@ -311,7 +312,7 @@
           "type": "textarea",
           "id": "answer",
           "label": "Answer",
-          "default": "Open the lid of the charging case, enable Bluetooth on your smartphone or laptop, and tap TR DwOTS to connect instantly."
+          "default": "Open the lid of the charging case, enable Bluetooth on your smartphone or laptop, and select Grooves Pulse Pro to connect instantly."
         }
       ]
     },
@@ -336,7 +337,7 @@
   ],
   "presets": [
     {
-      "name": "TR PDP Story & Specs"
+      "name": "Grooves Product Story & Specs"
     }
   ]
 }

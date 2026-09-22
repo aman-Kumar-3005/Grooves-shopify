@@ -17,9 +17,9 @@
           "settings": {
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187",
             "badge_text": "FLAT 10% OFF | USE CODE: GET10OFF",
-            "heading": "SwIRL Series",
-            "subheading": "The Rechargeable Power Fan",
-            "button_label": "BUY NOW",
+            "heading": "",
+            "subheading": "",
+            "button_label": "",
             "button_link": "shopify://collections/all"
           }
         },
@@ -27,10 +27,10 @@
           "type": "slide",
           "settings": {
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_New_Bold.webp?v=1789042588",
-            "badge_text": "NEXT-GEN SOUND",
-            "heading": "DwOTS Bold",
-            "subheading": "Experience Immersive Acoustics",
-            "button_label": "EXPLORE NOW",
+            "badge_text": "",
+            "heading": "",
+            "subheading": "",
+            "button_label": "",
             "button_link": "shopify://collections/all"
           }
         }
@@ -47,6 +47,7 @@
         "cat_bestseller": {
           "type": "category",
           "settings": {
+            "collection": "",
             "title": "Bestseller",
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198",
             "url": "shopify://collections/all"
@@ -55,6 +56,7 @@
         "cat_fan": {
           "type": "category",
           "settings": {
+            "collection": "",
             "title": "Portable Fan",
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/portable-fan-category_jpg.jpg?v=1782898913",
             "url": "shopify://collections/all"
@@ -63,6 +65,7 @@
         "cat_soundbars": {
           "type": "category",
           "settings": {
+            "collection": "",
             "title": "Soundbars",
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-sphorika.jpg?v=1781091487",
             "url": "shopify://collections/all"
@@ -71,6 +74,7 @@
         "cat_translucent": {
           "type": "category",
           "settings": {
+            "collection": "",
             "title": "Translucent",
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/sense__jpg.jpg?v=1776665934",
             "url": "shopify://collections/all"
@@ -79,6 +83,7 @@
         "cat_powerbank": {
           "type": "category",
           "settings": {
+            "collection": "",
             "title": "Power Bank",
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365",
             "url": "shopify://collections/all"
@@ -87,6 +92,7 @@
         "cat_earbuds": {
           "type": "category",
           "settings": {
+            "collection": "",
             "title": "Earbuds",
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673",
             "url": "shopify://collections/all"
@@ -95,6 +101,7 @@
         "cat_speakers": {
           "type": "category",
           "settings": {
+            "collection": "",
             "title": "Speakers",
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/soundbar.png?v=1742213430",
             "url": "shopify://collections/all"
@@ -120,6 +127,7 @@
         "prod_fire": {
           "type": "product_card",
           "settings": {
+            "product": "",
             "title": "DwOTS Fire",
             "price": "₹1,499",
             "compare_price": "₹4,999",
@@ -131,6 +139,7 @@
         "prod_muze": {
           "type": "product_card",
           "settings": {
+            "product": "",
             "title": "DwOTS Muze",
             "price": "₹1,699",
             "compare_price": "₹5,499",
@@ -142,6 +151,7 @@
         "prod_bold": {
           "type": "product_card",
           "settings": {
+            "product": "",
             "title": "DwOTS Bold",
             "price": "₹1,299",
             "compare_price": "₹3,999",
@@ -153,6 +163,7 @@
         "prod_wave": {
           "type": "product_card",
           "settings": {
+            "product": "",
             "title": "DwOTS Wave",
             "price": "₹1,399",
             "compare_price": "₹4,499",
@@ -170,11 +181,12 @@
       ],
       "settings": {
         "section_title": "EXPLORE INDIA'S FIRST AUDIO RANGE",
+        "hero_product": "",
         "hero_title": "DwOTS 107 Pro - Fast Charging Wireless Earbuds",
         "hero_tag": "SUPER FAST CHARGING",
         "hero_image": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002",
-        "hero_btn_text": "BUY NOW",
-        "hero_link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
+        "hero_link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white",
+        "hero_btn_text": "BUY NOW"
       }
     },
     "feature_banners": {
@@ -392,7 +404,8 @@
         "blog_4"
       ],
       "settings": {
-        "badge_title": "Blogs"
+        "badge_title": "Blogs",
+        "blog": ""
       }
     },
     "press_logos": {

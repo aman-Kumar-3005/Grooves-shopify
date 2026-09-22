@@ -1,11 +1,33 @@
+{%- liquid
+  assign footer_logo = section.settings.logo | default: settings.logo
+  assign footer_logo_url = section.settings.logo_url
+  assign footer_logo_w = section.settings.logo_width | default: 110
+-%}
+
 <footer class="tr-footer" id="tr-footer-{{ section.id }}">
   <div class="tr-container">
     <div class="tr-footer-grid">
       <!-- Brand Column -->
       <div class="tr-footer-brand">
         <a href="/" class="tr-logo-link">
-          <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
-          <span class="tr-logo-dot">.</span>
+          {% if footer_logo != blank %}
+            <img 
+              src="{{ footer_logo | image_url: width: 400 }}" 
+              alt="{{ section.settings.brand_name | default: 'TR' }}"
+              style="width: {{ footer_logo_w }}px; height: auto; display: block;"
+              loading="lazy"
+            >
+          {% elsif footer_logo_url != blank %}
+            <img 
+              src="{{ footer_logo_url }}" 
+              alt="{{ section.settings.brand_name | default: 'TR' }}"
+              style="width: {{ footer_logo_w }}px; height: auto; display: block;"
+              loading="lazy"
+            >
+          {% else %}
+            <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+            <span class="tr-logo-dot">.</span>
+          {% endif %}
         </a>
         <p>{{ section.settings.brand_desc | default: 'High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging.' }}</p>
         <div style="margin-top: 16px; display: flex; gap: 14px;">
@@ -80,9 +102,33 @@
   "name": "TR Footer",
   "settings": [
     {
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_url",
+      "label": "Or Footer Logo URL"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 40,
+      "max": 250,
+      "step": 5,
+      "unit": "px",
+      "label": "Footer Logo Width",
+      "default": 110
+    },
+    {
       "type": "text",
       "id": "brand_name",
-      "label": "Brand Name",
+      "label": "Brand Name Fallback",
       "default": "TR"
     },
     {

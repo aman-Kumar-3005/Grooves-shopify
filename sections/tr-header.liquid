@@ -1,10 +1,37 @@
-<header class="tr-header" id="tr-header-{{ section.id }}">
+{%- liquid
+  assign logo_image = section.settings.logo | default: settings.logo
+  assign logo_url = section.settings.logo_url
+  assign logo_w_desk = section.settings.logo_width | default: 120
+  assign logo_w_mob = section.settings.logo_width_mobile | default: 85
+-%}
+
+<header class="tr-header" id="tr-header-{{ section.id }}" style="--tr-logo-w-desk: {{ logo_w_desk }}px; --tr-logo-w-mob: {{ logo_w_mob }}px;">
   <div class="tr-container">
     <div class="tr-header-inner">
       <!-- Brand Logo -->
       <a href="/" class="tr-logo-link">
-        <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
-        <span class="tr-logo-dot">.</span>
+        {% if logo_image != blank %}
+          <img 
+            src="{{ logo_image | image_url: width: 600 }}" 
+            alt="{{ shop.name | default: section.settings.brand_name | default: 'TR' }}"
+            class="tr-logo-image"
+            width="{{ logo_w_desk }}"
+            height="auto"
+            loading="eager"
+          >
+        {% elsif logo_url != blank %}
+          <img 
+            src="{{ logo_url }}" 
+            alt="{{ section.settings.brand_name | default: 'TR' }}"
+            class="tr-logo-image"
+            width="{{ logo_w_desk }}"
+            height="auto"
+            loading="eager"
+          >
+        {% else %}
+          <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+          <span class="tr-logo-dot">.</span>
+        {% endif %}
       </a>
 
       <!-- Desktop Nav -->
@@ -58,9 +85,43 @@
   "name": "TR Header",
   "settings": [
     {
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_url",
+      "label": "Or Logo Image URL (CDN / External)"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 40,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop Logo Width",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "min": 30,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Logo Width",
+      "default": 85
+    },
+    {
       "type": "text",
       "id": "brand_name",
-      "label": "Brand Name",
+      "label": "Brand Name Fallback",
       "default": "TR"
     }
   ],

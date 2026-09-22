@@ -205,6 +205,20 @@ body.tr-theme,
   line-height: 0;
 }
 
+.tr-logo-image {
+  display: block;
+  height: auto;
+  width: var(--tr-logo-w-desk, 120px);
+  max-width: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .tr-logo-image {
+    width: var(--tr-logo-w-mob, 85px);
+  }
+}
+
 .tr-nav-menu {
   display: flex;
   align-items: center;

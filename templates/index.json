@@ -51,18 +51,18 @@
         "cat_bestseller": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Bestseller",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198",
+            "collection": "accessories",
+            "title": "",
+            "image_url": "",
             "url": "shopify://collections/all"
           }
         },
         "cat_fan": {
           "type": "category",
           "settings": {
-            "collection": "",
-            "title": "Portable Fan",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/portable-fan-category_jpg.jpg?v=1782898913",
+            "collection": "adaptor",
+            "title": "",
+            "image_url": "",
             "url": "shopify://collections/all"
           }
         },

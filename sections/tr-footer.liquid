@@ -85,10 +85,23 @@
         <h4>{{ section.settings.footer_menu_heading | default: 'Customer Support' }}</h4>
         <ul>
           {%- if sec_links != blank and sec_links.size > 0 -%}
+            {% assign has_track = false %}
+            {% for link in sec_links %}
+              {% if link.url contains 'track-status' %}{% assign has_track = true %}{% endif %}
+            {% endfor %}
             {% for link in sec_links %}
               <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- if link.url contains '/search' or link.title == 'Search' -%}
+                <li><a href="/pages/track-status">Track warranty &amp; ticket status</a></li>
+                {% assign has_track = true %}
+              {%- endif -%}
             {% endfor %}
+            {%- unless has_track -%}
+              <li><a href="/pages/track-status">Track warranty &amp; ticket status</a></li>
+            {%- endunless -%}
           {%- else -%}
+            <li><a href="/search">Search</a></li>
+            <li><a href="/pages/track-status">Track warranty &amp; ticket status</a></li>
             <li><a href="/pages/warranty">Warranty Claim</a></li>
             <li><a href="/pages/faqs">FAQs & Troubleshooting</a></li>
             <li><a href="/pages/shipping-policy">Shipping Policy</a></li>

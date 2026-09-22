@@ -1,21 +1,26 @@
 {{ 'grooves-track-status.css' | asset_url | stylesheet_tag }}
-<section class="g-track g-container" data-g-track data-endpoint="{{ section.settings.lookup_endpoint | escape }}">
+<section class="g-track g-container" data-g-track data-endpoint="{{ section.settings.lookup_endpoint | escape }}" data-create-endpoint="{{ section.settings.create_ticket_endpoint | default: '/apps/grooves-support/create-ticket' | escape }}">
   <div class="g-track__intro">
-    <span class="g-eyebrow">Grooves Support</span>
-    <h1>{{ section.settings.heading | escape }}</h1>
-    <p>{{ section.settings.intro | escape }}</p>
+    <span class="g-eyebrow">GROOVES SUPPORT</span>
+    <h1>{{ section.settings.heading | default: 'TRACK YOUR STATUS' | upcase }}</h1>
+    <p>{{ section.settings.intro | default: 'Invoice number se warranty aur ticket number se support request ka current status dekhein.' }}</p>
   </div>
+
+  <!-- Top 2-Column Lookup Grid -->
   <div class="g-track__grid">
+    <!-- Card 1: Warranty Status -->
     <form class="g-track__card" data-lookup="warranty" novalidate>
-      <h2>Warranty Status</h2>
+      <h2>WARRANTY STATUS</h2>
       <p>Apna invoice number daal kar warranty registration ka status check karein.</p>
       <label for="WarrantyInvoice-{{ section.id }}">Invoice Number</label>
       <input id="WarrantyInvoice-{{ section.id }}" name="reference" type="text" maxlength="80" autocomplete="off" required placeholder="Invoice number">
       <button class="g-button" type="submit">Check Warranty Status</button>
       <div class="g-track__result" role="status" aria-live="polite" data-result hidden></div>
     </form>
+
+    <!-- Card 2: Ticket Status -->
     <form class="g-track__card" data-lookup="ticket" novalidate>
-      <h2>Ticket Status</h2>
+      <h2>TICKET STATUS</h2>
       <p>Apna support ticket number daal kar latest status check karein.</p>
       <label for="SupportTicket-{{ section.id }}">Ticket Number</label>
       <input id="SupportTicket-{{ section.id }}" name="reference" type="text" maxlength="80" autocomplete="off" required placeholder="GRV-TKT-2026-000001">
@@ -23,7 +28,78 @@
       <div class="g-track__result" role="status" aria-live="polite" data-result hidden></div>
     </form>
   </div>
-  {% if section.settings.support_email != blank %}<p class="g-track__help">Status nahi mil raha? <a href="mailto:{{ section.settings.support_email | escape }}">{{ section.settings.support_email | escape }}</a> par sampark karein.</p>{% endif %}
+
+  <!-- Card 3: Create Support Ticket -->
+  <div class="g-track__create-section" id="create-ticket-section">
+    <form class="g-track__card g-track__card--full" data-create-ticket novalidate>
+      <div class="g-track__create-header">
+        <span class="g-badge-pill">NEED HELP?</span>
+        <h2>CREATE SUPPORT TICKET</h2>
+        <p>Facing an issue with your Grooves product? Raise a support ticket and our engineering team will resolve it within 24-48 hours.</p>
+      </div>
+
+      <div class="g-track__form-grid">
+        <div class="g-track__field">
+          <label for="TicketName-{{ section.id }}">Customer Full Name <span class="g-req">*</span></label>
+          <input id="TicketName-{{ section.id }}" name="customer_name" type="text" required placeholder="e.g. Rahul Sharma" autocomplete="name">
+        </div>
+        <div class="g-track__field">
+          <label for="TicketEmail-{{ section.id }}">Customer Email <span class="g-req">*</span></label>
+          <input id="TicketEmail-{{ section.id }}" name="customer_email" type="email" required placeholder="name@example.com" autocomplete="email">
+        </div>
+        <div class="g-track__field">
+          <label for="TicketInvoice-{{ section.id }}">Invoice Number <span class="g-req">*</span></label>
+          <input id="TicketInvoice-{{ section.id }}" name="invoice_number" type="text" required placeholder="e.g. INV-2026-001">
+        </div>
+        <div class="g-track__field">
+          <label for="TicketProduct-{{ section.id }}">Product Model <span class="g-req">*</span></label>
+          <select id="TicketProduct-{{ section.id }}" name="product_name" required>
+            <option value="" disabled selected>Select your Grooves product</option>
+            <option value="Grooves Pulse Pro ANC Earbuds">Grooves Pulse Pro ANC Earbuds</option>
+            <option value="Grooves SoundWave Headphones">Grooves SoundWave Headphones</option>
+            <option value="Grooves Turbo 20000mAh Power Bank">Grooves Turbo 20,000mAh Power Bank</option>
+            <option value="Grooves 65W GaN Fast Adaptor">Grooves 65W GaN Fast Adaptor</option>
+            <option value="Grooves Duo Lifestyle Combo">Grooves Duo Lifestyle Combo</option>
+            <option value="Other Grooves Product">Other Grooves Product</option>
+          </select>
+        </div>
+        <div class="g-track__field g-track__field--full">
+          <label for="TicketCategory-{{ section.id }}">Issue Category <span class="g-req">*</span></label>
+          <select id="TicketCategory-{{ section.id }}" name="issue_category" required>
+            <option value="Audio / Sound Distortion">Audio / Sound Distortion / Low Volume</option>
+            <option value="Battery / Charging Issue">Battery Draining / Not Charging</option>
+            <option value="Bluetooth / Pairing Problem">Bluetooth Connectivity / Frequent Disconnects</option>
+            <option value="Physical Defect / Damage">Physical Defect / Loose Button / Cable Issue</option>
+            <option value="Replacement / Warranty Claim">Replacement / 1-Year Warranty Claim</option>
+            <option value="Other">Other Inquiry / Feedback</option>
+          </select>
+        </div>
+        <div class="g-track__field g-track__field--full">
+          <label for="TicketDesc-{{ section.id }}">Issue Description <span class="g-req">*</span></label>
+          <textarea id="TicketDesc-{{ section.id }}" name="issue_description" rows="4" required placeholder="Please describe the issue in detail, how it started, and steps you already tried..."></textarea>
+        </div>
+        <div class="g-track__field g-track__field--full">
+          <label>Attach Invoice / Defect Photos (Optional)</label>
+          <div class="g-track__dropzone" data-dropzone>
+            <input type="file" id="TicketFiles-{{ section.id }}" name="attachments" multiple accept="image/*,.pdf" class="g-track__file-input">
+            <div class="g-track__dropzone-content">
+              <span class="g-track__dropzone-icon">📎</span>
+              <p><strong>Click to browse</strong> or drag & drop files here</p>
+              <small>Supports JPG, PNG, WEBP, PDF (Max 10MB each)</small>
+            </div>
+            <div class="g-track__file-list" data-file-list></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="g-button g-button--submit" type="submit">Submit Support Ticket</button>
+      <div class="g-track__result g-track__result--create" role="status" aria-live="polite" data-create-result hidden></div>
+    </form>
+  </div>
+
+  {% if section.settings.support_email != blank %}
+    <p class="g-track__help">Status nahi mil raha? <a href="mailto:{{ section.settings.support_email | escape }}">{{ section.settings.support_email | escape }}</a> par sampark karein.</p>
+  {% endif %}
 </section>
 <script src="{{ 'grooves-track-status.js' | asset_url }}" defer></script>
 
@@ -31,11 +107,41 @@
 {
   "name": "Grooves status tracking",
   "settings": [
-    {"type":"text","id":"heading","label":"Heading","default":"Track your status"},
-    {"type":"text","id":"intro","label":"Intro","default":"Invoice number se warranty aur ticket number se support request ka current status dekhein."},
-    {"type":"text","id":"lookup_endpoint","label":"Status app proxy endpoint","default":"/apps/grooves-support/status"},
-    {"type":"text","id":"support_email","label":"Support email","default":"support@grooveslifestyle.com"}
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Track your status"
+    },
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Invoice number se warranty aur ticket number se support request ka current status dekhein."
+    },
+    {
+      "type": "text",
+      "id": "lookup_endpoint",
+      "label": "Status app proxy endpoint",
+      "default": "/apps/grooves-support/status"
+    },
+    {
+      "type": "text",
+      "id": "create_ticket_endpoint",
+      "label": "Create ticket endpoint",
+      "default": "/apps/grooves-support/create-ticket"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "default": "support@grooveslifestyle.com"
+    }
   ],
-  "presets": [{"name":"Grooves status tracking"}]
+  "presets": [
+    {
+      "name": "Grooves status tracking"
+    }
+  ]
 }
 {% endschema %}

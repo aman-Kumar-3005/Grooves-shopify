@@ -32,7 +32,9 @@ This file can be re-written at any time.
     <style>:root{--g-accent:{{ settings.grooves_accent | default:'#bbff0a' }};--g-radius:{{ settings.grooves_radius | default:16 }}px;--tr-accent:#bbff0a;}</style>
     <script src="{{ 'grooves.js' | asset_url }}" type="module"></script>
     {{ content_for_header }}
-  </head>
+  
+  {% render 'shogun-head' %}
+</head>
   <body data-grooves-confetti="{{ settings.grooves_confetti }}" class="tr-theme grooves-theme page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
     {% include 'shogun-content-handler' %}
 

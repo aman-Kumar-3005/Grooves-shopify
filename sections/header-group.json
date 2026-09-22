@@ -40,6 +40,22 @@
             "is_active": false
           }
         },
+        "nav_smartwatch": {
+          "type": "nav_item",
+          "settings": {
+            "title": "SMARTWATCH",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
+        "nav_neckband": {
+          "type": "nav_item",
+          "settings": {
+            "title": "NECKBAND",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
         "nav_headphones": {
           "type": "nav_item",
           "settings": {
@@ -48,43 +64,19 @@
             "is_active": false
           }
         },
-        "nav_accessories": {
+        "nav_speakers": {
           "type": "nav_item",
           "settings": {
-            "title": "ACCESSORIES",
+            "title": "SPEAKERS",
             "url": "shopify://collections/all",
             "is_active": false
           }
         },
-        "nav_combo": {
+        "nav_more": {
           "type": "nav_item",
           "settings": {
-            "title": "COMBO",
+            "title": "MORE",
             "url": "shopify://collections/all",
-            "is_active": false
-          }
-        },
-        "nav_powerbank": {
-          "type": "nav_item",
-          "settings": {
-            "title": "POWER BANK",
-            "url": "shopify://collections/all",
-            "is_active": false
-          }
-        },
-        "nav_adaptor": {
-          "type": "nav_item",
-          "settings": {
-            "title": "ADAPTOR",
-            "url": "shopify://collections/all",
-            "is_active": false
-          }
-        },
-        "nav_support": {
-          "type": "nav_item",
-          "settings": {
-            "title": "SUPPORT",
-            "url": "shopify://pages/contact",
             "is_active": false
           }
         }
@@ -92,18 +84,18 @@
       "block_order": [
         "nav_hot_deals",
         "nav_earbuds",
+        "nav_smartwatch",
+        "nav_neckband",
         "nav_headphones",
-        "nav_accessories",
-        "nav_combo",
-        "nav_powerbank",
-        "nav_adaptor",
-        "nav_support"
+        "nav_speakers",
+        "nav_more"
       ],
       "settings": {
         "menu": "main-menu",
-        "logo_width": 130,
+        "logo_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/logog-removebg-preview.png?v=1789673586",
+        "logo_width": 120,
         "logo_width_mobile": 85,
-        "brand_name": "Grooves Lifestyle"
+        "brand_name": "TR"
       }
     }
   },

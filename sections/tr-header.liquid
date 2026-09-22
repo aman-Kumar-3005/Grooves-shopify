@@ -1,46 +1,62 @@
 {%- liquid
   assign logo_image = section.settings.logo | default: settings.logo
   assign logo_url = section.settings.logo_url
-  assign logo_w_desk = section.settings.logo_width | default: 120
-  assign logo_w_mob = section.settings.logo_width_mobile | default: 85
+  assign logo_w_desk = section.settings.logo_width | default: 130
+  assign logo_w_mob = section.settings.logo_width_mobile | default: 90
 -%}
 
 <header class="tr-header" id="tr-header-{{ section.id }}" style="--tr-logo-w-desk: {{ logo_w_desk }}px; --tr-logo-w-mob: {{ logo_w_mob }}px;">
   <div class="tr-container">
     <div class="tr-header-inner">
-      <!-- Brand Logo -->
-      <a href="/" class="tr-logo-link">
-        {% if logo_image != blank %}
-          <img 
-            src="{{ logo_image | image_url: width: 600 }}" 
-            alt="{{ shop.name | default: section.settings.brand_name | default: 'TR' }}"
-            class="tr-logo-image"
-            width="{{ logo_w_desk }}"
-            height="auto"
-            loading="eager"
-          >
-        {% elsif logo_url != blank %}
-          <img 
-            src="{{ logo_url }}" 
-            alt="{{ section.settings.brand_name | default: 'TR' }}"
-            class="tr-logo-image"
-            width="{{ logo_w_desk }}"
-            height="auto"
-            loading="eager"
-          >
-        {% else %}
-          <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
-          <span class="tr-logo-dot">.</span>
-        {% endif %}
-      </a>
+      <div class="tr-header-left">
+        <!-- Mobile Menu Toggle Button (Visible on mobile/tablet) -->
+        <button class="tr-mobile-menu-toggle" type="button" aria-label="Open Navigation Menu" onclick="document.body.classList.toggle('tr-mobile-nav-active')">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
 
-      <!-- Desktop Nav -->
+        <!-- Brand Logo with Soundwave Visualizer (Matches Screenshot 2) -->
+        <a href="/" class="tr-logo-link">
+          {% if logo_image != blank %}
+            <img 
+              src="{{ logo_image | image_url: width: 600 }}" 
+              alt="{{ shop.name | default: section.settings.brand_name | default: 'TR' }}"
+              class="tr-logo-image"
+              width="{{ logo_w_desk }}"
+              height="auto"
+              loading="eager"
+            >
+          {% elsif logo_url != blank %}
+            <img 
+              src="{{ logo_url }}" 
+              alt="{{ section.settings.brand_name | default: 'TR' }}"
+              class="tr-logo-image"
+              width="{{ logo_w_desk }}"
+              height="auto"
+              loading="eager"
+            >
+          {% else %}
+            <div class="tr-brand-wordmark">
+              <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+              <span class="tr-logo-reg">&reg;</span>
+              <span class="tr-soundwave-bars">
+                <span></span><span></span><span></span><span></span><span></span>
+              </span>
+            </div>
+          {% endif %}
+        </a>
+      </div>
+
+      <!-- Desktop Nav with Neon Lime Links (Matches Screenshot 2) -->
       <nav class="tr-nav-menu" aria-label="Main Navigation">
         {% for block in section.blocks %}
           {% if block.type == 'nav_item' %}
             <a 
-              href="{{ block.settings.url | default: '#' }}" 
-              class="tr-nav-link {% if block.settings.is_hot_deal %}tr-hot-deal{% endif %}"
+              href="{{ block.settings.url | default: '/collections/all' }}" 
+              class="tr-nav-link {% if block.settings.is_active or forloop.first %}active{% endif %}"
             >
               {{ block.settings.title }}
             </a>
@@ -48,37 +64,86 @@
         {% endfor %}
       </nav>
 
-      <!-- Header Actions -->
+      <!-- Header Action Icons (Neon Lime Matching Screenshot 2) -->
       <div class="tr-header-actions">
         <!-- Search -->
         <a href="/search" class="tr-header-icon-btn" aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </a>
 
-        <!-- Account -->
-        <a href="/account" class="tr-header-icon-btn" aria-label="Account">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Account with Thunderbolt / Lightning (Exact Match Screenshot 2) -->
+        <a href="/account" class="tr-header-icon-btn tr-account-icon-btn" aria-label="Account">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
+          <span class="tr-lightning-badge">⚡</span>
         </a>
 
-        <!-- Cart -->
-        <a href="/cart" class="tr-header-icon-btn" aria-label="Cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
+        <!-- Cart with Badge (Matches Screenshot 1 & 2) -->
+        <a href="/cart" class="tr-header-icon-btn tr-cart-icon-btn" aria-label="Cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
           <span class="tr-cart-count">{{ cart.item_count | default: 0 }}</span>
         </a>
       </div>
     </div>
   </div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="tr-mobile-drawer-overlay" onclick="document.body.classList.remove('tr-mobile-nav-active')"></div>
+  <div class="tr-mobile-drawer" id="tr-mobile-drawer">
+    <div class="tr-mobile-drawer-header">
+      <div class="tr-brand-wordmark">
+        <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+        <span class="tr-logo-reg">&reg;</span>
+      </div>
+      <button class="tr-mobile-drawer-close" type="button" aria-label="Close Navigation Menu" onclick="document.body.classList.remove('tr-mobile-nav-active')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <nav class="tr-mobile-drawer-nav">
+      {% for block in section.blocks %}
+        {% if block.type == 'nav_item' %}
+          <a href="{{ block.settings.url | default: '/collections/all' }}" class="tr-mobile-drawer-link {% if block.settings.is_active or forloop.first %}active{% endif %}">
+            <span>{{ block.settings.title }}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+    <div class="tr-mobile-drawer-footer">
+      <a href="/account" class="tr-mobile-drawer-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <span>Account / Login</span>
+      </a>
+    </div>
+  </div>
 </header>
+
+<script>
+  // Ensure header remains sticky while announcement hides smoothly
+  (function() {
+    function handleHeaderScroll() {
+      if (window.pageYOffset > 15) {
+        document.body.classList.add('tr-header-scrolled');
+      } else {
+        document.body.classList.remove('tr-header-scrolled');
+      }
+    }
+    window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+    handleHeaderScroll();
+  })();
+</script>
 
 {% schema %}
 {
@@ -106,7 +171,7 @@
       "step": 5,
       "unit": "px",
       "label": "Desktop Logo Width",
-      "default": 120
+      "default": 130
     },
     {
       "type": "range",
@@ -116,7 +181,7 @@
       "step": 5,
       "unit": "px",
       "label": "Mobile Logo Width",
-      "default": 85
+      "default": 90
     },
     {
       "type": "text",
@@ -134,7 +199,7 @@
           "type": "text",
           "id": "title",
           "label": "Link Title",
-          "default": "EARBUDS"
+          "default": "Wireless Audio"
         },
         {
           "type": "url",
@@ -143,8 +208,8 @@
         },
         {
           "type": "checkbox",
-          "id": "is_hot_deal",
-          "label": "Highlight as Hot Deal (Neon Lime)",
+          "id": "is_active",
+          "label": "Active (Shows Underline)",
           "default": false
         }
       ]
@@ -154,13 +219,14 @@
     {
       "name": "TR Header",
       "blocks": [
-        { "type": "nav_item", "settings": { "title": "HOT DEALS", "is_hot_deal": true } },
-        { "type": "nav_item", "settings": { "title": "EARBUDS" } },
-        { "type": "nav_item", "settings": { "title": "SMARTWATCH" } },
-        { "type": "nav_item", "settings": { "title": "NECKBAND" } },
-        { "type": "nav_item", "settings": { "title": "HEADPHONES" } },
-        { "type": "nav_item", "settings": { "title": "SPEAKERS" } },
-        { "type": "nav_item", "settings": { "title": "MORE" } }
+        { "type": "nav_item", "settings": { "title": "Wireless Audio", "is_active": true } },
+        { "type": "nav_item", "settings": { "title": "Home Theatre" } },
+        { "type": "nav_item", "settings": { "title": "Portable Fan" } },
+        { "type": "nav_item", "settings": { "title": "Portable Speaker" } },
+        { "type": "nav_item", "settings": { "title": "Personalization" } },
+        { "type": "nav_item", "settings": { "title": "India's First" } },
+        { "type": "nav_item", "settings": { "title": "Smartwatches" } },
+        { "type": "nav_item", "settings": { "title": "TR X Chhetri" } }
       ]
     }
   ]

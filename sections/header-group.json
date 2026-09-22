@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
@@ -12,9 +21,6 @@
     },
     "tr_header": {
       "type": "tr-header",
-      "settings": {
-        "brand_name": "TR"
-      },
       "blocks": {
         "nav_hot_deals": {
           "type": "nav_item",
@@ -81,7 +87,14 @@
         "nav_headphones",
         "nav_speakers",
         "nav_more"
-      ]
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/logog-removebg-preview.png",
+        "logo_url": "",
+        "logo_width": 120,
+        "logo_width_mobile": 85,
+        "brand_name": "TR"
+      }
     }
   },
   "order": [

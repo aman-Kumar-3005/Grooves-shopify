@@ -1,0 +1,42 @@
+{{ 'grooves-track-status.css' | asset_url | stylesheet_tag }}
+<section class="g-track g-container" data-g-track data-endpoint="{{ section.settings.lookup_endpoint | escape }}">
+  <div class="g-track__intro">
+    <span class="g-eyebrow">Grooves Support</span>
+    <h1>{{ section.settings.heading | escape }}</h1>
+    <p>{{ section.settings.intro | escape }}</p>
+  </div>
+  <div class="g-track__grid">
+    <form class="g-track__card" data-lookup="warranty" novalidate>
+      <h2>Warranty Status</h2>
+      <p>Apna invoice number daal kar warranty registration ka status check karein.</p>
+      <label for="WarrantyInvoice-{{ section.id }}">Invoice Number</label>
+      <input id="WarrantyInvoice-{{ section.id }}" name="reference" type="text" maxlength="80" autocomplete="off" required placeholder="Invoice number">
+      <button class="g-button" type="submit">Check Warranty Status</button>
+      <div class="g-track__result" role="status" aria-live="polite" data-result hidden></div>
+    </form>
+    <form class="g-track__card" data-lookup="ticket" novalidate>
+      <h2>Ticket Status</h2>
+      <p>Apna support ticket number daal kar latest status check karein.</p>
+      <label for="SupportTicket-{{ section.id }}">Ticket Number</label>
+      <input id="SupportTicket-{{ section.id }}" name="reference" type="text" maxlength="80" autocomplete="off" required placeholder="GRV-TKT-2026-000001">
+      <button class="g-button" type="submit">Check Ticket Status</button>
+      <div class="g-track__result" role="status" aria-live="polite" data-result hidden></div>
+    </form>
+  </div>
+  {% if section.settings.support_email != blank %}<p class="g-track__help">Status nahi mil raha? <a href="mailto:{{ section.settings.support_email | escape }}">{{ section.settings.support_email | escape }}</a> par sampark karein.</p>{% endif %}
+</section>
+<script src="{{ 'grooves-track-status.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Grooves status tracking",
+  "settings": [
+    {"type":"text","id":"heading","label":"Heading","default":"Track your status"},
+    {"type":"text","id":"intro","label":"Intro","default":"Invoice number se warranty aur ticket number se support request ka current status dekhein."},
+    {"type":"text","id":"lookup_endpoint","label":"Status app proxy endpoint","default":"/apps/grooves-support/status"},
+    {"type":"text","id":"support_email","label":"Support email","default":"support@grooveslifestyle.com"}
+  ],
+  "presets": [{"name":"Grooves status tracking"}]
+}
+{% endschema %}
+

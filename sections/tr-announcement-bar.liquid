@@ -1,29 +1,18 @@
 <div class="tr-announcement-bar" id="tr-announcement-{{ section.id }}">
   <div class="tr-container">
     <div class="tr-announcement-row">
-      <!-- 3-Part Promo (Exact from Screenshot 1 & 2) -->
-      <div class="tr-announcement-main-promo">
-        <!-- Left Block -->
-        <div class="tr-ann-block tr-ann-left">
-          <span>{{ section.settings.left_line_1 | default: 'FLAT 10% OFF ON' }}</span>
-          <span>{{ section.settings.left_line_2 | default: 'PREPAID ORDERS' }}</span>
-        </div>
-
-        <!-- Middle Code Block (Neon Lime Stacked) -->
-        <div class="tr-ann-block tr-ann-code">
-          <span class="tr-code-sub">{{ section.settings.code_word_1 | default: 'USE' }}</span>
-          <span class="tr-code-sub">{{ section.settings.code_word_2 | default: 'CODE:' }}</span>
-          <span class="tr-code-main">{{ section.settings.code_word_3 | default: 'TR10' }}</span>
-        </div>
-
-        <!-- Vertical Divider -->
+      <!-- Trust & Safe Checkout Promo (Exact from User Uploaded Screenshot) -->
+      <div class="tr-announcement-trust-promo">
+        <span class="tr-ann-lock-icon">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+          </svg>
+        </span>
+        <span class="tr-ann-text-white">{{ section.settings.text_part_1 | default: 'Guaranteed' }}</span>
+        <span class="tr-ann-text-lime">{{ section.settings.highlight_part_1 | default: 'Safe Checkout' }}</span>
         <span class="tr-ann-divider">|</span>
-
-        <!-- Right Block -->
-        <div class="tr-ann-block tr-ann-right">
-          <span>{{ section.settings.right_line_1 | default: 'FREE SHIPPING' }}</span>
-          <span>{{ section.settings.right_line_2 | default: 'ACROSS INDIA' }}</span>
-        </div>
+        <span class="tr-ann-text-white">{{ section.settings.text_part_2 | default: 'Order Dispatched within' }}</span>
+        <span class="tr-ann-text-lime">{{ section.settings.highlight_part_2 | default: '24 Hours!!' }}</span>
       </div>
 
       <!-- Desktop Extra EMI Banner (Right side as seen in Desktop Screenshot 2) -->
@@ -61,57 +50,31 @@
   "settings": [
     {
       "type": "header",
-      "content": "Left Block"
+      "content": "Trust Promo Message"
     },
     {
       "type": "text",
-      "id": "left_line_1",
-      "label": "Left Line 1",
-      "default": "FLAT 10% OFF ON"
+      "id": "text_part_1",
+      "label": "Text Part 1 (White)",
+      "default": "Guaranteed"
     },
     {
       "type": "text",
-      "id": "left_line_2",
-      "label": "Left Line 2",
-      "default": "PREPAID ORDERS"
-    },
-    {
-      "type": "header",
-      "content": "Middle Coupon Block (Neon Lime)"
+      "id": "highlight_part_1",
+      "label": "Highlight Part 1 (Neon Lime)",
+      "default": "Safe Checkout"
     },
     {
       "type": "text",
-      "id": "code_word_1",
-      "label": "Word 1",
-      "default": "USE"
+      "id": "text_part_2",
+      "label": "Text Part 2 (White)",
+      "default": "Order Dispatched within"
     },
     {
       "type": "text",
-      "id": "code_word_2",
-      "label": "Word 2",
-      "default": "CODE:"
-    },
-    {
-      "type": "text",
-      "id": "code_word_3",
-      "label": "Code",
-      "default": "TR10"
-    },
-    {
-      "type": "header",
-      "content": "Right Block"
-    },
-    {
-      "type": "text",
-      "id": "right_line_1",
-      "label": "Right Line 1",
-      "default": "FREE SHIPPING"
-    },
-    {
-      "type": "text",
-      "id": "right_line_2",
-      "label": "Right Line 2",
-      "default": "ACROSS INDIA"
+      "id": "highlight_part_2",
+      "label": "Highlight Part 2 (Neon Lime)",
+      "default": "24 Hours!!"
     },
     {
       "type": "header",

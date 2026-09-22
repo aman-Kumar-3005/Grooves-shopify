@@ -1,3 +1,110 @@
+{%- liquid
+  assign d_mode = section.settings.height_mode_desktop | default: 'adapt'
+  assign d_height = section.settings.desktop_height | default: 550
+  assign d_fit = section.settings.desktop_image_fit | default: 'contain'
+  assign d_width = section.settings.desktop_banner_width | default: 100
+
+  assign m_mode = section.settings.height_mode_mobile | default: 'adapt'
+  assign m_height = section.settings.mobile_height | default: 360
+  assign m_fit = section.settings.mobile_image_fit | default: 'contain'
+  assign m_width = section.settings.mobile_banner_width | default: 100
+  assign slider_bg = section.settings.slider_bg | default: '#000000'
+-%}
+
+<style>
+  #tr-hero-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    max-width: {{ d_width }}%;
+    margin-inline: auto;
+    background: {{ slider_bg }};
+    overflow: hidden;
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-slides-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-img-wrap {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: {{ slider_bg }};
+    {% if d_mode == 'adapt' %}
+      height: auto;
+      max-height: none;
+    {% else %}
+      height: {{ d_height }}px;
+      max-height: {{ d_height }}px;
+    {% endif %}
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-img-wrap picture {
+    display: block;
+    width: 100%;
+    {% if d_mode == 'adapt' %}
+      height: auto;
+    {% else %}
+      height: 100%;
+    {% endif %}
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-img {
+    width: 100%;
+    display: block;
+    object-position: center;
+    {% if d_mode == 'adapt' %}
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+    {% else %}
+      height: 100%;
+      max-height: {{ d_height }}px;
+      object-fit: {{ d_fit }};
+    {% endif %}
+  }
+
+  @media (max-width: 768px) {
+    #tr-hero-{{ section.id }} {
+      max-width: {{ m_width }}% !important;
+    }
+
+    #tr-hero-{{ section.id }} .tr-hero-img-wrap {
+      {% if m_mode == 'adapt' %}
+        height: auto !important;
+        max-height: none !important;
+        min-height: unset !important;
+      {% else %}
+        height: {{ m_height }}px !important;
+        max-height: {{ m_height }}px !important;
+        min-height: unset !important;
+      {% endif %}
+    }
+
+    #tr-hero-{{ section.id }} .tr-hero-img-wrap picture {
+      {% if m_mode == 'adapt' %}
+        height: auto !important;
+      {% else %}
+        height: 100% !important;
+      {% endif %}
+    }
+
+    #tr-hero-{{ section.id }} .tr-hero-img {
+      width: 100% !important;
+      {% if m_mode == 'adapt' %}
+        height: auto !important;
+        max-height: none !important;
+        object-fit: contain !important;
+      {% else %}
+        height: 100% !important;
+        max-height: {{ m_height }}px !important;
+        object-fit: {{ m_fit }} !important;
+      {% endif %}
+    }
+  }
+</style>
+
 <section class="tr-hero-slider" id="tr-hero-{{ section.id }}">
   <div class="tr-hero-slides-container">
     {% for block in section.blocks %}
@@ -104,10 +211,11 @@
     function resetTimer() {
       if (timer) clearInterval(timer);
       if (slides.length > 1) {
+        const speed = {{ section.settings.autoplay_speed | default: 5 | times: 1000 }};
         timer = setInterval(() => {
           let next = (current + 1) % slides.length;
           showSlide(next);
-        }, 5500);
+        }, speed);
       }
     }
     resetTimer();
@@ -135,7 +243,119 @@
 {% schema %}
 {
   "name": "Grooves Hero Banner",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "🖥️ Desktop Banner Size Settings"
+    },
+    {
+      "type": "select",
+      "id": "height_mode_desktop",
+      "label": "Desktop Size Mode",
+      "options": [
+        { "value": "adapt", "label": "Adapt to Image (Natural Height - Bina Kate)" },
+        { "value": "custom", "label": "Custom Height (Use slider below)" }
+      ],
+      "default": "adapt",
+      "info": "'Adapt' automatically fits original image without cutting or cropping."
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 250,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop Height (Chota / Bada)",
+      "default": 550
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_fit",
+      "label": "Desktop Image Fit (No Crop)",
+      "options": [
+        { "value": "contain", "label": "Contain (Puri image dikhegi - Bina kate)" },
+        { "value": "cover", "label": "Cover (Fill entire banner box)" }
+      ],
+      "default": "contain",
+      "info": "Choose 'Contain' so banner image never gets cut or cropped."
+    },
+    {
+      "type": "range",
+      "id": "desktop_banner_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Desktop Banner Width (Scale Chota/Bada)",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile Banner Size Settings"
+    },
+    {
+      "type": "select",
+      "id": "height_mode_mobile",
+      "label": "Mobile Size Mode",
+      "options": [
+        { "value": "adapt", "label": "Adapt to Mobile Image (Natural Height - Bina Kate)" },
+        { "value": "custom", "label": "Custom Height (Use slider below)" }
+      ],
+      "default": "adapt",
+      "info": "'Adapt' automatically fits mobile banner without cutting or cropping."
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 150,
+      "max": 750,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Height (Chota / Bada)",
+      "default": 360
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_fit",
+      "label": "Mobile Image Fit (No Crop)",
+      "options": [
+        { "value": "contain", "label": "Contain (Puri image dikhegi - Bina kate)" },
+        { "value": "cover", "label": "Cover (Fill entire banner box)" }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "range",
+      "id": "mobile_banner_width",
+      "min": 70,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Mobile Banner Width (Scale Chota/Bada)",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "⚙️ Additional Settings"
+    },
+    {
+      "type": "color",
+      "id": "slider_bg",
+      "label": "Banner Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay Slide Speed (Seconds)",
+      "default": 5
+    }
+  ],
   "blocks": [
     {
       "type": "slide",

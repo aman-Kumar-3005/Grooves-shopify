@@ -1965,15 +1965,15 @@ body.tr-mobile-nav-active {
     padding-bottom: 0 !important;
   }
   .tr-hero-img-wrap {
-    min-height: unset !important;
-    height: auto !important;
-    max-height: none !important;
+    min-height: unset;
+    height: auto;
+    max-height: none;
   }
   .tr-hero-img {
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    display: block !important;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    display: block;
   }
   .tr-hero-dots {
     bottom: 6px !important;

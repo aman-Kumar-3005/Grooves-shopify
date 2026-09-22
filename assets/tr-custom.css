@@ -651,6 +651,8 @@ body.tr-mobile-nav-active {
   width: 100%;
   overflow: hidden;
   background: #000000;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .tr-hero-slide {
@@ -663,19 +665,30 @@ body.tr-mobile-nav-active {
   display: block;
 }
 
+.tr-hero-slide-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
 .tr-hero-img-wrap {
   width: 100%;
   height: auto;
-  min-height: 480px;
-  max-height: 640px;
   overflow: hidden;
   position: relative;
 }
 
+.tr-hero-img-wrap picture {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .tr-hero-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   object-position: center;
   display: block;
 }
@@ -708,7 +721,7 @@ body.tr-mobile-nav-active {
 }
 
 .tr-hero-title {
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: clamp(28px, 3.5vw, 56px);
   font-weight: 900;
   line-height: 1.1;
   color: #ffffff;
@@ -724,26 +737,28 @@ body.tr-mobile-nav-active {
 
 .tr-hero-dots {
   position: absolute;
-  bottom: 20px;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  align-items: center;
   gap: 8px;
   z-index: 10;
 }
 
 .tr-hero-dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.45);
   cursor: pointer;
   border: none;
-  transition: all 0.3s;
+  padding: 0;
+  transition: all 0.3s ease;
 }
 
 .tr-hero-dot.active {
-  width: 28px;
+  width: 24px;
   border-radius: 6px;
   background: var(--tr-accent);
 }
@@ -751,6 +766,9 @@ body.tr-mobile-nav-active {
 /* ==========================================================================
    Category Circles Section
    ========================================================================== */
+.tr-categories-section {
+  padding: 24px 0 36px;
+}
 .tr-categories-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -1941,6 +1959,50 @@ body.tr-mobile-nav-active {
   .tr-header-inner {
     padding-inline: 14px;
     height: 56px;
+  }
+  .tr-hero-slider {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .tr-hero-img-wrap {
+    min-height: unset !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  .tr-hero-img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    display: block !important;
+  }
+  .tr-hero-dots {
+    bottom: 6px !important;
+    gap: 5px !important;
+  }
+  .tr-hero-dot {
+    width: 6px !important;
+    height: 6px !important;
+  }
+  .tr-hero-dot.active {
+    width: 18px !important;
+  }
+  .tr-categories-section {
+    padding-top: 10px !important;
+    padding-bottom: 20px !important;
+  }
+  .tr-categories-section .tr-section-badge-wrap {
+    margin: 8px 0 14px !important;
+  }
+  .tr-categories-grid {
+    padding: 6px 0 16px !important;
+    gap: 14px !important;
+  }
+  .tr-category-icon-box {
+    width: 76px !important;
+    height: 76px !important;
+  }
+  .tr-category-name {
+    font-size: 11px !important;
   }
   .tr-explore-right-grid {
     grid-template-columns: 1fr 1fr;

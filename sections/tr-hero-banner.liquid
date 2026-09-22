@@ -1,35 +1,65 @@
 <section class="tr-hero-slider" id="tr-hero-{{ section.id }}">
   <div class="tr-hero-slides-container">
     {% for block in section.blocks %}
-      <div class="tr-hero-slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}">
-        <div class="tr-hero-img-wrap">
-          <img 
-            src="{{ block.settings.image_url | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187' }}" 
-            alt="{{ block.settings.heading | default: 'TR Audio & Tech' }}" 
-            class="tr-hero-img"
-            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-          >
-          {% if block.settings.heading != blank or block.settings.badge_text != blank %}
-            <div class="tr-hero-overlay">
-              <div class="tr-hero-content">
-                {% if block.settings.badge_text != blank %}
-                  <div class="tr-hero-discount-tag">
-                    <span>⚡</span> {{ block.settings.badge_text }}
-                  </div>
-                {% endif %}
-                <h1 class="tr-hero-title">{{ block.settings.heading }}</h1>
-                {% if block.settings.subheading != blank %}
-                  <p class="tr-hero-desc">{{ block.settings.subheading }}</p>
-                {% endif %}
-                {% if block.settings.button_label != blank %}
-                  <a href="{{ block.settings.button_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent">
-                    {{ block.settings.button_label }}
-                  </a>
-                {% endif %}
+      {%- liquid
+        assign desk_img = block.settings.image
+        assign desk_url = block.settings.image_url | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187'
+        assign mob_img = block.settings.mobile_image
+        assign mob_url = block.settings.mobile_image_url
+      -%}
+      <div class="tr-hero-slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.button_link | default: '/collections/all' }}" class="tr-hero-slide-link">
+          <div class="tr-hero-img-wrap">
+            <picture>
+              {% if mob_img != blank %}
+                <source media="(max-width: 768px)" srcset="{{ mob_img | image_url: width: 800 }}">
+              {% elsif mob_url != blank %}
+                <source media="(max-width: 768px)" srcset="{{ mob_url }}">
+              {% endif %}
+              
+              {% if desk_img != blank %}
+                <img 
+                  src="{{ desk_img | image_url: width: 2000 }}" 
+                  alt="{{ block.settings.heading | default: 'TR Audio & Tech' }}" 
+                  class="tr-hero-img"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  width="1920"
+                  height="auto"
+                >
+              {% else %}
+                <img 
+                  src="{{ desk_url }}" 
+                  alt="{{ block.settings.heading | default: 'TR Audio & Tech' }}" 
+                  class="tr-hero-img"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  width="1920"
+                  height="auto"
+                >
+              {% endif %}
+            </picture>
+
+            {% if block.settings.show_text_overlay and block.settings.heading != blank %}
+              <div class="tr-hero-overlay">
+                <div class="tr-hero-content">
+                  {% if block.settings.badge_text != blank %}
+                    <div class="tr-hero-discount-tag">
+                      <span>⚡</span> {{ block.settings.badge_text }}
+                    </div>
+                  {% endif %}
+                  <h2 class="tr-hero-title">{{ block.settings.heading }}</h2>
+                  {% if block.settings.subheading != blank %}
+                    <p class="tr-hero-desc">{{ block.settings.subheading }}</p>
+                  {% endif %}
+                  {% if block.settings.button_label != blank %}
+                    <span class="tr-btn tr-btn-accent">
+                      {{ block.settings.button_label }}
+                    </span>
+                  {% endif %}
+                </div>
               </div>
-            </div>
-          {% endif %}
-        </div>
+            {% endif %}
+          </div>
+        </a>
       </div>
     {% endfor %}
   </div>
@@ -54,6 +84,7 @@
     const slides = slider.querySelectorAll('.tr-hero-slide');
     const dots = slider.querySelectorAll('.tr-hero-dot');
     let current = 0;
+    let timer = null;
 
     function showSlide(index) {
       slides.forEach((s, i) => s.classList.toggle('active', i === index));
@@ -62,15 +93,41 @@
     }
 
     dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => showSlide(idx));
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSlide(idx);
+        resetTimer();
+      });
     });
 
-    if (slides.length > 1) {
-      setInterval(() => {
-        let next = (current + 1) % slides.length;
-        showSlide(next);
-      }, 5500);
+    function resetTimer() {
+      if (timer) clearInterval(timer);
+      if (slides.length > 1) {
+        timer = setInterval(() => {
+          let next = (current + 1) % slides.length;
+          showSlide(next);
+        }, 5500);
+      }
     }
+    resetTimer();
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        showSlide((current + 1) % slides.length);
+        resetTimer();
+      } else if (touchEndX - touchStartX > 50) {
+        showSlide((current - 1 + slides.length) % slides.length);
+        resetTimer();
+      }
+    }, { passive: true });
   })();
 </script>
 
@@ -84,10 +141,49 @@
       "name": "Slide",
       "settings": [
         {
+          "type": "header",
+          "content": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Desktop Slide Image"
+        },
+        {
           "type": "text",
           "id": "image_url",
-          "label": "Slide Image URL (Placeholder)",
+          "label": "Or Desktop Image URL (Placeholder/CDN)",
           "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187"
+        },
+        {
+          "type": "header",
+          "content": "Mobile Image (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Slide Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "mobile_image_url",
+          "label": "Or Mobile Image URL (Optional)"
+        },
+        {
+          "type": "header",
+          "content": "Slide Link & Text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Slide Link (Clickable Banner)",
+          "default": "/collections/all"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_text_overlay",
+          "label": "Show HTML Text Overlay (Keep OFF if banner has baked-in text)",
+          "default": false
         },
         {
           "type": "text",
@@ -112,11 +208,6 @@
           "id": "button_label",
           "label": "Button Label",
           "default": "BUY NOW"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button Link"
         }
       ]
     }

@@ -16,22 +16,26 @@
           "type": "slide",
           "settings": {
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187",
+            "mobile_image_url": "",
+            "button_link": "shopify://collections/all",
+            "show_text_overlay": false,
             "badge_text": "",
             "heading": "",
             "subheading": "",
-            "button_label": "",
-            "button_link": "shopify://collections/all"
+            "button_label": ""
           }
         },
         "slide_bold": {
           "type": "slide",
           "settings": {
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_New_Bold.webp?v=1789042588",
+            "mobile_image_url": "",
+            "button_link": "shopify://collections/all",
+            "show_text_overlay": false,
             "badge_text": "",
             "heading": "",
             "subheading": "",
-            "button_label": "",
-            "button_link": "shopify://collections/all"
+            "button_label": ""
           }
         }
       },
@@ -246,7 +250,7 @@
           "settings": {
             "creator_name": "@alex_sound",
             "product_name": "DwOTS Fire Earbuds",
-            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281",
+            "thumbnail_url": "https://cdn.shopify.com/videos/c/o/v/c9b0819a6b5548289412b7a3abf65b13.mp4",
             "product_link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
           }
         },

@@ -1,0 +1,152 @@
+<section class="tr-support-section" id="tr-support-{{ section.id }}" style="padding: 20px 0 0;">
+  <div class="tr-container">
+    <div class="tr-section-badge-wrap">
+      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'TR Support' }}</span>
+    </div>
+
+    <!-- 6 Support Cards -->
+    <div class="tr-support-grid">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.link | default: '/pages/contact' }}" class="tr-support-card" style="text-decoration: none;">
+          <img 
+            src="{{ block.settings.icon_url }}" 
+            alt="{{ block.settings.title }}" 
+            loading="lazy"
+          >
+          <h4 class="tr-support-title">{{ block.settings.title }}</h4>
+          {% if block.settings.subtitle != blank %}
+            <span style="font-size: 11px; color: #888888;">{{ block.settings.subtitle }}</span>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Bottom Policy Strip -->
+  <div class="tr-policy-strip">
+    <div class="tr-container">
+      <div class="tr-policy-strip-inner">
+        <div class="tr-policy-item">
+          <span>🚚</span>
+          <span>Pan India Delivery</span>
+        </div>
+        <div class="tr-policy-item">
+          <span>🛡️</span>
+          <span>1 Year Warranty</span>
+        </div>
+        <div class="tr-policy-item">
+          <span>💵</span>
+          <span>COD Available</span>
+        </div>
+        <div class="tr-policy-item">
+          <span>🔄</span>
+          <span>72 Hours Replacement</span>
+        </div>
+        <div class="tr-policy-item">
+          <span>🔒</span>
+          <span>100% Secure Checkout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TR Support & Policies",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "TR Support"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "support_item",
+      "name": "Support Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Customer Support"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "24/7 Dedicated Help"
+        },
+        {
+          "type": "text",
+          "id": "icon_url",
+          "label": "Icon Image URL",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Support.png?v=1745498991"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Support & Policies",
+      "blocks": [
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "Customer Support",
+            "subtitle": "+91 Support Desk",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Support.png?v=1745498991"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "1 Year Warranty",
+            "subtitle": "Hassle-Free Coverage",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Warranty.png?v=1745498983"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "FAQs",
+            "subtitle": "Instant Answers",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-FAQ.png?v=1745499001"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "Instagram",
+            "subtitle": "@tr.audio",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Instagram.png?v=1745498977"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "YouTube",
+            "subtitle": "Unboxing & Reviews",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/youtube_icon_2c00e3ce-9090-4bb1-bbce-dfc9d1286d63.png?v=1758871384"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "72Hrs Replacement",
+            "subtitle": "No Questions Asked",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

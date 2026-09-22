@@ -1,0 +1,94 @@
+<section class="tr-press-section" id="tr-press-{{ section.id }}" style="padding: 20px 0 30px;">
+  <div class="tr-container">
+    <div class="tr-section-badge-wrap">
+      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'As Featured On' }}</span>
+    </div>
+
+    <div class="tr-press-grid">
+      {% for block in section.blocks %}
+        <img 
+          src="{{ block.settings.logo_url }}" 
+          alt="{{ block.settings.name | default: 'Press Media' }}" 
+          class="tr-press-logo"
+          loading="lazy"
+        >
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TR Press Logos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "As Featured On"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "press_logo",
+      "name": "Press Logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Media Outlet Name",
+          "default": "Media Outlet"
+        },
+        {
+          "type": "text",
+          "id": "logo_url",
+          "label": "Logo Image URL",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-01.webp?v=1762587441"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Press Logos",
+      "blocks": [
+        {
+          "type": "press_logo",
+          "settings": {
+            "name": "Live Mint",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-01.webp?v=1762587441"
+          }
+        },
+        {
+          "type": "press_logo",
+          "settings": {
+            "name": "Impact",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-02.webp?v=1762587441"
+          }
+        },
+        {
+          "type": "press_logo",
+          "settings": {
+            "name": "Dainik Jagran",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-03.webp?v=1762587441"
+          }
+        },
+        {
+          "type": "press_logo",
+          "settings": {
+            "name": "Amar Ujala",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-04.webp?v=1762587440"
+          }
+        },
+        {
+          "type": "press_logo",
+          "settings": {
+            "name": "Business Standard",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-05.webp?v=1762587441"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

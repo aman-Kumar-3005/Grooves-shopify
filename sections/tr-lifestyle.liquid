@@ -1,0 +1,103 @@
+<section class="tr-lifestyle-section" id="tr-lifestyle-{{ section.id }}" style="padding: 20px 0 40px;">
+  <div class="tr-container">
+    <div class="tr-section-badge-wrap">
+      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'Shop By Lifestyle' }}</span>
+    </div>
+
+    <div class="tr-lifestyle-grid">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.link | default: '/collections/all' }}" class="tr-lifestyle-card">
+          <div class="tr-lifestyle-img-wrap">
+            <img 
+              src="{{ block.settings.image_url }}" 
+              alt="{{ block.settings.title }}"
+              loading="lazy"
+            >
+          </div>
+          <span class="tr-lifestyle-label">{{ block.settings.title }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TR Lifestyle",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "Shop By Lifestyle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "lifestyle_item",
+      "name": "Lifestyle Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Lifestyle Name",
+          "default": "Movie Night"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Lifestyle",
+      "blocks": [
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Movie Night",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
+          }
+        },
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "News & Podcasts",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesNews.png?v=1782984314"
+          }
+        },
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Innovators",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesinnovators.png?v=1782984337"
+          }
+        },
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Workout & Fitness",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesWorkout.png?v=1782984362"
+          }
+        },
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Party & Travel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesParty.png?v=1782984388"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

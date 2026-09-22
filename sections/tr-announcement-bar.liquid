@@ -1,0 +1,43 @@
+<div class="tr-announcement-bar" id="tr-announcement-{{ section.id }}">
+  <div class="tr-container">
+    <p class="tr-announcement-text">
+      <span>{{ section.settings.message | default: 'FLAT 10% OFF ON PREPAID ORDERS' }}</span>
+      <span class="tr-announcement-highlight">{{ section.settings.code_text | default: 'USE CODE: TR10' }}</span>
+      {% if section.settings.secondary_message != blank %}
+        <span style="opacity: 0.6; margin-left: 10px;">|</span>
+        <span style="margin-left: 10px;">{{ section.settings.secondary_message }}</span>
+      {% endif %}
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "TR Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Announcement Text",
+      "default": "FLAT 10% OFF ON PREPAID ORDERS"
+    },
+    {
+      "type": "text",
+      "id": "code_text",
+      "label": "Coupon Code Highlight",
+      "default": "USE CODE: TR10"
+    },
+    {
+      "type": "text",
+      "id": "secondary_message",
+      "label": "Secondary Message",
+      "default": "FREE SHIPPING ACROSS INDIA"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

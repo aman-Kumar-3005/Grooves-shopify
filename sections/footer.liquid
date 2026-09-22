@@ -2,7 +2,7 @@
 <div class="g-footer-grid">{% for block in section.blocks %}<div {{ block.shopify_attributes }}>{% case block.type %}
 {% when 'brand_info' %}{% if block.settings.logo != blank %}{{ block.settings.logo | image_url:width:400 | image_tag: class:'g-footer-logo', loading:'lazy', widths:'150,300,400', sizes:'150px' }}{% else %}<h2>{{ shop.name | escape }}</h2>{% endif %}<p>{{ block.settings.subtitle | escape }}</p><div>{{ block.settings.description }}</div>
 {% when 'link_list' %}<grooves-footer-menu><details class="g-footer-menu" open><summary>{{ block.settings.heading | escape }}<span>+</span></summary><ul>{% for link in block.settings.menu.links %}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{% endfor %}</ul></details></grooves-footer-menu>
-{% when 'contact_info' %}<h3>{{ block.settings.heading | escape }}</h3>{% if block.settings.phone != blank %}<a class="g-support-phone" href="tel:{{ block.settings.phone | remove:' ' | remove:'(' | remove:')' | escape }}">{{ block.settings.phone | escape }}</a>{% endif %}{% if block.settings.email != blank %}<p><a href="mailto:{{ block.settings.email | escape }}">{{ block.settings.email | escape }}</a></p>{% endif %}
+{% when 'contact_info' %}<h3>{{ block.settings.heading | escape }}</h3>{% if block.settings.phone != blank %}<a class="g-support-phone" href="tel:{{ block.settings.phone | remove:' ' | remove:'(' | remove:')' | escape }}">{{ block.settings.phone | escape }}</a>{% endif %}{% if block.settings.email != blank %}<p><a href="mailto:{{ block.settings.email | escape }}">{{ block.settings.email | escape }}</a></p>{% endif %}{% assign tracking_page = pages['track-status'] %}{% if tracking_page != blank %}<p class="g-footer-tracking"><a href="{{ tracking_page.url }}">Track warranty &amp; ticket status</a></p>{% endif %}
 {% when 'text_block' %}<grooves-footer-menu><details class="g-footer-menu" open><summary>{{ block.settings.heading | escape }}<span>+</span></summary><div>{{ block.settings.text }}</div></details></grooves-footer-menu>
 {% endcase %}</div>{% endfor %}</div>
 {% if section.settings.newsletter %}<div class="g-newsletter"><div><h2>{{ section.settings.newsletter_heading | escape }}</h2><p>{{ section.settings.newsletter_copy | escape }}</p></div>{% assign newsletter_id = 'Newsletter-' | append:section.id %}{% form 'customer',id:newsletter_id %}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="Email-{{ section.id }}">Email address</label><div class="g-newsletter-input"><input type="email" id="Email-{{ section.id }}" name="contact[email]" required autocomplete="email" placeholder="Enter your email address" {% if form.errors %}aria-invalid="true" aria-describedby="NewsletterError-{{ section.id }}"{% endif %}><button class="g-button" type="submit">{{ section.settings.subscribe_label | escape }}</button></div>{% if form.errors %}<div id="NewsletterError-{{ section.id }}" role="alert">{{ form.errors | default_errors }}</div>{% endif %}{% if form.posted_successfully? %}<p role="status">Thanks for subscribing.</p>{% endif %}{% endform %}</div>{% endif %}
@@ -91,37 +91,31 @@
       "type": "url",
       "id": "facebook_url",
       "label": "Facebook URL",
-      "default": "https://www.facebook.com/people/grooves-powered-by-infiniarc/61556742414399/"
     },
     {
       "type": "url",
       "id": "instagram_url",
       "label": "Instagram URL",
-      "default": "https://www.instagram.com/grooves_audio/"
     },
     {
       "type": "url",
       "id": "youtube_url",
       "label": "YouTube URL",
-      "default": "https://www.youtube.com/@grooves_audio"
     },
     {
       "type": "url",
       "id": "twitter_url",
       "label": "X/Twitter URL",
-      "default": ""
     },
     {
       "type": "url",
       "id": "linkedin_url",
       "label": "LinkedIn URL",
-      "default": "https://www.linkedin.com/company/grooves-audio/home/"
     },
     {
       "type": "url",
       "id": "whatsapp_url",
       "label": "WhatsApp URL",
-      "default": "https://wa.me/9216921661"
     },
     {
       "type": "text",

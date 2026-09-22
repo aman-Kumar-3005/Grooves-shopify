@@ -1,304 +1,523 @@
 {
   "sections": {
-    "hero_RkimKJ": {
-      "type": "hero",
+    "hero_slider": {
+      "type": "tr-hero-banner",
       "blocks": {
-        "slide_9YnfA3": {
+        "slide_swirl": {
           "type": "slide",
           "settings": {
-            "desktop_image": "shopify://shop_images/re.png",
-            "mobile_image": "shopify://shop_images/hero-mobile.png",
-            "overlay_opacity": 0,
-            "heading": "",
-            "subheading": "",
-            "button_label": "",
-            "slide_link": "shopify://collections/all"
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187",
+            "badge_text": "FLAT 10% OFF | USE CODE: GET10OFF",
+            "heading": "SwIRL Series",
+            "subheading": "The Rechargeable Power Fan",
+            "button_label": "BUY NOW",
+            "button_link": "shopify://collections/all"
           }
         },
-        "slide_cJdV3y": {
+        "slide_bold": {
           "type": "slide",
           "settings": {
-            "desktop_image": "shopify://shop_images/hero-desktop_1.png",
-            "mobile_image": "shopify://shop_images/hero-mobile_2.png",
-            "overlay_opacity": 0,
-            "heading": "",
-            "subheading": "",
-            "button_label": "",
-            "slide_link": "shopify://collections/all"
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_New_Bold.webp?v=1789042588",
+            "badge_text": "NEXT-GEN SOUND",
+            "heading": "DwOTS Bold",
+            "subheading": "Experience Immersive Acoustics",
+            "button_label": "EXPLORE NOW",
+            "button_link": "shopify://collections/all"
           }
         }
       },
       "block_order": [
-        "slide_9YnfA3",
-        "slide_cJdV3y"
+        "slide_swirl",
+        "slide_bold"
+      ],
+      "settings": {}
+    },
+    "categories": {
+      "type": "tr-categories",
+      "blocks": {
+        "cat_bestseller": {
+          "type": "category",
+          "settings": {
+            "title": "Bestseller",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_fan": {
+          "type": "category",
+          "settings": {
+            "title": "Portable Fan",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/portable-fan-category_jpg.jpg?v=1782898913",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_soundbars": {
+          "type": "category",
+          "settings": {
+            "title": "Soundbars",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-sphorika.jpg?v=1781091487",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_translucent": {
+          "type": "category",
+          "settings": {
+            "title": "Translucent",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/sense__jpg.jpg?v=1776665934",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_powerbank": {
+          "type": "category",
+          "settings": {
+            "title": "Power Bank",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_earbuds": {
+          "type": "category",
+          "settings": {
+            "title": "Earbuds",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_speakers": {
+          "type": "category",
+          "settings": {
+            "title": "Speakers",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/soundbar.png?v=1742213430",
+            "url": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "cat_bestseller",
+        "cat_fan",
+        "cat_soundbars",
+        "cat_translucent",
+        "cat_powerbank",
+        "cat_earbuds",
+        "cat_speakers"
       ],
       "settings": {
-        "auto_play": true,
-        "auto_play_time": 5,
-        "show_arrows": false,
-        "show_dots": true,
-        "full_width": true,
-        "max_width": 1600,
-        "full_height": false,
-        "desktop_height": 560,
-        "mobile_height": 360,
-        "text_alignment": "left",
-        "heading_size_desktop": 64,
-        "heading_size_mobile": 36,
-        "subheading_size_desktop": 24,
-        "subheading_size_mobile": 16,
-        "heading_color": "#ffffff",
-        "subheading_color": "#ffffff",
-        "button_bg_color": "#b3ff00",
-        "button_text_color": "#000000",
-        "button_radius": 24,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "show_gradient": false
+        "badge_title": "Shop By Categories"
       }
     },
-    "grooves_categories": {
-      "type": "grooves-categories",
-      "settings": {},
+    "explore_range": {
+      "type": "tr-explore-range",
       "blocks": {
-        "collection_TTrtLF": {
-          "type": "category",
+        "prod_fire": {
+          "type": "product_card",
           "settings": {
-            "collection": "power-bank",
-            "title": "",
-            "image": ""
+            "title": "DwOTS Fire",
+            "price": "₹1,499",
+            "compare_price": "₹4,999",
+            "discount_tag": "70% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-Fire-new.webp?v=1770725157",
+            "link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
           }
         },
-        "collection_pGnq7k": {
-          "type": "category",
+        "prod_muze": {
+          "type": "product_card",
           "settings": {
-            "collection": "accessories",
-            "title": "",
-            "image": ""
+            "title": "DwOTS Muze",
+            "price": "₹1,699",
+            "compare_price": "₹5,499",
+            "discount_tag": "69% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/DwOTS-Muze-main-page.webp?v=1781258849",
+            "link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
           }
         },
-        "collection_rwWTTt": {
-          "type": "category",
+        "prod_bold": {
+          "type": "product_card",
           "settings": {
-            "collection": "adaptor",
-            "title": "",
-            "image": ""
+            "title": "DwOTS Bold",
+            "price": "₹1,299",
+            "compare_price": "₹3,999",
+            "discount_tag": "67% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/homepage-dwots-bold.webp?v=1762508529",
+            "link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
           }
         },
-        "collection_7jfDEn": {
-          "type": "category",
+        "prod_wave": {
+          "type": "product_card",
           "settings": {
-            "collection": "combo",
-            "title": "",
-            "image": ""
-          }
-        },
-        "collection_VArjUk": {
-          "type": "category",
-          "settings": {
-            "collection": "earbuds",
-            "title": "",
-            "image": ""
-          }
-        },
-        "headphones": {
-          "type": "category",
-          "settings": {
-            "collection": "headphones",
-            "title": "Headphones",
-            "icon": "audio"
+            "title": "DwOTS Wave",
+            "price": "₹1,399",
+            "compare_price": "₹4,499",
+            "discount_tag": "68% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Explore-India_s-First-tws-Inbuilt-MP3-Player.webp?v=1781356903",
+            "link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
           }
         }
       },
       "block_order": [
-        "collection_TTrtLF",
-        "collection_pGnq7k",
-        "collection_rwWTTt",
-        "collection_7jfDEn",
-        "collection_VArjUk",
-        "headphones"
-      ]
-    },
-    "grooves_featured": {
-      "type": "grooves-products",
-      "settings": {
-        "heading": "Your everyday upgrades",
-        "collection": "all",
-        "limit": 8
-      }
-    },
-    "grooves_banner": {
-      "type": "grooves-banner",
-      "settings": {
-        "eyebrow": "THE GROOVES EDIT",
-        "heading": "Good sound. Great days.",
-        "copy": "<p>Discover audio made for your everyday rhythm.</p>",
-        "link": "shopify://collections/earbuds"
-      }
-    },
-    "grooves_audio": {
-      "type": "grooves-products",
-      "settings": {
-        "heading": "Find your sound",
-        "collection": "earbuds",
-        "limit": 8
-      }
-    },
-    "shoppable_videos_iPtCWY": {
-      "type": "shoppable-videos",
-      "blocks": {
-        "video_xG97Pw": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1737299270_3549045898173508440_64911717332.mp4",
-            "product": "gunmetal-sandstone-3",
-            "custom_title": ""
-          }
-        },
-        "video_rbHUzN": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1772072764_3840746963625776568_64911717332.mp4",
-            "product": "gunmetal-sandstone-1",
-            "custom_title": ""
-          }
-        },
-        "video_LVrDgF": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1771962527_3839816045813816865_64911717332.mp4",
-            "product": "daniel-wellington-1",
-            "custom_title": ""
-          }
-        },
-        "video_Q3iFe7": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/Grooves Alpha 100 Uninterrupted Beats for Every Move.mp4",
-            "product": "gunmetal-sandstone-1",
-            "custom_title": ""
-          }
-        },
-        "video_rX4QMn": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1753118286_3681745028289685219_64911717332.mp4",
-            "product": "daniel-wellington-4",
-            "custom_title": ""
-          }
-        },
-        "video_CnRnmp": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/Grooves Infinity Earbuds.mp4",
-            "product": "gunmetal-sandstone",
-            "custom_title": ""
-          }
-        },
-        "video_BqYQnp": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1753957334_3688783793070618735_64911717332.mp4",
-            "product": "11",
-            "custom_title": ""
-          }
-        },
-        "video_hkyeQ8": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1759587830_3736015819072475952_64911717332.mp4",
-            "product": "daniel-wellington-1",
-            "custom_title": ""
-          }
-        }
-      },
-      "block_order": [
-        "video_xG97Pw",
-        "video_rbHUzN",
-        "video_LVrDgF",
-        "video_Q3iFe7",
-        "video_rX4QMn",
-        "video_CnRnmp",
-        "video_BqYQnp",
-        "video_hkyeQ8"
+        "prod_fire",
+        "prod_muze",
+        "prod_bold",
+        "prod_wave"
       ],
-      "name": "Shoppable Videos Slider",
       "settings": {
-        "full_width": true,
-        "enable_autoplay": true,
-        "title": "Watch & Shop",
-        "heading_size": 24,
-        "heading_alignment": "left",
-        "card_width_desktop": 260,
-        "card_width_mobile": 220,
-        "card_radius": 16,
-        "bg_color": "#ffffff",
-        "text_color": "#121212",
-        "padding_top": 40,
-        "padding_bottom": 40
+        "section_title": "EXPLORE INDIA'S FIRST AUDIO RANGE",
+        "hero_title": "DwOTS 107 Pro - Fast Charging Wireless Earbuds",
+        "hero_tag": "SUPER FAST CHARGING",
+        "hero_image": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002",
+        "hero_btn_text": "BUY NOW",
+        "hero_link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
       }
     },
-    "grooves_power": {
-      "type": "grooves-products",
-      "settings": {
-        "heading": "Power through your day",
-        "collection": "adaptor",
-        "limit": 8
-      }
-    },
-    "grooves_support": {
-      "type": "grooves-support",
-      "settings": {},
+    "feature_banners": {
+      "type": "tr-feature-banners",
       "blocks": {
-        "support": {
-          "type": "feature",
+        "banner_swirl": {
+          "type": "banner",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/swirl-banner-desk.webp?v=1789043104",
+            "tagline": "TR SWIRL POWER",
+            "title": "Smart Digital Fan With Device Powerbank",
+            "button_text": "BUY NOW",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "banner_dwots": {
+          "type": "banner",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Flow-Desktop.webp?v=1762508858",
+            "tagline": "DwOTS SERIES",
+            "title": "Welcome The Future Of Audio",
+            "button_text": "BUY NOW",
+            "button_link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "banner_swirl",
+        "banner_dwots"
+      ],
+      "settings": {}
+    },
+    "tabbed_tws": {
+      "type": "tr-tabbed-tws",
+      "settings": {
+        "section_title": "TWS Earbuds built for seamless sound",
+        "earbuds_banner": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/shopby-life-MUZE.webp?v=1770725159",
+        "earbuds_link": "shopify://collections/all",
+        "soundbar_banner": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/CARNIwAL_Sphorika_Banner__Desk.webp?v=1781075171",
+        "soundbar_link": "shopify://collections/all"
+      }
+    },
+    "dual_speakers": {
+      "type": "tr-dual-speakers",
+      "settings": {
+        "speaker1_image": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_515_Chhetri.webp?v=1773487465",
+        "speaker1_link": "shopify://collections/all",
+        "speaker2_image": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_717_Harsh.webp?v=1773487412",
+        "speaker2_link": "shopify://collections/all"
+      }
+    },
+    "social_reels": {
+      "type": "tr-social-reels",
+      "blocks": {
+        "reel_1": {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@alex_sound",
+            "product_name": "DwOTS Fire Earbuds",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281",
+            "product_link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
+          }
+        },
+        "reel_2": {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@priya_vibes",
+            "product_name": "SwIRL Power Fan",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesNews.png?v=1782984314",
+            "product_link": "shopify://collections/all"
+          }
+        },
+        "reel_3": {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@rohit_fitness",
+            "product_name": "DwOTS 107 Pro",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesWorkout.png?v=1782984362",
+            "product_link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
+          }
+        },
+        "reel_4": {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@tanya_music",
+            "product_name": "Sphorika Soundbar",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesParty.png?v=1782984388",
+            "product_link": "shopify://collections/all"
+          }
+        },
+        "reel_5": {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@sam_gadgets",
+            "product_name": "DwOTS Muze",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesinnovators.png?v=1782984337",
+            "product_link": "shopify://products/dwots-fire-wireless-charging-earbuds-moon-white"
+          }
+        }
+      },
+      "block_order": [
+        "reel_1",
+        "reel_2",
+        "reel_3",
+        "reel_4",
+        "reel_5"
+      ],
+      "settings": {
+        "title": "TALK OF THE TOWN - SOCIAL"
+      }
+    },
+    "lifestyle": {
+      "type": "tr-lifestyle",
+      "blocks": {
+        "life_movie": {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Movie Night",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_news": {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "News & Podcasts",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesNews.png?v=1782984314",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_innovators": {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Innovators",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesinnovators.png?v=1782984337",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_workout": {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Workout & Fitness",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesWorkout.png?v=1782984362",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_party": {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Party & Travel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesParty.png?v=1782984388",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "life_movie",
+        "life_news",
+        "life_innovators",
+        "life_workout",
+        "life_party"
+      ],
+      "settings": {
+        "badge_title": "Shop By Lifestyle"
+      }
+    },
+    "blogs": {
+      "type": "tr-blogs",
+      "blocks": {
+        "blog_1": {
+          "type": "article",
+          "settings": {
+            "title": "Best Open Ear Earbuds in 2026",
+            "category": "TECH & AUDIO",
+            "excerpt": "Discover how open-ear audio tech delivers spatial acoustics while keeping you aware of your surroundings.",
+            "image_url": "https://acwo.com/cdn/shop/articles/Best_OWS_Earbuds.webp?v=1789979303&width=533",
+            "link": "shopify://blogs/news"
+          }
+        },
+        "blog_2": {
+          "type": "article",
+          "settings": {
+            "title": "TR SwIRL POWER: The Multi-Functional Fan",
+            "category": "INNOVATION",
+            "excerpt": "A high-speed rechargeable cooling fan engineered with emergency powerbank charging capability.",
+            "image_url": "https://acwo.com/cdn/shop/articles/swirl_power_blog.webp?v=1789205421&width=533",
+            "link": "shopify://blogs/news"
+          }
+        },
+        "blog_3": {
+          "type": "article",
+          "settings": {
+            "title": "Best Earbuds Under ₹5000 in India",
+            "category": "BUYER GUIDE",
+            "excerpt": "Compare features, battery life, quad-mic ENC, and ultra low gaming latency across top contenders.",
+            "image_url": "https://acwo.com/cdn/shop/articles/dwots_touch_muze_1_4b7015df-621e-4365-a61d-99d32b3abc05.webp?v=1789463821&width=533",
+            "link": "shopify://blogs/news"
+          }
+        },
+        "blog_4": {
+          "type": "article",
+          "settings": {
+            "title": "What Is the Best Sound System For Home?",
+            "category": "HOME THEATRE",
+            "excerpt": "Transform your entertainment room with deep bass soundbars and dedicated wireless subwoofers.",
+            "image_url": "https://acwo.com/cdn/shop/articles/Ganesh_Chaturthi_CARNIwAL_Desi_e7c61e80-3fe9-4f6e-9660-0ac726636a3f.webp?v=1789123369&width=533",
+            "link": "shopify://blogs/news"
+          }
+        }
+      },
+      "block_order": [
+        "blog_1",
+        "blog_2",
+        "blog_3",
+        "blog_4"
+      ],
+      "settings": {
+        "badge_title": "Blogs"
+      }
+    },
+    "press_logos": {
+      "type": "tr-press-marquee",
+      "blocks": {
+        "press_1": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Live Mint",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-01.webp?v=1762587441"
+          }
+        },
+        "press_2": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Impact",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-02.webp?v=1762587441"
+          }
+        },
+        "press_3": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Dainik Jagran",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-03.webp?v=1762587441"
+          }
+        },
+        "press_4": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Amar Ujala",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-04.webp?v=1762587440"
+          }
+        },
+        "press_5": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Business Standard",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-05.webp?v=1762587441"
+          }
+        }
+      },
+      "block_order": [
+        "press_1",
+        "press_2",
+        "press_3",
+        "press_4",
+        "press_5"
+      ],
+      "settings": {
+        "badge_title": "As Featured On"
+      }
+    },
+    "support_policies": {
+      "type": "tr-support-policies",
+      "blocks": {
+        "sup_1": {
+          "type": "support_item",
           "settings": {
             "title": "Customer Support",
-            "icon": "support",
+            "subtitle": "+91 Support Desk",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Support.png?v=1745498991",
             "link": "shopify://pages/contact"
           }
         },
-        "warranty": {
-          "type": "feature",
+        "sup_2": {
+          "type": "support_item",
           "settings": {
-            "title": "Warranty",
-            "icon": "shield",
+            "title": "1 Year Warranty",
+            "subtitle": "Hassle-Free Coverage",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Warranty.png?v=1745498983",
             "link": "shopify://pages/contact"
           }
         },
-        "faq": {
-          "type": "feature",
+        "sup_3": {
+          "type": "support_item",
           "settings": {
             "title": "FAQs",
-            "icon": "faq",
+            "subtitle": "Instant Answers",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-FAQ.png?v=1745499001",
             "link": "shopify://pages/contact"
           }
         },
-        "replacement": {
-          "type": "feature",
+        "sup_4": {
+          "type": "support_item",
           "settings": {
-            "title": "Replacement",
-            "icon": "box",
+            "title": "Instagram",
+            "subtitle": "@tr.audio",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Instagram.png?v=1745498977",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_5": {
+          "type": "support_item",
+          "settings": {
+            "title": "YouTube",
+            "subtitle": "Unboxing & Reviews",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/youtube_icon_2c00e3ce-9090-4bb1-bbce-dfc9d1286d63.png?v=1758871384",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_6": {
+          "type": "support_item",
+          "settings": {
+            "title": "72Hrs Replacement",
+            "subtitle": "No Questions Asked",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254",
             "link": "shopify://pages/contact"
           }
         }
       },
       "block_order": [
-        "support",
-        "warranty",
-        "faq",
-        "replacement"
-      ]
+        "sup_1",
+        "sup_2",
+        "sup_3",
+        "sup_4",
+        "sup_5",
+        "sup_6"
+      ],
+      "settings": {
+        "badge_title": "TR Support"
+      }
     }
   },
   "order": [
-    "hero_RkimKJ",
-    "grooves_categories",
-    "grooves_featured",
-    "grooves_banner",
-    "grooves_audio",
-    "shoppable_videos_iPtCWY",
-    "grooves_power",
-    "grooves_support"
+    "hero_slider",
+    "categories",
+    "explore_range",
+    "feature_banners",
+    "tabbed_tws",
+    "dual_speakers",
+    "social_reels",
+    "lifestyle",
+    "blogs",
+    "press_logos",
+    "support_policies"
   ]
 }

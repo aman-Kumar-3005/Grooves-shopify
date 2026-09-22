@@ -1,0 +1,93 @@
+<section class="tr-tabbed-tws-section" id="tr-tabbed-{{ section.id }}" style="padding: 20px 0 40px;">
+  <div class="tr-container">
+    <div class="tr-tabs-header">
+      <h2 class="tr-tabs-title">{{ section.settings.section_title | default: 'TWS Earbuds built for seamless sound' }}</h2>
+      <div class="tr-tabs-nav">
+        {% assign tabs = "All,ANC / ENC,Translucent,Wireless Charging,Dual Mic,Display Earbuds,Gaming" | split: "," %}
+        {% for tab in tabs %}
+          <button class="tr-tab-btn {% if forloop.first %}active{% endif %}">{{ tab }}</button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Earbuds Banner with Man Wearing Open Sound -->
+    <div class="tr-showcase-banner" style="margin-bottom: 24px;">
+      <img 
+        src="{{ section.settings.earbuds_banner | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/shopby-life-MUZE.webp?v=1770725159' }}" 
+        alt="Open Sound Earbuds" 
+        class="tr-showcase-img"
+        loading="lazy"
+      >
+      <div class="tr-showcase-overlay" style="align-items: flex-start; padding: 40px 60px;">
+        <h3 style="color: #000000; font-size: clamp(22px, 3.5vw, 42px); font-weight: 900; margin: 0 0 12px; text-shadow: 0 0 2px #fff;">
+          Open sound that feels<br>Light . Natural . & Easy
+        </h3>
+        <a href="{{ section.settings.earbuds_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 28px;">
+          Shop Now
+        </a>
+      </div>
+    </div>
+
+    <!-- Soundbar / Home Theatre Banner -->
+    <div class="tr-showcase-banner">
+      <img 
+        src="{{ section.settings.soundbar_banner | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/CARNIwAL_Sphorika_Banner__Desk.webp?v=1781075171' }}" 
+        alt="Sphorika Cinematic Sound" 
+        class="tr-showcase-img"
+        loading="lazy"
+      >
+      <div class="tr-showcase-overlay" style="align-items: flex-end; padding: 40px 60px;">
+        <span style="color: var(--tr-accent); font-weight: 800; font-size: 13px; text-transform: uppercase;">
+          CINEMATIC SOUND AT HOME
+        </span>
+        <h3 style="color: #ffffff; font-size: clamp(20px, 3vw, 36px); font-weight: 900; margin: 6px 0 16px;">
+          Crafted for Cinematic Precision
+        </h3>
+        <a href="{{ section.settings.soundbar_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 28px;">
+          BUY NOW
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TR Tabbed TWS & Soundbar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Heading",
+      "default": "TWS Earbuds built for seamless sound"
+    },
+    {
+      "type": "text",
+      "id": "earbuds_banner",
+      "label": "Earbuds Banner Image URL",
+      "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/shopby-life-MUZE.webp?v=1770725159"
+    },
+    {
+      "type": "url",
+      "id": "earbuds_link",
+      "label": "Earbuds Banner Link"
+    },
+    {
+      "type": "text",
+      "id": "soundbar_banner",
+      "label": "Soundbar Banner Image URL",
+      "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/CARNIwAL_Sphorika_Banner__Desk.webp?v=1781075171"
+    },
+    {
+      "type": "url",
+      "id": "soundbar_link",
+      "label": "Soundbar Banner Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Tabbed TWS & Soundbar"
+    }
+  ]
+}
+{% endschema %}

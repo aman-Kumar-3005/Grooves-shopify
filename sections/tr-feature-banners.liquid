@@ -1,0 +1,100 @@
+<section class="tr-feature-banners-section" id="tr-banners-{{ section.id }}" style="padding: 10px 0 30px;">
+  <div class="tr-container">
+    {% for block in section.blocks %}
+      <div class="tr-showcase-banner">
+        <img 
+          src="{{ block.settings.image_url }}" 
+          alt="{{ block.settings.title | default: 'TR Product' }}" 
+          class="tr-showcase-img"
+          loading="lazy"
+        >
+        {% if block.settings.button_text != blank %}
+          <div class="tr-showcase-overlay">
+            {% if block.settings.tagline != blank %}
+              <p style="color: var(--tr-accent); font-weight: 800; font-size: 14px; text-transform: uppercase; margin-bottom: 8px;">
+                {{ block.settings.tagline }}
+              </p>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <h3 style="color: #fff; font-size: clamp(20px, 3vw, 36px); font-weight: 900; margin: 0 0 16px;">
+                {{ block.settings.title }}
+              </h3>
+            {% endif %}
+            <a href="{{ block.settings.button_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 12px 32px;">
+              {{ block.settings.button_text }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TR Feature Banners",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Showcase Banner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Banner Image URL",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/swirl-banner-desk.webp?v=1789043104"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Tagline / Badge",
+          "default": "TR SWIRL POWER"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Banner Title",
+          "default": "The Rechargeable Power Fan"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Label",
+          "default": "BUY NOW"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Feature Banners",
+      "blocks": [
+        {
+          "type": "banner",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/swirl-banner-desk.webp?v=1789043104",
+            "tagline": "TR SWIRL POWER",
+            "title": "Smart Digital Fan With Device Powerbank",
+            "button_text": "BUY NOW"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Flow-Desktop.webp?v=1762508858",
+            "tagline": "DwOTS SERIES",
+            "title": "Welcome To The Future Of Audio",
+            "button_text": "BUY NOW"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

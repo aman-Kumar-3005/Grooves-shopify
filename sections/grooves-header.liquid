@@ -1,22 +1,23 @@
 {% render 'theme-drawer-styles' %}
-<style>#shopify-section-{{ section.id }}{position:sticky;top:0;z-index:30}#header-group:has(.g-header){display:contents}.g-header-{{ section.id }}{--g-header-bg:{{ section.settings.background }};--g-header-text:{{ section.settings.text_color }};--g-logo-width:{{ section.settings.logo_width }}px;--color-account-icon:{{ section.settings.text_color }};--color-cart-bubble-background:var(--g-accent);--color-cart-bubble-text:#111}</style>
-<grooves-header class="g-header g-header-{{ section.id }}" data-bottom="{{ section.settings.bottom_navigation }}">
+<style>#header-group:has(.g-header){position:sticky;top:0;z-index:40}#shopify-section-{{ section.id }}{position:relative;z-index:1}.g-header-{{ section.id }}{--g-header-bg:{{ section.settings.background }};--g-header-text:{{ section.settings.text_color }};--g-logo-width:{{ section.settings.logo_width }}px;--color-account-icon:{{ section.settings.text_color }};--color-cart-bubble-background:var(--g-accent);--color-cart-bubble-text:#111}</style>
+<grooves-header class="g-header acwo-header g-header-{{ section.id }}{% unless section.settings.sticky_header %} g-header--static{% endunless %}{% if section.settings.center_mobile_logo %} g-header--mobile-logo-center{% endif %}" data-bottom="{{ section.settings.bottom_navigation }}" data-sticky="{{ section.settings.sticky_header }}" data-hide-announcement="{{ section.settings.hide_announcement_on_scroll }}" data-acwo-header>
  {% if section.blocks.size > 0 %}<grooves-announcement class="g-announcement" data-interval="{{ section.settings.interval | times: 1000 }}" aria-label="Store announcements">
  <div>{% for block in section.blocks %}<div data-message {% unless forloop.first %}hidden{% endunless %} {{ block.shopify_attributes }}>{% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif %}{{ block.settings.text | escape }}{% if block.settings.link != blank %}</a>{% endif %}</div>{% endfor %}</div>
  {% if section.blocks.size > 1 %}<button type="button" class="g-announcement-pause" aria-label="Pause announcements" data-pause>&#8545;</button>{% endif %}
  </grooves-announcement>{% endif %}
- <div class="g-header-row g-container">
- <div class="g-header-left"><button type="button" class="g-icon-button" data-menu-open aria-label="Open menu" aria-expanded="false" aria-controls="GroovesMenu-{{ section.id }}">{% render 'grooves-icon', name:'menu' %}</button>{% if section.settings.show_search %}{% render 'search', style:'modal', display_style:'icon' %}{% endif %}</div>
+ <div class="g-header-row acwo-header__main g-container">
+ <button type="button" class="g-icon-button g-mobile-menu-trigger" data-menu-open aria-label="Open menu" aria-expanded="false" aria-controls="GroovesMenu-{{ section.id }}">{% render 'grooves-icon', name:'menu' %}</button>
+ <div class="g-header-search">{% if section.settings.show_search %}{% render 'search', style:'modal', display_style:'icon' %}{% endif %}</div>
  <a class="g-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 420 | image_tag: widths: '140,210,280,420', sizes: '160px', loading: 'eager' }}{% else %}<span>{{ section.settings.brand | default: shop.name | escape }}</span>{% endif %}</a>
+ {% if section.settings.desktop_menu %}<nav class="g-desktop-nav" aria-label="Main navigation">{% for link in section.settings.menu.links %}{% if link.links != blank %}<details><summary>{{ link.title | escape }}</summary><div class="g-nav-submenu"><a href="{{ link.url }}">Shop {{ link.title | escape }}</a>{% for child in link.links %}<a href="{{ child.url }}">{{ child.title | escape }}</a>{% for grandchild in child.links %}<a href="{{ grandchild.url }}">{{ grandchild.title | escape }}</a>{% endfor %}{% endfor %}</div></details>{% else %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endif %}{% endfor %}</nav>{% endif %}
  <div class="g-header-right">{% render 'header-actions', display_style:'icon', section:section %}</div>
  </div>
- {% if section.settings.desktop_menu %}<nav class="g-desktop-nav" aria-label="Main navigation">{% for link in section.settings.menu.links %}{% if link.links != blank %}<details><summary>{{ link.title | escape }}</summary><div class="g-nav-submenu"><a href="{{ link.url }}">Shop {{ link.title | escape }}</a>{% for child in link.links %}<a href="{{ child.url }}">{{ child.title | escape }}</a>{% for grandchild in child.links %}<a href="{{ grandchild.url }}">— {{ grandchild.title | escape }}</a>{% endfor %}{% endfor %}</div></details>{% else %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endif %}{% endfor %}</nav>{% endif %}
  <dialog id="GroovesMenu-{{ section.id }}" class="g-menu-dialog" aria-labelledby="GroovesMenuTitle-{{ section.id }}">
  <div class="g-menu-top"><strong id="GroovesMenuTitle-{{ section.id }}">{{ section.settings.menu_title | escape }}</strong><button class="g-icon-button" type="button" data-menu-close aria-label="Close menu">{% render 'grooves-icon', name:'close' %}</button></div>
  <nav class="g-drawer-nav" aria-label="Mobile navigation">{% for link in section.settings.menu.links %}{% if link.links != blank %}<details><summary>{{ link.title | escape }}<span>+</span></summary><a href="{{ link.url }}">Shop all {{ link.title | escape }}</a>{% for child in link.links %}{% if child.links != blank %}<details><summary>{{ child.title | escape }}<span>+</span></summary><a href="{{ child.url }}">Shop all</a>{% for grandchild in child.links %}<a href="{{ grandchild.url }}">{{ grandchild.title | escape }}</a>{% endfor %}</details>{% else %}<a href="{{ child.url }}">{{ child.title | escape }}</a>{% endif %}{% endfor %}</details>{% else %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endif %}{% endfor %}</nav>
  {% if section.settings.support_url != blank %}<a class="g-button" href="{{ section.settings.support_url }}">{{ section.settings.support_label | escape }}</a>{% endif %}
  </dialog>
- {% if section.settings.bottom_navigation and section.settings.bottom_menu.links.size > 0 %}<nav class="g-bottom-nav" aria-label="Quick categories">{% for link in section.settings.bottom_menu.links limit:4 %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{% assign icon_index = forloop.index | modulo: 4 %}{% case icon_index %}{% when 1 %}{% render 'grooves-icon',name:'audio' %}{% when 2 %}{% render 'grooves-icon',name:'watch' %}{% when 3 %}{% render 'grooves-icon',name:'power' %}{% else %}{% render 'grooves-icon',name:'shield' %}{% endcase %}<span>{{ link.title | escape }}</span></a>{% endfor %}</nav>{% endif %}
+ {% if section.settings.bottom_navigation %}<nav class="g-bottom-nav" aria-label="Quick navigation"><a href="{{ routes.root_url }}" {% if request.page_type == 'index' %}aria-current="page"{% endif %}>{% render 'grooves-icon',name:'home' %}<span>Home</span></a><a href="{{ routes.collections_url }}" {% if request.page_type == 'collection' %}aria-current="page"{% endif %}>{% render 'grooves-icon',name:'grid' %}<span>Categories</span></a>{% if settings.cart_type == 'drawer' and template.name != 'cart' %}<button type="button" class="g-bottom-nav__button" on:click="#cart-drawer/toggle" aria-label="Open cart">{% render 'grooves-icon',name:'cart' %}<span>Cart{% unless cart.item_count == 0 %} ({{ cart.item_count }}){% endunless %}</span></button>{% else %}<a href="{{ routes.cart_url }}" {% if request.page_type == 'cart' %}aria-current="page"{% endif %}>{% render 'grooves-icon',name:'cart' %}<span>Cart{% unless cart.item_count == 0 %} ({{ cart.item_count }}){% endunless %}</span></a>{% endif %}<a href="{{ routes.account_url }}" aria-label="Profile">{% render 'grooves-icon',name:'user' %}<span>Profile</span></a></nav>{% endif %}
 </grooves-header>
 <noscript><style>.g-header-left [data-menu-open]{display:none}.g-desktop-nav{display:flex;flex-wrap:wrap}</style></noscript>
 
@@ -62,6 +63,24 @@
       "type": "checkbox",
       "id": "show_search",
       "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Keep header visible while scrolling",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_announcement_on_scroll",
+      "label": "Hide announcement bar while scrolling",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "center_mobile_logo",
+      "label": "Center logo on mobile",
       "default": true
     },
     {

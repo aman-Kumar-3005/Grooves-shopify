@@ -1,0 +1,191 @@
+<section class="tr-pdp-top-wrapper" id="tr-pdp-hero-{{ section.id }}">
+  <div class="tr-container">
+    <div class="tr-pdp-grid">
+      <!-- Media Gallery (Left) -->
+      <div class="tr-pdp-gallery-wrap">
+        <div class="tr-pdp-thumbnails">
+          <div class="tr-pdp-thumb-item active" data-media-src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" data-type="image">
+            <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="DwOTS Fire White" loading="lazy">
+          </div>
+          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" data-type="image">
+            <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="DwOTS Fire 3D" loading="lazy">
+          </div>
+          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" data-type="image">
+            <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="DwOTS Fire Rotating" loading="lazy">
+          </div>
+          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" data-type="image">
+            <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="DwOTS Fire Black Case" loading="lazy">
+          </div>
+          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" data-type="image">
+            <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="DwOTS Fire In Ear" loading="lazy">
+          </div>
+        </div>
+
+        <div class="tr-pdp-main-media">
+          <img 
+            id="tr-main-display-img" 
+            src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" 
+            alt="DwOTS Fire Earbuds"
+          >
+        </div>
+      </div>
+
+      <!-- Product Info Column (Right) -->
+      <div class="tr-pdp-details">
+        <!-- Rating Row -->
+        <div class="tr-pdp-rating-row">
+          <span class="tr-pdp-stars">★★★★★</span>
+          <strong style="color: #fff;">4.8</strong>
+          <span class="tr-pdp-review-count">| 128 Verified Reviews</span>
+        </div>
+
+        <!-- Title & Subtitle -->
+        <h1 class="tr-pdp-title">{{ section.settings.product_title | default: "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging" }}</h1>
+        <p class="tr-pdp-subtitle">Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency</p>
+
+        <!-- Price Box -->
+        <div class="tr-pdp-price-box">
+          <span class="tr-pdp-price">₹1,499</span>
+          <span class="tr-pdp-mrp">₹4,999</span>
+          <span class="tr-pdp-discount-badge">70% OFF</span>
+        </div>
+
+        <!-- Color Swatches -->
+        <div class="tr-swatch-section">
+          <div class="tr-swatch-label">Color: <span id="tr-selected-color-name" style="color: var(--tr-accent);">Moon White</span></div>
+          <div class="tr-swatches-row">
+            <button class="tr-swatch-btn active" data-color-name="Moon White" data-img-url="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774">
+              <span class="tr-swatch-color-circle" style="background: #ffffff;"></span>
+              Moon White
+            </button>
+            <button class="tr-swatch-btn" data-color-name="Carbon Black" data-img-url="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073">
+              <span class="tr-swatch-color-circle" style="background: #111111;"></span>
+              Carbon Black
+            </button>
+            <button class="tr-swatch-btn" data-color-name="Steel Blue" data-img-url="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131">
+              <span class="tr-swatch-color-circle" style="background: #3b5998;"></span>
+              Steel Blue
+            </button>
+          </div>
+        </div>
+
+        <!-- Personalise Engraving -->
+        <div class="tr-personalise-box">
+          <label for="tr-engrave-text">✨ Make Your Product Personalised (Optional Free Engraving)</label>
+          <input 
+            type="text" 
+            id="tr-engrave-text" 
+            class="tr-personalise-input" 
+            placeholder="Enter name or initials to engrave on case (Max 12 chars)" 
+            maxlength="12"
+          >
+        </div>
+
+        <!-- Offer Coupon Box -->
+        <div class="tr-coupon-banner">
+          <div class="tr-coupon-text">
+            <span>🏷️ Get 15% OFF on 2 or More Items</span>
+          </div>
+          <span class="tr-coupon-code-pill">Use Code: TR15</span>
+        </div>
+
+        <!-- Pincode Delivery Check -->
+        <div>
+          <label style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; display: block;">Check Estimated Delivery Date</label>
+          <div class="tr-pincode-wrap">
+            <input type="text" class="tr-pincode-input" id="tr-pincode-input" placeholder="Enter Delivery Pincode" maxlength="6">
+            <button type="button" class="tr-btn tr-btn-dark" style="padding: 10px 20px;" onclick="checkPincode()">CHECK</button>
+          </div>
+          <div id="tr-pincode-msg" style="font-size: 12px; margin-top: 6px; color: var(--tr-accent); display: none;">
+            ✓ Delivery expected in 2-4 business days. Free shipping eligible!
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="tr-pdp-actions">
+          <button type="button" class="tr-btn-buy-now" onclick="alert('Proceeding to Instant Fast Checkout...')">
+            ⚡ BUY IT NOW - PAY ON DELIVERY / UPI
+          </button>
+          <button type="button" class="tr-btn-add-cart" onclick="alert('Item added to cart!')">
+            ADD TO CART
+          </button>
+        </div>
+
+        <!-- 4 PDP Trust Badges -->
+        <div class="tr-pdp-badges-grid">
+          <div class="tr-pdp-badge-item">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Free Shipping">
+            <span>Free Shipping</span>
+          </div>
+          <div class="tr-pdp-badge-item">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="1 Year Warranty">
+            <span>1 Year Warranty</span>
+          </div>
+          <div class="tr-pdp-badge-item">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="72Hrs Replacement">
+            <span>72h Replacement</span>
+          </div>
+          <div class="tr-pdp-badge-item">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="GST Billing">
+            <span>GST Billing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Thumbnail switching logic
+  document.querySelectorAll('.tr-pdp-thumb-item').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      document.querySelectorAll('.tr-pdp-thumb-item').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const src = this.getAttribute('data-media-src');
+      document.getElementById('tr-main-display-img').src = src;
+    });
+  });
+
+  // Color Swatch logic
+  document.querySelectorAll('.tr-swatch-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tr-swatch-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const colorName = this.getAttribute('data-color-name');
+      const imgUrl = this.getAttribute('data-img-url');
+      document.getElementById('tr-selected-color-name').textContent = colorName;
+      if (imgUrl) {
+        document.getElementById('tr-main-display-img').src = imgUrl;
+      }
+    });
+  });
+
+  function checkPincode() {
+    const input = document.getElementById('tr-pincode-input');
+    const msg = document.getElementById('tr-pincode-msg');
+    if (input.value.length >= 6) {
+      msg.style.display = 'block';
+    } else {
+      alert('Please enter a valid 6-digit Indian PIN code');
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "TR PDP Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product Title",
+      "default": "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR PDP Hero"
+    }
+  ]
+}
+{% endschema %}

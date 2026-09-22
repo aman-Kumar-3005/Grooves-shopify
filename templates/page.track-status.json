@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
@@ -7,10 +8,15 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
+=======
+>>>>>>> 4209231 (Update website)
 {
   "sections": {
     "main": { "type": "grooves-track-status", "settings": {} }
   },
   "order": ["main"]
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4209231 (Update website)

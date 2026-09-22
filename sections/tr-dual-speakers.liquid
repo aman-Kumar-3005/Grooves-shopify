@@ -1,0 +1,68 @@
+<section class="tr-dual-speakers-section" id="tr-dual-speakers-{{ section.id }}" style="padding: 10px 0 30px;">
+  <div class="tr-container">
+    <div class="tr-dual-speakers-grid">
+      <!-- 30W RMS -->
+      <div class="tr-speaker-card">
+        <img 
+          src="{{ section.settings.speaker1_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_515_Chhetri.webp?v=1773487465' }}" 
+          alt="UP TO 30W RMS"
+          loading="lazy"
+        >
+        <div class="tr-speaker-card-content">
+          <a href="{{ section.settings.speaker1_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
+            BUY NOW
+          </a>
+        </div>
+      </div>
+
+      <!-- 50W RMS -->
+      <div class="tr-speaker-card">
+        <img 
+          src="{{ section.settings.speaker2_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_717_Harsh.webp?v=1773487412' }}" 
+          alt="UP TO 50W RMS"
+          loading="lazy"
+        >
+        <div class="tr-speaker-card-content">
+          <a href="{{ section.settings.speaker2_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
+            BUY NOW
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TR Dual Speaker Promos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "speaker1_image",
+      "label": "Speaker 1 Image URL (30W)",
+      "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_515_Chhetri.webp?v=1773487465"
+    },
+    {
+      "type": "url",
+      "id": "speaker1_link",
+      "label": "Speaker 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "speaker2_image",
+      "label": "Speaker 2 Image URL (50W)",
+      "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Carniwal_717_Harsh.webp?v=1773487412"
+    },
+    {
+      "type": "url",
+      "id": "speaker2_link",
+      "label": "Speaker 2 Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Dual Speaker Promos"
+    }
+  ]
+}
+{% endschema %}

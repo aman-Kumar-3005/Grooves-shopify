@@ -1,0 +1,117 @@
+<section class="tr-categories-section" id="tr-categories-{{ section.id }}" style="padding: 20px 0;">
+  <div class="tr-container">
+    <div class="tr-section-badge-wrap">
+      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'Shop By Categories' }}</span>
+    </div>
+
+    <div class="tr-categories-grid">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.url | default: '/collections/all' }}" class="tr-category-card">
+          <div class="tr-category-icon-box">
+            <img 
+              src="{{ block.settings.image_url }}" 
+              alt="{{ block.settings.title }}" 
+              loading="lazy"
+            >
+          </div>
+          <span class="tr-category-name">{{ block.settings.title }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TR Categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "Shop By Categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Name",
+          "default": "Earbuds"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Icon Image URL",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Category Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Categories",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Bestseller",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Portable Fan",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/portable-fan-category_jpg.jpg?v=1782898913"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Soundbars",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-sphorika.jpg?v=1781091487"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Translucent",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/sense__jpg.jpg?v=1776665934"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Power Bank",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Earbuds",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Speakers",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/soundbar.png?v=1742213430"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

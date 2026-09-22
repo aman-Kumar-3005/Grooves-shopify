@@ -1,0 +1,107 @@
+<header class="tr-header" id="tr-header-{{ section.id }}">
+  <div class="tr-container">
+    <div class="tr-header-inner">
+      <!-- Brand Logo -->
+      <a href="/" class="tr-logo-link">
+        <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+        <span class="tr-logo-dot">.</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="tr-nav-menu" aria-label="Main Navigation">
+        {% for block in section.blocks %}
+          {% if block.type == 'nav_item' %}
+            <a 
+              href="{{ block.settings.url | default: '#' }}" 
+              class="tr-nav-link {% if block.settings.is_hot_deal %}tr-hot-deal{% endif %}"
+            >
+              {{ block.settings.title }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="tr-header-actions">
+        <!-- Search -->
+        <a href="/search" class="tr-header-icon-btn" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
+
+        <!-- Account -->
+        <a href="/account" class="tr-header-icon-btn" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+
+        <!-- Cart -->
+        <a href="/cart" class="tr-header-icon-btn" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="tr-cart-count">{{ cart.item_count | default: 0 }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "TR Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "TR"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Navigation Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Link Title",
+          "default": "EARBUDS"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_hot_deal",
+          "label": "Highlight as Hot Deal (Neon Lime)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Header",
+      "blocks": [
+        { "type": "nav_item", "settings": { "title": "HOT DEALS", "is_hot_deal": true } },
+        { "type": "nav_item", "settings": { "title": "EARBUDS" } },
+        { "type": "nav_item", "settings": { "title": "SMARTWATCH" } },
+        { "type": "nav_item", "settings": { "title": "NECKBAND" } },
+        { "type": "nav_item", "settings": { "title": "HEADPHONES" } },
+        { "type": "nav_item", "settings": { "title": "SPEAKERS" } },
+        { "type": "nav_item", "settings": { "title": "MORE" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

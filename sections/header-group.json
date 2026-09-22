@@ -11,25 +11,94 @@
   "type": "header",
   "name": "Header",
   "sections": {
+<<<<<<< HEAD
     "grooves_header": {
       "type": "grooves-header",
+=======
+    "tr_announcement": {
+      "type": "tr-announcement-bar",
+      "settings": {
+        "message": "FLAT 10% OFF ON PREPAID ORDERS",
+        "code_text": "USE CODE: TR10",
+        "secondary_message": "FREE SHIPPING ACROSS INDIA"
+      }
+    },
+    "tr_header": {
+      "type": "tr-header",
+      "settings": {
+        "brand_name": "TR"
+      },
+>>>>>>> 4209231 (Update website)
       "blocks": {
-        "message1": {
-          "type": "announcement",
+        "nav_hot_deals": {
+          "type": "nav_item",
           "settings": {
+<<<<<<< HEAD
             "text": "Discover your everyday upgrade",
             "link": ""
+=======
+            "title": "HOT DEALS",
+            "url": "shopify://collections/all",
+            "is_hot_deal": true
+>>>>>>> 4209231 (Update website)
           }
         },
-        "message2": {
-          "type": "announcement",
+        "nav_earbuds": {
+          "type": "nav_item",
           "settings": {
+<<<<<<< HEAD
             "text": "Audio. Power. Possibilities.",
             "link": ""
+=======
+            "title": "EARBUDS",
+            "url": "shopify://collections/all",
+            "is_hot_deal": false
+          }
+        },
+        "nav_smartwatch": {
+          "type": "nav_item",
+          "settings": {
+            "title": "SMARTWATCH",
+            "url": "shopify://collections/all",
+            "is_hot_deal": false
+          }
+        },
+        "nav_neckband": {
+          "type": "nav_item",
+          "settings": {
+            "title": "NECKBAND",
+            "url": "shopify://collections/all",
+            "is_hot_deal": false
+          }
+        },
+        "nav_headphones": {
+          "type": "nav_item",
+          "settings": {
+            "title": "HEADPHONES",
+            "url": "shopify://collections/all",
+            "is_hot_deal": false
+          }
+        },
+        "nav_speakers": {
+          "type": "nav_item",
+          "settings": {
+            "title": "SPEAKERS",
+            "url": "shopify://collections/all",
+            "is_hot_deal": false
+          }
+        },
+        "nav_more": {
+          "type": "nav_item",
+          "settings": {
+            "title": "MORE",
+            "url": "shopify://collections/all",
+            "is_hot_deal": false
+>>>>>>> 4209231 (Update website)
           }
         }
       },
       "block_order": [
+<<<<<<< HEAD
         "message1",
         "message2"
       ],
@@ -49,9 +118,20 @@
         "text_color": "#ffffff",
         "interval": 5
       }
+=======
+        "nav_hot_deals",
+        "nav_earbuds",
+        "nav_smartwatch",
+        "nav_neckband",
+        "nav_headphones",
+        "nav_speakers",
+        "nav_more"
+      ]
+>>>>>>> 4209231 (Update website)
     }
   },
   "order": [
-    "grooves_header"
+    "tr_announcement",
+    "tr_header"
   ]
 }

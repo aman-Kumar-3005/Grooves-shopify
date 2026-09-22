@@ -1,4 +1,4 @@
-<grooves-hero class="g-hero" aria-label="Featured collections" aria-roledescription="carousel" data-autoplay="{{ section.settings.auto_play }}" data-interval="{{ section.settings.auto_play_time | times:1000 }}" style="--hero-desktop:{% if section.settings.full_height %}100svh{% else %}{{ section.settings.desktop_height }}px{% endif %};--hero-mobile:{% if section.settings.full_height %}100svh{% else %}{{ section.settings.mobile_height }}px{% endif %};--hero-speed:{{ section.settings.transition_speed }}ms;--hero-heading:{{ section.settings.heading_size_desktop }}px;--hero-heading-mobile:{{ section.settings.heading_size_mobile }}px;--hero-copy:{{ section.settings.subheading_size_desktop }}px;--hero-copy-mobile:{{ section.settings.subheading_size_mobile }}px;--hero-text:{{ section.settings.heading_color }};--hero-subtext:{{ section.settings.subheading_color }};--g-accent:{{ section.settings.button_bg_color }};--g-button-text:{{ section.settings.button_text_color }};--g-radius:{{ section.settings.button_radius }}px;background:{{ section.settings.background }};text-align:{{ section.settings.text_alignment }};margin-block:{{ section.settings.margin_top }}px {{ section.settings.margin_bottom }}px;{% unless section.settings.full_width %}max-width:{{ section.settings.max_width }}px;margin-inline:auto;{% endunless %}">
+<grooves-hero class="g-hero" aria-label="Featured collections" aria-roledescription="carousel" data-autoplay="{{ section.settings.auto_play }}" data-interval="{{ section.settings.auto_play_time | times:1000 }}" style="--hero-desktop:{% if section.settings.full_height %}100svh{% else %}{{ section.settings.desktop_height }}px{% endif %};--hero-mobile:{% if section.settings.full_height %}100svh{% else %}{{ section.settings.mobile_height }}px{% endif %};--hero-speed:{{ section.settings.transition_speed }}ms;--hero-image-fit:{{ section.settings.image_fit | default: 'contain' }};--hero-heading:{{ section.settings.heading_size_desktop }}px;--hero-heading-mobile:{{ section.settings.heading_size_mobile }}px;--hero-copy:{{ section.settings.subheading_size_desktop }}px;--hero-copy-mobile:{{ section.settings.subheading_size_mobile }}px;--hero-text:{{ section.settings.heading_color }};--hero-subtext:{{ section.settings.subheading_color }};--g-accent:{{ section.settings.button_bg_color }};--g-button-text:{{ section.settings.button_text_color }};--g-radius:{{ section.settings.button_radius }}px;background:{{ section.settings.background }};text-align:{{ section.settings.text_alignment }};margin-block:{{ section.settings.margin_top }}px {{ section.settings.margin_bottom }}px;{% unless section.settings.full_width %}max-width:{{ section.settings.max_width }}px;margin-inline:auto;{% endunless %}">
  <div class="g-hero-track" data-track>
  {% for block in section.blocks %}{% liquid
  assign hero_link = block.settings.slide_link | default: routes.all_products_collection_url
@@ -118,6 +118,22 @@
       "step": 20,
       "unit": "px",
       "default": 400
+    },{
+      "type": "select",
+      "id": "image_fit",
+      "label": "Banner image fit",
+      "info": "Show full image prevents the sides from being cropped.",
+      "default": "contain",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Show full image (no crop)"
+        },
+        {
+          "value": "cover",
+          "label": "Fill banner (may crop)"
+        }
+      ]
     },
     {
       "type": "header",

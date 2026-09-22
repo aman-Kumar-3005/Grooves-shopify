@@ -1,0 +1,131 @@
+<section class="tr-reels-section" id="tr-reels-{{ section.id }}" style="padding: 20px 0 40px;">
+  <div class="tr-container">
+    <div style="text-align: center; margin-bottom: 24px;">
+      <h2 style="font-size: 24px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin: 0;">
+        {{ section.settings.title | default: 'TALK OF THE TOWN - SOCIAL' }}
+      </h2>
+    </div>
+
+    <div class="tr-reels-slider">
+      {% for block in section.blocks %}
+        <div class="tr-reel-card">
+          <img 
+            src="{{ block.settings.thumbnail_url }}" 
+            alt="{{ block.settings.creator_name | default: 'TR Community' }}"
+            loading="lazy"
+          >
+          <div class="tr-reel-play-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </div>
+          <div class="tr-reel-info">
+            <div>
+              <span style="font-size: 13px; font-weight: 700; color: #fff; display: block;">
+                {{ block.settings.creator_name }}
+              </span>
+              <span style="font-size: 11px; color: var(--tr-accent);">
+                {{ block.settings.product_name }}
+              </span>
+            </div>
+            <a href="{{ block.settings.product_link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white' }}" class="tr-btn tr-btn-accent" style="padding: 6px 14px; font-size: 11px;">
+              SHOP
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TR Social Reels",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "TALK OF THE TOWN - SOCIAL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Reel Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "creator_name",
+          "label": "Creator Name",
+          "default": "@tech_vibes"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product Tagged",
+          "default": "DwOTS Fire"
+        },
+        {
+          "type": "text",
+          "id": "thumbnail_url",
+          "label": "Reel Thumbnail URL",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesWorkout.png?v=1782984362"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Social Reels",
+      "blocks": [
+        {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@alex_sound",
+            "product_name": "DwOTS Fire Earbuds",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@priya_vibes",
+            "product_name": "SwIRL Power Fan",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesNews.png?v=1782984314"
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@rohit_fitness",
+            "product_name": "DwOTS 107 Pro",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesWorkout.png?v=1782984362"
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@tanya_music",
+            "product_name": "Sphorika Soundbar",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesParty.png?v=1782984388"
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@sam_gadgets",
+            "product_name": "DwOTS Muze",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesinnovators.png?v=1782984337"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

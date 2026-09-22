@@ -1,0 +1,101 @@
+<footer class="tr-footer" id="tr-footer-{{ section.id }}">
+  <div class="tr-container">
+    <div class="tr-footer-grid">
+      <!-- Brand Column -->
+      <div class="tr-footer-brand">
+        <a href="/" class="tr-logo-link">
+          <span class="tr-logo-text">{{ section.settings.brand_name | default: 'TR' }}</span>
+          <span class="tr-logo-dot">.</span>
+        </a>
+        <p>{{ section.settings.brand_desc | default: 'High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging.' }}</p>
+        <div style="margin-top: 16px; display: flex; gap: 14px;">
+          <a href="#" style="color: #888; font-size: 18px;" aria-label="Instagram">📸</a>
+          <a href="#" style="color: #888; font-size: 18px;" aria-label="YouTube">▶️</a>
+          <a href="#" style="color: #888; font-size: 18px;" aria-label="Twitter">🐦</a>
+          <a href="#" style="color: #888; font-size: 18px;" aria-label="Facebook">📘</a>
+        </div>
+      </div>
+
+      <!-- Column 1: Products -->
+      <div class="tr-footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="/collections/all">True Wireless Earbuds</a></li>
+          <li><a href="/collections/all">Smartwatches</a></li>
+          <li><a href="/collections/all">Portable Fans</a></li>
+          <li><a href="/collections/all">Soundbars</a></li>
+          <li><a href="/collections/all">Power Banks</a></li>
+          <li><a href="/collections/all">Neckbands</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 2: Company -->
+      <div class="tr-footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/pages/about-us">About TR</a></li>
+          <li><a href="/pages/contact">Contact Us</a></li>
+          <li><a href="/pages/warranty">Warranty Claim</a></li>
+          <li><a href="/pages/faqs">FAQs</a></li>
+          <li><a href="/pages/shipping-policy">Shipping Policy</a></li>
+          <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Newsletter -->
+      <div class="tr-footer-col">
+        <h4>Newsletter</h4>
+        <p style="color: #888888; font-size: 13px; margin: 0 0 12px;">
+          Subscribe for early product launches, secret discounts, and VIP updates.
+        </p>
+        <form class="tr-newsletter-form" action="#" method="post" onsubmit="event.preventDefault(); alert('Thank you for subscribing to TR!');">
+          <input 
+            type="email" 
+            placeholder="Enter your email" 
+            class="tr-newsletter-input" 
+            required
+          >
+          <button type="submit" class="tr-btn tr-btn-accent" style="padding: 10px 20px; font-size: 12px;">
+            JOIN
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="tr-footer-bottom">
+      <div>
+        &copy; {{ 'now' | date: '%Y' }} {{ section.settings.brand_name | default: 'TR' }} Lifestyle. All Rights Reserved.
+      </div>
+      <div>
+        <span style="color: #888888; font-size: 12px; margin-right: 12px;">100% SECURE PAYMENTS</span>
+        <span>💳 UPI | Cards | NetBanking | COD</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "TR Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "TR"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_desc",
+      "label": "Brand Description",
+      "default": "High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging."
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Footer"
+    }
+  ]
+}
+{% endschema %}

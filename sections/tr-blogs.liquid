@@ -1,0 +1,131 @@
+<section class="tr-blogs-section" id="tr-blogs-{{ section.id }}" style="padding: 20px 0 40px;">
+  <div class="tr-container">
+    <div class="tr-section-badge-wrap">
+      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'Blogs' }}</span>
+    </div>
+
+    <div class="tr-blogs-grid">
+      {% for block in section.blocks %}
+        <article class="tr-blog-card">
+          <a href="{{ block.settings.link | default: '/blogs/news' }}" class="tr-blog-img-wrap">
+            <img 
+              src="{{ block.settings.image_url }}" 
+              alt="{{ block.settings.title }}" 
+              loading="lazy"
+            >
+          </a>
+          <div class="tr-blog-content">
+            <span style="font-size: 11px; color: var(--tr-accent); font-weight: 700; text-transform: uppercase;">
+              {{ block.settings.category | default: 'AUDIO GUIDE' }}
+            </span>
+            <h3 class="tr-blog-title">
+              <a href="{{ block.settings.link | default: '/blogs/news' }}" style="color: inherit; text-decoration: none;">
+                {{ block.settings.title }}
+              </a>
+            </h3>
+            <p style="color: #888888; font-size: 13px; margin: 0; line-height: 1.5;">
+              {{ block.settings.excerpt }}
+            </p>
+            <a href="{{ block.settings.link | default: '/blogs/news' }}" class="tr-blog-link">
+              Read more &rarr;
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TR Blogs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "Blogs"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Blog Article",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Article Title",
+          "default": "Best Open Ear Earbuds in 2026: Top Picks"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category / Tag",
+          "default": "TECH & AUDIO"
+        },
+        {
+          "type": "text",
+          "id": "excerpt",
+          "label": "Short Excerpt",
+          "default": "Looking for the most comfortable open sound experience? Here is our comprehensive guide."
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Featured Image URL",
+          "default": "https://acwo.com/cdn/shop/articles/Best_OWS_Earbuds.webp?v=1789979303&width=533"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Article Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR Blogs",
+      "blocks": [
+        {
+          "type": "article",
+          "settings": {
+            "title": "Best Open Ear Earbuds in 2026",
+            "category": "TECH & AUDIO",
+            "excerpt": "Discover how open-ear audio tech delivers spatial acoustics while keeping you aware of your surroundings.",
+            "image_url": "https://acwo.com/cdn/shop/articles/Best_OWS_Earbuds.webp?v=1789979303&width=533"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "TR SwIRL POWER: The Multi-Functional Fan",
+            "category": "INNOVATION",
+            "excerpt": "A high-speed rechargeable cooling fan engineered with emergency powerbank charging capability.",
+            "image_url": "https://acwo.com/cdn/shop/articles/swirl_power_blog.webp?v=1789205421&width=533"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "Best Earbuds Under ₹5000 in India",
+            "category": "BUYER GUIDE",
+            "excerpt": "Compare features, battery life, quad-mic ENC, and ultra low gaming latency across top contenders.",
+            "image_url": "https://acwo.com/cdn/shop/articles/dwots_touch_muze_1_4b7015df-621e-4365-a61d-99d32b3abc05.webp?v=1789463821&width=533"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "What Is the Best Sound System For Home?",
+            "category": "HOME THEATRE",
+            "excerpt": "Transform your entertainment room with deep bass soundbars and dedicated wireless subwoofers.",
+            "image_url": "https://acwo.com/cdn/shop/articles/Ganesh_Chaturthi_CARNIwAL_Desi_e7c61e80-3fe9-4f6e-9660-0ac726636a3f.webp?v=1789123369&width=533"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

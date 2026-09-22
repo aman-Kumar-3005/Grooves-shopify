@@ -8,8 +8,49 @@ class GroovesElement extends HTMLElement {
 }
 class GroovesHeader extends GroovesElement {
   setup() {
+    const announcement = this.querySelector('.g-announcement');
     const dialog = this.querySelector('dialog');
     const trigger = this.querySelector('[data-menu-open]');
+    const bottomCart = this.querySelector('.g-bottom-nav__button');
+    bottomCart?.removeAttribute('on:click');
+    this.on(bottomCart, 'click', () => {
+      const drawer = document.getElementById('cart-drawer');
+      if (typeof drawer?.open === 'function') drawer.open();
+      else location.assign(`${window.Shopify?.routes?.root || '/'}cart`);
+    });
+    const previewBar = document.getElementById('PBarNextFrame');
+    const updatePreviewSpace = () => {
+      const rect = previewBar?.getBoundingClientRect();
+      const height = rect && rect.width > 0 && rect.height > 0 ? Math.min(rect.height, 100) : 0;
+      document.body.style.setProperty('--g-preview-height', `${height}px`);
+    };
+    if (previewBar) {
+      this.previewObserver = new ResizeObserver(updatePreviewSpace);
+      this.previewObserver.observe(previewBar);
+    }
+    updatePreviewSpace();
+    const readScrollTop = () => Math.max(
+      window.scrollY || 0,
+      document.documentElement.scrollTop || 0,
+      document.body.scrollTop || 0,
+      this.scrollTarget?.scrollTop || 0
+    );
+    const updateAnnouncement = () => {
+      this.scrollFrame = 0;
+      const scrollTop = readScrollTop();
+      const shouldCollapse = this.dataset.hideAnnouncement === 'true' && scrollTop > 0;
+      const shouldStick = this.dataset.sticky === 'true' && scrollTop > 0;
+      this.classList.toggle('g-header--scrolled', shouldCollapse);
+      this.classList.toggle('g-header--sticky-active', shouldStick);
+    };
+    const requestScrollUpdate = (event) => {
+      this.scrollTarget = event?.target instanceof Element ? event.target : null;
+      if (!announcement || this.scrollFrame) return;
+      this.scrollFrame = requestAnimationFrame(updateAnnouncement);
+    };
+    this.on(window, 'scroll', requestScrollUpdate, { passive: true });
+    this.on(document, 'scroll', requestScrollUpdate, { passive: true, capture: true });
+    updateAnnouncement();
     const close = () => dialog.close();
     this.on(trigger, 'click', () => { dialog.showModal(); trigger.setAttribute('aria-expanded', 'true'); document.documentElement.classList.add('g-menu-open'); });
     this.on(this.querySelector('[data-menu-close]'), 'click', close);
@@ -25,7 +66,7 @@ class GroovesHeader extends GroovesElement {
     this.observer.observe(this);
     if (this.querySelector('.g-bottom-nav')) this.observer.observe(this.querySelector('.g-bottom-nav'));
   }
-  disconnectedCallback() { super.disconnectedCallback(); document.documentElement.classList.remove('g-menu-open'); document.body.style.setProperty('--g-bottom-height', '0px'); }
+  disconnectedCallback() { super.disconnectedCallback(); cancelAnimationFrame(this.scrollFrame); document.documentElement.classList.remove('g-menu-open'); document.body.style.setProperty('--g-bottom-height', '0px'); }
 }
 class GroovesAnnouncement extends GroovesElement {
   setup() {
@@ -101,6 +142,12 @@ class GroovesDelivery extends GroovesElement {
   });}
 }
 for(const [name,component] of Object.entries({'grooves-header':GroovesHeader,'grooves-announcement':GroovesAnnouncement,'grooves-hero':GroovesHero,'grooves-rail':GroovesRail,'grooves-footer-menu':GroovesFooterMenu,'grooves-coupon':GroovesCoupon,'grooves-delivery':GroovesDelivery}))if(!customElements.get(name))customElements.define(name,component);
+document.querySelectorAll('[data-social-proof]').forEach(el => el.remove());
+const navFallbacks = { accessories:'/collections/accessories', combo:'/collections/combo', earbuds:'/collections/earbuds', headphones:'/collections/headphones', 'power bank':'/collections/power-bank', adaptor:'/collections/adaptor', contact:'/pages/contact', 'about us':'/pages/about-us' };
+document.querySelectorAll('.g-header a[href="#"], .g-footer a[href="#"]').forEach((link) => {
+  const target = navFallbacks[link.textContent.trim().toLowerCase()];
+  if (target) link.href = target;
+});
 document.addEventListener(StandardEvents.cartLinesUpdate,event=>{
   if(event.action!=='add'||document.body.dataset.groovesConfetti!=='true'||reducedMotion.matches)return;
   event.promise?.then(({detail})=>{if(detail?.didError)return;const host=document.querySelector('#cart-drawer dialog[open]')||document.body;const celebration=document.createElement('div');celebration.className='g-confetti';celebration.setAttribute('aria-hidden','true');for(let i=0;i<18;i++){const p=document.createElement('i');p.style.setProperty('--x',`${Math.random()*100}%`);p.style.setProperty('--delay',`${Math.random()*0.3}s`);p.style.setProperty('--rotation',`${Math.random()*600}deg`);celebration.append(p);}host.append(celebration);setTimeout(()=>celebration.remove(),1800);}).catch(()=>{});

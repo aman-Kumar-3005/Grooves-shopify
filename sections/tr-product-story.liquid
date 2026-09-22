@@ -1,8 +1,18 @@
+{%- liquid
+  assign warranty_img = product.metafields.custom.warranty_banner.value | default: product.metafields.custom.warranty_banner | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/AcWO-365days-Warranty.webp?v=1701523957'
+  assign video_1 = product.metafields.custom.story_video_1.value | default: product.metafields.custom.story_video_1 | default: 'https://cdn.shopify.com/videos/c/o/v/d00783f960bf4a8c84a81a64e46fa405.mp4'
+  assign video_2 = product.metafields.custom.story_video_2.value | default: product.metafields.custom.story_video_2 | default: 'https://cdn.shopify.com/videos/c/o/v/7f0ae6f11507465695f2716c4df907c7.mp4'
+  assign video_3 = product.metafields.custom.story_video_3.value | default: product.metafields.custom.story_video_3 | default: 'https://cdn.shopify.com/videos/c/o/v/0ecb5e06ce354e2abe61bbeb4da79be3.mp4'
+  assign connectivity_img = product.metafields.custom.connectivity_steps_image.value | default: product.metafields.custom.connectivity_steps_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Fire-Steps-for-Connectivity.webp?v=1743578870'
+  assign spec_grid_img = product.metafields.custom.spec_grid_image.value | default: product.metafields.custom.spec_grid_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Grid-fire.png?v=1744111861'
+  assign box_content_img = product.metafields.custom.box_content_image.value | default: product.metafields.custom.box_content_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/DwOTS_FIRE_BOX_CONTENT.webp?v=1701945274'
+-%}
+
 <section class="tr-story-section" id="tr-pdp-story-{{ section.id }}">
   <!-- 365 Days Warranty Visual Banner -->
   <div style="background: #000; text-align: center;">
     <img 
-      src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/AcWO-365days-Warranty.webp?v=1701523957" 
+      src="{{ warranty_img }}" 
       alt="TR 365 Days Warranty" 
       class="tr-story-img-full"
       loading="lazy"
@@ -10,23 +20,27 @@
   </div>
 
   <!-- Video Showcase 1 -->
-  <div class="tr-story-video-wrap">
-    <video autoplay loop muted playsinline poster="" style="width: 100%; height: auto; display: block;">
-      <source src="https://cdn.shopify.com/videos/c/o/v/d00783f960bf4a8c84a81a64e46fa405.mp4" type="video/mp4">
-    </video>
-  </div>
+  {% if video_1 != blank %}
+    <div class="tr-story-video-wrap">
+      <video autoplay loop muted playsinline poster="" style="width: 100%; height: auto; display: block;">
+        <source src="{{ video_1 }}" type="video/mp4">
+      </video>
+    </div>
+  {% endif %}
 
   <!-- Video Showcase 2 -->
-  <div class="tr-story-video-wrap">
-    <video autoplay loop muted playsinline poster="" style="width: 100%; height: auto; display: block;">
-      <source src="https://cdn.shopify.com/videos/c/o/v/7f0ae6f11507465695f2716c4df907c7.mp4" type="video/mp4">
-    </video>
-  </div>
+  {% if video_2 != blank %}
+    <div class="tr-story-video-wrap">
+      <video autoplay loop muted playsinline poster="" style="width: 100%; height: auto; display: block;">
+        <source src="{{ video_2 }}" type="video/mp4">
+      </video>
+    </div>
+  {% endif %}
 
   <!-- Connectivity Steps Banner -->
   <div>
     <img 
-      src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Fire-Steps-for-Connectivity.webp?v=1743578870" 
+      src="{{ connectivity_img }}" 
       alt="TR Connectivity Steps" 
       class="tr-story-img-full"
       loading="lazy"
@@ -56,19 +70,21 @@
   <!-- 10-Feature Grid Graphic -->
   <div>
     <img 
-      src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Grid-fire.png?v=1744111861" 
-      alt="DwOTS Fire Spec Grid: 2 Pair, DNN Noise Cancellation, 4-Mic ENC, 52 Hrs, 45ms, Wireless Charging" 
+      src="{{ spec_grid_img }}" 
+      alt="Spec Grid: 2 Pair, DNN Noise Cancellation, 4-Mic ENC, 52 Hrs, 45ms, Wireless Charging" 
       class="tr-story-img-full"
       loading="lazy"
     >
   </div>
 
   <!-- Video Showcase 3 -->
-  <div class="tr-story-video-wrap">
-    <video autoplay loop muted playsinline poster="" style="width: 100%; height: auto; display: block;">
-      <source src="https://cdn.shopify.com/videos/c/o/v/0ecb5e06ce354e2abe61bbeb4da79be3.mp4" type="video/mp4">
-    </video>
-  </div>
+  {% if video_3 != blank %}
+    <div class="tr-story-video-wrap">
+      <video autoplay loop muted playsinline poster="" style="width: 100%; height: auto; display: block;">
+        <source src="{{ video_3 }}" type="video/mp4">
+      </video>
+    </div>
+  {% endif %}
 
   <!-- Feature Slides (Dual Connectivity, Dual Sharing, Battery Life) -->
   <div>
@@ -91,77 +107,96 @@
     <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Regular-VS-Fire.webp?v=1743578870" alt="Regular vs Fire Earbuds" class="tr-story-img-full" loading="lazy">
   </div>
 
-  <!-- What's in the box graphic -->
+  <!-- What's in the box graphic & list -->
   <div style="background: #0d0d0d; padding: 40px 0;">
     <div class="tr-container" style="text-align: center;">
       <h2 style="font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 24px;">WHAT'S IN THE BOX</h2>
       <img 
-        src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/DwOTS_FIRE_BOX_CONTENT.webp?v=1701945274" 
-        alt="DwOTS Fire Box Contents" 
+        src="{{ box_content_img }}" 
+        alt="Box Contents" 
         style="max-width: 900px; width: 100%; height: auto; border-radius: 16px;"
         loading="lazy"
       >
+      {% if product.metafields.custom.box_contents_list != blank %}
+        <p style="color: #aaa; font-size: 14px; margin-top: 16px;">
+          {{ product.metafields.custom.box_contents_list }}
+        </p>
+      {% endif %}
     </div>
   </div>
 
-  <!-- Interactive FAQs Accordion -->
+  <!-- Dynamic / Fallback FAQs Accordion -->
   <div class="tr-accordion-wrap">
     <div style="text-align: center; margin-bottom: 30px;">
       <span class="tr-section-pill">FREQUENTLY ASKED QUESTIONS</span>
     </div>
 
-    <div class="tr-accordion-item">
-      <button class="tr-accordion-trigger" type="button">
-        <span>Q. What makes 4 in 1 TR DwOTS FIRE different from other earbuds?</span>
-        <span class="tr-accordion-icon">+</span>
-      </button>
-      <div class="tr-accordion-content">
-        TR DwOTS FIRE isn’t your usual pair of earbuds. You get two full pairs in one sleek case — one in-ear, one half-in-ear. Whether you want to switch styles, share with someone, or connect both to the same device (if supported), FIRE gives you options without carrying extra gear.
+    {% if product.metafields.custom.faqs.value != blank %}
+      {% for faq in product.metafields.custom.faqs.value %}
+        <div class="tr-accordion-item">
+          <button class="tr-accordion-trigger" type="button">
+            <span>{{ faq.question }}</span>
+            <span class="tr-accordion-icon">+</span>
+          </button>
+          <div class="tr-accordion-content">
+            {{ faq.answer }}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="tr-accordion-item">
+        <button class="tr-accordion-trigger" type="button">
+          <span>Q. What makes 4 in 1 TR DwOTS FIRE different from other earbuds?</span>
+          <span class="tr-accordion-icon">+</span>
+        </button>
+        <div class="tr-accordion-content">
+          TR DwOTS FIRE isn’t your usual pair of earbuds. You get two full pairs in one sleek case — one in-ear, one half-in-ear. Whether you want to switch styles, share with someone, or connect both to the same device (if supported), FIRE gives you options without carrying extra gear.
+        </div>
       </div>
-    </div>
 
-    <div class="tr-accordion-item">
-      <button class="tr-accordion-trigger" type="button">
-        <span>Q. Can I actually use wireless charging with this?</span>
-        <span class="tr-accordion-icon">+</span>
-      </button>
-      <div class="tr-accordion-content">
-        Yes — just place the case on any Qi wireless charging pad, and it starts charging immediately. No cables, no clutter. It also features a Type-C fast charging port.
+      <div class="tr-accordion-item">
+        <button class="tr-accordion-trigger" type="button">
+          <span>Q. Can I actually use wireless charging with this?</span>
+          <span class="tr-accordion-icon">+</span>
+        </button>
+        <div class="tr-accordion-content">
+          Yes — just place the case on any Qi wireless charging pad, and it starts charging immediately. No cables, no clutter. It also features a Type-C fast charging port.
+        </div>
       </div>
-    </div>
 
-    <div class="tr-accordion-item">
-      <button class="tr-accordion-trigger" type="button">
-        <span>Q. Is the bass any good, or is it all just features?</span>
-        <span class="tr-accordion-icon">+</span>
-      </button>
-      <div class="tr-accordion-content">
-        If you like deep, punchy, cinematic bass — you will love it. The 13mm BasSBoomX™ drivers are engineered for rich depth without muddy vocals.
+      <div class="tr-accordion-item">
+        <button class="tr-accordion-trigger" type="button">
+          <span>Q. Is the bass any good, or is it all just features?</span>
+          <span class="tr-accordion-icon">+</span>
+        </button>
+        <div class="tr-accordion-content">
+          If you like deep, punchy, cinematic bass — you will love it. The 13mm BasSBoomX™ drivers are engineered for rich depth without muddy vocals.
+        </div>
       </div>
-    </div>
 
-    <div class="tr-accordion-item">
-      <button class="tr-accordion-trigger" type="button">
-        <span>Q. Is it good for gaming?</span>
-        <span class="tr-accordion-icon">+</span>
-      </button>
-      <div class="tr-accordion-content">
-        Absolutely. Turn on Game Mode and enjoy ultra-low latency (45ms) with zero perceivable audio lag for competitive BGMI, COD Mobile, and Free Fire gaming.
+      <div class="tr-accordion-item">
+        <button class="tr-accordion-trigger" type="button">
+          <span>Q. Is it good for gaming?</span>
+          <span class="tr-accordion-icon">+</span>
+        </button>
+        <div class="tr-accordion-content">
+          Absolutely. Turn on Game Mode and enjoy ultra-low latency (45ms) with zero perceivable audio lag for competitive BGMI, COD Mobile, and Free Fire gaming.
+        </div>
       </div>
-    </div>
 
-    <div class="tr-accordion-item">
-      <button class="tr-accordion-trigger" type="button">
-        <span>Q. Is there a warranty if something goes wrong?</span>
-        <span class="tr-accordion-icon">+</span>
-      </button>
-      <div class="tr-accordion-content">
-        Yes — you are fully covered with TR's 1-Year Hassle-Free Replacement Warranty backed by our dedicated support team via WhatsApp and email.
+      <div class="tr-accordion-item">
+        <button class="tr-accordion-trigger" type="button">
+          <span>Q. Is there a warranty if something goes wrong?</span>
+          <span class="tr-accordion-icon">+</span>
+        </button>
+        <div class="tr-accordion-content">
+          Yes — you are fully covered with TR's 1-Year Hassle-Free Replacement Warranty backed by our dedicated support team via WhatsApp and email.
+        </div>
       </div>
-    </div>
+    {% endif %}
   </div>
 
-  <!-- Technical Specifications Accordion -->
+  <!-- Dynamic / Fallback Technical Specifications Accordion -->
   <div class="tr-accordion-wrap" style="margin-top: 0; padding-bottom: 50px;">
     <div class="tr-accordion-item">
       <button class="tr-accordion-trigger" type="button">
@@ -171,17 +206,23 @@
       <div class="tr-accordion-content">
         <table class="tr-specs-table">
           <tbody>
-            <tr><td>Speaker Driver</td><td>13mm BasS BooM X™ Drivers</td></tr>
-            <tr><td>Bluetooth Version</td><td>v5.3 + EDR Instant Pairing</td></tr>
-            <tr><td>Wireless Range</td><td>10 meters (33 ft)</td></tr>
-            <tr><td>Total Playtime</td><td>Up to 52 Hours (with Case)</td></tr>
-            <tr><td>Charging Tech</td><td>Qi Wireless Charging + Type-C Fast Fuel</td></tr>
-            <tr><td>Gaming Latency</td><td>45ms Ultra Low Latency Beast Mode</td></tr>
-            <tr><td>Water Resistance</td><td>IPX5 Sweat & Splash Proof</td></tr>
-            <tr><td>Microphones</td><td>Quad Mic ENC with Sonic Shield™</td></tr>
-            <tr><td>Compatibility</td><td>Android, iOS, Windows, macOS</td></tr>
-            <tr><td>Country of Origin</td><td>India</td></tr>
-            <tr><td>Brand</td><td>TR Lifestyle Pvt Ltd</td></tr>
+            {% if product.metafields.custom.specs.value != blank %}
+              {% for spec in product.metafields.custom.specs.value %}
+                <tr><td>{{ spec.label }}</td><td>{{ spec.value }}</td></tr>
+              {% endfor %}
+            {% else %}
+              <tr><td>Speaker Driver</td><td>{{ product.metafields.custom.driver.value | default: '13mm BasS BooM X™ Drivers' }}</td></tr>
+              <tr><td>Bluetooth Version</td><td>{{ product.metafields.custom.bluetooth.value | default: 'v5.3 + EDR Instant Pairing' }}</td></tr>
+              <tr><td>Wireless Range</td><td>10 meters (33 ft)</td></tr>
+              <tr><td>Total Playtime</td><td>{{ product.metafields.custom.playtime.value | default: 'Up to 52 Hours (with Case)' }}</td></tr>
+              <tr><td>Charging Tech</td><td>Qi Wireless Charging + Type-C Fast Fuel</td></tr>
+              <tr><td>Gaming Latency</td><td>{{ product.metafields.custom.latency.value | default: '45ms Ultra Low Latency Beast Mode' }}</td></tr>
+              <tr><td>Water Resistance</td><td>{{ product.metafields.custom.water_resistance.value | default: 'IPX5 Sweat & Splash Proof' }}</td></tr>
+              <tr><td>Microphones</td><td>Quad Mic ENC with Sonic Shield™</td></tr>
+              <tr><td>Compatibility</td><td>Android, iOS, Windows, macOS</td></tr>
+              <tr><td>Country of Origin</td><td>India</td></tr>
+              <tr><td>Brand</td><td>TR Lifestyle Pvt Ltd</td></tr>
+            {% endif %}
           </tbody>
         </table>
       </div>

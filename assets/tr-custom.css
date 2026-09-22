@@ -1015,6 +1015,9 @@ body.tr-theme,
    ========================================================================== */
 .tr-pdp-top-wrapper {
   padding: 30px 0 60px;
+  position: relative;
+  z-index: 10;
+  background-color: #000000;
 }
 
 .tr-pdp-grid {
@@ -1022,14 +1025,24 @@ body.tr-theme,
   grid-template-columns: 1.15fr 1fr;
   gap: 48px;
   align-items: start;
+  position: relative;
 }
 
 /* PDP Gallery */
 .tr-pdp-gallery-wrap {
   display: flex;
   gap: 16px;
-  position: sticky;
-  top: 90px;
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 1025px) {
+  .tr-pdp-gallery-wrap {
+    position: sticky;
+    top: 90px;
+    align-self: start;
+    z-index: 2;
+  }
 }
 
 .tr-pdp-thumbnails {
@@ -1341,6 +1354,9 @@ body.tr-theme,
 .tr-story-section {
   width: 100%;
   background: #000000;
+  position: relative;
+  z-index: 20;
+  clear: both;
 }
 
 .tr-story-img-full {
@@ -1520,7 +1536,7 @@ body.tr-theme,
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Responsive Breakpoints & Scroll Overlap Fix
    ========================================================================== */
 @media (max-width: 1024px) {
   .tr-explore-range-grid,
@@ -1528,6 +1544,24 @@ body.tr-theme,
   .tr-pdp-grid {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+  .tr-pdp-gallery-wrap {
+    position: static !important;
+    top: auto !important;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100% !important;
+    z-index: auto !important;
+  }
+  .tr-pdp-thumbnails {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+    gap: 10px;
+  }
+  .tr-pdp-thumb-item {
+    flex: 0 0 64px;
+    height: 64px;
   }
   .tr-footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -1546,19 +1580,17 @@ body.tr-theme,
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
-  .tr-pdp-gallery-wrap {
-    flex-direction: column-reverse;
-  }
-  .tr-pdp-thumbnails {
-    flex-direction: row;
-    width: 100%;
-    overflow-x: auto;
-  }
-  .tr-pdp-thumb-item {
-    flex: 0 0 60px;
-    height: 60px;
+  .tr-pdp-main-media {
+    min-height: 320px;
+    max-height: 420px;
   }
   .tr-footer-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Eliminate rogue overlaps from legacy theme sticky elements */
+.g-bottom-nav,
+.sticky-add-to-cart__bar {
+  display: none !important;
 }

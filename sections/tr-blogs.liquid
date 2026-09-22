@@ -4,34 +4,74 @@
       <span class="tr-section-pill">{{ section.settings.badge_title | default: 'Blogs' }}</span>
     </div>
 
+    {% assign real_blog = blogs[section.settings.blog] %}
+
     <div class="tr-blogs-grid">
-      {% for block in section.blocks %}
-        <article class="tr-blog-card">
-          <a href="{{ block.settings.link | default: '/blogs/news' }}" class="tr-blog-img-wrap">
-            <img 
-              src="{{ block.settings.image_url }}" 
-              alt="{{ block.settings.title }}" 
-              loading="lazy"
-            >
-          </a>
-          <div class="tr-blog-content">
-            <span style="font-size: 11px; color: var(--tr-accent); font-weight: 700; text-transform: uppercase;">
-              {{ block.settings.category | default: 'AUDIO GUIDE' }}
-            </span>
-            <h3 class="tr-blog-title">
-              <a href="{{ block.settings.link | default: '/blogs/news' }}" style="color: inherit; text-decoration: none;">
-                {{ block.settings.title }}
-              </a>
-            </h3>
-            <p style="color: #888888; font-size: 13px; margin: 0; line-height: 1.5;">
-              {{ block.settings.excerpt }}
-            </p>
-            <a href="{{ block.settings.link | default: '/blogs/news' }}" class="tr-blog-link">
-              Read more &rarr;
+      {% if real_blog != blank and real_blog.articles_count > 0 %}
+        {% for article in real_blog.articles limit: 4 %}
+          <article class="tr-blog-card">
+            <a href="{{ article.url }}" class="tr-blog-img-wrap">
+              {% if article.image %}
+                <img 
+                  src="{{ article.image | image_url: width: 600 }}" 
+                  alt="{{ article.title }}" 
+                  loading="lazy"
+                >
+              {% else %}
+                <img 
+                  src="https://acwo.com/cdn/shop/articles/Best_OWS_Earbuds.webp?v=1789979303&width=533" 
+                  alt="{{ article.title }}" 
+                  loading="lazy"
+                >
+              {% endif %}
             </a>
-          </div>
-        </article>
-      {% endfor %}
+            <div class="tr-blog-content">
+              <span style="font-size: 11px; color: var(--tr-accent); font-weight: 700; text-transform: uppercase;">
+                {{ article.tags.first | default: 'AUDIO GUIDE' }}
+              </span>
+              <h3 class="tr-blog-title">
+                <a href="{{ article.url }}" style="color: inherit; text-decoration: none;">
+                  {{ article.title }}
+                </a>
+              </h3>
+              <p style="color: #888888; font-size: 13px; margin: 0; line-height: 1.5;">
+                {{ article.excerpt_or_content | strip_html | truncatewords: 20 }}
+              </p>
+              <a href="{{ article.url }}" class="tr-blog-link">
+                Read more &rarr;
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        {% for block in section.blocks %}
+          <article class="tr-blog-card">
+            <a href="{{ block.settings.link | default: '/blogs/news' }}" class="tr-blog-img-wrap">
+              <img 
+                src="{{ block.settings.image_url }}" 
+                alt="{{ block.settings.title }}" 
+                loading="lazy"
+              >
+            </a>
+            <div class="tr-blog-content">
+              <span style="font-size: 11px; color: var(--tr-accent); font-weight: 700; text-transform: uppercase;">
+                {{ block.settings.category | default: 'AUDIO GUIDE' }}
+              </span>
+              <h3 class="tr-blog-title">
+                <a href="{{ block.settings.link | default: '/blogs/news' }}" style="color: inherit; text-decoration: none;">
+                  {{ block.settings.title }}
+                </a>
+              </h3>
+              <p style="color: #888888; font-size: 13px; margin: 0; line-height: 1.5;">
+                {{ block.settings.excerpt }}
+              </p>
+              <a href="{{ block.settings.link | default: '/blogs/news' }}" class="tr-blog-link">
+                Read more &rarr;
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 </section>
@@ -45,12 +85,17 @@
       "id": "badge_title",
       "label": "Badge Title",
       "default": "Blogs"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select Dynamic Blog"
     }
   ],
   "blocks": [
     {
       "type": "article",
-      "name": "Blog Article",
+      "name": "Blog Article Fallback",
       "settings": [
         {
           "type": "text",
@@ -86,45 +131,7 @@
   ],
   "presets": [
     {
-      "name": "TR Blogs",
-      "blocks": [
-        {
-          "type": "article",
-          "settings": {
-            "title": "Best Open Ear Earbuds in 2026",
-            "category": "TECH & AUDIO",
-            "excerpt": "Discover how open-ear audio tech delivers spatial acoustics while keeping you aware of your surroundings.",
-            "image_url": "https://acwo.com/cdn/shop/articles/Best_OWS_Earbuds.webp?v=1789979303&width=533"
-          }
-        },
-        {
-          "type": "article",
-          "settings": {
-            "title": "TR SwIRL POWER: The Multi-Functional Fan",
-            "category": "INNOVATION",
-            "excerpt": "A high-speed rechargeable cooling fan engineered with emergency powerbank charging capability.",
-            "image_url": "https://acwo.com/cdn/shop/articles/swirl_power_blog.webp?v=1789205421&width=533"
-          }
-        },
-        {
-          "type": "article",
-          "settings": {
-            "title": "Best Earbuds Under ₹5000 in India",
-            "category": "BUYER GUIDE",
-            "excerpt": "Compare features, battery life, quad-mic ENC, and ultra low gaming latency across top contenders.",
-            "image_url": "https://acwo.com/cdn/shop/articles/dwots_touch_muze_1_4b7015df-621e-4365-a61d-99d32b3abc05.webp?v=1789463821&width=533"
-          }
-        },
-        {
-          "type": "article",
-          "settings": {
-            "title": "What Is the Best Sound System For Home?",
-            "category": "HOME THEATRE",
-            "excerpt": "Transform your entertainment room with deep bass soundbars and dedicated wireless subwoofers.",
-            "image_url": "https://acwo.com/cdn/shop/articles/Ganesh_Chaturthi_CARNIwAL_Desi_e7c61e80-3fe9-4f6e-9660-0ac726636a3f.webp?v=1789123369&width=533"
-          }
-        }
-      ]
+      "name": "TR Blogs"
     }
   ]
 }

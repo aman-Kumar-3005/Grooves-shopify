@@ -6,12 +6,25 @@
       </div>
     </div>
 
+    {%- liquid
+      assign hero_prod = section.settings.hero_product
+      if hero_prod != blank
+        assign hero_img = hero_prod.featured_image | image_url: width: 800
+        assign hero_title = hero_prod.title
+        assign hero_link = hero_prod.url
+      else
+        assign hero_img = section.settings.hero_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002'
+        assign hero_title = section.settings.hero_title | default: 'DwOTS 107 Pro - Fast Charging Wireless Earbuds'
+        assign hero_link = section.settings.hero_link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white'
+      endif
+    -%}
+
     <div class="tr-explore-range-grid">
       <!-- Large Hero Feature Card (Left) -->
       <div class="tr-explore-hero-card">
         <img 
-          src="{{ section.settings.hero_image | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002' }}" 
-          alt="{{ section.settings.hero_title | default: 'DwOTS 107 Pro' }}"
+          src="{{ hero_img }}" 
+          alt="{{ hero_title }}"
           class="tr-explore-hero-bg"
           loading="lazy"
         >
@@ -20,9 +33,9 @@
             {{ section.settings.hero_tag | default: 'SUPER FAST CHARGING' }}
           </span>
           <h3 style="font-size: 24px; font-weight: 900; color: #fff; margin: 6px 0 14px;">
-            {{ section.settings.hero_title | default: 'DwOTS 107 Pro - Fast Charging Wireless Earbuds' }}
+            {{ hero_title }}
           </h3>
-          <a href="{{ section.settings.hero_link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white' }}" class="tr-btn tr-btn-accent" style="padding: 10px 24px;">
+          <a href="{{ hero_link }}" class="tr-btn tr-btn-accent" style="padding: 10px 24px;">
             {{ section.settings.hero_btn_text | default: 'BUY NOW' }}
           </a>
         </div>
@@ -31,25 +44,47 @@
       <!-- 4-Grid Cards (Right) -->
       <div class="tr-explore-right-grid">
         {% for block in section.blocks %}
+          {%- liquid
+            assign blk_prod = block.settings.product
+            if blk_prod != blank
+              assign c_title = blk_prod.title
+              assign c_price = blk_prod.price | money
+              assign c_compare = blk_prod.compare_at_price | money
+              assign c_link = blk_prod.url
+              assign c_img = blk_prod.featured_image | image_url: width: 400
+              if blk_prod.compare_at_price > blk_prod.price
+                assign c_discount = blk_prod.compare_at_price | minus: blk_prod.price | times: 100 | divided_by: blk_prod.compare_at_price | append: '% OFF'
+              else
+                assign c_discount = ''
+              endif
+            else
+              assign c_title = block.settings.title
+              assign c_price = block.settings.price
+              assign c_compare = block.settings.compare_price
+              assign c_discount = block.settings.discount_tag
+              assign c_img = block.settings.image_url
+              assign c_link = block.settings.link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white'
+            endif
+          -%}
           <div class="tr-product-mini-card">
-            <a href="{{ block.settings.link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white' }}">
+            <a href="{{ c_link }}">
               <img 
-                src="{{ block.settings.image_url }}" 
-                alt="{{ block.settings.title }}" 
+                src="{{ c_img }}" 
+                alt="{{ c_title }}" 
                 class="tr-product-thumb"
                 loading="lazy"
               >
             </a>
             <div class="tr-product-info">
-              <h4 class="tr-product-title">{{ block.settings.title }}</h4>
+              <h4 class="tr-product-title">{{ c_title }}</h4>
               <div class="tr-product-price-row">
-                <span class="tr-price-current">{{ block.settings.price }}</span>
-                {% if block.settings.compare_price != blank %}
-                  <span class="tr-price-compare">{{ block.settings.compare_price }}</span>
-                  <span class="tr-price-discount">{{ block.settings.discount_tag }}</span>
+                <span class="tr-price-current">{{ c_price }}</span>
+                {% if c_compare != blank and c_compare != '$0.00' %}
+                  <span class="tr-price-compare">{{ c_compare }}</span>
+                  <span class="tr-price-discount">{{ c_discount }}</span>
                 {% endif %}
               </div>
-              <a href="{{ block.settings.link | default: '/products/dwots-fire-wireless-charging-earbuds-moon-white' }}" class="tr-btn tr-btn-accent tr-card-btn">
+              <a href="{{ c_link }}" class="tr-btn tr-btn-accent tr-card-btn">
                 BUY NOW
               </a>
             </div>
@@ -71,9 +106,14 @@
       "default": "EXPLORE INDIA'S FIRST AUDIO RANGE"
     },
     {
+      "type": "product",
+      "id": "hero_product",
+      "label": "Select Hero Product (Optional)"
+    },
+    {
       "type": "text",
       "id": "hero_title",
-      "label": "Hero Product Title",
+      "label": "Hero Product Title Fallback",
       "default": "DwOTS 107 Pro - Fast Charging Wireless Earbuds"
     },
     {
@@ -85,13 +125,13 @@
     {
       "type": "text",
       "id": "hero_image",
-      "label": "Hero Image URL",
+      "label": "Hero Image URL Fallback",
       "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002"
     },
     {
       "type": "url",
       "id": "hero_link",
-      "label": "Hero Button Link"
+      "label": "Hero Button Link Fallback"
     },
     {
       "type": "text",
@@ -106,88 +146,51 @@
       "name": "Product Card",
       "settings": [
         {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product (Dynamic)"
+        },
+        {
           "type": "text",
           "id": "title",
-          "label": "Product Title",
+          "label": "Product Title Fallback",
           "default": "DwOTS Fire"
         },
         {
           "type": "text",
           "id": "price",
-          "label": "Price",
+          "label": "Price Fallback",
           "default": "₹1,499"
         },
         {
           "type": "text",
           "id": "compare_price",
-          "label": "Compare at Price",
+          "label": "Compare at Price Fallback",
           "default": "₹4,999"
         },
         {
           "type": "text",
           "id": "discount_tag",
-          "label": "Discount Tag",
+          "label": "Discount Tag Fallback",
           "default": "70% OFF"
         },
         {
           "type": "text",
           "id": "image_url",
-          "label": "Image URL",
+          "label": "Image URL Fallback",
           "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-Fire-new.webp?v=1770725157"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Product Link"
+          "label": "Product Link Fallback"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "TR Explore Range",
-      "blocks": [
-        {
-          "type": "product_card",
-          "settings": {
-            "title": "DwOTS Fire",
-            "price": "₹1,499",
-            "compare_price": "₹4,999",
-            "discount_tag": "70% OFF",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-Fire-new.webp?v=1770725157"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "title": "DwOTS Muze",
-            "price": "₹1,699",
-            "compare_price": "₹5,499",
-            "discount_tag": "69% OFF",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/DwOTS-Muze-main-page.webp?v=1781258849"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "title": "DwOTS Bold",
-            "price": "₹1,299",
-            "compare_price": "₹3,999",
-            "discount_tag": "67% OFF",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/homepage-dwots-bold.webp?v=1762508529"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "title": "DwOTS Wave",
-            "price": "₹1,399",
-            "compare_price": "₹4,499",
-            "discount_tag": "68% OFF",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Explore-India_s-First-tws-Inbuilt-MP3-Player.webp?v=1781356903"
-          }
-        }
-      ]
+      "name": "TR Explore Range"
     }
   ]
 }

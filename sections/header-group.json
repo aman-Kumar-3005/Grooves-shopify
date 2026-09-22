@@ -1,20 +1,7 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "header",
   "name": "Header",
   "sections": {
-<<<<<<< HEAD
-    "grooves_header": {
-      "type": "grooves-header",
-=======
     "tr_announcement": {
       "type": "tr-announcement-bar",
       "settings": {
@@ -28,28 +15,18 @@
       "settings": {
         "brand_name": "TR"
       },
->>>>>>> 4209231 (Update website)
       "blocks": {
         "nav_hot_deals": {
           "type": "nav_item",
           "settings": {
-<<<<<<< HEAD
-            "text": "Discover your everyday upgrade",
-            "link": ""
-=======
             "title": "HOT DEALS",
             "url": "shopify://collections/all",
             "is_hot_deal": true
->>>>>>> 4209231 (Update website)
           }
         },
         "nav_earbuds": {
           "type": "nav_item",
           "settings": {
-<<<<<<< HEAD
-            "text": "Audio. Power. Possibilities.",
-            "link": ""
-=======
             "title": "EARBUDS",
             "url": "shopify://collections/all",
             "is_hot_deal": false
@@ -93,32 +70,10 @@
             "title": "MORE",
             "url": "shopify://collections/all",
             "is_hot_deal": false
->>>>>>> 4209231 (Update website)
           }
         }
       },
       "block_order": [
-<<<<<<< HEAD
-        "message1",
-        "message2"
-      ],
-      "settings": {
-        "logo": "shopify://shop_images/logog-removebg-preview.png",
-        "brand": "GROOVES",
-        "logo_width": 150,
-        "menu": "main-menu",
-        "menu_title": "Explore Grooves",
-        "show_search": true,
-        "desktop_menu": true,
-        "bottom_navigation": true,
-        "bottom_menu": "main-menu",
-        "support_label": "Get support",
-        "support_url": "shopify://pages/contact",
-        "background": "#080808",
-        "text_color": "#ffffff",
-        "interval": 5
-      }
-=======
         "nav_hot_deals",
         "nav_earbuds",
         "nav_smartwatch",
@@ -127,7 +82,6 @@
         "nav_speakers",
         "nav_more"
       ]
->>>>>>> 4209231 (Update website)
     }
   },
   "order": [

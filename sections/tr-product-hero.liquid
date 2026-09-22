@@ -1,132 +1,247 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant | default: product.variants.first
+  assign p_title = product.title | default: section.settings.product_title | default: "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging"
+  assign p_subtitle = product.metafields.custom.subtitle.value | default: product.metafields.custom.subtitle | default: product.metafields.descriptors.subtitle.value | default: product.metafields.descriptors.subtitle | default: "Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency"
+  assign p_rating = product.metafields.reviews.rating.value.rating | default: product.metafields.reviews.rating.value | default: product.metafields.custom.rating.value | default: product.metafields.custom.rating | default: "4.8"
+  assign p_review_count = product.metafields.reviews.rating_count | default: product.metafields.custom.review_count | default: "128"
+  assign p_offer_text = product.metafields.custom.offer_text.value | default: product.metafields.custom.offer_text | default: "Get 15% OFF on 2 or More Items"
+  assign p_coupon_code = product.metafields.custom.coupon_code.value | default: product.metafields.custom.coupon_code | default: "TR15"
+-%}
+
 <section class="tr-pdp-top-wrapper" id="tr-pdp-hero-{{ section.id }}">
   <div class="tr-container">
     <div class="tr-pdp-grid">
       <!-- Media Gallery (Left) -->
       <div class="tr-pdp-gallery-wrap">
         <div class="tr-pdp-thumbnails">
-          <div class="tr-pdp-thumb-item active" data-media-src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="DwOTS Fire White" loading="lazy">
-          </div>
-          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="DwOTS Fire 3D" loading="lazy">
-          </div>
-          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="DwOTS Fire Rotating" loading="lazy">
-          </div>
-          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="DwOTS Fire Black Case" loading="lazy">
-          </div>
-          <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" data-type="image">
-            <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="DwOTS Fire In Ear" loading="lazy">
-          </div>
+          {% if product.media.size > 0 %}
+            {% for media in product.media %}
+              <div 
+                class="tr-pdp-thumb-item {% if forloop.first %}active{% endif %}" 
+                data-media-src="{{ media | image_url: width: 1000 }}" 
+                data-media-type="{{ media.media_type }}"
+                data-media-id="{{ media.id }}"
+              >
+                {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+                  <img src="{{ media.preview_image | image_url: width: 150 }}" alt="{{ media.alt | default: p_title }}" loading="lazy">
+                {% else %}
+                  <img src="{{ media | image_url: width: 150 }}" alt="{{ media.alt | default: p_title }}" loading="lazy">
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% else %}
+            <!-- High-Res Placeholder Gallery -->
+            <div class="tr-pdp-thumb-item active" data-media-src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" data-media-type="image">
+              <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="DwOTS Fire White" loading="lazy">
+            </div>
+            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" data-media-type="image">
+              <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="DwOTS Fire 3D" loading="lazy">
+            </div>
+            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" data-media-type="image">
+              <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="DwOTS Fire Rotating" loading="lazy">
+            </div>
+            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" data-media-type="image">
+              <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="DwOTS Fire Black Case" loading="lazy">
+            </div>
+            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" data-media-type="image">
+              <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="DwOTS Fire In Ear" loading="lazy">
+            </div>
+          {% endif %}
         </div>
 
-        <div class="tr-pdp-main-media">
-          <img 
-            id="tr-main-display-img" 
-            src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" 
-            alt="DwOTS Fire Earbuds"
-          >
+        <div class="tr-pdp-main-media" id="tr-pdp-main-media-box">
+          {% if product.featured_media != blank %}
+            <img 
+              id="tr-main-display-img" 
+              src="{{ product.featured_media | image_url: width: 1000 }}" 
+              alt="{{ product.featured_media.alt | default: p_title }}"
+            >
+          {% else %}
+            <img 
+              id="tr-main-display-img" 
+              src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" 
+              alt="{{ p_title }}"
+            >
+          {% endif %}
         </div>
       </div>
 
       <!-- Product Info Column (Right) -->
       <div class="tr-pdp-details">
-        <!-- Rating Row -->
+        <!-- Rating Row Connected to Metafields -->
         <div class="tr-pdp-rating-row">
           <span class="tr-pdp-stars">★★★★★</span>
-          <strong style="color: #fff;">4.8</strong>
-          <span class="tr-pdp-review-count">| 128 Verified Reviews</span>
+          <strong style="color: #fff;">{{ p_rating }}</strong>
+          <span class="tr-pdp-review-count">| {{ p_review_count }} Verified Reviews</span>
         </div>
 
-        <!-- Title & Subtitle -->
-        <h1 class="tr-pdp-title">{{ section.settings.product_title | default: "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging" }}</h1>
-        <p class="tr-pdp-subtitle">Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency</p>
+        <!-- Dynamic Title & Subtitle -->
+        <h1 class="tr-pdp-title">{{ p_title }}</h1>
+        <p class="tr-pdp-subtitle">{{ p_subtitle }}</p>
 
-        <!-- Price Box -->
+        <!-- Dynamic Price Box -->
         <div class="tr-pdp-price-box">
-          <span class="tr-pdp-price">₹1,499</span>
-          <span class="tr-pdp-mrp">₹4,999</span>
-          <span class="tr-pdp-discount-badge">70% OFF</span>
+          <span class="tr-pdp-price" id="tr-pdp-price-display">
+            {% if current_variant.price and current_variant.price > 0 %}
+              {{ current_variant.price | money }}
+            {% else %}
+              ₹1,499
+            {% endif %}
+          </span>
+          <span class="tr-pdp-mrp" id="tr-pdp-mrp-display">
+            {% if current_variant.compare_at_price and current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money }}
+            {% else %}
+              ₹4,999
+            {% endif %}
+          </span>
+          <span class="tr-pdp-discount-badge" id="tr-pdp-discount-display">
+            {% if current_variant.compare_at_price and current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price }}% OFF
+            {% else %}
+              70% OFF
+            {% endif %}
+          </span>
         </div>
 
-        <!-- Color Swatches -->
-        <div class="tr-swatch-section">
-          <div class="tr-swatch-label">Color: <span id="tr-selected-color-name" style="color: var(--tr-accent);">Moon White</span></div>
-          <div class="tr-swatches-row">
-            <button class="tr-swatch-btn active" data-color-name="Moon White" data-img-url="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774">
-              <span class="tr-swatch-color-circle" style="background: #ffffff;"></span>
-              Moon White
+        <!-- Dynamic Form -->
+        {% form 'product', product, id: 'tr-pdp-form', class: 'tr-product-form' %}
+          <input type="hidden" name="id" value="{{ current_variant.id | default: product.variants.first.id }}" id="tr-selected-variant-id">
+          <input type="hidden" name="quantity" value="1">
+
+          <!-- Dynamic Color Swatches -->
+          {% assign has_color_option = false %}
+          {% for option in product.options_with_values %}
+            {% assign downcased_opt = option.name | downcase %}
+            {% if downcased_opt contains 'color' or downcased_opt contains 'colour' %}
+              {% assign has_color_option = true %}
+              <div class="tr-swatch-section">
+                <div class="tr-swatch-label">Color: <span id="tr-selected-color-name" style="color: var(--tr-accent);">{{ option.selected_value | default: option.values.first }}</span></div>
+                <div class="tr-swatches-row">
+                  {% for value in option.values %}
+                    {% assign swatch_variant = product.variants | where: 'title', value | first %}
+                    <button 
+                      type="button" 
+                      class="tr-swatch-btn {% if option.selected_value == value or forloop.first %}active{% endif %}" 
+                      data-color-name="{{ value | escape }}" 
+                      data-variant-id="{{ swatch_variant.id | default: current_variant.id }}"
+                      {% if swatch_variant.featured_image %}
+                        data-img-url="{{ swatch_variant.featured_image | image_url: width: 1000 }}"
+                      {% endif %}
+                      {% if swatch_variant.price %}
+                        data-price="{{ swatch_variant.price | money }}"
+                        data-compare="{{ swatch_variant.compare_at_price | money }}"
+                      {% endif %}
+                    >
+                      <span class="tr-swatch-color-circle" style="background: {% case value | downcase %}{% when 'white' or 'moon white' %}#ffffff{% when 'black' or 'carbon black' %}#111111{% when 'blue' or 'steel blue' %}#3b5998{% else %}#777777{% endcase %};"></span>
+                      {{ value }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+          {% unless has_color_option %}
+            <!-- Default Swatches Fallback -->
+            <div class="tr-swatch-section">
+              <div class="tr-swatch-label">Color: <span id="tr-selected-color-name" style="color: var(--tr-accent);">Moon White</span></div>
+              <div class="tr-swatches-row">
+                <button type="button" class="tr-swatch-btn active" data-color-name="Moon White" data-img-url="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774">
+                  <span class="tr-swatch-color-circle" style="background: #ffffff;"></span>
+                  Moon White
+                </button>
+                <button type="button" class="tr-swatch-btn" data-color-name="Carbon Black" data-img-url="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073">
+                  <span class="tr-swatch-color-circle" style="background: #111111;"></span>
+                  Carbon Black
+                </button>
+                <button type="button" class="tr-swatch-btn" data-color-name="Steel Blue" data-img-url="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131">
+                  <span class="tr-swatch-color-circle" style="background: #3b5998;"></span>
+                  Steel Blue
+                </button>
+              </div>
+            </div>
+          {% endunless %}
+
+          <!-- Personalise Engraving Line Item Property -->
+          <div class="tr-personalise-box">
+            <label for="tr-engrave-text">✨ {{ product.metafields.custom.personalise_label | default: "Make Your Product Personalised (Optional Free Engraving)" }}</label>
+            <input 
+              type="text" 
+              id="tr-engrave-text" 
+              name="properties[Personalised Engraving]"
+              class="tr-personalise-input" 
+              placeholder="Enter name or initials to engrave on case (Max 12 chars)" 
+              maxlength="12"
+            >
+          </div>
+
+          <!-- Dynamic Offer Coupon Box from Metafields -->
+          <div class="tr-coupon-banner">
+            <div class="tr-coupon-text">
+              <span>🏷️ {{ p_offer_text }}</span>
+            </div>
+            <span class="tr-coupon-code-pill">Use Code: {{ p_coupon_code }}</span>
+          </div>
+
+          <!-- Pincode Delivery Check -->
+          <div style="margin: 6px 0;">
+            <label style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; display: block;">Check Estimated Delivery Date</label>
+            <div class="tr-pincode-wrap">
+              <input type="text" class="tr-pincode-input" id="tr-pincode-input" placeholder="Enter Delivery Pincode" maxlength="6">
+              <button type="button" class="tr-btn tr-btn-dark" style="padding: 10px 20px;" onclick="checkPincode()">CHECK</button>
+            </div>
+            <div id="tr-pincode-msg" style="font-size: 12px; margin-top: 6px; color: var(--tr-accent); display: none;">
+              ✓ Delivery expected in 2-4 business days. Free shipping eligible!
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="tr-pdp-actions">
+            <button 
+              type="button" 
+              class="tr-btn-buy-now" 
+              id="tr-buy-now-btn"
+              {% if product.available == false or current_variant.available == false %}disabled{% endif %}
+            >
+              {% if product.available == false or current_variant.available == false %}
+                SOLD OUT
+              {% else %}
+                ⚡ BUY IT NOW - PAY ON DELIVERY / UPI
+              {% endif %}
             </button>
-            <button class="tr-swatch-btn" data-color-name="Carbon Black" data-img-url="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073">
-              <span class="tr-swatch-color-circle" style="background: #111111;"></span>
-              Carbon Black
+            <button 
+              type="submit" 
+              name="add" 
+              class="tr-btn-add-cart" 
+              id="tr-add-to-cart-btn"
+              {% if product.available == false or current_variant.available == false %}disabled{% endif %}
+            >
+              {% if product.available == false or current_variant.available == false %}
+                SOLD OUT
+              {% else %}
+                ADD TO CART
+              {% endif %}
             </button>
-            <button class="tr-swatch-btn" data-color-name="Steel Blue" data-img-url="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131">
-              <span class="tr-swatch-color-circle" style="background: #3b5998;"></span>
-              Steel Blue
-            </button>
           </div>
-        </div>
-
-        <!-- Personalise Engraving -->
-        <div class="tr-personalise-box">
-          <label for="tr-engrave-text">✨ Make Your Product Personalised (Optional Free Engraving)</label>
-          <input 
-            type="text" 
-            id="tr-engrave-text" 
-            class="tr-personalise-input" 
-            placeholder="Enter name or initials to engrave on case (Max 12 chars)" 
-            maxlength="12"
-          >
-        </div>
-
-        <!-- Offer Coupon Box -->
-        <div class="tr-coupon-banner">
-          <div class="tr-coupon-text">
-            <span>🏷️ Get 15% OFF on 2 or More Items</span>
-          </div>
-          <span class="tr-coupon-code-pill">Use Code: TR15</span>
-        </div>
-
-        <!-- Pincode Delivery Check -->
-        <div>
-          <label style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; display: block;">Check Estimated Delivery Date</label>
-          <div class="tr-pincode-wrap">
-            <input type="text" class="tr-pincode-input" id="tr-pincode-input" placeholder="Enter Delivery Pincode" maxlength="6">
-            <button type="button" class="tr-btn tr-btn-dark" style="padding: 10px 20px;" onclick="checkPincode()">CHECK</button>
-          </div>
-          <div id="tr-pincode-msg" style="font-size: 12px; margin-top: 6px; color: var(--tr-accent); display: none;">
-            ✓ Delivery expected in 2-4 business days. Free shipping eligible!
-          </div>
-        </div>
-
-        <!-- CTA Buttons -->
-        <div class="tr-pdp-actions">
-          <button type="button" class="tr-btn-buy-now" onclick="alert('Proceeding to Instant Fast Checkout...')">
-            ⚡ BUY IT NOW - PAY ON DELIVERY / UPI
-          </button>
-          <button type="button" class="tr-btn-add-cart" onclick="alert('Item added to cart!')">
-            ADD TO CART
-          </button>
-        </div>
+        {% endform %}
 
         <!-- 4 PDP Trust Badges -->
         <div class="tr-pdp-badges-grid">
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Free Shipping">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Free Shipping" loading="lazy">
             <span>Free Shipping</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="1 Year Warranty">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="1 Year Warranty" loading="lazy">
             <span>1 Year Warranty</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="72Hrs Replacement">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="72Hrs Replacement" loading="lazy">
             <span>72h Replacement</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="GST Billing">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="GST Billing" loading="lazy">
             <span>GST Billing</span>
           </div>
         </div>
@@ -135,35 +250,141 @@
   </div>
 </section>
 
-<script>
-  // Thumbnail switching logic
-  document.querySelectorAll('.tr-pdp-thumb-item').forEach(thumb => {
-    thumb.addEventListener('click', function() {
-      document.querySelectorAll('.tr-pdp-thumb-item').forEach(t => t.classList.remove('active'));
-      this.classList.add('active');
-      const src = this.getAttribute('data-media-src');
-      document.getElementById('tr-main-display-img').src = src;
-    });
-  });
+<!-- Embedded Variant Data for Dynamic JS Switching -->
+{% if product.variants.size > 0 %}
+  <script type="application/json" id="tr-product-variants-json">
+    [
+      {% for v in product.variants %}
+        {
+          "id": {{ v.id }},
+          "title": {{ v.title | json }},
+          "price": {{ v.price | money | json }},
+          "compare_at_price": {{ v.compare_at_price | money | json }},
+          "available": {{ v.available | json }},
+          "featured_image": {% if v.featured_image %}{{ v.featured_image | image_url: width: 1000 | json }}{% else %}null{% endif %}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  </script>
+{% endif %}
 
-  // Color Swatch logic
-  document.querySelectorAll('.tr-swatch-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.tr-swatch-btn').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      const colorName = this.getAttribute('data-color-name');
-      const imgUrl = this.getAttribute('data-img-url');
-      document.getElementById('tr-selected-color-name').textContent = colorName;
-      if (imgUrl) {
-        document.getElementById('tr-main-display-img').src = imgUrl;
-      }
+<script>
+  (function() {
+    // Thumbnail switching logic
+    document.querySelectorAll('.tr-pdp-thumb-item').forEach(thumb => {
+      thumb.addEventListener('click', function() {
+        document.querySelectorAll('.tr-pdp-thumb-item').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        const src = this.getAttribute('data-media-src');
+        const displayImg = document.getElementById('tr-main-display-img');
+        if (displayImg && src) {
+          displayImg.src = src;
+        }
+      });
     });
-  });
+
+    // Swatch switching & dynamic variant update
+    const variantsDataEl = document.getElementById('tr-product-variants-json');
+    let variants = [];
+    if (variantsDataEl) {
+      try { variants = JSON.parse(variantsDataEl.textContent); } catch (e) {}
+    }
+
+    document.querySelectorAll('.tr-swatch-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tr-swatch-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const colorName = this.getAttribute('data-color-name');
+        const imgUrl = this.getAttribute('data-img-url');
+        const variantId = this.getAttribute('data-variant-id');
+        
+        const colorNameLabel = document.getElementById('tr-selected-color-name');
+        if (colorNameLabel) colorNameLabel.textContent = colorName;
+
+        const variantInput = document.getElementById('tr-selected-variant-id');
+        if (variantInput && variantId) variantInput.value = variantId;
+
+        // Check if matched variant has price/image
+        const matched = variants.find(v => v.title.toLowerCase().includes(colorName.toLowerCase()) || v.id == variantId);
+        if (matched) {
+          if (matched.price) {
+            const priceEl = document.getElementById('tr-pdp-price-display');
+            if (priceEl) priceEl.textContent = matched.price;
+          }
+          if (matched.compare_at_price) {
+            const mrpEl = document.getElementById('tr-pdp-mrp-display');
+            if (mrpEl) mrpEl.textContent = matched.compare_at_price;
+          }
+          if (matched.featured_image) {
+            const displayImg = document.getElementById('tr-main-display-img');
+            if (displayImg) displayImg.src = matched.featured_image;
+          }
+        } else if (imgUrl) {
+          const displayImg = document.getElementById('tr-main-display-img');
+          if (displayImg) displayImg.src = imgUrl;
+        }
+      });
+    });
+
+    // AJAX Add to Cart & Buy Now Handlers
+    const form = document.getElementById('tr-pdp-form');
+    const buyNowBtn = document.getElementById('tr-buy-now-btn');
+
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+          // Update cart badge count
+          fetch('/cart.js')
+            .then(r => r.json())
+            .then(cart => {
+              document.querySelectorAll('.tr-cart-count').forEach(el => {
+                el.textContent = cart.item_count;
+              });
+              // Open cart drawer if present
+              const drawer = document.getElementById('cart-drawer');
+              if (drawer && typeof drawer.show === 'function') {
+                drawer.show();
+              } else {
+                window.location.href = '/cart';
+              }
+            });
+        })
+        .catch(err => {
+          console.error(err);
+          form.submit();
+        });
+      });
+    }
+
+    if (buyNowBtn && form) {
+      buyNowBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData
+        })
+        .then(() => {
+          window.location.href = '/checkout';
+        })
+        .catch(() => {
+          window.location.href = '/checkout';
+        });
+      });
+    }
+  })();
 
   function checkPincode() {
     const input = document.getElementById('tr-pincode-input');
     const msg = document.getElementById('tr-pincode-msg');
-    if (input.value.length >= 6) {
+    if (input && input.value.trim().length === 6) {
       msg.style.display = 'block';
     } else {
       alert('Please enter a valid 6-digit Indian PIN code');
@@ -178,7 +399,7 @@
     {
       "type": "text",
       "id": "product_title",
-      "label": "Product Title",
+      "label": "Fallback Product Title",
       "default": "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging"
     }
   ],

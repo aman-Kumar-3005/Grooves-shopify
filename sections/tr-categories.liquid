@@ -6,15 +6,33 @@
 
     <div class="tr-categories-grid">
       {% for block in section.blocks %}
-        <a href="{{ block.settings.url | default: '/collections/all' }}" class="tr-category-card">
+        {%- liquid
+          assign col = block.settings.collection
+          if col != blank
+            assign c_title = col.title
+            assign c_url = col.url
+            if col.featured_image
+              assign c_img = col.featured_image | image_url: width: 200
+            elsif col.products.first.featured_image
+              assign c_img = col.products.first.featured_image | image_url: width: 200
+            else
+              assign c_img = block.settings.image_url
+            endif
+          else
+            assign c_title = block.settings.title
+            assign c_url = block.settings.url | default: '/collections/all'
+            assign c_img = block.settings.image_url
+          endif
+        -%}
+        <a href="{{ c_url }}" class="tr-category-card">
           <div class="tr-category-icon-box">
             <img 
-              src="{{ block.settings.image_url }}" 
-              alt="{{ block.settings.title }}" 
+              src="{{ c_img }}" 
+              alt="{{ c_title }}" 
               loading="lazy"
             >
           </div>
-          <span class="tr-category-name">{{ block.settings.title }}</span>
+          <span class="tr-category-name">{{ c_title }}</span>
         </a>
       {% endfor %}
     </div>
@@ -38,79 +56,33 @@
       "name": "Category Item",
       "settings": [
         {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection (Dynamic)"
+        },
+        {
           "type": "text",
           "id": "title",
-          "label": "Category Name",
+          "label": "Category Name Fallback",
           "default": "Earbuds"
         },
         {
           "type": "text",
           "id": "image_url",
-          "label": "Icon Image URL",
+          "label": "Icon Image URL Fallback",
           "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198"
         },
         {
           "type": "url",
           "id": "url",
-          "label": "Category Link"
+          "label": "Category Link Fallback"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "TR Categories",
-      "blocks": [
-        {
-          "type": "category",
-          "settings": {
-            "title": "Bestseller",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Portable Fan",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/portable-fan-category_jpg.jpg?v=1782898913"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Soundbars",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/home-sphorika.jpg?v=1781091487"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Translucent",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/sense__jpg.jpg?v=1776665934"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Power Bank",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Earbuds",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Speakers",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/soundbar.png?v=1742213430"
-          }
-        }
-      ]
+      "name": "TR Categories"
     }
   ]
 }

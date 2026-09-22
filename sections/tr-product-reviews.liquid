@@ -1,4 +1,9 @@
-<section class="tr-reviews-section" id="tr-reviews-{{ section.id }}" style="background: #0a0a0a; border-top: 1px solid #1f1f1f;">
+{%- liquid
+  assign r_score = product.metafields.reviews.rating.value.rating | default: product.metafields.reviews.rating.value | default: product.metafields.custom.rating.value | default: product.metafields.custom.rating | default: "4.8"
+  assign r_count = product.metafields.reviews.rating_count | default: product.metafields.custom.review_count | default: "128"
+-%}
+
+<section class="tr-reviews-section" id="tr-reviews-{{ section.id }}" style="background: #0a0a0a; border-top: 1px solid #1f1f1f; position: relative; z-index: 20; clear: both;">
   <div class="tr-container">
     <div class="tr-reviews-container">
       <!-- Reviews Header -->
@@ -6,30 +11,38 @@
         <div class="tr-section-badge-wrap" style="margin-top: 0;">
           <span class="tr-section-pill">CUSTOMER REVIEWS</span>
         </div>
-        <div class="tr-reviews-score">4.8 <span style="font-size: 28px; color: var(--tr-gold);">★★★★★</span></div>
-        <p style="color: #888888; font-size: 15px; margin: 0;">Based on 128 verified customer reviews</p>
+        <div class="tr-reviews-score">{{ r_score }} <span style="font-size: 28px; color: var(--tr-gold);">★★★★★</span></div>
+        <p style="color: #888888; font-size: 15px; margin: 0;">Based on {{ r_count }} verified customer reviews</p>
       </div>
 
       <!-- Customer Photos Grid -->
       <div class="tr-customer-photos-grid">
-        <div class="tr-customer-photo-card">
-          <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="Customer review photo 1" loading="lazy">
-        </div>
-        <div class="tr-customer-photo-card">
-          <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="Customer review photo 2" loading="lazy">
-        </div>
-        <div class="tr-customer-photo-card">
-          <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="Customer review photo 3" loading="lazy">
-        </div>
-        <div class="tr-customer-photo-card">
-          <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="Customer review photo 4" loading="lazy">
-        </div>
-        <div class="tr-customer-photo-card">
-          <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="Customer review photo 5" loading="lazy">
-        </div>
-        <div class="tr-customer-photo-card">
-          <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002" alt="Customer review photo 6" loading="lazy">
-        </div>
+        {% if product.metafields.custom.customer_photos.value != blank %}
+          {% for photo in product.metafields.custom.customer_photos.value limit: 6 %}
+            <div class="tr-customer-photo-card">
+              <img src="{{ photo | image_url: width: 300 }}" alt="Customer review photo" loading="lazy">
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="tr-customer-photo-card">
+            <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="Customer review photo 1" loading="lazy">
+          </div>
+          <div class="tr-customer-photo-card">
+            <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="Customer review photo 2" loading="lazy">
+          </div>
+          <div class="tr-customer-photo-card">
+            <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="Customer review photo 3" loading="lazy">
+          </div>
+          <div class="tr-customer-photo-card">
+            <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="Customer review photo 4" loading="lazy">
+          </div>
+          <div class="tr-customer-photo-card">
+            <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="Customer review photo 5" loading="lazy">
+          </div>
+          <div class="tr-customer-photo-card">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Home-DwOTSFire-Prime-web.webp?v=1745321002" alt="Customer review photo 6" loading="lazy">
+          </div>
+        {% endif %}
       </div>
 
       <!-- Review Cards Grid -->

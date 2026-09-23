@@ -11,8 +11,14 @@
         {%- liquid
           if block.settings.image != blank
             assign p_img = block.settings.image | image_url: width: 300
+          elsif block.settings.logo_url != blank
+            if block.settings.logo_url contains 'http' or block.settings.logo_url contains '//'
+              assign p_img = block.settings.logo_url
+            else
+              assign p_img = block.settings.logo_url | replace: 'campaign/', '' | asset_url
+            endif
           else
-            assign p_img = block.settings.logo_url
+            assign p_img = ''
           endif
         -%}
         {% if block.settings.link != blank %}

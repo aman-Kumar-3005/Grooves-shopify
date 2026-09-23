@@ -17,10 +17,16 @@
           assign blk_prod = block.settings.product
           if block.settings.image != blank
             assign thumb = block.settings.image | image_url: width: 600
+          elsif block.settings.thumbnail_url != blank
+            if block.settings.thumbnail_url contains 'http' or block.settings.thumbnail_url contains '//'
+              assign thumb = block.settings.thumbnail_url
+            else
+              assign thumb = block.settings.thumbnail_url | replace: 'campaign/', '' | asset_url
+            endif
           elsif blk_prod != blank and blk_prod.featured_image
             assign thumb = blk_prod.featured_image | image_url: width: 600
           else
-            assign thumb = block.settings.thumbnail_url
+            assign thumb = 'grooves-reel-1.jpg' | asset_url
           endif
 
           if blk_prod != blank

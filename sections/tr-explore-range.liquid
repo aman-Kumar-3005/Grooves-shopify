@@ -23,11 +23,16 @@
       else
         if section.settings.hero_image_file != blank
           assign hero_img = section.settings.hero_image_file | image_url: width: 800
+        elsif section.settings.hero_image != blank
+          if section.settings.hero_image contains 'http' or section.settings.hero_image contains '//'
+            assign hero_img = section.settings.hero_image
+          else
+            assign hero_img = section.settings.hero_image | replace: 'campaign/', '' | asset_url
+          endif
         else
-          assign default_hero_img = 'campaign/grooves-audio-desktop-branded.png' | asset_url
-          assign hero_img = section.settings.hero_image | default: default_hero_img
+          assign hero_img = 'grooves-explore-hero.jpg' | asset_url
         endif
-        assign hero_title = section.settings.hero_title | default: 'Grooves Pulse Pro ANC - Fast Wireless Charging Earbuds'
+        assign hero_title = section.settings.hero_title | default: 'Grooves 107 Pro ANC - Fast Charging Wireless Earbuds'
         assign hero_link = section.settings.hero_link | default: '/collections/all'
       endif
     -%}
@@ -70,10 +75,16 @@
               assign c_link = blk_prod.url
               if block.settings.image != blank
                 assign c_img = block.settings.image | image_url: width: 400
+              elsif block.settings.image_url != blank
+                if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                  assign c_img = block.settings.image_url
+                else
+                  assign c_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+                endif
               elsif blk_prod.featured_image
                 assign c_img = blk_prod.featured_image | image_url: width: 400
               else
-                assign c_img = block.settings.image_url
+                assign c_img = 'grooves-prod-fire.jpg' | asset_url
               endif
               if blk_prod.compare_at_price > blk_prod.price
                 assign c_discount = blk_prod.compare_at_price | minus: blk_prod.price | times: 100 | divided_by: blk_prod.compare_at_price | append: '% OFF'
@@ -87,8 +98,14 @@
               assign c_discount = block.settings.discount_tag
               if block.settings.image != blank
                 assign c_img = block.settings.image | image_url: width: 400
+              elsif block.settings.image_url != blank
+                if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                  assign c_img = block.settings.image_url
+                else
+                  assign c_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+                endif
               else
-                assign c_img = block.settings.image_url
+                assign c_img = 'grooves-prod-fire.jpg' | asset_url
               endif
               assign c_link = block.settings.link | default: '/collections/all'
             endif

@@ -3,9 +3,23 @@
     {% for block in section.blocks %}
       {%- liquid
         assign desk_img = block.settings.image
-        assign desk_url = block.settings.image_url | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/swirl-banner-desk.webp?v=1789043104'
+        assign desk_raw = block.settings.image_url | default: 'grooves-banner-turbo.jpg'
+        if desk_raw contains 'http' or desk_raw contains '//'
+          assign desk_url = desk_raw
+        else
+          assign desk_url = desk_raw | replace: 'campaign/', '' | asset_url
+        endif
         assign mob_img = block.settings.mobile_image
-        assign mob_url = block.settings.mobile_image_url
+        assign mob_raw = block.settings.mobile_image_url
+        if mob_raw != blank
+          if mob_raw contains 'http' or mob_raw contains '//'
+            assign mob_url = mob_raw
+          else
+            assign mob_url = mob_raw | replace: 'campaign/', '' | asset_url
+          endif
+        else
+          assign mob_url = ''
+        endif
       -%}
       <div class="tr-showcase-banner" {{ block.shopify_attributes }}>
         <picture>

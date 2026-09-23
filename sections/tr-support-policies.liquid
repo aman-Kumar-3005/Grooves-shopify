@@ -12,8 +12,14 @@
         {%- liquid
           if block.settings.image != blank
             assign sup_icon = block.settings.image | image_url: width: 120
+          elsif block.settings.icon_url != blank
+            if block.settings.icon_url contains 'http' or block.settings.icon_url contains '//'
+              assign sup_icon = block.settings.icon_url
+            else
+              assign sup_icon = block.settings.icon_url | replace: 'campaign/', '' | asset_url
+            endif
           else
-            assign sup_icon = block.settings.icon_url
+            assign sup_icon = 'grooves-icon-support.png' | asset_url
           endif
         -%}
         <a href="{{ block.settings.link | default: '/pages/contact' }}" class="tr-support-card" style="text-decoration: none;" {{ block.shopify_attributes }}>

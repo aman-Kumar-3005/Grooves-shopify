@@ -15,18 +15,30 @@
             assign item_link = col.url
             if block.settings.image != blank
               assign item_img = block.settings.image | image_url: width: 400
+            elsif block.settings.image_url != blank
+              if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                assign item_img = block.settings.image_url
+              else
+                assign item_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+              endif
             elsif col.featured_image
               assign item_img = col.featured_image | image_url: width: 400
             else
-              assign item_img = block.settings.image_url
+              assign item_img = 'grooves-life-movie.jpg' | asset_url
             endif
           else
             assign item_title = block.settings.title
             assign item_link = block.settings.link | default: '/collections/all'
             if block.settings.image != blank
               assign item_img = block.settings.image | image_url: width: 400
+            elsif block.settings.image_url != blank
+              if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                assign item_img = block.settings.image_url
+              else
+                assign item_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+              endif
             else
-              assign item_img = block.settings.image_url
+              assign item_img = 'grooves-life-movie.jpg' | asset_url
             endif
           endif
         -%}

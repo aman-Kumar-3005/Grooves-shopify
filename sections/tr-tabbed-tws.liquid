@@ -15,7 +15,12 @@
       if section.settings.earbuds_image != blank
         assign eb_img = section.settings.earbuds_image | image_url: width: 1600
       else
-        assign eb_img = section.settings.earbuds_banner | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/shopby-life-MUZE.webp?v=1770725159'
+        assign eb_raw = section.settings.earbuds_banner | default: 'grooves-tabbed-earbuds.jpg'
+        if eb_raw contains 'http' or eb_raw contains '//'
+          assign eb_img = eb_raw
+        else
+          assign eb_img = eb_raw | replace: 'campaign/', '' | asset_url
+        endif
       endif
     -%}
     <div class="tr-showcase-banner" style="margin-bottom: 24px;">
@@ -28,7 +33,7 @@
         height="auto"
       >
       <div class="tr-showcase-overlay" style="align-items: flex-start; padding: 40px 60px;">
-        <h3 style="color: #000000; font-size: clamp(22px, 3.5vw, 42px); font-weight: 900; margin: 0 0 12px; text-shadow: 0 0 2px #fff;">
+        <h3 style="color: #ffffff; font-size: clamp(22px, 3.5vw, 42px); font-weight: 900; margin: 0 0 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">
           {{ section.settings.earbuds_title | default: 'Grooves Signature Sound<br>Precision . Power . & Comfort' }}
         </h3>
         <a href="{{ section.settings.earbuds_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 28px;">
@@ -42,7 +47,12 @@
       if section.settings.soundbar_image != blank
         assign sb_img = section.settings.soundbar_image | image_url: width: 1600
       else
-        assign sb_img = section.settings.soundbar_banner | default: 'https://cdn.shopify.com/s/files/1/0666/4870/3294/files/CARNIwAL_Sphorika_Banner__Desk.webp?v=1781075171'
+        assign sb_raw = section.settings.soundbar_banner | default: 'grooves-audio-desktop-branded.png'
+        if sb_raw contains 'http' or sb_raw contains '//'
+          assign sb_img = sb_raw
+        else
+          assign sb_img = sb_raw | replace: 'campaign/', '' | asset_url
+        endif
       endif
     -%}
     <div class="tr-showcase-banner">

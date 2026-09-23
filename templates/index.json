@@ -1,4 +1,4 @@
-﻿/*
+/*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
  *
@@ -8,609 +8,609 @@
  * ------------------------------------------------------------
  */
 {
-    "sections":  {
-                     "hero_slider":  {
-                                         "type":  "tr-hero-banner",
-                                         "blocks":  {
-                                                        "slide_swirl":  {
-                                                                            "type":  "slide",
-                                                                            "settings":  {
-                                                                                             "image_url":  "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_25_44_AM.png?v=1790117888",
-                                                                                             "mobile_image_url":  "",
-                                                                                             "button_link":  "shopify://collections/all",
-                                                                                             "show_text_overlay":  false,
-                                                                                             "badge_text":  "",
-                                                                                             "heading":  "",
-                                                                                             "subheading":  "",
-                                                                                             "button_label":  ""
-                                                                                         }
-                                                                        },
-                                                        "slide_bold":  {
-                                                                           "type":  "slide",
-                                                                           "settings":  {
-                                                                                            "image_url":  "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_26_53_AM.png?v=1790117887",
-                                                                                            "mobile_image_url":  "",
-                                                                                            "button_link":  "shopify://collections/all",
-                                                                                            "show_text_overlay":  false,
-                                                                                            "badge_text":  "",
-                                                                                            "heading":  "",
-                                                                                            "subheading":  "",
-                                                                                            "button_label":  ""
-                                                                                        }
-                                                                       }
-                                                    },
-                                         "block_order":  [
-                                                             "slide_swirl",
-                                                             "slide_bold"
-                                                         ],
-                                         "settings":  {
-                                                          "desktop_height":  500,
-                                                          "desktop_image_fit":  "contain",
-                                                          "desktop_banner_width":  100,
-                                                          "mobile_height":  350,
-                                                          "mobile_image_fit":  "contain",
-                                                          "mobile_banner_width":  100,
-                                                          "slider_bg":  "#000000",
-                                                          "autoplay_speed":  5
-                                                      }
-                                     },
-                     "categories":  {
-                                        "type":  "tr-categories",
-                                        "blocks":  {
-                                                       "cat_bestseller":  {
-                                                                              "type":  "category",
-                                                                              "settings":  {
-                                                                                               "collection":  "accessories",
-                                                                                               "title":  "Accessories",
-                                                                                               "image_url":  "grooves-cat-accessories.jpg",
-                                                                                               "url":  "shopify://collections/all"
-                                                                                           }
-                                                                          },
-                                                       "cat_fan":  {
-                                                                       "type":  "category",
-                                                                       "settings":  {
-                                                                                        "collection":  "adaptor",
-                                                                                        "title":  "Adaptor",
-                                                                                        "image_url":  "grooves-cat-adaptor.jpg",
-                                                                                        "url":  "shopify://collections/all"
-                                                                                    }
-                                                                   },
-                                                       "cat_soundbars":  {
-                                                                             "type":  "category",
-                                                                             "settings":  {
-                                                                                              "collection":  "combo",
-                                                                                              "title":  "Combo",
-                                                                                              "image_url":  "grooves-cat-combo.jpg",
-                                                                                              "url":  "shopify://collections/all"
-                                                                                          }
-                                                                         },
-                                                       "cat_translucent":  {
-                                                                               "type":  "category",
-                                                                               "settings":  {
-                                                                                                "collection":  "earbuds",
-                                                                                                "title":  "Earbuds",
-                                                                                                "image_url":  "grooves-cat-earbuds.jpg",
-                                                                                                "url":  "shopify://collections/all"
-                                                                                            }
-                                                                           },
-                                                       "cat_powerbank":  {
-                                                                             "type":  "category",
-                                                                             "settings":  {
-                                                                                              "collection":  "headphones",
-                                                                                              "title":  "Headphones",
-                                                                                              "image_url":  "grooves-cat-headphones.jpg",
-                                                                                              "url":  "shopify://collections/all"
-                                                                                          }
-                                                                         },
-                                                       "cat_earbuds":  {
-                                                                           "type":  "category",
-                                                                           "settings":  {
-                                                                                            "collection":  "power-bank",
-                                                                                            "title":  "Powerbank",
-                                                                                            "image_url":  "grooves-cat-powerbank.jpg",
-                                                                                            "url":  "shopify://collections/all"
-                                                                                        }
-                                                                       }
-                                                   },
-                                        "block_order":  [
-                                                            "cat_bestseller",
-                                                            "cat_fan",
-                                                            "cat_soundbars",
-                                                            "cat_translucent",
-                                                            "cat_powerbank",
-                                                            "cat_earbuds"
-                                                        ],
-                                        "settings":  {
-                                                         "badge_title":  "Shop By Categories",
-                                                         "padding_top":  20,
-                                                         "padding_bottom":  30
-                                                     }
-                                    },
-                     "explore_range":  {
-                                           "type":  "tr-explore-range",
-                                           "blocks":  {
-                                                          "prod_fire":  {
-                                                                            "type":  "product_card",
-                                                                            "settings":  {
-                                                                                             "product":  "",
-                                                                                             "title":  "Grooves Fire Earbuds",
-                                                                                             "price":  "â‚¹1,499",
-                                                                                             "compare_price":  "â‚¹4,999",
-                                                                                             "discount_tag":  "70% OFF",
-                                                                                             "image_url":  "grooves-prod-fire.jpg",
-                                                                                             "link":  "shopify://collections/all"
-                                                                                         }
-                                                                        },
-                                                          "prod_muze":  {
-                                                                            "type":  "product_card",
-                                                                            "settings":  {
-                                                                                             "product":  "",
-                                                                                             "title":  "Grooves Muze Open-Ear",
-                                                                                             "price":  "â‚¹1,699",
-                                                                                             "compare_price":  "â‚¹5,499",
-                                                                                             "discount_tag":  "69% OFF",
-                                                                                             "image_url":  "grooves-prod-muze.jpg",
-                                                                                             "link":  "shopify://collections/all"
-                                                                                         }
-                                                                        },
-                                                          "prod_bold":  {
-                                                                            "type":  "product_card",
-                                                                            "settings":  {
-                                                                                             "product":  "",
-                                                                                             "title":  "Grooves Bold Studio",
-                                                                                             "price":  "â‚¹1,299",
-                                                                                             "compare_price":  "â‚¹3,999",
-                                                                                             "discount_tag":  "67% OFF",
-                                                                                             "image_url":  "grooves-prod-bold.jpg",
-                                                                                             "link":  "shopify://collections/all"
-                                                                                         }
-                                                                        },
-                                                          "prod_wave":  {
-                                                                            "type":  "product_card",
-                                                                            "settings":  {
-                                                                                             "product":  "",
-                                                                                             "title":  "Grooves Wave Clear",
-                                                                                             "price":  "â‚¹1,399",
-                                                                                             "compare_price":  "â‚¹4,499",
-                                                                                             "discount_tag":  "68% OFF",
-                                                                                             "image_url":  "grooves-prod-wave.jpg",
-                                                                                             "link":  "shopify://collections/all"
-                                                                                         }
-                                                                        }
-                                                      },
-                                           "block_order":  [
-                                                               "prod_fire",
-                                                               "prod_muze",
-                                                               "prod_bold",
-                                                               "prod_wave"
-                                                           ],
-                                           "settings":  {
-                                                            "section_title":  "EXPLORE GROOVES AUDIO RANGE",
-                                                            "padding_top":  20,
-                                                            "padding_bottom":  40,
-                                                            "hero_product":  "",
-                                                            "hero_image":  "grooves-explore-hero.jpg",
-                                                            "hero_title":  "Grooves 107 Pro - Fast Charging Wireless Earbuds",
-                                                            "hero_tag":  "SUPER FAST CHARGING",
-                                                            "hero_link":  "shopify://collections/all",
-                                                            "hero_btn_text":  "BUY NOW"
-                                                        }
-                                       },
-                     "feature_banners":  {
-                                             "type":  "tr-feature-banners",
-                                             "blocks":  {
-                                                            "banner_swirl":  {
-                                                                                 "type":  "banner",
-                                                                                 "settings":  {
-                                                                                                  "image_url":  "grooves-banner-turbo.jpg",
-                                                                                                  "mobile_image_url":  "",
-                                                                                                  "tagline":  "GROOVES TURBO CHARGE",
-                                                                                                  "title":  "Smart Digital GaN Fast Charger \u0026 Powerbank",
-                                                                                                  "button_text":  "BUY NOW",
-                                                                                                  "button_link":  "shopify://collections/all"
-                                                                                              }
-                                                                             },
-                                                            "banner_dwots":  {
-                                                                                 "type":  "banner",
-                                                                                 "settings":  {
-                                                                                                  "image_url":  "grooves-banner-dwots.jpg",
-                                                                                                  "mobile_image_url":  "",
-                                                                                                  "tagline":  "GROOVES SIGNATURE SERIES",
-                                                                                                  "title":  "Welcome The Future Of Audio",
-                                                                                                  "button_text":  "BUY NOW",
-                                                                                                  "button_link":  "shopify://collections/all"
-                                                                                              }
-                                                                             }
-                                                        },
-                                             "block_order":  [
-                                                                 "banner_swirl",
-                                                                 "banner_dwots"
-                                                             ],
-                                             "settings":  {
-                                                              "padding_top":  10,
-                                                              "padding_bottom":  30
-                                                          }
-                                         },
-                     "tabbed_tws":  {
-                                        "type":  "tr-tabbed-tws",
-                                        "settings":  {
-                                                         "section_title":  "Grooves Earbuds built for seamless sound",
-                                                         "tabs_list":  "All,ANC / ENC,Translucent,Wireless Charging,Dual Mic,Display Earbuds,Gaming",
-                                                         "padding_top":  20,
-                                                         "padding_bottom":  40,
-                                                         "earbuds_banner":  "grooves-tabbed-earbuds.jpg",
-                                                         "earbuds_title":  "Open sound that feels Light . Natural . \u0026 Easy",
-                                                         "earbuds_btn":  "Shop Now",
-                                                         "earbuds_link":  "shopify://collections/all",
-                                                         "soundbar_banner":  "grooves-audio-desktop-branded.png",
-                                                         "soundbar_badge":  "CINEMATIC SOUND AT HOME",
-                                                         "soundbar_title":  "Crafted for Cinematic Precision",
-                                                         "soundbar_btn":  "BUY NOW",
-                                                         "soundbar_link":  "shopify://collections/all"
-                                                     }
-                                    },
-                     "dual_speakers":  {
-                                           "type":  "tr-dual-speakers",
-                                           "settings":  {
-                                                            "padding_top":  10,
-                                                            "padding_bottom":  30,
-                                                            "speaker1_image":  "grooves-speaker-1.jpg",
-                                                            "speaker1_btn":  "BUY NOW",
-                                                            "speaker1_link":  "shopify://collections/all",
-                                                            "speaker2_image":  "grooves-speaker-2.jpg",
-                                                            "speaker2_btn":  "BUY NOW",
-                                                            "speaker2_link":  "shopify://collections/all"
-                                                        }
-                                       },
-                     "social_reels":  {
-                                          "type":  "tr-social-reels",
-                                          "blocks":  {
-                                                         "reel_1":  {
-                                                                        "type":  "reel",
-                                                                        "settings":  {
-                                                                                         "thumbnail_url":  "grooves-reel-1.jpg",
-                                                                                         "creator_name":  "@alex_sound",
-                                                                                         "product":  "",
-                                                                                         "product_name":  "Grooves Fire Earbuds",
-                                                                                         "product_link":  "shopify://collections/all",
-                                                                                         "button_label":  "SHOP"
-                                                                                     }
-                                                                    },
-                                                         "reel_2":  {
-                                                                        "type":  "reel",
-                                                                        "settings":  {
-                                                                                         "thumbnail_url":  "grooves-reel-2.jpg",
-                                                                                         "creator_name":  "@priya_vibes",
-                                                                                         "product":  "",
-                                                                                         "product_name":  "Grooves Muze Clip",
-                                                                                         "product_link":  "shopify://collections/all",
-                                                                                         "button_label":  "SHOP"
-                                                                                     }
-                                                                    },
-                                                         "reel_3":  {
-                                                                        "type":  "reel",
-                                                                        "settings":  {
-                                                                                         "thumbnail_url":  "grooves-reel-3.jpg",
-                                                                                         "creator_name":  "@rohit_fitness",
-                                                                                         "product":  "",
-                                                                                         "product_name":  "Grooves 107 Pro ANC",
-                                                                                         "product_link":  "shopify://collections/all",
-                                                                                         "button_label":  "SHOP"
-                                                                                     }
-                                                                    },
-                                                         "reel_4":  {
-                                                                        "type":  "reel",
-                                                                        "settings":  {
-                                                                                         "thumbnail_url":  "grooves-reel-4.jpg",
-                                                                                         "creator_name":  "@tanya_music",
-                                                                                         "product":  "",
-                                                                                         "product_name":  "Grooves Sphorika Soundbar",
-                                                                                         "product_link":  "shopify://collections/all",
-                                                                                         "button_label":  "SHOP"
-                                                                                     }
-                                                                    },
-                                                         "reel_5":  {
-                                                                        "type":  "reel",
-                                                                        "settings":  {
-                                                                                         "thumbnail_url":  "grooves-reel-5.jpg",
-                                                                                         "creator_name":  "@sam_gadgets",
-                                                                                         "product":  "",
-                                                                                         "product_name":  "Grooves Wave Clear",
-                                                                                         "product_link":  "shopify://collections/all",
-                                                                                         "button_label":  "SHOP"
-                                                                                     }
-                                                                    }
-                                                     },
-                                          "block_order":  [
-                                                              "reel_1",
-                                                              "reel_2",
-                                                              "reel_3",
-                                                              "reel_4",
-                                                              "reel_5"
-                                                          ],
-                                          "settings":  {
-                                                           "title":  "TALK OF THE TOWN - SOCIAL",
-                                                           "subtitle":  "See how creators and fans groove with Grooves Lifestyle",
-                                                           "padding_top":  20,
-                                                           "padding_bottom":  40
-                                                       }
-                                      },
-                     "lifestyle":  {
-                                       "type":  "tr-lifestyle",
-                                       "blocks":  {
-                                                      "life_movie":  {
-                                                                         "type":  "lifestyle_item",
-                                                                         "settings":  {
-                                                                                          "collection":  "",
-                                                                                          "title":  "Movie Night",
-                                                                                          "image_url":  "grooves-life-movie.jpg",
-                                                                                          "link":  "shopify://collections/all"
-                                                                                      }
-                                                                     },
-                                                      "life_news":  {
-                                                                        "type":  "lifestyle_item",
-                                                                        "settings":  {
-                                                                                         "collection":  "",
-                                                                                         "title":  "News \u0026 Podcasts",
-                                                                                         "image_url":  "grooves-life-news.jpg",
-                                                                                         "link":  "shopify://collections/all"
-                                                                                     }
-                                                                    },
-                                                      "life_innovators":  {
-                                                                              "type":  "lifestyle_item",
-                                                                              "settings":  {
-                                                                                               "collection":  "",
-                                                                                               "title":  "Innovators",
-                                                                                               "image_url":  "grooves-life-innovators.jpg",
-                                                                                               "link":  "shopify://collections/all"
-                                                                                           }
-                                                                          },
-                                                      "life_workout":  {
-                                                                           "type":  "lifestyle_item",
-                                                                           "settings":  {
-                                                                                            "collection":  "",
-                                                                                            "title":  "Workout \u0026 Fitness",
-                                                                                            "image_url":  "grooves-life-workout.jpg",
-                                                                                            "link":  "shopify://collections/all"
-                                                                                        }
-                                                                       },
-                                                      "life_party":  {
-                                                                         "type":  "lifestyle_item",
-                                                                         "settings":  {
-                                                                                          "collection":  "",
-                                                                                          "title":  "Party \u0026 Travel",
-                                                                                          "image_url":  "grooves-life-party.jpg",
-                                                                                          "link":  "shopify://collections/all"
-                                                                                      }
-                                                                     }
-                                                  },
-                                       "block_order":  [
-                                                           "life_movie",
-                                                           "life_news",
-                                                           "life_innovators",
-                                                           "life_workout",
-                                                           "life_party"
-                                                       ],
-                                       "settings":  {
-                                                        "badge_title":  "Shop By Lifestyle",
-                                                        "padding_top":  20,
-                                                        "padding_bottom":  40
-                                                    }
-                                   },
-                     "blogs":  {
-                                   "type":  "tr-blogs",
-                                   "blocks":  {
-                                                  "blog_1":  {
-                                                                 "type":  "article",
-                                                                 "settings":  {
-                                                                                  "article":  "",
-                                                                                  "title":  "Best Open Ear Earbuds in 2026",
-                                                                                  "category":  "TECH \u0026 AUDIO",
-                                                                                  "excerpt":  "Discover how open-ear audio tech delivers spatial acoustics while keeping you aware of your surroundings.",
-                                                                                  "image_url":  "grooves-blog-open-ear.jpg",
-                                                                                  "link":  "shopify://blogs/news"
-                                                                              }
-                                                             },
-                                                  "blog_2":  {
-                                                                 "type":  "article",
-                                                                 "settings":  {
-                                                                                  "article":  "",
-                                                                                  "title":  "Grooves Turbo GaN: Next-Gen Charging Hub",
-                                                                                  "category":  "INNOVATION",
-                                                                                  "excerpt":  "A high-speed GaN fast charger engineered with portable battery backup and smart multi-device protection.",
-                                                                                  "image_url":  "grooves-blog-swirl-fan.jpg",
-                                                                                  "link":  "shopify://blogs/news"
-                                                                              }
-                                                             },
-                                                  "blog_3":  {
-                                                                 "type":  "article",
-                                                                 "settings":  {
-                                                                                  "article":  "",
-                                                                                  "title":  "Best Earbuds Under â‚¹5000 in India",
-                                                                                  "category":  "BUYER GUIDE",
-                                                                                  "excerpt":  "Compare features, battery life, quad-mic ENC, and ultra low gaming latency across top contenders.",
-                                                                                  "image_url":  "grooves-blog-budget-tws.jpg",
-                                                                                  "link":  "shopify://blogs/news"
-                                                                              }
-                                                             },
-                                                  "blog_4":  {
-                                                                 "type":  "article",
-                                                                 "settings":  {
-                                                                                  "article":  "",
-                                                                                  "title":  "What Is the Best Sound System For Home?",
-                                                                                  "category":  "HOME THEATRE",
-                                                                                  "excerpt":  "Transform your entertainment room with deep bass soundbars and dedicated wireless subwoofers.",
-                                                                                  "image_url":  "grooves-blog-festival-sound.jpg",
-                                                                                  "link":  "shopify://blogs/news"
-                                                                              }
-                                                             }
-                                              },
-                                   "block_order":  [
-                                                       "blog_1",
-                                                       "blog_2",
-                                                       "blog_3",
-                                                       "blog_4"
-                                                   ],
-                                   "settings":  {
-                                                    "badge_title":  "Blogs",
-                                                    "blog":  "",
-                                                    "articles_count":  4,
-                                                    "padding_top":  20,
-                                                    "padding_bottom":  40
-                                                }
-                               },
-                     "press_logos":  {
-                                         "type":  "tr-press-marquee",
-                                         "blocks":  {
-                                                        "press_1":  {
-                                                                        "type":  "press_logo",
-                                                                        "settings":  {
-                                                                                         "name":  "Live Mint",
-                                                                                         "logo_url":  "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-01.webp?v=1762587441",
-                                                                                         "link":  ""
-                                                                                     }
-                                                                    },
-                                                        "press_2":  {
-                                                                        "type":  "press_logo",
-                                                                        "settings":  {
-                                                                                         "name":  "Impact",
-                                                                                         "logo_url":  "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-02.webp?v=1762587441",
-                                                                                         "link":  ""
-                                                                                     }
-                                                                    },
-                                                        "press_3":  {
-                                                                        "type":  "press_logo",
-                                                                        "settings":  {
-                                                                                         "name":  "Dainik Jagran",
-                                                                                         "logo_url":  "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-03.webp?v=1762587441",
-                                                                                         "link":  ""
-                                                                                     }
-                                                                    },
-                                                        "press_4":  {
-                                                                        "type":  "press_logo",
-                                                                        "settings":  {
-                                                                                         "name":  "Amar Ujala",
-                                                                                         "logo_url":  "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-04.webp?v=1762587440",
-                                                                                         "link":  ""
-                                                                                     }
-                                                                    },
-                                                        "press_5":  {
-                                                                        "type":  "press_logo",
-                                                                        "settings":  {
-                                                                                         "name":  "Business Standard",
-                                                                                         "logo_url":  "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-05.webp?v=1762587441",
-                                                                                         "link":  ""
-                                                                                     }
-                                                                    }
-                                                    },
-                                         "block_order":  [
-                                                             "press_1",
-                                                             "press_2",
-                                                             "press_3",
-                                                             "press_4",
-                                                             "press_5"
-                                                         ],
-                                         "settings":  {
-                                                          "badge_title":  "As Featured On",
-                                                          "padding_top":  20,
-                                                          "padding_bottom":  30
-                                                      }
-                                     },
-                     "support_policies":  {
-                                              "type":  "tr-support-policies",
-                                              "blocks":  {
-                                                             "sup_1":  {
-                                                                           "type":  "support_item",
-                                                                           "settings":  {
-                                                                                            "title":  "Customer Support",
-                                                                                            "subtitle":  "+91 Support Desk",
-                                                                                            "icon_url":  "grooves-icon-support.png",
-                                                                                            "link":  "shopify://pages/contact"
-                                                                                        }
-                                                                       },
-                                                             "sup_2":  {
-                                                                           "type":  "support_item",
-                                                                           "settings":  {
-                                                                                            "title":  "1 Year Warranty",
-                                                                                            "subtitle":  "Hassle-Free Coverage",
-                                                                                            "icon_url":  "grooves-icon-warranty.png",
-                                                                                            "link":  "shopify://pages/contact"
-                                                                                        }
-                                                                       },
-                                                             "sup_3":  {
-                                                                           "type":  "support_item",
-                                                                           "settings":  {
-                                                                                            "title":  "FAQs",
-                                                                                            "subtitle":  "Instant Answers",
-                                                                                            "icon_url":  "grooves-icon-faq.png",
-                                                                                            "link":  "shopify://pages/contact"
-                                                                                        }
-                                                                       },
-                                                             "sup_4":  {
-                                                                           "type":  "support_item",
-                                                                           "settings":  {
-                                                                                            "title":  "Instagram",
-                                                                                            "subtitle":  "@grooveslifestyle",
-                                                                                            "icon_url":  "grooves-icon-instagram.png",
-                                                                                            "link":  "shopify://pages/contact"
-                                                                                        }
-                                                                       },
-                                                             "sup_5":  {
-                                                                           "type":  "support_item",
-                                                                           "settings":  {
-                                                                                            "title":  "YouTube",
-                                                                                            "subtitle":  "Unboxing \u0026 Reviews",
-                                                                                            "icon_url":  "grooves-icon-youtube.png",
-                                                                                            "link":  "shopify://pages/contact"
-                                                                                        }
-                                                                       },
-                                                             "sup_6":  {
-                                                                           "type":  "support_item",
-                                                                           "settings":  {
-                                                                                            "title":  "72Hrs Replacement",
-                                                                                            "subtitle":  "No Questions Asked",
-                                                                                            "icon_url":  "grooves-icon-replacement.png",
-                                                                                            "link":  "shopify://pages/contact"
-                                                                                        }
-                                                                       }
-                                                         },
-                                              "block_order":  [
-                                                                  "sup_1",
-                                                                  "sup_2",
-                                                                  "sup_3",
-                                                                  "sup_4",
-                                                                  "sup_5",
-                                                                  "sup_6"
-                                                              ],
-                                              "settings":  {
-                                                               "badge_title":  "Grooves Support",
-                                                               "padding_top":  20,
-                                                               "padding_bottom":  0,
-                                                               "show_policy_strip":  true,
-                                                               "policy_1_icon":  "ðŸšš",
-                                                               "policy_1_text":  "Pan India Delivery",
-                                                               "policy_2_icon":  "ðŸ›¡ï¸",
-                                                               "policy_2_text":  "1 Year Warranty",
-                                                               "policy_3_icon":  "ðŸ’µ",
-                                                               "policy_3_text":  "COD Available",
-                                                               "policy_4_icon":  "ðŸ”„",
-                                                               "policy_4_text":  "72 Hours Replacement",
-                                                               "policy_5_icon":  "ðŸ”’",
-                                                               "policy_5_text":  "100% Secure Checkout"
-                                                           }
-                                          }
-                 },
-    "order":  [
-                  "hero_slider",
-                  "categories",
-                  "explore_range",
-                  "feature_banners",
-                  "tabbed_tws",
-                  "dual_speakers",
-                  "social_reels",
-                  "lifestyle",
-                  "blogs",
-                  "press_logos",
-                  "support_policies"
-              ]
+  "sections": {
+    "hero_slider": {
+      "type": "tr-hero-banner",
+      "blocks": {
+        "slide_swirl": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_25_44_AM.png?v=1790117888",
+            "mobile_image_url": "",
+            "button_link": "shopify://collections/all",
+            "show_text_overlay": false,
+            "badge_text": "",
+            "heading": "",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "slide_bold": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_26_53_AM.png?v=1790117887",
+            "mobile_image_url": "",
+            "button_link": "shopify://collections/all",
+            "show_text_overlay": false,
+            "badge_text": "",
+            "heading": "",
+            "subheading": "",
+            "button_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_swirl",
+        "slide_bold"
+      ],
+      "settings": {
+        "desktop_height": 500,
+        "desktop_image_fit": "contain",
+        "desktop_banner_width": 100,
+        "mobile_height": 350,
+        "mobile_image_fit": "contain",
+        "mobile_banner_width": 100,
+        "slider_bg": "#000000",
+        "autoplay_speed": 5
+      }
+    },
+    "categories": {
+      "type": "tr-categories",
+      "blocks": {
+        "cat_bestseller": {
+          "type": "category",
+          "settings": {
+            "collection": "accessories",
+            "title": "Accessories",
+            "image_url": "grooves-cat-accessories.jpg",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_fan": {
+          "type": "category",
+          "settings": {
+            "collection": "adaptor",
+            "title": "Adaptor",
+            "image_url": "grooves-cat-adaptor.jpg",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_soundbars": {
+          "type": "category",
+          "settings": {
+            "collection": "combo",
+            "title": "Combo",
+            "image_url": "grooves-cat-combo.jpg",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_translucent": {
+          "type": "category",
+          "settings": {
+            "collection": "earbuds",
+            "title": "Earbuds",
+            "image_url": "grooves-cat-earbuds.jpg",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_powerbank": {
+          "type": "category",
+          "settings": {
+            "collection": "headphones",
+            "title": "Headphones",
+            "image_url": "grooves-cat-headphones.jpg",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_earbuds": {
+          "type": "category",
+          "settings": {
+            "collection": "power-bank",
+            "title": "Powerbank",
+            "image_url": "grooves-cat-powerbank.jpg",
+            "url": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "cat_bestseller",
+        "cat_fan",
+        "cat_soundbars",
+        "cat_translucent",
+        "cat_powerbank",
+        "cat_earbuds"
+      ],
+      "settings": {
+        "badge_title": "Shop By Categories",
+        "padding_top": 20,
+        "padding_bottom": 30
+      }
+    },
+    "explore_range": {
+      "type": "tr-explore-range",
+      "blocks": {
+        "prod_fire": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "title": "Grooves Fire Earbuds",
+            "price": "₹1,499",
+            "compare_price": "₹4,999",
+            "discount_tag": "70% OFF",
+            "image_url": "grooves-prod-fire.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "prod_muze": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "title": "Grooves Muze Open-Ear",
+            "price": "₹1,699",
+            "compare_price": "₹5,499",
+            "discount_tag": "69% OFF",
+            "image_url": "grooves-prod-muze.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "prod_bold": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "title": "Grooves Bold Studio",
+            "price": "₹1,299",
+            "compare_price": "₹3,999",
+            "discount_tag": "67% OFF",
+            "image_url": "grooves-prod-bold.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "prod_wave": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "title": "Grooves Wave Clear",
+            "price": "₹1,399",
+            "compare_price": "₹4,499",
+            "discount_tag": "68% OFF",
+            "image_url": "grooves-prod-wave.jpg",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "prod_fire",
+        "prod_muze",
+        "prod_bold",
+        "prod_wave"
+      ],
+      "settings": {
+        "section_title": "EXPLORE GROOVES AUDIO RANGE",
+        "padding_top": 20,
+        "padding_bottom": 40,
+        "hero_product": "",
+        "hero_image": "grooves-explore-hero.jpg",
+        "hero_title": "Grooves 107 Pro - Fast Charging Wireless Earbuds",
+        "hero_tag": "SUPER FAST CHARGING",
+        "hero_link": "shopify://collections/all",
+        "hero_btn_text": "BUY NOW"
+      }
+    },
+    "feature_banners": {
+      "type": "tr-feature-banners",
+      "blocks": {
+        "banner_swirl": {
+          "type": "banner",
+          "settings": {
+            "image_url": "grooves-banner-turbo.jpg",
+            "mobile_image_url": "",
+            "tagline": "GROOVES TURBO CHARGE",
+            "title": "Smart Digital GaN Fast Charger & Powerbank",
+            "button_text": "BUY NOW",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "banner_dwots": {
+          "type": "banner",
+          "settings": {
+            "image_url": "grooves-banner-dwots.jpg",
+            "mobile_image_url": "",
+            "tagline": "GROOVES SIGNATURE SERIES",
+            "title": "Welcome The Future Of Audio",
+            "button_text": "BUY NOW",
+            "button_link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "banner_swirl",
+        "banner_dwots"
+      ],
+      "settings": {
+        "padding_top": 10,
+        "padding_bottom": 30
+      }
+    },
+    "tabbed_tws": {
+      "type": "tr-tabbed-tws",
+      "settings": {
+        "section_title": "Grooves Earbuds built for seamless sound",
+        "tabs_list": "All,ANC / ENC,Translucent,Wireless Charging,Dual Mic,Display Earbuds,Gaming",
+        "padding_top": 20,
+        "padding_bottom": 40,
+        "earbuds_banner": "grooves-tabbed-earbuds.jpg",
+        "earbuds_title": "Open sound that feels Light . Natural . & Easy",
+        "earbuds_btn": "Shop Now",
+        "earbuds_link": "shopify://collections/all",
+        "soundbar_banner": "grooves-audio-desktop-branded.png",
+        "soundbar_badge": "CINEMATIC SOUND AT HOME",
+        "soundbar_title": "Crafted for Cinematic Precision",
+        "soundbar_btn": "BUY NOW",
+        "soundbar_link": "shopify://collections/all"
+      }
+    },
+    "dual_speakers": {
+      "type": "tr-dual-speakers",
+      "settings": {
+        "padding_top": 10,
+        "padding_bottom": 30,
+        "speaker1_image": "grooves-speaker-1.jpg",
+        "speaker1_btn": "BUY NOW",
+        "speaker1_link": "shopify://collections/all",
+        "speaker2_image": "grooves-speaker-2.jpg",
+        "speaker2_btn": "BUY NOW",
+        "speaker2_link": "shopify://collections/all"
+      }
+    },
+    "social_reels": {
+      "type": "tr-social-reels",
+      "blocks": {
+        "reel_1": {
+          "type": "reel",
+          "settings": {
+            "thumbnail_url": "grooves-reel-1.jpg",
+            "creator_name": "@alex_sound",
+            "product": "",
+            "product_name": "Grooves Fire Earbuds",
+            "product_link": "shopify://collections/all",
+            "button_label": "SHOP"
+          }
+        },
+        "reel_2": {
+          "type": "reel",
+          "settings": {
+            "thumbnail_url": "grooves-reel-2.jpg",
+            "creator_name": "@priya_vibes",
+            "product": "",
+            "product_name": "Grooves Muze Clip",
+            "product_link": "shopify://collections/all",
+            "button_label": "SHOP"
+          }
+        },
+        "reel_3": {
+          "type": "reel",
+          "settings": {
+            "thumbnail_url": "grooves-reel-3.jpg",
+            "creator_name": "@rohit_fitness",
+            "product": "",
+            "product_name": "Grooves 107 Pro ANC",
+            "product_link": "shopify://collections/all",
+            "button_label": "SHOP"
+          }
+        },
+        "reel_4": {
+          "type": "reel",
+          "settings": {
+            "thumbnail_url": "grooves-reel-4.jpg",
+            "creator_name": "@tanya_music",
+            "product": "",
+            "product_name": "Grooves Sphorika Soundbar",
+            "product_link": "shopify://collections/all",
+            "button_label": "SHOP"
+          }
+        },
+        "reel_5": {
+          "type": "reel",
+          "settings": {
+            "thumbnail_url": "grooves-reel-5.jpg",
+            "creator_name": "@sam_gadgets",
+            "product": "",
+            "product_name": "Grooves Wave Clear",
+            "product_link": "shopify://collections/all",
+            "button_label": "SHOP"
+          }
+        }
+      },
+      "block_order": [
+        "reel_1",
+        "reel_2",
+        "reel_3",
+        "reel_4",
+        "reel_5"
+      ],
+      "settings": {
+        "title": "TALK OF THE TOWN - SOCIAL",
+        "subtitle": "See how creators and fans groove with Grooves Lifestyle",
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
+    },
+    "lifestyle": {
+      "type": "tr-lifestyle",
+      "blocks": {
+        "life_movie": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Movie Night",
+            "image_url": "grooves-life-movie.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_news": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "News & Podcasts",
+            "image_url": "grooves-life-news.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_innovators": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Innovators",
+            "image_url": "grooves-life-innovators.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_workout": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Workout & Fitness",
+            "image_url": "grooves-life-workout.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_party": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Party & Travel",
+            "image_url": "grooves-life-party.jpg",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "life_movie",
+        "life_news",
+        "life_innovators",
+        "life_workout",
+        "life_party"
+      ],
+      "settings": {
+        "badge_title": "Shop By Lifestyle",
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
+    },
+    "blogs": {
+      "type": "tr-blogs",
+      "blocks": {
+        "blog_1": {
+          "type": "article",
+          "settings": {
+            "article": "",
+            "title": "Best Open Ear Earbuds in 2026",
+            "category": "TECH & AUDIO",
+            "excerpt": "Discover how open-ear audio tech delivers spatial acoustics while keeping you aware of your surroundings.",
+            "image_url": "grooves-blog-open-ear.jpg",
+            "link": "shopify://blogs/news"
+          }
+        },
+        "blog_2": {
+          "type": "article",
+          "settings": {
+            "article": "",
+            "title": "Grooves Turbo GaN: Next-Gen Charging Hub",
+            "category": "INNOVATION",
+            "excerpt": "A high-speed GaN fast charger engineered with portable battery backup and smart multi-device protection.",
+            "image_url": "grooves-blog-swirl-fan.jpg",
+            "link": "shopify://blogs/news"
+          }
+        },
+        "blog_3": {
+          "type": "article",
+          "settings": {
+            "article": "",
+            "title": "Best Earbuds Under ₹5000 in India",
+            "category": "BUYER GUIDE",
+            "excerpt": "Compare features, battery life, quad-mic ENC, and ultra low gaming latency across top contenders.",
+            "image_url": "grooves-blog-budget-tws.jpg",
+            "link": "shopify://blogs/news"
+          }
+        },
+        "blog_4": {
+          "type": "article",
+          "settings": {
+            "article": "",
+            "title": "What Is the Best Sound System For Home?",
+            "category": "HOME THEATRE",
+            "excerpt": "Transform your entertainment room with deep bass soundbars and dedicated wireless subwoofers.",
+            "image_url": "grooves-blog-festival-sound.jpg",
+            "link": "shopify://blogs/news"
+          }
+        }
+      },
+      "block_order": [
+        "blog_1",
+        "blog_2",
+        "blog_3",
+        "blog_4"
+      ],
+      "settings": {
+        "badge_title": "Blogs",
+        "blog": "",
+        "articles_count": 4,
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
+    },
+    "press_logos": {
+      "type": "tr-press-marquee",
+      "blocks": {
+        "press_1": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Live Mint",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-01.webp?v=1762587441",
+            "link": ""
+          }
+        },
+        "press_2": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Impact",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-02.webp?v=1762587441",
+            "link": ""
+          }
+        },
+        "press_3": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Dainik Jagran",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-03.webp?v=1762587441",
+            "link": ""
+          }
+        },
+        "press_4": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Amar Ujala",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-04.webp?v=1762587440",
+            "link": ""
+          }
+        },
+        "press_5": {
+          "type": "press_logo",
+          "settings": {
+            "name": "Business Standard",
+            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-05.webp?v=1762587441",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "press_1",
+        "press_2",
+        "press_3",
+        "press_4",
+        "press_5"
+      ],
+      "settings": {
+        "badge_title": "As Featured On",
+        "padding_top": 20,
+        "padding_bottom": 30
+      }
+    },
+    "support_policies": {
+      "type": "tr-support-policies",
+      "blocks": {
+        "sup_1": {
+          "type": "support_item",
+          "settings": {
+            "title": "Customer Support",
+            "subtitle": "+91 Support Desk",
+            "icon_url": "grooves-icon-support.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_2": {
+          "type": "support_item",
+          "settings": {
+            "title": "1 Year Warranty",
+            "subtitle": "Hassle-Free Coverage",
+            "icon_url": "grooves-icon-warranty.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_3": {
+          "type": "support_item",
+          "settings": {
+            "title": "FAQs",
+            "subtitle": "Instant Answers",
+            "icon_url": "grooves-icon-faq.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_4": {
+          "type": "support_item",
+          "settings": {
+            "title": "Instagram",
+            "subtitle": "@grooveslifestyle",
+            "icon_url": "grooves-icon-instagram.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_5": {
+          "type": "support_item",
+          "settings": {
+            "title": "YouTube",
+            "subtitle": "Unboxing & Reviews",
+            "icon_url": "grooves-icon-youtube.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_6": {
+          "type": "support_item",
+          "settings": {
+            "title": "72Hrs Replacement",
+            "subtitle": "No Questions Asked",
+            "icon_url": "grooves-icon-replacement.png",
+            "link": "shopify://pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "sup_1",
+        "sup_2",
+        "sup_3",
+        "sup_4",
+        "sup_5",
+        "sup_6"
+      ],
+      "settings": {
+        "badge_title": "Grooves Support",
+        "padding_top": 20,
+        "padding_bottom": 0,
+        "show_policy_strip": true,
+        "policy_1_icon": "🚚",
+        "policy_1_text": "Pan India Delivery",
+        "policy_2_icon": "🛡️",
+        "policy_2_text": "1 Year Warranty",
+        "policy_3_icon": "💵",
+        "policy_3_text": "COD Available",
+        "policy_4_icon": "🔄",
+        "policy_4_text": "72 Hours Replacement",
+        "policy_5_icon": "🔒",
+        "policy_5_text": "100% Secure Checkout"
+      }
+    }
+  },
+  "order": [
+    "hero_slider",
+    "categories",
+    "explore_range",
+    "feature_banners",
+    "tabbed_tws",
+    "dual_speakers",
+    "social_reels",
+    "lifestyle",
+    "blogs",
+    "press_logos",
+    "support_policies"
+  ]
 }

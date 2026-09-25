@@ -275,35 +275,28 @@
         "review_pVJYzt": {
           "type": "review",
           "settings": {
-            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "review_text": "Got the smartwatch combo. The display is super crisp, and the Bluetooth calling works flawlessly even in traffic.",
             "author_name": "Rahul Sharma"
           }
         },
         "review_RVJQmL": {
           "type": "review",
           "settings": {
-            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "review_text": "Delivery was super fast, and the build quality feels extremely premium. Definitely switching to this brand permanently.",
             "author_name": "Rahul Sharma"
           }
         },
         "review_wkUJFM": {
           "type": "review",
           "settings": {
-            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "review_text": "Been using their headphones for my workouts and gaming. Zero audio lag, super comfortable on the ears, and the mic is crystal clear during calls.",
             "author_name": "Rahul Sharma"
           }
         },
         "review_qFmPcG": {
           "type": "review",
           "settings": {
-            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
-            "author_name": "Rahul Sharma"
-          }
-        },
-        "review_BePfdK": {
-          "type": "review",
-          "settings": {
-            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "review_text": "The fast-charging adapter and power bank are lifesavers. Charges my phone super quick and the build is very sturdy. Highly recommend!",
             "author_name": "Rahul Sharma"
           }
         }
@@ -313,8 +306,7 @@
         "review_pVJYzt",
         "review_RVJQmL",
         "review_wkUJFM",
-        "review_qFmPcG",
-        "review_BePfdK"
+        "review_qFmPcG"
       ],
       "name": "Customer Testimonials",
       "settings": {

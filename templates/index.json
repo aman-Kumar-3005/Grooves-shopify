@@ -299,6 +299,13 @@
             "review_text": "The fast-charging adapter and power bank are lifesavers. Charges my phone super quick and the build is very sturdy. Highly recommend!",
             "author_name": "Rahul Sharma"
           }
+        },
+        "review_hQpydt": {
+          "type": "review",
+          "settings": {
+            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "author_name": "Rahul Sharma"
+          }
         }
       },
       "block_order": [
@@ -306,7 +313,8 @@
         "review_pVJYzt",
         "review_RVJQmL",
         "review_wkUJFM",
-        "review_qFmPcG"
+        "review_qFmPcG",
+        "review_hQpydt"
       ],
       "name": "Customer Testimonials",
       "settings": {

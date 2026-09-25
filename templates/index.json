@@ -326,76 +326,84 @@
         "auto_scroll": 3
       }
     },
-    "social_reels": {
-      "type": "tr-social-reels",
+    "shoppabl_videos_npt6gF": {
+      "type": "shoppabl-videos",
       "blocks": {
-        "reel_1": {
-          "type": "reel",
+        "video_Rc6MEe": {
+          "type": "video",
           "settings": {
-            "thumbnail_url": "grooves-reel-1.jpg",
-            "creator_name": "@alex_sound",
-            "product": "",
-            "product_name": "Grooves Fire Earbuds",
-            "product_link": "shopify://collections/all",
-            "button_label": "SHOP"
+            "shopify_video": "shopify://files/videos/Grooves Infinity Earbuds.mp4",
+            "youtube_id": "",
+            "product": "grooves-18-w-pd",
+            "custom_title": ""
           }
         },
-        "reel_2": {
-          "type": "reel",
+        "video_3LXF9G": {
+          "type": "video",
           "settings": {
-            "thumbnail_url": "grooves-reel-2.jpg",
-            "creator_name": "@priya_vibes",
-            "product": "",
-            "product_name": "Grooves Muze Clip",
-            "product_link": "shopify://collections/all",
-            "button_label": "SHOP"
+            "shopify_video": "shopify://files/videos/grooves_audio_1772575077_3844960367529934968_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-alpha-200-with-anc",
+            "custom_title": ""
           }
         },
-        "reel_3": {
-          "type": "reel",
+        "video_dhBPDt": {
+          "type": "video",
           "settings": {
-            "thumbnail_url": "grooves-reel-3.jpg",
-            "creator_name": "@rohit_fitness",
-            "product": "",
-            "product_name": "Grooves 107 Pro ANC",
-            "product_link": "shopify://collections/all",
-            "button_label": "SHOP"
+            "shopify_video": "shopify://files/videos/grooves_audio_1772072764_3840746963625776568_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-beat",
+            "custom_title": ""
           }
         },
-        "reel_4": {
-          "type": "reel",
+        "video_zWxT8g": {
+          "type": "video",
           "settings": {
-            "thumbnail_url": "grooves-reel-4.jpg",
-            "creator_name": "@tanya_music",
-            "product": "",
-            "product_name": "Grooves Sphorika Soundbar",
-            "product_link": "shopify://collections/all",
-            "button_label": "SHOP"
+            "shopify_video": "shopify://files/videos/grooves_audio_1782331211_3926800424393116968_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-bang-60w",
+            "custom_title": ""
           }
         },
-        "reel_5": {
-          "type": "reel",
+        "video_aDLzMt": {
+          "type": "video",
           "settings": {
-            "thumbnail_url": "grooves-reel-5.jpg",
-            "creator_name": "@sam_gadgets",
-            "product": "",
-            "product_name": "Grooves Wave Clear",
-            "product_link": "shopify://collections/all",
-            "button_label": "SHOP"
+            "shopify_video": "shopify://files/videos/grooves_audio_1757052781_3714750295289939891_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-beat",
+            "custom_title": ""
+          }
+        },
+        "video_E9mxFB": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1741417489_3583591983125800638_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-delta-plus",
+            "custom_title": ""
           }
         }
       },
       "block_order": [
-        "reel_1",
-        "reel_2",
-        "reel_3",
-        "reel_4",
-        "reel_5"
+        "video_Rc6MEe",
+        "video_3LXF9G",
+        "video_dhBPDt",
+        "video_zWxT8g",
+        "video_aDLzMt",
+        "video_E9mxFB"
       ],
+      "name": "Shoppable VIDEO",
       "settings": {
-        "title": "TALK OF THE TOWN - SOCIAL",
-        "subtitle": "See how creators and fans groove with Grooves Lifestyle",
-        "padding_top": 20,
+        "full_width": true,
+        "title": "Shop the Trends Everyone’s Talking About.",
+        "heading_size": 24,
+        "heading_alignment": "left",
+        "card_width_desktop": 260,
+        "card_width_mobile": 220,
+        "card_radius": 16,
+        "bg_color": "#ffffff",
+        "text_color": "#121212",
+        "padding_top": 40,
         "padding_bottom": 40
       }
     },
@@ -672,7 +680,7 @@
     "tabbed_tws",
     "dual_speakers",
     "custom_testimonials_dkWGJt",
-    "social_reels",
+    "shoppabl_videos_npt6gF",
     "lifestyle",
     "blogs",
     "press_logos",

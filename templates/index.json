@@ -262,6 +262,70 @@
         "speaker2_link": "shopify://collections/all"
       }
     },
+    "custom_testimonials_dkWGJt": {
+      "type": "custom-testimonials",
+      "blocks": {
+        "review_83Tpc6": {
+          "type": "review",
+          "settings": {
+            "review_text": "The ANC on these earbuds is insane! The bass is deep, and the battery easily lasts me all week. Total value for money.",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_pVJYzt": {
+          "type": "review",
+          "settings": {
+            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_RVJQmL": {
+          "type": "review",
+          "settings": {
+            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_wkUJFM": {
+          "type": "review",
+          "settings": {
+            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_qFmPcG": {
+          "type": "review",
+          "settings": {
+            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_BePfdK": {
+          "type": "review",
+          "settings": {
+            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "author_name": "Rahul Sharma"
+          }
+        }
+      },
+      "block_order": [
+        "review_83Tpc6",
+        "review_pVJYzt",
+        "review_RVJQmL",
+        "review_wkUJFM",
+        "review_qFmPcG",
+        "review_BePfdK"
+      ],
+      "name": "Customer Testimonials",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "subheading": "Loved by thousands of music lovers across the country.",
+        "bg_color": "#f4f6f8",
+        "text_color": "#111111",
+        "padding_y": 60,
+        "auto_scroll": 3
+      }
+    },
     "social_reels": {
       "type": "tr-social-reels",
       "blocks": {
@@ -607,6 +671,7 @@
     "feature_banners",
     "tabbed_tws",
     "dual_speakers",
+    "custom_testimonials_dkWGJt",
     "social_reels",
     "lifestyle",
     "blogs",

@@ -531,63 +531,6 @@
         "padding_bottom": 40
       }
     },
-    "press_logos": {
-      "type": "tr-press-marquee",
-      "blocks": {
-        "press_1": {
-          "type": "press_logo",
-          "settings": {
-            "name": "Live Mint",
-            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-01.webp?v=1762587441",
-            "link": ""
-          }
-        },
-        "press_2": {
-          "type": "press_logo",
-          "settings": {
-            "name": "Impact",
-            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-02.webp?v=1762587441",
-            "link": ""
-          }
-        },
-        "press_3": {
-          "type": "press_logo",
-          "settings": {
-            "name": "Dainik Jagran",
-            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-03.webp?v=1762587441",
-            "link": ""
-          }
-        },
-        "press_4": {
-          "type": "press_logo",
-          "settings": {
-            "name": "Amar Ujala",
-            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-04.webp?v=1762587440",
-            "link": ""
-          }
-        },
-        "press_5": {
-          "type": "press_logo",
-          "settings": {
-            "name": "Business Standard",
-            "logo_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/new-news-homepage-05.webp?v=1762587441",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "press_1",
-        "press_2",
-        "press_3",
-        "press_4",
-        "press_5"
-      ],
-      "settings": {
-        "badge_title": "As Featured On",
-        "padding_top": 20,
-        "padding_bottom": 30
-      }
-    },
     "support_policies": {
       "type": "tr-support-policies",
       "blocks": {
@@ -970,7 +913,6 @@
     "shoppabl_videos_npt6gF",
     "lifestyle",
     "blogs",
-    "press_logos",
     "support_policies",
     "press_logos_slider_AKyL3Y",
     "section_NcG6nn"

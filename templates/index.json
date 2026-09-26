@@ -670,6 +670,111 @@
         "policy_5_icon": "🔒",
         "policy_5_text": "100% Secure Checkout"
       }
+    },
+    "press_logos_slider_AKyL3Y": {
+      "type": "press-logos-slider",
+      "blocks": {
+        "logo_item_FqABNA": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b2350c63d71_b4c43c0b-3f2b-43df-af16-c37d2e1554f4.webp",
+            "link": ""
+          }
+        },
+        "logo_item_tJWFjQ": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b239b6c266f_d47ab000-0f86-40be-bacd-3c681fe335f2.webp",
+            "link": ""
+          }
+        },
+        "logo_item_tbRiYr": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b23567ef7e7_8a083325-0f7a-4c02-9a93-7388b2bdc6f6.webp",
+            "link": ""
+          }
+        },
+        "logo_item_xdCCRr": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b3101a37034_1a487ab4-9475-4f3b-ad25-eafe0c9beb10.webp",
+            "link": ""
+          }
+        },
+        "logo_item_8Mnzwj": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25ff9d6f37_b4b18a4d-72f5-41f7-98ee-6d17524362fc.webp",
+            "link": ""
+          }
+        },
+        "logo_item_whizrX": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25f2b2fe2c_15e8a0a6-5795-47bb-a9e3-25914b9fca9e.webp",
+            "link": ""
+          }
+        },
+        "logo_item_V8HHXN": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25fb4ebbf7_ae2a576f-c9ce-4230-8833-ff11d6b33acf.webp",
+            "link": ""
+          }
+        },
+        "logo_item_4qxD6a": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25f49763f9_0195774f-d202-4a2e-a714-d743c753538c.webp",
+            "link": ""
+          }
+        },
+        "logo_item_jJ3QGF": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25fe63e0bf_dbe1541e-dc2a-4978-b55f-354fe5236153.webp",
+            "link": ""
+          }
+        },
+        "logo_item_VyRPWd": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b234e4aee4b_f6b620bd-8dff-420e-967d-e34ec631b9cd.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_item_FqABNA",
+        "logo_item_tJWFjQ",
+        "logo_item_tbRiYr",
+        "logo_item_xdCCRr",
+        "logo_item_8Mnzwj",
+        "logo_item_whizrX",
+        "logo_item_V8HHXN",
+        "logo_item_4qxD6a",
+        "logo_item_jJ3QGF",
+        "logo_item_VyRPWd"
+      ],
+      "name": "Press Logos Slider",
+      "settings": {
+        "subtitle": "Places where we have been featured",
+        "subtitle_color": "#3b82f6",
+        "title": "In The Press",
+        "heading_size": 36,
+        "text_color": "#1a1a1a",
+        "logo_width": 180,
+        "logo_height": 80,
+        "logo_gap": 30,
+        "logo_width_mobile": 140,
+        "logo_height_mobile": 60,
+        "bg_color": "#f8f9fa",
+        "card_bg": "transparent",
+        "card_radius": 8,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
@@ -684,6 +789,7 @@
     "lifestyle",
     "blogs",
     "press_logos",
-    "support_policies"
+    "support_policies",
+    "press_logos_slider_AKyL3Y"
   ]
 }

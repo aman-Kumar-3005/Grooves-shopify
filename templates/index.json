@@ -54,6 +54,65 @@
         "autoplay_speed": 5
       }
     },
+    "marque_sec_UHQFnE": {
+      "type": "marque-sec",
+      "blocks": {
+        "text_rYK6MH": {
+          "type": "text",
+          "settings": {
+            "new_text": "⭐ India’s Fastest Growing Audio Brand | Over 2.5 Crore+ Happy Customers."
+          }
+        },
+        "text_nn3WUA": {
+          "type": "text",
+          "settings": {
+            "new_text": "🎁 Use Coupon Code PREPAID at Checkout for an Extra 5% OFF!"
+          }
+        },
+        "text_wWdYgJ": {
+          "type": "text",
+          "settings": {
+            "new_text": "🛡️ 100% Secure Checkout & 24-Hour Easy Replacement Policy."
+          }
+        },
+        "text_q4VYtA": {
+          "type": "text",
+          "settings": {
+            "new_text": "⚡ Special Launch Offer: Flat 50% OFF on All Wireless Earbuds & Headphones!"
+          }
+        },
+        "text_cYrqzw": {
+          "type": "text",
+          "settings": {
+            "new_text": "🚀 Fast & Secure Delivery: Free Shipping on All Prepaid Orders."
+          }
+        },
+        "text_MnXRhM": {
+          "type": "text",
+          "settings": {
+            "new_text": "🔥 High Demand Alert: Grab Your True Wireless Stereo Before Stock Runs Out!"
+          }
+        }
+      },
+      "block_order": [
+        "text_rYK6MH",
+        "text_nn3WUA",
+        "text_wWdYgJ",
+        "text_q4VYtA",
+        "text_cYrqzw",
+        "text_MnXRhM"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "marquee_meta": "",
+        "colorBackground": "#000",
+        "marquee_speed": 164,
+        "colorText": "#fff",
+        "link": "",
+        "marquee_height": 46,
+        "font_size": 24
+      }
+    },
     "categories": {
       "type": "tr-categories",
       "blocks": {
@@ -713,7 +772,7 @@
         "logo_width_mobile": 140,
         "logo_height_mobile": 60,
         "bg_color": "#f8f9fa",
-        "card_bg": "transparent",
+        "card_bg": "rgba(0,0,0,0)",
         "card_radius": 8,
         "padding_top": 60,
         "padding_bottom": 60
@@ -728,6 +787,7 @@
           "settings": {
             "source": "uploaded",
             "video": "shopify://files/videos/GROOVES-premium-product-showcase-4K.mp4",
+            "video_url": "",
             "video_autoplay": false,
             "video_loop": true,
             "alt": "",
@@ -884,7 +944,7 @@
         "section_height": "custom",
         "section_height_custom": 0,
         "background_media": "none",
-        "background_color": "#E8D5C7",
+        "background_color": "#e8d5c7",
         "enable_audio": false,
         "video_position": "cover",
         "background_image_position": "cover",
@@ -904,6 +964,7 @@
   },
   "order": [
     "hero_slider",
+    "marque_sec_UHQFnE",
     "categories",
     "explore_range",
     "feature_banners",

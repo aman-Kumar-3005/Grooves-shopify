@@ -191,7 +191,7 @@
         "prod_fire": {
           "type": "product_card",
           "settings": {
-            "product": "",
+            "product": "grooves-beat",
             "title": "Grooves Fire Earbuds",
             "price": "₹1,499",
             "compare_price": "₹4,999",
@@ -203,7 +203,7 @@
         "prod_muze": {
           "type": "product_card",
           "settings": {
-            "product": "",
+            "product": "grooves-25-w-pd",
             "title": "Grooves Muze Open-Ear",
             "price": "₹1,699",
             "compare_price": "₹5,499",
@@ -215,7 +215,7 @@
         "prod_bold": {
           "type": "product_card",
           "settings": {
-            "product": "",
+            "product": "grooves-65-w-supervooc-2",
             "title": "Grooves Bold Studio",
             "price": "₹1,299",
             "compare_price": "₹3,999",
@@ -227,7 +227,7 @@
         "prod_wave": {
           "type": "product_card",
           "settings": {
-            "product": "",
+            "product": "grooves-aura-earphone",
             "title": "Grooves Wave Clear",
             "price": "₹1,399",
             "compare_price": "₹4,499",
@@ -247,7 +247,7 @@
         "section_title": "EXPLORE GROOVES AUDIO RANGE",
         "padding_top": 20,
         "padding_bottom": 40,
-        "hero_product": "",
+        "hero_product": "alpha-100x",
         "hero_image": "grooves-explore-hero.jpg",
         "hero_title": "Grooves 107 Pro - Fast Charging Wireless Earbuds",
         "hero_tag": "SUPER FAST CHARGING",
@@ -268,22 +268,10 @@
             "button_text": "BUY NOW",
             "button_link": "shopify://collections/all"
           }
-        },
-        "banner_dwots": {
-          "type": "banner",
-          "settings": {
-            "image_url": "grooves-banner-dwots.jpg",
-            "mobile_image_url": "",
-            "tagline": "GROOVES SIGNATURE SERIES",
-            "title": "Welcome The Future Of Audio",
-            "button_text": "BUY NOW",
-            "button_link": "shopify://collections/all"
-          }
         }
       },
       "block_order": [
-        "banner_swirl",
-        "banner_dwots"
+        "banner_swirl"
       ],
       "settings": {
         "padding_top": 10,

@@ -778,6 +778,70 @@
         "padding_bottom": 60
       }
     },
+    "dynamic_brand_marquee_a8rq38": {
+      "type": "dynamic-brand-marquee",
+      "blocks": {
+        "logo_item_heVjmw": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/66600d4f21404_de2ed2a7-b62b-4624-9832-ef4413a171d2.webp"
+          }
+        },
+        "logo_item_Bf4LYQ": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/665ed54001ffc_5cd5d867-655c-4461-b355-40c1a52f87a4.webp"
+          }
+        },
+        "logo_item_ntAJyG": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/66600d39807c0_1759a2fa-c045-4969-8823-7a527281f9eb.webp"
+          }
+        },
+        "logo_item_bKBa4F": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/665ed4071e862_c403fb9e-989e-4d35-ba0f-63c8153c5d15.webp"
+          }
+        },
+        "logo_item_EnFaVG": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/665ed3d45cb08_9a319a11-a1ff-4cc7-ac6c-8afd2d11b602.webp"
+          }
+        },
+        "logo_item_kxDmYi": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/665ed573a6b72_53b22507-bf40-459d-b327-93d2a447087e.webp"
+          }
+        }
+      },
+      "block_order": [
+        "logo_item_heVjmw",
+        "logo_item_Bf4LYQ",
+        "logo_item_ntAJyG",
+        "logo_item_bKBa4F",
+        "logo_item_EnFaVG",
+        "logo_item_kxDmYi"
+      ],
+      "name": "Brand Marquee Logos",
+      "settings": {
+        "title": "Best selling brand on...",
+        "heading_size": 22,
+        "heading_alignment": "center",
+        "logo_width": 150,
+        "logo_height": 60,
+        "logo_gap": 50,
+        "marquee_speed": 20,
+        "pause_on_hover": true,
+        "bg_color": "#ffffff",
+        "text_color": "#121212",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "section_NcG6nn": {
       "type": "section",
       "blocks": {
@@ -976,6 +1040,7 @@
     "blogs",
     "support_policies",
     "press_logos_slider_AKyL3Y",
+    "dynamic_brand_marquee_a8rq38",
     "section_NcG6nn"
   ]
 }

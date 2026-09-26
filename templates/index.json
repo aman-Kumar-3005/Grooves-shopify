@@ -203,7 +203,7 @@
         "prod_muze": {
           "type": "product_card",
           "settings": {
-            "product": "grooves-bang-60w",
+            "product": "grooves-25-w-pd",
             "title": "Grooves Muze Open-Ear",
             "price": "₹1,699",
             "compare_price": "₹5,499",
@@ -215,7 +215,7 @@
         "prod_bold": {
           "type": "product_card",
           "settings": {
-            "product": "grooves-delta-plus",
+            "product": "grooves-65-w-supervooc-2",
             "title": "Grooves Bold Studio",
             "price": "₹1,299",
             "compare_price": "₹3,999",
@@ -268,22 +268,10 @@
             "button_text": "BUY NOW",
             "button_link": "shopify://collections/all"
           }
-        },
-        "banner_dwots": {
-          "type": "banner",
-          "settings": {
-            "image_url": "grooves-banner-dwots.jpg",
-            "mobile_image_url": "",
-            "tagline": "GROOVES SIGNATURE SERIES",
-            "title": "Welcome The Future Of Audio",
-            "button_text": "BUY NOW",
-            "button_link": "shopify://collections/all"
-          }
         }
       },
       "block_order": [
-        "banner_swirl",
-        "banner_dwots"
+        "banner_swirl"
       ],
       "settings": {
         "padding_top": 10,

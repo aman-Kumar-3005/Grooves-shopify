@@ -1,3 +1,11 @@
+{%- style -%}
+  #tr-categories-{{ section.id }} .tr-category-card,
+  #tr-categories-{{ section.id }} .tr-category-name,
+  #tr-categories-{{ section.id }} .tr-section-pill {
+    color: #000000 !important;
+  }
+{%- endstyle -%}
+
 <section class="tr-categories-section" id="tr-categories-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 30 }}px;">
   <div class="tr-container">
     {% if section.settings.badge_title != blank %}

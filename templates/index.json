@@ -280,6 +280,7 @@
     },
     "tabbed_tws": {
       "type": "tr-tabbed-tws",
+      "disabled": true,
       "settings": {
         "section_title": "Grooves Earbuds built for seamless sound",
         "tabs_list": "All,ANC / ENC,Translucent,Wireless Charging,Dual Mic,Display Earbuds,Gaming",
@@ -298,6 +299,7 @@
     },
     "dual_speakers": {
       "type": "tr-dual-speakers",
+      "disabled": true,
       "settings": {
         "padding_top": 10,
         "padding_bottom": 30,

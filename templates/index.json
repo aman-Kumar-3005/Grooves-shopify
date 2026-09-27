@@ -576,8 +576,10 @@
         "badge_title": "Blogs",
         "blog": "news",
         "articles_count": 4,
-        "padding_top": 20,
-        "padding_bottom": 40
+        "accent_color": "#4cf800",
+        "card_bg": "#141414",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "support_policies": {

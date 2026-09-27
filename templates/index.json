@@ -607,16 +607,6 @@
     "support_policies": {
       "type": "tr-support-policies",
       "blocks": {
-        "sup_1": {
-          "type": "support_item",
-          "settings": {
-            "title": "Customer Support",
-            "subtitle": "+91 Support Desk",
-            "image": "shopify://shop_images/customer_support.png",
-            "icon_url": "",
-            "link": "shopify://pages/contact"
-          }
-        },
         "sup_2": {
           "type": "support_item",
           "settings": {
@@ -627,13 +617,13 @@
             "link": "shopify://pages/contact"
           }
         },
-        "sup_3": {
+        "sup_1": {
           "type": "support_item",
           "settings": {
-            "title": "FAQs",
-            "subtitle": "Instant Answers",
-            "image": "shopify://shop_images/faqs.png",
-            "icon_url": "grooves-icon-faq.png",
+            "title": "Customer Support",
+            "subtitle": "+91 Support Desk",
+            "image": "shopify://shop_images/customer_support.png",
+            "icon_url": "",
             "link": "shopify://pages/contact"
           }
         },
@@ -644,6 +634,16 @@
             "subtitle": "@grooveslifestyle",
             "image": "shopify://shop_images/icon_instagram.png",
             "icon_url": "grooves-icon-instagram.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_3": {
+          "type": "support_item",
+          "settings": {
+            "title": "FAQs",
+            "subtitle": "Instant Answers",
+            "image": "shopify://shop_images/faqs.png",
+            "icon_url": "grooves-icon-faq.png",
             "link": "shopify://pages/contact"
           }
         },
@@ -669,10 +669,10 @@
         }
       },
       "block_order": [
-        "sup_1",
         "sup_2",
-        "sup_3",
+        "sup_1",
         "sup_4",
+        "sup_3",
         "sup_5",
         "sup_6"
       ],

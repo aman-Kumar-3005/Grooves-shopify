@@ -126,65 +126,6 @@
         "padding_bottom": 30
       }
     },
-    "marque_sec_UHQFnE": {
-      "type": "marque-sec",
-      "blocks": {
-        "text_rYK6MH": {
-          "type": "text",
-          "settings": {
-            "new_text": "⭐ India’s Fastest Growing Audio Brand | Over 2.5 Crore+ Happy Customers."
-          }
-        },
-        "text_nn3WUA": {
-          "type": "text",
-          "settings": {
-            "new_text": "🎁 Use Coupon Code PREPAID at Checkout for an Extra 5% OFF!"
-          }
-        },
-        "text_wWdYgJ": {
-          "type": "text",
-          "settings": {
-            "new_text": "🛡️ 100% Secure Checkout & 24-Hour Easy Replacement Policy."
-          }
-        },
-        "text_q4VYtA": {
-          "type": "text",
-          "settings": {
-            "new_text": "⚡ Special Launch Offer: Flat 50% OFF on All Wireless Earbuds & Headphones!"
-          }
-        },
-        "text_cYrqzw": {
-          "type": "text",
-          "settings": {
-            "new_text": "🚀 Fast & Secure Delivery: Free Shipping on All Prepaid Orders."
-          }
-        },
-        "text_MnXRhM": {
-          "type": "text",
-          "settings": {
-            "new_text": "🔥 High Demand Alert: Grab Your True Wireless Stereo Before Stock Runs Out!"
-          }
-        }
-      },
-      "block_order": [
-        "text_rYK6MH",
-        "text_nn3WUA",
-        "text_wWdYgJ",
-        "text_q4VYtA",
-        "text_cYrqzw",
-        "text_MnXRhM"
-      ],
-      "name": "Marquee",
-      "settings": {
-        "marquee_meta": "",
-        "colorBackground": "#000",
-        "marquee_speed": 164,
-        "colorText": "#fff",
-        "link": "",
-        "marquee_height": 46,
-        "font_size": 24
-      }
-    },
     "explore_range": {
       "type": "tr-explore-range",
       "blocks": {
@@ -253,6 +194,65 @@
         "hero_tag": "SUPER FAST CHARGING",
         "hero_link": "shopify://collections/all",
         "hero_btn_text": "BUY NOW"
+      }
+    },
+    "marque_sec_UHQFnE": {
+      "type": "marque-sec",
+      "blocks": {
+        "text_rYK6MH": {
+          "type": "text",
+          "settings": {
+            "new_text": "⭐ India’s Fastest Growing Audio Brand | Over 2.5 Crore+ Happy Customers."
+          }
+        },
+        "text_nn3WUA": {
+          "type": "text",
+          "settings": {
+            "new_text": "🎁 Use Coupon Code PREPAID at Checkout for an Extra 5% OFF!"
+          }
+        },
+        "text_wWdYgJ": {
+          "type": "text",
+          "settings": {
+            "new_text": "🛡️ 100% Secure Checkout & 24-Hour Easy Replacement Policy."
+          }
+        },
+        "text_q4VYtA": {
+          "type": "text",
+          "settings": {
+            "new_text": "⚡ Special Launch Offer: Flat 50% OFF on All Wireless Earbuds & Headphones!"
+          }
+        },
+        "text_cYrqzw": {
+          "type": "text",
+          "settings": {
+            "new_text": "🚀 Fast & Secure Delivery: Free Shipping on All Prepaid Orders."
+          }
+        },
+        "text_MnXRhM": {
+          "type": "text",
+          "settings": {
+            "new_text": "🔥 High Demand Alert: Grab Your True Wireless Stereo Before Stock Runs Out!"
+          }
+        }
+      },
+      "block_order": [
+        "text_rYK6MH",
+        "text_nn3WUA",
+        "text_wWdYgJ",
+        "text_q4VYtA",
+        "text_cYrqzw",
+        "text_MnXRhM"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "marquee_meta": "",
+        "colorBackground": "#000",
+        "marquee_speed": 164,
+        "colorText": "#fff",
+        "link": "",
+        "marquee_height": 46,
+        "font_size": 24
       }
     },
     "feature_banners": {
@@ -1017,8 +1017,8 @@
   "order": [
     "hero_slider",
     "categories",
-    "marque_sec_UHQFnE",
     "explore_range",
+    "marque_sec_UHQFnE",
     "feature_banners",
     "tabbed_tws",
     "dual_speakers",

@@ -216,6 +216,26 @@
         "hero_btn_text": "BUY NOW"
       }
     },
+    "custom_product_slider_jjiczL": {
+      "type": "custom-product-slider",
+      "name": "Dynamic Product Slider",
+      "settings": {
+        "title": "Newly In",
+        "heading_size": 24,
+        "collection": "headphones",
+        "products_to_show": 8,
+        "show_new_badge": true,
+        "new_badge_text": "Newly In",
+        "show_rating_badge": true,
+        "price_prefix": "Prebook @",
+        "card_radius": 8,
+        "btn_bg_color": "#121212",
+        "btn_text_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "marque_sec_UHQFnE": {
       "type": "marque-sec",
       "blocks": {
@@ -1072,6 +1092,7 @@
     "categories",
     "custom_product_slider_x9FpRN",
     "explore_range",
+    "custom_product_slider_jjiczL",
     "marque_sec_UHQFnE",
     "feature_banners",
     "tabbed_tws",

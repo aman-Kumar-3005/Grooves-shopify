@@ -459,6 +459,25 @@
     "lifestyle": {
       "type": "tr-lifestyle",
       "blocks": {
+        "lifestyle_item_B8JNBG": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/68619e343b02d_bc5dba57-b45f-45c3-b417-7c5483254001.webp",
+            "title": "Daily Commute & Travel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281",
+            "link": ""
+          }
+        },
+        "lifestyle_item_XtCAc6": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Daily Commute & Travel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281",
+            "link": ""
+          }
+        },
         "life_movie": {
           "type": "lifestyle_item",
           "settings": {
@@ -506,6 +525,8 @@
         }
       },
       "block_order": [
+        "lifestyle_item_B8JNBG",
+        "lifestyle_item_XtCAc6",
         "life_movie",
         "life_news",
         "life_innovators",
@@ -590,6 +611,7 @@
           "settings": {
             "title": "Customer Support",
             "subtitle": "+91 Support Desk",
+            "image": "shopify://shop_images/66600d39807c0_1759a2fa-c045-4969-8823-7a527281f9eb.webp",
             "icon_url": "grooves-icon-support.png",
             "link": "shopify://pages/contact"
           }

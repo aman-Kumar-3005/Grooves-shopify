@@ -261,6 +261,7 @@
         "banner_swirl": {
           "type": "banner",
           "settings": {
+            "image": "shopify://shop_images/neon_tech_hero_1790518696234.jpg",
             "image_url": "grooves-banner-turbo.jpg",
             "mobile_image_url": "",
             "tagline": "GROOVES TURBO CHARGE",

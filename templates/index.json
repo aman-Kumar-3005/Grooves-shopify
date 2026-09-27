@@ -613,7 +613,7 @@
             "title": "Customer Support",
             "subtitle": "+91 Support Desk",
             "image": "shopify://shop_images/66600d39807c0_1759a2fa-c045-4969-8823-7a527281f9eb.webp",
-            "icon_url": "grooves-icon-support.png",
+            "icon_url": "",
             "link": "shopify://pages/contact"
           }
         },
@@ -673,11 +673,11 @@
       ],
       "settings": {
         "badge_title": "Grooves Support",
-        "padding_top": 20,
+        "padding_top": 0,
         "padding_bottom": 0,
-        "show_policy_strip": true,
-        "policy_1_icon": "🚚",
-        "policy_1_text": "Pan India Delivery",
+        "show_policy_strip": false,
+        "policy_1_icon": "",
+        "policy_1_text": "",
         "policy_2_icon": "🛡️",
         "policy_2_text": "1 Year Warranty",
         "policy_3_icon": "💵",

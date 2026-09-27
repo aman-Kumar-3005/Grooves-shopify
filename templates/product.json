@@ -12,16 +12,47 @@
     "pdp_hero": {
       "type": "tr-product-hero",
       "settings": {
-        "product_title": "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging"
+        "fallback_product": "",
+        "bg_color": "#0b0b0b",
+        "card_bg": "#161616",
+        "text_color": "#ffffff",
+        "accent_color": "#4cf800",
+        "padding_top": 40,
+        "padding_bottom": 60,
+        "product_title": "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging",
+        "product_subtitle": "Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency",
+        "fallback_price": "₹1,499",
+        "fallback_compare_price": "₹4,999",
+        "discount_badge_text": "70% OFF",
+        "show_rating": true,
+        "rating_score": "4.8",
+        "reviews_count": "128 Verified Reviews",
+        "enable_personalisation": true,
+        "personalise_label": "Make Your Product Personalised (Optional Free Engraving)",
+        "personalise_placeholder": "Enter name or initials to engrave on case (Max 12 chars)",
+        "show_coupon": true,
+        "coupon_text": "Get 15% OFF on 2 or More Items",
+        "coupon_code": "Use Code: TR15",
+        "show_pincode": true,
+        "pincode_label": "Check Estimated Delivery Date",
+        "show_buy_now": true,
+        "buy_now_label": "BUY IT NOW - PAY ON DELIVERY / UPI",
+        "add_to_cart_label": "ADD TO CART",
+        "badge_1_text": "Free Shipping",
+        "badge_2_text": "1 Year Warranty",
+        "badge_3_text": "72h Replacement",
+        "badge_4_text": "GST Billing"
       }
-    },
-    "pdp_story": {
-      "type": "tr-product-story",
-      "settings": {}
     },
     "pdp_reviews": {
       "type": "tr-product-reviews",
-      "settings": {}
+      "settings": {
+        "badge_title": "CUSTOMER REVIEWS",
+        "rating_score": "4.8",
+        "reviews_count": "128 Verified Reviews",
+        "show_customer_photos": true,
+        "show_reviews_list": true
+      }
     },
     "support_policies": {
       "type": "tr-support-policies",
@@ -90,13 +121,25 @@
         "sup_6"
       ],
       "settings": {
-        "badge_title": "TR Support"
+        "badge_title": "TR Support",
+        "padding_top": 20,
+        "padding_bottom": 0,
+        "show_policy_strip": true,
+        "policy_1_icon": "🚚",
+        "policy_1_text": "Pan India Delivery",
+        "policy_2_icon": "🛡️",
+        "policy_2_text": "1 Year Warranty",
+        "policy_3_icon": "💵",
+        "policy_3_text": "COD Available",
+        "policy_4_icon": "🔄",
+        "policy_4_text": "72 Hours Replacement",
+        "policy_5_icon": "🔒",
+        "policy_5_text": "100% Secure Checkout"
       }
     }
   },
   "order": [
     "pdp_hero",
-    "pdp_story",
     "pdp_reviews",
     "support_policies"
   ]

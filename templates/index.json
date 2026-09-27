@@ -612,7 +612,7 @@
           "settings": {
             "title": "Customer Support",
             "subtitle": "+91 Support Desk",
-            "image": "shopify://shop_images/66600d39807c0_1759a2fa-c045-4969-8823-7a527281f9eb.webp",
+            "image": "shopify://shop_images/customer_support.png",
             "icon_url": "",
             "link": "shopify://pages/contact"
           }
@@ -622,6 +622,7 @@
           "settings": {
             "title": "1 Year Warranty",
             "subtitle": "Hassle-Free Coverage",
+            "image": "shopify://shop_images/1_year_warranty.png",
             "icon_url": "grooves-icon-warranty.png",
             "link": "shopify://pages/contact"
           }
@@ -631,6 +632,7 @@
           "settings": {
             "title": "FAQs",
             "subtitle": "Instant Answers",
+            "image": "shopify://shop_images/faqs.png",
             "icon_url": "grooves-icon-faq.png",
             "link": "shopify://pages/contact"
           }
@@ -640,6 +642,7 @@
           "settings": {
             "title": "Instagram",
             "subtitle": "@grooveslifestyle",
+            "image": "shopify://shop_images/icon_instagram.png",
             "icon_url": "grooves-icon-instagram.png",
             "link": "shopify://pages/contact"
           }
@@ -649,6 +652,7 @@
           "settings": {
             "title": "YouTube",
             "subtitle": "Unboxing & Reviews",
+            "image": "shopify://shop_images/icon_youtube.png",
             "icon_url": "grooves-icon-youtube.png",
             "link": "shopify://pages/contact"
           }
@@ -658,6 +662,7 @@
           "settings": {
             "title": "72Hrs Replacement",
             "subtitle": "No Questions Asked",
+            "image": "shopify://shop_images/icon_72hrs_replacement.png",
             "icon_url": "grooves-icon-replacement.png",
             "link": "shopify://pages/contact"
           }

@@ -130,9 +130,9 @@
       "type": "custom-product-slider",
       "name": "Dynamic Product Slider",
       "settings": {
-        "title": "Newly In",
+        "title": "Best Offers",
         "heading_size": 24,
-        "collection": "earbuds",
+        "collection": "offers",
         "products_to_show": 8,
         "show_new_badge": true,
         "new_badge_text": "Newly In",

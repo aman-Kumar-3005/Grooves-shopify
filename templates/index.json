@@ -779,7 +779,7 @@
         "subtitle": "Places where we have been featured",
         "subtitle_color": "#3b82f6",
         "title": "In The Press",
-        "heading_size": 36,
+        "heading_size": 24,
         "text_color": "#1a1a1a",
         "logo_width": 180,
         "logo_height": 80,
@@ -789,8 +789,8 @@
         "bg_color": "#f8f9fa",
         "card_bg": "rgba(0,0,0,0)",
         "card_radius": 8,
-        "padding_top": 60,
-        "padding_bottom": 60
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     },
     "dynamic_brand_marquee_a8rq38": {

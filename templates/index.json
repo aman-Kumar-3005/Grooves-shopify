@@ -310,7 +310,7 @@
         "custom_subheading": "",
         "heading_alignment": "left",
         "max_section_width": 1400,
-        "card_max_width": 300,
+        "card_max_width": 320,
         "collection": "earbuds",
         "layout_type": "carousel",
         "carousel_on_mobile": false,

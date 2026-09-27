@@ -534,6 +534,7 @@
         "life_workout",
         "life_party"
       ],
+      "disabled": true,
       "settings": {
         "badge_title": "Shop By Lifestyle",
         "padding_top": 20,

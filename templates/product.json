@@ -44,16 +44,6 @@
         "badge_4_text": "GST Billing"
       }
     },
-    "pdp_reviews": {
-      "type": "tr-product-reviews",
-      "settings": {
-        "badge_title": "CUSTOMER REVIEWS",
-        "rating_score": "4.8",
-        "reviews_count": "128 Verified Reviews",
-        "show_customer_photos": true,
-        "show_reviews_list": true
-      }
-    },
     "support_policies": {
       "type": "tr-support-policies",
       "blocks": {
@@ -140,7 +130,6 @@
   },
   "order": [
     "pdp_hero",
-    "pdp_reviews",
     "support_policies"
   ]
 }

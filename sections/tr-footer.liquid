@@ -83,6 +83,36 @@
       <!-- Column 2: Customer Support & Policies -->
       <div class="tr-footer-col">
         <h4>{{ section.settings.footer_menu_heading | default: 'Customer Support' }}</h4>
+        <div class="tr-support-contact" style="margin: 0 0 16px; color: #888888; font-size: 13px; line-height: 1.55;">
+          {%- if section.settings.support_email != blank -%}
+            <div style="margin-bottom: 6px;">
+              <a
+                href="mailto:{{ section.settings.support_email | escape }}"
+                style="color: inherit; text-decoration: none; overflow-wrap: anywhere;"
+              >
+                {{ section.settings.support_email }}
+              </a>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.support_phone != blank -%}
+            {%- assign support_phone_link = section.settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' -%}
+            <div style="margin-bottom: 6px;">
+              <a
+                href="tel:{{ support_phone_link }}"
+                style="color: inherit; text-decoration: none;"
+              >
+                {{ section.settings.support_phone }}
+              </a>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.support_address != blank -%}
+            <address style="margin: 0; color: inherit; font: inherit; font-style: normal;">
+              {{ section.settings.support_address | newline_to_br }}
+            </address>
+          {%- endif -%}
+        </div>
         <ul>
           {%- if sec_links != blank and sec_links.size > 0 -%}
             {% assign has_track = false %}
@@ -212,6 +242,28 @@
       "id": "footer_menu_heading",
       "label": "Secondary Menu Heading",
       "default": "Customer Support"
+    },
+    {
+      "type": "header",
+      "content": "Customer Support Contact Details"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support Email",
+      "default": "support@grooveslifestyle.com"
+    },
+    {
+      "type": "text",
+      "id": "support_phone",
+      "label": "Support Phone Number",
+      "default": "(+91) 9216-9216-61"
+    },
+    {
+      "type": "textarea",
+      "id": "support_address",
+      "label": "Support Address",
+      "default": "SB 68 / A95 SECTOR 63A NOIDA 201307"
     }
   ],
   "presets": [

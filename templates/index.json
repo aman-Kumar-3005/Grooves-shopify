@@ -61,7 +61,7 @@
           "type": "category",
           "settings": {
             "collection": "neck-band",
-            "block_bg_color": "",
+            "block_bg_color": "{{ settings.color_palette.background }}",
             "title": "Earbuds",
             "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/68618bf5875fc.webp?v=1790163463",
             "url": ""
@@ -71,7 +71,7 @@
           "type": "category",
           "settings": {
             "collection": "accessories",
-            "block_bg_color": "",
+            "block_bg_color": "{{ settings.color_palette.background }}",
             "title": "Accessories",
             "image_url": "",
             "url": "shopify://collections/all"
@@ -81,7 +81,7 @@
           "type": "category",
           "settings": {
             "collection": "adaptor",
-            "block_bg_color": "",
+            "block_bg_color": "{{ settings.color_palette.background }}",
             "title": "Adaptor",
             "image_url": "",
             "url": "shopify://collections/all"
@@ -91,7 +91,7 @@
           "type": "category",
           "settings": {
             "collection": "combo",
-            "block_bg_color": "",
+            "block_bg_color": "{{ settings.color_palette.background }}",
             "title": "Combo",
             "image_url": "",
             "url": "shopify://collections/all"
@@ -101,7 +101,7 @@
           "type": "category",
           "settings": {
             "collection": "earbuds",
-            "block_bg_color": "",
+            "block_bg_color": "{{ settings.color_palette.background }}",
             "title": "Earbuds",
             "image_url": "",
             "url": "shopify://collections/all"
@@ -111,7 +111,7 @@
           "type": "category",
           "settings": {
             "collection": "headphones",
-            "block_bg_color": "",
+            "block_bg_color": "{{ settings.color_palette.background }}",
             "title": "Headphones",
             "image_url": "",
             "url": "shopify://collections/all"
@@ -121,7 +121,7 @@
           "type": "category",
           "settings": {
             "collection": "power-bank",
-            "block_bg_color": "",
+            "block_bg_color": "{{ settings.color_palette.background }}",
             "title": "Powerbank",
             "image_url": "",
             "url": "shopify://collections/all"
@@ -131,9 +131,9 @@
           "type": "category",
           "settings": {
             "collection": "offers",
-            "block_bg_color": "",
+            "block_bg_color": "{{ settings.color_palette.background }}",
             "title": "Earbuds",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673",
+            "image_url": "",
             "url": ""
           }
         }

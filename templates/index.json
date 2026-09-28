@@ -67,16 +67,6 @@
             "url": ""
           }
         },
-        "category_9bcadb": {
-          "type": "category",
-          "settings": {
-            "collection": "offers",
-            "block_bg_color": "",
-            "title": "Earbuds",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673",
-            "url": ""
-          }
-        },
         "cat_bestseller": {
           "type": "category",
           "settings": {
@@ -136,17 +126,27 @@
             "image_url": "grooves-cat-powerbank.jpg",
             "url": "shopify://collections/all"
           }
+        },
+        "category_9bcadb": {
+          "type": "category",
+          "settings": {
+            "collection": "offers",
+            "block_bg_color": "",
+            "title": "Earbuds",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673",
+            "url": ""
+          }
         }
       },
       "block_order": [
         "category_mKDHmx",
-        "category_9bcadb",
         "cat_bestseller",
         "cat_fan",
         "cat_soundbars",
         "cat_translucent",
         "cat_powerbank",
-        "cat_earbuds"
+        "cat_earbuds",
+        "category_9bcadb"
       ],
       "settings": {
         "badge_title": "Shop By Categories",

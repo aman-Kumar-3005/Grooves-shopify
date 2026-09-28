@@ -575,8 +575,9 @@
         "video_frrkpA": {
           "type": "video",
           "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1736266188_3540379778268922748_64911717332.mp4",
             "youtube_id": "",
-            "product": "",
+            "product": "grooves-theta-pro",
             "custom_title": ""
           }
         }

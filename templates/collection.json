@@ -506,58 +506,95 @@
         "padding_y": 40
       }
     },
-    "shoppable_videos_A69jKX": {
-      "type": "shoppable-videos",
+    "shoppabl_videos_EqdcLF": {
+      "type": "shoppabl-videos",
       "blocks": {
-        "video_CkmM69": {
+        "video_JYQkTb": {
           "type": "video",
           "settings": {
-            "product": "",
+            "shopify_video": "shopify://files/videos/Grooves Infinity Earbuds.mp4",
+            "youtube_id": "",
+            "product": "grooves-delta-plus",
             "custom_title": ""
           }
         },
-        "video_H3QyRX": {
+        "video_6YhYB3": {
           "type": "video",
           "settings": {
             "shopify_video": "shopify://files/videos/grooves_audio_1772072764_3840746963625776568_64911717332.mp4",
-            "product": "groove-mini",
+            "youtube_id": "",
+            "product": "grooves-bang-60w",
             "custom_title": ""
           }
         },
-        "video_bAKqjf": {
+        "video_kUfyQm": {
           "type": "video",
           "settings": {
-            "product": "",
+            "shopify_video": "shopify://files/videos/grooves_audio_1757052781_3714750295289939891_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-fire-true-wireless-earbuds-ergonomic-bluetooth-in-ear-headphones-with-dual-tone-charging-case-touch-controls-deep-bass",
             "custom_title": ""
           }
         },
-        "video_hCCpP6": {
+        "video_yQVW8M": {
           "type": "video",
           "settings": {
-            "product": "",
+            "shopify_video": "shopify://files/videos/grooves_audio_1755612927_3702671967315569579_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-alpha100",
             "custom_title": ""
           }
         },
-        "video_Azbt7d": {
+        "video_BDAfqn": {
           "type": "video",
           "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1741417489_3583591983125800638_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-metal-blast",
+            "custom_title": ""
+          }
+        },
+        "video_BqeP3h": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1753118286_3681745028289685219_64911717332.mp4",
+            "youtube_id": "",
+            "product": "guru-35w",
+            "custom_title": ""
+          }
+        },
+        "video_W6WdEr": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1759587830_3736015819072475952_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-45-w-pd",
+            "custom_title": ""
+          }
+        },
+        "video_frrkpA": {
+          "type": "video",
+          "settings": {
+            "youtube_id": "",
             "product": "",
             "custom_title": ""
           }
         }
       },
       "block_order": [
-        "video_CkmM69",
-        "video_H3QyRX",
-        "video_bAKqjf",
-        "video_hCCpP6",
-        "video_Azbt7d"
+        "video_JYQkTb",
+        "video_6YhYB3",
+        "video_kUfyQm",
+        "video_yQVW8M",
+        "video_BDAfqn",
+        "video_BqeP3h",
+        "video_W6WdEr",
+        "video_frrkpA"
       ],
-      "name": "Shoppable Videos Slider",
+      "name": "Shoppable VIDEO",
       "settings": {
         "full_width": false,
-        "enable_autoplay": false,
-        "title": "Watch & Shop",
+        "title": "Shop the Trends Everyone’s Talking About.",
         "heading_size": 24,
         "heading_alignment": "left",
         "card_width_desktop": 260,
@@ -580,6 +617,6 @@
     "shogun-optimizer",
     "grooves_support_pNM8TM",
     "custom_trust_badges_6Qyy8J",
-    "shoppable_videos_A69jKX"
+    "shoppabl_videos_EqdcLF"
   ]
 }

@@ -15,13 +15,16 @@
       "type": "tr-footer",
       "settings": {
         "logo_url": "",
-        "logo_width": 110,
+        "logo_width": 150,
         "brand_name": "",
         "brand_desc": "High Definition Audio & Smart Wearables. Engineered for everyday hustle with cinematic acoustics and fast charging.",
         "menu": "main-menu",
         "menu_heading": "Quick Links",
         "footer_menu": "footer",
-        "footer_menu_heading": "Customer Support"
+        "footer_menu_heading": "Customer Support",
+        "support_email": "support@grooveslifestyle.com",
+        "support_phone": "(+91) 9216-9216-61",
+        "support_address": "SB 68 / A95 SECTOR 63A NOIDA 201307"
       }
     }
   },

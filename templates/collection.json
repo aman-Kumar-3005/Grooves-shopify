@@ -453,57 +453,7 @@
         "heading": "Grooves Support",
         "background": "#ffffff",
         "text_color": "#151515",
-        "padding": 36
-      }
-    },
-    "custom_trust_badges_6Qyy8J": {
-      "type": "custom-trust-badges",
-      "blocks": {
-        "feature_BkHd8Y": {
-          "type": "feature",
-          "settings": {
-            "icon": "shipping",
-            "title": "DELIVERY OPTIONS",
-            "text": "See available delivery options at checkout."
-          }
-        },
-        "feature_jrPUCt": {
-          "type": "feature",
-          "settings": {
-            "icon": "shield",
-            "title": "1 YEAR WARRANTY",
-            "text": "Peace of mind with 12 months warranty."
-          }
-        },
-        "feature_mKzdpB": {
-          "type": "feature",
-          "settings": {
-            "icon": "return",
-            "title": "7 DAYS RETURN",
-            "text": "Hassle-free returns and exchanges."
-          }
-        },
-        "feature_TF3xHg": {
-          "type": "feature",
-          "settings": {
-            "icon": "support",
-            "title": "24/7 SUPPORT",
-            "text": "We are here to help you anytime."
-          }
-        }
-      },
-      "block_order": [
-        "feature_BkHd8Y",
-        "feature_jrPUCt",
-        "feature_mKzdpB",
-        "feature_TF3xHg"
-      ],
-      "name": "Trust Badges",
-      "settings": {
-        "bg_color": "#f8f9fa",
-        "icon_color": "#111111",
-        "text_color": "#111111",
-        "padding_y": 40
+        "padding": 0
       }
     },
     "shoppabl_videos_EqdcLF": {
@@ -707,7 +657,6 @@
     "shogun-below",
     "shogun-optimizer",
     "grooves_support_pNM8TM",
-    "custom_trust_badges_6Qyy8J",
     "shoppabl_videos_EqdcLF",
     "tr_support_policies_ym7M4e"
   ]

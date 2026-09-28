@@ -541,6 +541,25 @@
         "font_size": 24
       }
     },
+    "tr_tabbed_tws_cJJHKF": {
+      "type": "tr-tabbed-tws",
+      "name": "Grooves Audio & Soundbars",
+      "settings": {
+        "section_title": "Studio Acoustics & Portable Audio",
+        "tabs_list": "All,TWS Earbuds,Wireless Headphones,Fast Charging Adaptors,Power Banks,Value Combos",
+        "padding_top": 20,
+        "padding_bottom": 40,
+        "earbuds_banner": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/shopby-life-MUZE.webp?v=1770725159",
+        "earbuds_title": "Grooves Signature SoundPrecision . Power . & Comfort",
+        "earbuds_btn": "Shop Now",
+        "earbuds_link": "",
+        "soundbar_banner": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/CARNIwAL_Sphorika_Banner__Desk.webp?v=1781075171",
+        "soundbar_badge": "IMMERSIVE AUDIO EXPERIENCE",
+        "soundbar_title": "Grooves Home Audio & Party Speakers",
+        "soundbar_btn": "BUY NOW",
+        "soundbar_link": ""
+      }
+    },
     "tr_support_policies_ym7M4e": {
       "type": "tr-support-policies",
       "blocks": {
@@ -642,6 +661,7 @@
     "shogun-optimizer",
     "shoppabl_videos_EqdcLF",
     "marque_sec_DxwKEC",
+    "tr_tabbed_tws_cJJHKF",
     "tr_support_policies_ym7M4e"
   ]
 }

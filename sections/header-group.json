@@ -92,11 +92,10 @@
       ],
       "settings": {
         "menu": "main-menu",
-        "logo": "shopify://shop_images/accessories-banner.png",
         "logo_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/logog-removebg-preview.png?v=1789673586",
         "logo_width": 120,
         "logo_width_mobile": 85,
-        "brand_name": "TR"
+        "brand_name": ""
       }
     }
   },

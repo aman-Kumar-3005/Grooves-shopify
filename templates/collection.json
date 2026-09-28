@@ -401,6 +401,110 @@
     "shogun-optimizer": {
       "type": "shogun-optimizer",
       "settings": {}
+    },
+    "grooves_support_pNM8TM": {
+      "type": "grooves-support",
+      "blocks": {
+        "feature_7Vka8k": {
+          "type": "feature",
+          "settings": {
+            "icon": "support",
+            "title": "Customer Support",
+            "copy": "",
+            "link": ""
+          }
+        },
+        "feature_ghBxpU": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Warranty",
+            "copy": "",
+            "link": ""
+          }
+        },
+        "feature_Jyy8yt": {
+          "type": "feature",
+          "settings": {
+            "icon": "faq",
+            "title": "FAQs",
+            "copy": "",
+            "link": ""
+          }
+        },
+        "feature_aUyHcC": {
+          "type": "feature",
+          "settings": {
+            "icon": "box",
+            "title": "Replacement",
+            "copy": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_7Vka8k",
+        "feature_ghBxpU",
+        "feature_Jyy8yt",
+        "feature_aUyHcC"
+      ],
+      "name": "Grooves trust and support",
+      "settings": {
+        "heading": "Grooves Support",
+        "background": "#ffffff",
+        "text_color": "#151515",
+        "padding": 36
+      }
+    },
+    "custom_trust_badges_6Qyy8J": {
+      "type": "custom-trust-badges",
+      "blocks": {
+        "feature_BkHd8Y": {
+          "type": "feature",
+          "settings": {
+            "icon": "shipping",
+            "title": "DELIVERY OPTIONS",
+            "text": "See available delivery options at checkout."
+          }
+        },
+        "feature_jrPUCt": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "1 YEAR WARRANTY",
+            "text": "Peace of mind with 12 months warranty."
+          }
+        },
+        "feature_mKzdpB": {
+          "type": "feature",
+          "settings": {
+            "icon": "return",
+            "title": "7 DAYS RETURN",
+            "text": "Hassle-free returns and exchanges."
+          }
+        },
+        "feature_TF3xHg": {
+          "type": "feature",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 SUPPORT",
+            "text": "We are here to help you anytime."
+          }
+        }
+      },
+      "block_order": [
+        "feature_BkHd8Y",
+        "feature_jrPUCt",
+        "feature_mKzdpB",
+        "feature_TF3xHg"
+      ],
+      "name": "Trust Badges",
+      "settings": {
+        "bg_color": "#f8f9fa",
+        "icon_color": "#111111",
+        "text_color": "#111111",
+        "padding_y": 40
+      }
     }
   },
   "order": [
@@ -410,6 +514,8 @@
     "main",
     "custom_product_slider_V64N6Y",
     "shogun-below",
-    "shogun-optimizer"
+    "shogun-optimizer",
+    "grooves_support_pNM8TM",
+    "custom_trust_badges_6Qyy8J"
   ]
 }

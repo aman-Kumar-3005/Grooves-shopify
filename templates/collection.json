@@ -25,10 +25,10 @@
           "name": "t:names.title",
           "settings": {
             "text": "<h6>{{ closest.collection.title }}</h6>",
-            "width": "100%",
+            "width": "fit-content",
             "max_width": "none",
             "alignment": "left",
-            "type_preset": "h2",
+            "type_preset": "h3",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
             "line_height": "normal",

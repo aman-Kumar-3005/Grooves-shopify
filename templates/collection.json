@@ -9,6 +9,14 @@
  */
 {
   "sections": {
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
+    "shogun-above": {
+      "type": "shogun-above",
+      "settings": {}
+    },
     "section": {
       "type": "section",
       "blocks": {
@@ -59,6 +67,7 @@
         "background_color": "{{ settings.color_palette.foreground }}",
         "enable_audio": false,
         "video_position": "cover",
+        "background_image": "{{ collection.metafields.custom.collection_banner.value }}",
         "background_image_position": "cover",
         "toggle_overlay": true,
         "overlay_color": "#00000061",
@@ -365,16 +374,8 @@
         "padding-block-end": 1
       }
     },
-    "shogun-above": {
-      "type": "shogun-above",
-      "settings": {}
-    },
     "shogun-below": {
       "type": "shogun-below",
-      "settings": {}
-    },
-    "shogun-helper": {
-      "type": "shogun-helper",
       "settings": {}
     },
     "shogun-optimizer": {

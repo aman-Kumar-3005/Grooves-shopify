@@ -648,8 +648,8 @@
         "subheading": "Loved by thousands of music lovers across the country.",
         "bg_color": "#f4f6f8",
         "text_color": "#111111",
-        "padding_y": 60,
-        "auto_scroll": 3
+        "padding_y": 20,
+        "auto_scroll": 0
       }
     },
     "shoppabl_videos_npt6gF": {

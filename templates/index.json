@@ -130,9 +130,9 @@
       "settings": {
         "badge_title": "Shop By Categories",
         "image_bg_color": "{{ settings.color_palette.color1 }}",
-        "image_size": 90,
-        "image_box_padding": 12,
-        "image_border_radius": 16,
+        "image_size": 180,
+        "image_box_padding": 0,
+        "image_border_radius": 10,
         "padding_top": 0,
         "padding_bottom": 0
       }

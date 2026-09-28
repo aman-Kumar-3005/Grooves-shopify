@@ -61,6 +61,7 @@
           "type": "category",
           "settings": {
             "collection": "accessories",
+            "block_bg_color": "",
             "title": "Accessories",
             "image_url": "grooves-cat-accessories.jpg",
             "url": "shopify://collections/all"
@@ -70,6 +71,8 @@
           "type": "category",
           "settings": {
             "collection": "adaptor",
+            "image": "shopify://shop_images/68619b7882257.webp",
+            "block_bg_color": "",
             "title": "Adaptor",
             "image_url": "grooves-cat-adaptor.jpg",
             "url": "shopify://collections/all"
@@ -79,6 +82,7 @@
           "type": "category",
           "settings": {
             "collection": "combo",
+            "block_bg_color": "",
             "title": "Combo",
             "image_url": "grooves-cat-combo.jpg",
             "url": "shopify://collections/all"
@@ -88,6 +92,7 @@
           "type": "category",
           "settings": {
             "collection": "earbuds",
+            "block_bg_color": "",
             "title": "Earbuds",
             "image_url": "grooves-cat-earbuds.jpg",
             "url": "shopify://collections/all"
@@ -97,6 +102,7 @@
           "type": "category",
           "settings": {
             "collection": "headphones",
+            "block_bg_color": "",
             "title": "Headphones",
             "image_url": "grooves-cat-headphones.jpg",
             "url": "shopify://collections/all"
@@ -106,6 +112,7 @@
           "type": "category",
           "settings": {
             "collection": "power-bank",
+            "block_bg_color": "",
             "title": "Powerbank",
             "image_url": "grooves-cat-powerbank.jpg",
             "url": "shopify://collections/all"
@@ -122,8 +129,12 @@
       ],
       "settings": {
         "badge_title": "Shop By Categories",
-        "padding_top": 20,
-        "padding_bottom": 30
+        "image_bg_color": "{{ settings.color_palette.color1 }}",
+        "image_size": 90,
+        "image_box_padding": 12,
+        "image_border_radius": 16,
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "custom_product_slider_x9FpRN": {

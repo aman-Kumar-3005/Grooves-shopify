@@ -4,6 +4,23 @@
   #tr-categories-{{ section.id }} .tr-section-pill {
     color: #000000 !important;
   }
+
+  #tr-categories-{{ section.id }} .tr-category-icon-box {
+    background-color: {{ section.settings.image_bg_color }};
+    padding: {{ section.settings.image_box_padding }}px;
+    border-radius: {{ section.settings.image_border_radius }}px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  #tr-categories-{{ section.id }} .tr-category-icon-box img {
+    width: {{ section.settings.image_size }}px !important;
+    height: {{ section.settings.image_size }}px !important;
+    object-fit: contain;
+    display: block;
+  }
 {%- endstyle -%}
 
 <section class="tr-categories-section" id="tr-categories-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 30 }}px;">
@@ -19,7 +36,7 @@
         {%- liquid
           assign col = block.settings.collection
           if block.settings.image != blank
-            assign c_img = block.settings.image | image_url: width: 300
+            assign c_img = block.settings.image | image_url: width: 400
           elsif block.settings.image_url != blank
             if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
               assign c_img = block.settings.image_url
@@ -27,9 +44,9 @@
               assign c_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
             endif
           elsif col != blank and col.featured_image
-            assign c_img = col.featured_image | image_url: width: 300
+            assign c_img = col.featured_image | image_url: width: 400
           elsif col != blank and col.products.first.featured_image
-            assign c_img = col.products.first.featured_image | image_url: width: 300
+            assign c_img = col.products.first.featured_image | image_url: width: 400
           else
             assign c_img = 'grooves-cat-earbuds.jpg' | asset_url
           endif
@@ -43,13 +60,18 @@
           endif
         -%}
         <a href="{{ c_url }}" class="tr-category-card" {{ block.shopify_attributes }}>
-          <div class="tr-category-icon-box">
+          <div 
+            class="tr-category-icon-box" 
+            {% if block.settings.block_bg_color != blank and block.settings.block_bg_color != 'rgba(0,0,0,0)' %}
+              style="background-color: {{ block.settings.block_bg_color }};"
+            {% endif %}
+          >
             <img 
               src="{{ c_img }}" 
               alt="{{ c_title }}" 
               loading="lazy"
-              width="90"
-              height="90"
+              width="{{ section.settings.image_size }}"
+              height="{{ section.settings.image_size }}"
             >
           </div>
           <span class="tr-category-name">{{ c_title }}</span>
@@ -68,6 +90,50 @@
       "id": "badge_title",
       "label": "Badge Title",
       "default": "EXPLORE GROOVES CATEGORIES"
+    },
+    {
+      "type": "header",
+      "content": "Image & Background Settings"
+    },
+    {
+      "type": "color",
+      "id": "image_bg_color",
+      "label": "Image Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "min": 40,
+      "max": 180,
+      "step": 5,
+      "unit": "px",
+      "label": "Card Image Size",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "image_box_padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Background Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Box Corner Radius",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
     },
     {
       "type": "range",
@@ -104,6 +170,11 @@
           "type": "image_picker",
           "id": "image",
           "label": "Custom Category Icon"
+        },
+        {
+          "type": "color",
+          "id": "block_bg_color",
+          "label": "Custom Image BG Color (Optional)"
         },
         {
           "type": "text",

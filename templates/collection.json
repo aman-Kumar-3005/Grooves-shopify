@@ -374,6 +374,26 @@
         "padding-block-end": 1
       }
     },
+    "custom_product_slider_V64N6Y": {
+      "type": "custom-product-slider",
+      "name": "Dynamic Product Slider",
+      "settings": {
+        "title": "Newly In",
+        "heading_size": 24,
+        "collection": "accessories",
+        "products_to_show": 8,
+        "show_new_badge": true,
+        "new_badge_text": "Newly In",
+        "show_rating_badge": true,
+        "price_prefix": "",
+        "card_radius": 8,
+        "btn_bg_color": "#121212",
+        "btn_text_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "shogun-below": {
       "type": "shogun-below",
       "settings": {}
@@ -388,6 +408,7 @@
     "shogun-above",
     "section",
     "main",
+    "custom_product_slider_V64N6Y",
     "shogun-below",
     "shogun-optimizer"
   ]

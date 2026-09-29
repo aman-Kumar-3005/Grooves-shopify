@@ -2,6 +2,8 @@
   #tr-blogs-{{ section.id }} {
     --tr-accent: {{ section.settings.accent_color | default: '#4cf800' }};
     --tr-card-bg: {{ section.settings.card_bg | default: '#141414' }};
+    --tr-cols-desktop: {{ section.settings.columns_desktop }};
+    --tr-cols-mobile: {{ section.settings.columns_mobile }};
     font-family: inherit;
   }
 
@@ -29,26 +31,67 @@
     letter-spacing: 0.8px;
   }
 
-  /* --- Equal Height Responsive Grid --- */
+  /* --- Grid & Carousel Layout --- */
   #tr-blogs-{{ section.id }} .tr-blogs-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--tr-cols-desktop), 1fr);
     gap: 24px;
     align-items: stretch;
   }
 
-  @media screen and (max-width: 1024px) {
+  /* Desktop Carousel Setup */
+  {% if section.settings.enable_desktop_carousel %}
+  @media screen and (min-width: 1025px) {
+    #tr-blogs-{{ section.id }} .tr-blogs-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Firefox */
+      padding-bottom: 15px; /* shadow clipping fix */
+    }
+    #tr-blogs-{{ section.id }} .tr-blogs-grid::-webkit-scrollbar {
+      display: none; /* Chrome */
+    }
+    #tr-blogs-{{ section.id }} .tr-blogs-grid .tr-blog-card {
+      flex: 0 0 calc((100% - (24px * (var(--tr-cols-desktop) - 1))) / var(--tr-cols-desktop));
+      scroll-snap-align: start;
+    }
+  }
+  {% endif %}
+
+  /* Tablet Adjustments */
+  @media screen and (max-width: 1024px) and (min-width: 768px) {
     #tr-blogs-{{ section.id }} .tr-blogs-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      display: grid; 
     }
   }
 
-  @media screen and (max-width: 600px) {
+  /* Mobile Grid & Carousel Setup */
+  @media screen and (max-width: 767px) {
     #tr-blogs-{{ section.id }} .tr-blogs-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 16px;
+      {% if section.settings.enable_mobile_carousel %}
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        padding-bottom: 15px;
+      {% else %}
+        display: grid;
+        grid-template-columns: repeat(var(--tr-cols-mobile), 1fr);
+      {% endif %}
     }
+    
+    {% if section.settings.enable_mobile_carousel %}
+    #tr-blogs-{{ section.id }} .tr-blogs-grid::-webkit-scrollbar {
+      display: none;
+    }
+    #tr-blogs-{{ section.id }} .tr-blogs-grid .tr-blog-card {
+      flex: 0 0 calc((100% - (16px * (var(--tr-cols-mobile) - 1))) / var(--tr-cols-mobile));
+      scroll-snap-align: start;
+    }
+    {% endif %}
   }
 
   /* --- Dark Blog Card --- */
@@ -58,7 +101,8 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto; /* Changed for flex child */
+    min-height: 100%;
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -175,7 +219,6 @@
     {% endif %}
 
     {%- liquid
-      # Dynamic Blog Detection: Settings -> Current Page Blog -> Default 'news' Blog
       assign real_blog = blogs[section.settings.blog]
       if real_blog == blank or real_blog.articles_count == 0
         if blog != blank and blog.articles_count > 0
@@ -185,7 +228,7 @@
         endif
       endif
 
-      assign limit_count = section.settings.articles_count | default: 4
+      assign limit_count = section.settings.articles_count | default: 8
     -%}
 
     <div class="tr-blogs-grid">
@@ -326,8 +369,47 @@
       "min": 2,
       "max": 12,
       "step": 1,
-      "label": "Articles to Display",
+      "label": "Total Articles to Load",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Layout & Carousel Settings"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Cards per row (Desktop)",
       "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_desktop_carousel",
+      "label": "Enable Swipe/Carousel on Desktop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Cards per row (Mobile)",
+      "default": 1,
+      "info": "Set to 1 or 2 for best visual experience."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_carousel",
+      "label": "Enable Swipe/Carousel on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors & Spacing"
     },
     {
       "type": "color",

@@ -6,6 +6,8 @@ This file can be re-written at any time.
 {% include 'shogun-content-handler' %}
 <html if request.design_mode class="shopify-design-mode" endif lang="{{ request.locale.iso_code }}">
   <head>
+  {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
+  <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"

@@ -220,7 +220,7 @@
         "prod_wave": {
           "type": "product_card",
           "settings": {
-            "product": "grooves-aura-earphone",
+            "product": "grooves-signature2-0",
             "title": "Grooves Wave Clear",
             "price": "₹1,399",
             "compare_price": "₹4,499",
@@ -240,7 +240,7 @@
         "section_title": "EXPLORE GROOVES AUDIO RANGE",
         "padding_top": 20,
         "padding_bottom": 40,
-        "hero_product": "alpha-100x",
+        "hero_product": "grooves-robo-x-thunder",
         "hero_image": "grooves-explore-hero.jpg",
         "hero_title": "Grooves 107 Pro - Fast Charging Wireless Earbuds",
         "hero_tag": "SUPER FAST CHARGING",

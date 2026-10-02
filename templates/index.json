@@ -254,7 +254,7 @@
       "settings": {
         "title": "Newly In",
         "heading_size": 24,
-        "collection": "power-bank",
+        "collection": "combo",
         "products_to_show": 8,
         "show_new_badge": true,
         "new_badge_text": "Newly In",

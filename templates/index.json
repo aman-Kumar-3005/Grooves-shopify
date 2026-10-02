@@ -164,7 +164,7 @@
       "settings": {
         "title": "Best Offers",
         "heading_size": 24,
-        "collection": "offers",
+        "collection": "earbuds",
         "products_to_show": 8,
         "show_new_badge": true,
         "new_badge_text": "Newly In",

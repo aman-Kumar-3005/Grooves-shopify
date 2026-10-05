@@ -397,7 +397,7 @@
       "settings": {
         "title": "Newly In",
         "heading_size": 24,
-        "collection": "combo",
+        "collection": "headphones",
         "products_to_show": 8,
         "show_new_badge": true,
         "new_badge_text": "Newly In",
@@ -1347,7 +1347,7 @@
         "section_height": "custom",
         "section_height_custom": 0,
         "background_media": "none",
-        "background_color": "#e8d5c7",
+        "background_color": "#000000",
         "enable_audio": false,
         "video_position": "cover",
         "background_image_position": "cover",

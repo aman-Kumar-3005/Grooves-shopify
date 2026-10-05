@@ -1,303 +1,291 @@
 /**
- * Grooves Lifestyle Customer Support & Ticketing Backend
- * Handles:
- *  1. Shopify App Proxy HMAC Verification (Security)
- *  2. Warranty Status Lookups
- *  3. Support Ticket Status Lookups
- *  4. Automated Ticket Creation & Sequential ID Generation
- *  5. Automated Confirmation Email Dispatch
- *  6. Turnkey CRM Connectors (Zendesk, Gorgias, Freshdesk)
+ * Grooves customer support service.
+ * Real orders are verified against Shopify Admin GraphQL before any order or
+ * warranty information is returned. Unknown references never receive demo data.
  */
-
+require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
-const SHOPIFY_API_SECRET = process.env.SHOPIFY_API_SECRET || 'grooves_secret_key_demo';
-
-// File Upload configuration (stored in uploads/)
-const uploadDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
-    cb(null, unique);
-  }
-});
-const upload = multer({
-  storage,
-  limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
-});
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Data Persistence Store (File-backed SQLite / JSON DB)
+const PORT = Number(process.env.PORT) || 4000;
+const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION || '2026-10';
+const SHOPIFY_STORE_DOMAIN = String(process.env.SHOPIFY_STORE_DOMAIN || '').toLowerCase();
+const SHOPIFY_ADMIN_ACCESS_TOKEN = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN || '';
+const SHOPIFY_API_SECRET = process.env.SHOPIFY_API_SECRET || '';
+const WARRANTY_DAYS = Math.max(1, Number(process.env.WARRANTY_DAYS) || 365);
 const DB_FILE = path.join(__dirname, 'data.json');
+const UPLOAD_DIR = path.join(__dirname, 'uploads');
+const MAX_LOOKUPS = 12;
+const RATE_WINDOW_MS = 15 * 60 * 1000;
+const lookupBuckets = new Map();
+
+fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+
+const allowedUploads = new Map([
+  ['image/jpeg', '.jpg'], ['image/png', '.png'], ['image/webp', '.webp'], ['application/pdf', '.pdf']
+]);
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, done) => done(null, UPLOAD_DIR),
+    filename: (_req, file, done) => done(null, `${Date.now()}-${crypto.randomUUID()}${allowedUploads.get(file.mimetype) || ''}`)
+  }),
+  fileFilter: (_req, file, done) => done(null, allowedUploads.has(file.mimetype)),
+  limits: { fileSize: 10 * 1024 * 1024, files: 5 }
+});
+
+app.disable('x-powered-by');
+app.use(express.json({ limit: '32kb' }));
+app.use(express.urlencoded({ extended: false, limit: '32kb' }));
+
 function loadDatabase() {
-  if (!fs.existsSync(DB_FILE)) {
-    const initialData = {
-      warranties: {
-        'INV-2026-001': {
-          invoice: 'INV-2026-001',
-          customer_name: 'Rahul Sharma',
-          customer_email: 'rahul.s@example.com',
-          product: 'Grooves Pulse Pro ANC Earbuds (Carbon Black)',
-          purchaseDate: '2026-01-15',
-          durationDays: 365,
-          status: 'Active'
-        },
-        'INV-2026-002': {
-          invoice: 'INV-2026-002',
-          customer_name: 'Aman Patel',
-          customer_email: 'aman.p@example.com',
-          product: 'Grooves Turbo 20,000mAh Power Bank (Matte Black)',
-          purchaseDate: '2026-02-01',
-          durationDays: 365,
-          status: 'Active'
-        },
-        'INV-2025-089': {
-          invoice: 'INV-2025-089',
-          customer_name: 'Sneha Kulkarni',
-          customer_email: 'sneha.k@example.com',
-          product: 'Grooves SoundWave Over-Ear Headphones',
-          purchaseDate: '2025-01-10',
-          durationDays: 365,
-          status: 'Expired'
-        }
-      },
-      tickets: {
-        'GRV-TKT-2026-000001': {
-          ticketNumber: 'GRV-TKT-2026-000001',
-          name: 'Rahul Sharma',
-          email: 'rahul.s@example.com',
-          invoice: 'INV-2026-001',
-          product: 'Grooves Pulse Pro ANC Earbuds',
-          category: 'Audio / Sound Distortion',
-          description: 'Right earbud sound volume is significantly lower than the left one after a run.',
-          status: 'In Progress',
-          updatedAt: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
-          notes: 'Diagnostic completed by Grooves Audio Lab. Replacement right earbud packed and scheduled for courier dispatch via Bluedart.'
-        },
-        'GRV-TKT-2026-000002': {
-          ticketNumber: 'GRV-TKT-2026-000002',
-          name: 'Priya Joshi',
-          email: 'priya.j@example.com',
-          invoice: 'INV-2026-003',
-          product: 'Grooves 65W GaN Fast Adaptor',
-          category: 'Battery / Charging Issue',
-          description: 'Charger gets warm when charging laptop and stopped fast charging.',
-          status: 'Resolved',
-          updatedAt: new Date(Date.now() - 24 * 3600 * 1000).toISOString(),
-          notes: 'Replacement adapter delivered to customer address. Ticket resolved and closed.'
-        }
-      },
-      nextTicketSeq: 3
-    };
-    fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2), 'utf8');
-    return initialData;
-  }
+  if (!fs.existsSync(DB_FILE)) return { tickets: {}, nextTicketSeq: 1 };
   try {
-    return JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
-  } catch (e) {
-    console.error('Failed reading data file:', e);
-    return { warranties: {}, tickets: {}, nextTicketSeq: 1 };
+    const parsed = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+    return { tickets: parsed.tickets || {}, nextTicketSeq: Number(parsed.nextTicketSeq) || 1 };
+  } catch (error) {
+    console.error('Ticket database could not be read:', error.message);
+    return { tickets: {}, nextTicketSeq: 1 };
   }
 }
 
-function saveDatabase(db) {
-  try {
-    fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf8');
-  } catch (e) {
-    console.error('Failed saving data file:', e);
-  }
+function saveDatabase(database) {
+  const temporary = `${DB_FILE}.tmp`;
+  fs.writeFileSync(temporary, JSON.stringify(database, null, 2), 'utf8');
+  fs.renameSync(temporary, DB_FILE);
 }
 
-/**
- * Shopify App Proxy HMAC Security Verifier
- * Verifies that the request genuinely originated from Shopify's App Proxy gateway.
- */
-function verifyShopifyProxyHmac(req) {
-  if (process.env.NODE_ENV !== 'production' && !req.query.signature) {
-    // In local dev/testing without active proxy tunnel, allow requests
-    return true;
-  }
+function removeUploadedFiles(files) {
+  (files || []).forEach((file) => {
+    try { fs.unlinkSync(file.path); } catch (_) { /* File may already be unavailable. */ }
+  });
+}
+
+function verifyShopifyProxy(req) {
+  if (process.env.NODE_ENV !== 'production' && !req.query.signature) return true;
+  if (!SHOPIFY_API_SECRET || typeof req.query.signature !== 'string') return false;
+  const timestamp = Number(req.query.timestamp);
+  if (!Number.isFinite(timestamp) || Math.abs(Date.now() / 1000 - timestamp) > 300) return false;
 
   const query = { ...req.query };
-  const signature = query.signature;
+  const supplied = query.signature;
   delete query.signature;
-
-  const sortedParams = Object.keys(query)
-    .sort()
-    .map((k) => `${k}=${Array.isArray(query[k]) ? query[k].join(',') : query[k]}`)
-    .join('');
-
-  const calculatedHmac = crypto
-    .createHmac('sha256', SHOPIFY_API_SECRET)
-    .update(sortedParams)
-    .digest('hex');
-
-  return calculatedHmac === signature;
+  const message = Object.keys(query).sort().map((key) => `${key}=${Array.isArray(query[key]) ? query[key].join(',') : query[key]}`).join('');
+  const expected = crypto.createHmac('sha256', SHOPIFY_API_SECRET).update(message).digest('hex');
+  const suppliedBuffer = Buffer.from(supplied, 'utf8');
+  const expectedBuffer = Buffer.from(expected, 'utf8');
+  return suppliedBuffer.length === expectedBuffer.length && crypto.timingSafeEqual(suppliedBuffer, expectedBuffer);
 }
 
-// Health Check
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', service: 'grooves-support-backend', timestamp: new Date().toISOString() });
-});
-
-/**
- * 1. STATUS LOOKUP ENDPOINT
- * Route: POST /apps/grooves-support/status
- * Body: { type: 'warranty' | 'ticket', reference: 'INV-...' | 'GRV-TKT-...' }
- */
-app.post(['/apps/grooves-support/status', '/api/status'], (req, res) => {
-  if (!verifyShopifyProxyHmac(req)) {
-    return res.status(403).json({ error: 'Unauthorized: Invalid Shopify HMAC signature' });
+function requireProxy(req, res, next) {
+  if (!verifyShopifyProxy(req)) return res.status(403).json({ error: 'Unauthorized request.' });
+  const proxyShop = String(req.query.shop || '').toLowerCase();
+  if (proxyShop && SHOPIFY_STORE_DOMAIN && proxyShop !== SHOPIFY_STORE_DOMAIN) {
+    return res.status(403).json({ error: 'Store mismatch.' });
   }
+  next();
+}
 
-  const { type, reference } = req.body || {};
-  if (!type || !reference) {
-    return res.status(400).json({ error: 'Missing type or reference parameter' });
+function rateLimit(req, res, next) {
+  const key = req.ip || req.socket.remoteAddress || 'unknown';
+  const now = Date.now();
+  const bucket = lookupBuckets.get(key);
+  if (!bucket || now - bucket.startedAt >= RATE_WINDOW_MS) {
+    lookupBuckets.set(key, { startedAt: now, count: 1 });
+    return next();
   }
+  bucket.count += 1;
+  if (bucket.count > MAX_LOOKUPS) return res.status(429).json({ error: 'Too many attempts. Please try again later.' });
+  next();
+}
 
-  const db = loadDatabase();
-  const refClean = String(reference).trim().toUpperCase();
+function normalizeOrderReference(value) {
+  return String(value || '').trim().replace(/^#/, '').toUpperCase();
+}
 
-  if (type === 'warranty') {
-    let warranty = db.warranties[refClean];
-    if (!warranty) {
-      // Calculate realistic warranty for any registered invoice format
-      warranty = {
-        invoice: refClean,
-        product: 'Grooves Pulse Pro ANC Earbuds (Carbon Black)',
-        purchaseDate: '2026-01-20',
-        durationDays: 365,
-        status: 'Active'
-      };
-    }
+function normalizeEmail(value) {
+  return String(value || '').trim().toLowerCase();
+}
 
-    const purchase = new Date(warranty.purchaseDate);
-    const now = new Date();
-    const elapsedDays = Math.max(0, Math.floor((now - purchase) / (1000 * 60 * 60 * 24)));
-    const remainingDays = Math.max(0, warranty.durationDays - elapsedDays);
-    const isActive = remainingDays > 0;
+function validEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
 
-    return res.json({
-      product: warranty.product,
-      purchaseDate: warranty.purchaseDate,
-      durationDays: warranty.durationDays,
-      remainingDays: remainingDays,
-      status: isActive ? 'Active' : 'Expired',
-      updatedAt: new Date().toISOString()
-    });
-  } else if (type === 'ticket') {
-    const ticket = db.tickets[refClean];
-    if (ticket) {
-      return res.json({
-        ticketNumber: ticket.ticketNumber,
-        product: ticket.product,
-        category: ticket.category,
-        status: ticket.status,
-        updatedAt: ticket.updatedAt,
-        notes: ticket.notes
-      });
-    }
+function graphqlSearchValue(value) {
+  return String(value).replace(/[^a-zA-Z0-9@._+\-]/g, '');
+}
 
-    // Default for newly created tickets
-    return res.json({
-      ticketNumber: refClean,
-      product: 'Grooves Lifestyle Product',
-      category: 'Support Inquiry',
-      status: 'Open',
-      updatedAt: new Date().toISOString(),
-      notes: 'Ticket registered. Our technical support engineer is reviewing your request.'
-    });
+function assertShopifyConfigured() {
+  if (!SHOPIFY_STORE_DOMAIN || !SHOPIFY_ADMIN_ACCESS_TOKEN) {
+    const error = new Error('Shopify Admin API is not configured.');
+    error.status = 503;
+    throw error;
   }
-
-  return res.status(400).json({ error: 'Unknown lookup type' });
-});
-
-/**
- * 2. CREATE SUPPORT TICKET ENDPOINT
- * Route: POST /apps/grooves-support/create-ticket
- * Handles customer ticket creation with optional defect/invoice file attachments
- */
-app.post(['/apps/grooves-support/create-ticket', '/api/create-ticket'], upload.any(), async (req, res) => {
-  if (!verifyShopifyProxyHmac(req)) {
-    return res.status(403).json({ error: 'Unauthorized: Invalid Shopify HMAC signature' });
+  if (!/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(SHOPIFY_STORE_DOMAIN)) {
+    const error = new Error('Invalid Shopify store domain configuration.');
+    error.status = 503;
+    throw error;
   }
+}
 
-  const { name, email, invoice, product, category, description, ticketNumber } = req.body || {};
-
-  if (!name || !email || !description) {
-    return res.status(400).json({ error: 'Name, email, and description are required.' });
-  }
-
-  const db = loadDatabase();
-  const nextSeq = db.nextTicketSeq || (Object.keys(db.tickets).length + 1);
-  const formattedNumber = ticketNumber || `GRV-TKT-2026-${String(nextSeq).padStart(6, '0')}`;
-  db.nextTicketSeq = nextSeq + 1;
-
-  const uploadedFiles = (req.files || []).map((f) => ({
-    filename: f.filename,
-    originalName: f.originalname,
-    size: f.size
-  }));
-
-  const createdTicket = {
-    ticketNumber: formattedNumber,
-    name: String(name).trim(),
-    email: String(email).trim(),
-    invoice: String(invoice || '').trim().toUpperCase(),
-    product: String(product || 'Grooves Product').trim(),
-    category: String(category || 'General Support').trim(),
-    description: String(description).trim(),
-    status: 'Open',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    notes: 'Support request logged. Assigned to support desk for triage within 24 hours.',
-    attachments: uploadedFiles
-  };
-
-  db.tickets[formattedNumber.toUpperCase()] = createdTicket;
-  saveDatabase(db);
-
-  // Trigger automated email confirmation (Mock / Log)
-  console.log(`[Grooves Support] Automated confirmation email dispatched to: ${email}`);
-  console.log(`Ticket: ${formattedNumber} | Issue: ${category} | Product: ${product}`);
-
-  // Optional: Forward to CRM Helpdesk (Zendesk / Gorgias / Freshdesk)
-  if (process.env.CRM_WEBHOOK_URL) {
-    try {
-      // Forward ticket payload to CRM
-      console.log(`Forwarding ticket ${formattedNumber} to CRM webhook`);
-    } catch (crmErr) {
-      console.error('CRM forwarding error:', crmErr.message);
-    }
-  }
-
-  return res.status(201).json({
-    success: true,
-    ticketNumber: formattedNumber,
-    message: 'Support ticket generated successfully',
-    ticket: createdTicket
+async function shopifyGraphql(query, variables) {
+  assertShopifyConfigured();
+  const response = await fetch(`https://${SHOPIFY_STORE_DOMAIN}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Shopify-Access-Token': SHOPIFY_ADMIN_ACCESS_TOKEN },
+    body: JSON.stringify({ query, variables }),
+    signal: AbortSignal.timeout(10000)
   });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || payload.errors) {
+    console.error('Shopify GraphQL error:', response.status, JSON.stringify(payload.errors || payload));
+    const error = new Error('Shopify order service unavailable.');
+    error.status = 502;
+    throw error;
+  }
+  return payload.data;
+}
+
+async function findVerifiedOrder(reference, email, loggedInCustomerId) {
+  const orderReference = normalizeOrderReference(reference);
+  const normalizedEmail = normalizeEmail(email);
+  if (!orderReference || orderReference.length > 80 || !validEmail(normalizedEmail)) return null;
+  const search = `name:${graphqlSearchValue(orderReference)} email:${graphqlSearchValue(normalizedEmail)}`;
+  const data = await shopifyGraphql(`
+    query FindCustomerOrder($query: String!) {
+      orders(first: 5, query: $query, sortKey: CREATED_AT, reverse: true) {
+        nodes {
+          id name confirmationNumber processedAt displayFinancialStatus displayFulfillmentStatus email
+          customer { legacyResourceId }
+          currentTotalPriceSet { shopMoney { amount currencyCode } }
+          lineItems(first: 50) { nodes { name quantity sku } }
+        }
+      }
+    }
+  `, { query: search });
+
+  return (data.orders?.nodes || []).find((order) => {
+    const exactOrder = normalizeOrderReference(order.name) === orderReference || String(order.confirmationNumber || '').toUpperCase() === orderReference;
+    const exactEmail = normalizeEmail(order.email) === normalizedEmail;
+    const customerMatches = !loggedInCustomerId || String(order.customer?.legacyResourceId || '') === String(loggedInCustomerId);
+    return exactOrder && exactEmail && customerMatches;
+  }) || null;
+}
+
+function warrantyFromOrder(order) {
+  const purchase = new Date(order.processedAt);
+  const expiresAt = new Date(purchase.getTime() + WARRANTY_DAYS * 86400000);
+  const remainingDays = Math.max(0, Math.ceil((expiresAt.getTime() - Date.now()) / 86400000));
+  const disqualified = ['REFUNDED', 'VOIDED', 'EXPIRED'].includes(order.displayFinancialStatus);
+  return {
+    status: disqualified ? 'Not eligible' : (remainingDays > 0 ? 'Active' : 'Expired'),
+    orderNumber: order.name,
+    purchaseDate: order.processedAt,
+    durationDays: WARRANTY_DAYS,
+    remainingDays: disqualified ? 0 : remainingDays,
+    expiresAt: expiresAt.toISOString(),
+    financialStatus: order.displayFinancialStatus,
+    fulfillmentStatus: order.displayFulfillmentStatus,
+    total: order.currentTotalPriceSet?.shopMoney || null,
+    items: (order.lineItems?.nodes || []).map((item) => ({ title: item.name, quantity: item.quantity, sku: item.sku || '' }))
+  };
+}
+
+app.get('/health', (_req, res) => res.json({
+  status: 'ok',
+  shopifyConfigured: Boolean(SHOPIFY_STORE_DOMAIN && SHOPIFY_ADMIN_ACCESS_TOKEN),
+  timestamp: new Date().toISOString()
+}));
+
+app.post(['/apps/grooves-support/status', '/api/status'], requireProxy, rateLimit, async (req, res) => {
+  try {
+    const type = String(req.body?.type || '');
+    const reference = String(req.body?.reference || '').trim();
+    const email = normalizeEmail(req.body?.email);
+    if (!['warranty', 'ticket'].includes(type) || !reference || !validEmail(email)) {
+      return res.status(400).json({ error: 'Valid type, reference, and registered email are required.' });
+    }
+
+    if (type === 'warranty') {
+      const order = await findVerifiedOrder(reference, email, req.query.logged_in_customer_id);
+      if (!order) return res.status(404).json({ error: 'No data found.' });
+      return res.json({ ...warrantyFromOrder(order), verifiedEmail: email });
+    }
+
+    const database = loadDatabase();
+    const ticket = database.tickets[reference.toUpperCase()];
+    if (!ticket || normalizeEmail(ticket.email) !== email) return res.status(404).json({ error: 'No data found.' });
+    return res.json({
+      ticketNumber: ticket.ticketNumber,
+      product: ticket.product,
+      category: ticket.category,
+      status: ticket.status,
+      updatedAt: ticket.updatedAt,
+      notes: ticket.notes
+    });
+  } catch (error) {
+    console.error('Status lookup failed:', error.message);
+    res.status(error.status || 500).json({ error: error.message || 'Status lookup failed.' });
+  }
+});
+
+app.post(['/apps/grooves-support/create-ticket', '/api/create-ticket'], requireProxy, rateLimit, upload.array('attachments', 5), async (req, res) => {
+  try {
+    const name = String(req.body?.name || '').trim();
+    const email = normalizeEmail(req.body?.email);
+    const invoice = String(req.body?.invoice || '').trim();
+    const product = String(req.body?.product || '').trim();
+    const category = String(req.body?.category || '').trim();
+    const description = String(req.body?.description || '').trim();
+    if (!name || name.length > 100 || !validEmail(email) || !invoice || !product || !category || description.length < 10 || description.length > 3000) {
+      removeUploadedFiles(req.files);
+      return res.status(400).json({ error: 'Please complete all required fields with valid information.' });
+    }
+
+    const order = await findVerifiedOrder(invoice, email, req.query.logged_in_customer_id);
+    if (!order) {
+      removeUploadedFiles(req.files);
+      return res.status(404).json({ error: 'No matching Shopify order found.' });
+    }
+
+    const database = loadDatabase();
+    const sequence = database.nextTicketSeq++;
+    const ticketNumber = `GRV-TKT-${new Date().getFullYear()}-${String(sequence).padStart(6, '0')}`;
+    const now = new Date().toISOString();
+    database.tickets[ticketNumber] = {
+      ticketNumber,
+      name,
+      email,
+      invoice: order.name,
+      orderId: order.id,
+      product,
+      category,
+      description,
+      status: 'Open',
+      createdAt: now,
+      updatedAt: now,
+      notes: 'Request received. Grooves Support will review the case.',
+      attachments: (req.files || []).map((file) => ({ filename: file.filename, originalName: file.originalname, size: file.size, mimeType: file.mimetype }))
+    };
+    saveDatabase(database);
+    res.status(201).json({ success: true, ticketNumber, message: 'Support ticket created.' });
+  } catch (error) {
+    removeUploadedFiles(req.files);
+    console.error('Ticket creation failed:', error.message);
+    res.status(error.status || 500).json({ error: error.message || 'Ticket creation failed.' });
+  }
+});
+
+app.use((error, _req, res, _next) => {
+  if (error instanceof multer.MulterError) return res.status(400).json({ error: 'Attachment limit exceeded.' });
+  console.error('Unhandled request error:', error.message);
+  res.status(500).json({ error: 'Unexpected server error.' });
 });
 
 app.listen(PORT, () => {
-  console.log(`Grooves Support Backend running on http://localhost:${PORT}`);
-  console.log(`Shopify App Proxy endpoints:`);
-  console.log(` - POST /apps/grooves-support/status`);
-  console.log(` - POST /apps/grooves-support/create-ticket`);
+  console.log(`Grooves support service listening on port ${PORT}`);
+  console.log(`Shopify integration: ${SHOPIFY_STORE_DOMAIN && SHOPIFY_ADMIN_ACCESS_TOKEN ? 'configured' : 'not configured'}`);
 });

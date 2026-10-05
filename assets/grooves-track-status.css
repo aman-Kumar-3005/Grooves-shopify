@@ -104,6 +104,12 @@
   margin-bottom: 8px;
 }
 
+.g-track__card input + label,
+.g-track__card select + label,
+.g-track__card textarea + label {
+  margin-top: 16px;
+}
+
 .g-track__card input,
 .g-track__card select,
 .g-track__card textarea {
@@ -565,6 +571,50 @@
   color: #ffffff !important;
 }
 
+.g-track__privacy-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px auto 32px;
+  padding: 14px 18px;
+  max-width: 780px;
+  border: 1px solid rgba(179, 255, 0, .24);
+  border-radius: 999px;
+  background: rgba(179, 255, 0, .07);
+  color: #d9d9d9;
+  backdrop-filter: blur(12px);
+}
+
+.g-track__privacy-note > span { color: var(--g-accent, #b3ff00); }
+.g-track__privacy-note p { margin: 0; font-size: 12px; line-height: 1.5; }
+.g-status-kicker { display: block; margin-bottom: 3px; color: #6a6a6a; font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.g-status-detail-value.is-active { color: #0d8239; }
+.g-status-detail-value.is-expired { color: #c81e1e; }
+.g-order-items { padding: 14px; border: 1px solid #e6e6e6; border-radius: 12px; background: #fff; }
+.g-order-items > div { display: flex; justify-content: space-between; gap: 16px; padding-top: 9px; color: #222; font-size: 13px; }
+.g-order-items strong { white-space: nowrap; }
+
+/* Premium support portal surface */
+.g-track::before {
+  content: '';
+  position: absolute;
+  width: min(58vw, 720px);
+  aspect-ratio: 1;
+  top: -24%;
+  left: 50%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(179,255,0,.12), transparent 65%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.g-track { position: relative; isolation: isolate; }
+.g-track__card { border-color: rgba(255,255,255,.16); box-shadow: 0 25px 70px rgba(0,0,0,.28); }
+.g-track__card:hover { transform: translateY(-4px); box-shadow: 0 32px 80px rgba(0,0,0,.36), 0 0 0 1px rgba(179,255,0,.11); }
+.g-track__intro h1 { text-shadow: 0 0 45px rgba(179,255,0,.12); }
+.g-warranty-fill { box-shadow: 0 0 18px rgba(13,130,57,.38); }
+
 .g-track__help a {
   color: #ffffff !important;
   font-weight: 700;
@@ -621,4 +671,5 @@
     grid-template-columns: 1fr;
     gap: 10px;
   }
+  .g-track__privacy-note { align-items: flex-start; border-radius: 16px; }
 }

@@ -1,2 +1,7 @@
 .tools/
 outputs/
+backend/.env
+backend/data.json
+backend/data.json.tmp
+backend/uploads/
+backend/node_modules/

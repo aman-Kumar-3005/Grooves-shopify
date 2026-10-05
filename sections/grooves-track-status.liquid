@@ -3,7 +3,7 @@
   <div class="g-track__intro">
     <span class="g-eyebrow" style="color: #ffffff !important; opacity: 0.95;">GROOVES SUPPORT</span>
     <h1 style="color: #ffffff !important;">{{ section.settings.heading | default: 'TRACK YOUR STATUS' | upcase }}</h1>
-    <p style="color: #ffffff !important; opacity: 0.9;">{{ section.settings.intro | default: 'Invoice number se warranty aur ticket number se support request ka current status dekhein.' }}</p>
+    <p style="color: #ffffff !important; opacity: 0.9;">{{ section.settings.intro | default: 'Order number se warranty aur ticket number se support request ka current status dekhein.' }}</p>
   </div>
 
   <!-- Top 2-Column Lookup Grid -->
@@ -11,9 +11,11 @@
     <!-- Card 1: Warranty Status -->
     <form class="g-track__card" data-lookup="warranty" novalidate>
       <h2>WARRANTY STATUS</h2>
-      <p>Apna invoice number daal kar warranty registration ka status check karein.</p>
-      <label for="WarrantyInvoice-{{ section.id }}">Invoice Number</label>
-      <input id="WarrantyInvoice-{{ section.id }}" name="reference" type="text" maxlength="80" autocomplete="off" required placeholder="Invoice number">
+      <p>Shopify order number aur checkout email se order aur remaining warranty verify karein.</p>
+      <label for="WarrantyInvoice-{{ section.id }}">Order Number</label>
+      <input id="WarrantyInvoice-{{ section.id }}" name="reference" type="text" maxlength="80" autocomplete="off" required placeholder="Example: #1001">
+      <label for="WarrantyEmail-{{ section.id }}">Order Email</label>
+      <input id="WarrantyEmail-{{ section.id }}" name="email" type="email" maxlength="160" autocomplete="email" required placeholder="Email used at checkout">
       <button class="g-button" type="submit">Check Warranty Status</button>
       <div class="g-track__result" role="status" aria-live="polite" data-result hidden></div>
     </form>
@@ -21,12 +23,19 @@
     <!-- Card 2: Ticket Status -->
     <form class="g-track__card" data-lookup="ticket" novalidate>
       <h2>TICKET STATUS</h2>
-      <p>Apna support ticket number daal kar latest status check karein.</p>
+      <p>Ticket number aur registered email daal kar latest status check karein.</p>
       <label for="SupportTicket-{{ section.id }}">Ticket Number</label>
       <input id="SupportTicket-{{ section.id }}" name="reference" type="text" maxlength="80" autocomplete="off" required placeholder="GRV-TKT-2026-000001">
+      <label for="TicketLookupEmail-{{ section.id }}">Registered Email</label>
+      <input id="TicketLookupEmail-{{ section.id }}" name="email" type="email" maxlength="160" autocomplete="email" required placeholder="Email used while creating ticket">
       <button class="g-button" type="submit">Check Ticket Status</button>
       <div class="g-track__result" role="status" aria-live="polite" data-result hidden></div>
     </form>
+  </div>
+
+  <div class="g-track__privacy-note">
+    <span aria-hidden="true">◆</span>
+    <p><strong>Secure verification</strong> — Details are shown only when the order or ticket number matches the registered email. We never display payment or full address information.</p>
   </div>
 
   <!-- Card 3: Create Support Ticket -->
@@ -35,7 +44,7 @@
       <div class="g-track__create-header">
         <span class="g-badge-pill">NEED HELP?</span>
         <h2>CREATE SUPPORT TICKET</h2>
-        <p>Facing an issue with your Grooves product? Raise a support ticket and our engineering team will resolve it within 24-48 hours.</p>
+        <p>Facing an issue with your Grooves product? Verify your order and raise a support ticket for review by the Grooves support team.</p>
       </div>
 
       <div class="g-track__form-grid">
@@ -48,8 +57,8 @@
           <input id="TicketEmail-{{ section.id }}" name="customer_email" type="email" required placeholder="name@example.com" autocomplete="email">
         </div>
         <div class="g-track__field">
-          <label for="TicketInvoice-{{ section.id }}">Invoice Number <span class="g-req">*</span></label>
-          <input id="TicketInvoice-{{ section.id }}" name="invoice_number" type="text" required placeholder="e.g. INV-2026-001">
+          <label for="TicketInvoice-{{ section.id }}">Shopify Order Number <span class="g-req">*</span></label>
+          <input id="TicketInvoice-{{ section.id }}" name="invoice_number" type="text" required placeholder="e.g. #1001">
         </div>
         <div class="g-track__field">
           <label for="TicketProduct-{{ section.id }}">Product Model <span class="g-req">*</span></label>
@@ -117,7 +126,7 @@
       "type": "text",
       "id": "intro",
       "label": "Intro",
-      "default": "Invoice number se warranty aur ticket number se support request ka current status dekhein."
+      "default": "Order number se warranty aur ticket number se support request ka current status dekhein."
     },
     {
       "type": "text",

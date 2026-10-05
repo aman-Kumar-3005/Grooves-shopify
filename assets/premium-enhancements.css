@@ -8,6 +8,23 @@
   --premium-ease: cubic-bezier(.2, .75, .25, 1);
 }
 
+html { scroll-padding-top: calc(var(--header-height, 72px) + 18px); }
+.tr-theme .page-wrapper { scroll-behavior: smooth; }
+
+.premium-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+  transform: scaleX(var(--premium-scroll, 0));
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--premium-lime), #e8ffad);
+  box-shadow: 0 0 14px rgba(187,255,10,.65);
+}
+
 .tr-theme .content-for-layout {
   background:
     radial-gradient(circle at 10% 10%, rgba(187, 255, 10, .055), transparent 28rem),
@@ -176,6 +193,45 @@
   background: linear-gradient(115deg, rgba(255,255,255,.12), transparent 28%, transparent 70%, rgba(187,255,10,.08));
 }
 
+/* Samsung-inspired image stages: clipped entrance plus gentle pointer depth. */
+.premium-media {
+  --premium-media-x: 0px;
+  --premium-media-y: 0px;
+  --premium-media-scale: 1.02;
+  overflow: clip;
+}
+
+.premium-motion-ready .premium-media:not(.is-media-visible) {
+  clip-path: inset(0 0 100% 0 round 24px);
+}
+
+.premium-media.is-media-visible {
+  clip-path: inset(0 0 0 0 round 0);
+  transition: clip-path 1s var(--premium-ease);
+}
+
+.premium-media > :is(img, video),
+.premium-media picture > img {
+  transform: translate3d(var(--premium-media-x), var(--premium-media-y), 0) scale(var(--premium-media-scale));
+  transition: transform .65s var(--premium-ease), filter .45s ease;
+  will-change: transform;
+}
+
+.premium-media:hover { --premium-media-scale: 1.055; }
+
+.tr-theme :is(.tr-showcase-banner, .tr-speaker-card, .tr-reel-card)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at var(--premium-pointer-x, 50%) var(--premium-pointer-y, 50%), rgba(255,255,255,.18), transparent 28%);
+  transition: opacity .35s ease;
+}
+
+.tr-theme :is(.tr-showcase-banner, .tr-speaker-card, .tr-reel-card):hover::before { opacity: 1; }
+
 /* Category icons feel tactile without becoming noisy */
 .tr-theme .tr-category-icon-box {
   position: relative;
@@ -226,4 +282,6 @@
     transition-duration: .01ms !important;
   }
   .premium-motion-ready [data-premium-reveal] { opacity: 1; transform: none; }
+  .premium-motion-ready .premium-media:not(.is-media-visible) { clip-path: none; }
+  .premium-scroll-progress { display: none; }
 }

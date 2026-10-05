@@ -1,152 +1,75 @@
-# Grooves Lifestyle Support Tracking & Ticketing Backend Architecture
+# Grooves order, warranty, and support backend
 
-This backend service powers the customer support portal for **Grooves Lifestyle** ([`grooveslifestyle.com`](https://grooveslifestyle.com)), providing:
-1. **Warranty Status Verification** (Invoice lookups, warranty duration, remaining days, Active/Expired badge).
-2. **Ticket Status Lookups** (Ticket lifecycle state: Open, In Progress, Resolved, support engineer notes).
-3. **Automated Ticket Creation** (Captures customer details, issues, and defect attachments, generates sequential `GRV-TKT-2026-XXXXXX` references).
-4. **Automated Email Confirmations** to customers.
-5. **Shopify App Proxy Integration** with HMAC SHA-256 cryptographic security verification.
-6. **CRM / Helpdesk Integrations** (Zendesk, Gorgias, Freshdesk).
+This service powers `/pages/track-status`. It verifies a Shopify order number and checkout email before returning order or warranty information. Unknown numbers, mismatched emails, and unknown tickets return `404 No data found`; there is no demo-data fallback.
 
----
+## What is implemented
 
-## 1. Shopify App Proxy Configuration
+- Shopify Admin GraphQL order lookup by order number and checkout email.
+- Optional logged-in customer ownership check from the signed Shopify app-proxy request.
+- Remaining warranty calculation from the real order purchase date.
+- Safe public response containing order status, product names, total, and warranty dates—never payment details or a full address.
+- Ticket creation only after the Shopify order and email match.
+- Ticket lookup requires both ticket number and registered email.
+- Shopify app-proxy HMAC verification, five-minute timestamp tolerance, timing-safe signature comparison, input limits, attachment restrictions, and lookup rate limiting.
 
-To connect this backend to your live Shopify store so requests from `/pages/track-status` go directly to your backend over Shopify's proxy:
+## Merchant setup required
 
-1. Go to your **Shopify Partners Dashboard** or **Shopify Store Admin > Apps > App Setup**.
-2. Scroll to the **App Proxy** section and click **Set up proxy**.
-3. Configure the following values:
-   - **Subpath prefix**: `apps`
-   - **Subpath**: `grooves-support`
-   - **Proxy URL**: `https://your-backend-domain.com/apps/grooves-support`
-4. Copy your **Shopify App Client Secret** and set it in your environment:
+The code cannot connect to live orders until the store owner supplies credentials and deploys the service.
+
+1. Create or configure a Shopify app for the Grooves store.
+2. Grant `read_orders`. A 365-day warranty needs orders older than Shopify's normal 60-day window, so also request and grant `read_all_orders`.
+3. If Shopify asks for protected customer data approval, request access to the order email field. The portal uses it only to verify ownership.
+4. Copy `.env.example` to `.env` on the backend host and set:
+   - `SHOPIFY_STORE_DOMAIN` to the permanent `*.myshopify.com` domain, not the public custom domain.
+   - `SHOPIFY_ADMIN_ACCESS_TOKEN` to the app's Admin API token.
+   - `SHOPIFY_API_SECRET` to the app client secret used to validate proxy signatures.
+   - `WARRANTY_DAYS` to the approved store-wide warranty term.
+5. Deploy the `backend` directory to a persistent Node.js host. The host must use Node 20+ and persistent disk for `data.json` and `uploads/`.
+6. Install and start:
+
    ```bash
-   SHOPIFY_API_SECRET=your_app_client_secret_here
+   npm install
+   npm start
    ```
-5. When a customer on your store visits or submits an AJAX request to:
-   `https://grooveslifestyle.com/apps/grooves-support/status`
-   Shopify automatically attaches a cryptographic `signature` query parameter, forwards the request securely to your backend, and returns the response without cross-origin (CORS) complications.
 
----
+7. Confirm `https://YOUR-BACKEND-DOMAIN/health` returns `"shopifyConfigured": true`.
+8. Configure the Shopify app proxy:
+   - Prefix: `apps`
+   - Subpath: `grooves-support`
+   - Proxy destination: `https://YOUR-BACKEND-DOMAIN/apps/grooves-support`
+9. Keep the theme section endpoint as `/apps/grooves-support/status` and ticket endpoint as `/apps/grooves-support/create-ticket`.
+10. Test one recent real order, one order older than 60 days, a wrong email, a random order number, a new ticket, and a wrong ticket email before publishing.
 
-## 2. API Endpoints
+## Environment variables
 
-### A. Status Lookup
-- **URL**: `POST /apps/grooves-support/status`
-- **Request Body**:
-  ```json
-  {
-    "type": "warranty",
-    "reference": "INV-2026-001"
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "product": "Grooves Pulse Pro ANC Earbuds (Carbon Black)",
-    "purchaseDate": "2026-01-15",
-    "durationDays": 365,
-    "remainingDays": 284,
-    "status": "Active",
-    "updatedAt": "2026-09-23T04:00:00.000Z"
-  }
-  ```
+See `.env.example`. Secrets belong only on the backend host. Never paste the Admin token or app secret into Shopify theme code.
 
-- **For Ticket Lookup**:
-  ```json
-  {
-    "type": "ticket",
-    "reference": "GRV-TKT-2026-000001"
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "ticketNumber": "GRV-TKT-2026-000001",
-    "product": "Grooves Pulse Pro ANC Earbuds",
-    "category": "Audio / Sound Distortion",
-    "status": "In Progress",
-    "updatedAt": "2026-09-23T02:00:00.000Z",
-    "notes": "Diagnostic completed by Grooves Audio Lab. Replacement right earbud packed and scheduled for courier dispatch via Bluedart."
-  }
-  ```
+## Production storage note
 
----
+The included ticket store uses an atomic JSON file and is suitable for a single persistent backend instance. Before running multiple instances or serverless deployments, replace `loadDatabase` and `saveDatabase` with PostgreSQL, MySQL, or another shared database, and move attachments to private object storage.
 
-### B. Create Support Ticket
-- **URL**: `POST /apps/grooves-support/create-ticket`
-- **Content-Type**: `multipart/form-data` or `application/json`
-- **Fields**:
-  - `name`: Customer Full Name
-  - `email`: Customer Email Address
-  - `invoice`: Invoice Number (e.g. `INV-2026-001`)
-  - `product`: Grooves Product Model
-  - `category`: Issue Category
-  - `description`: Detailed Issue Description
-  - `attachments`: File uploads (invoice copy, defect photos)
-- **Response**:
-  ```json
-  {
-    "success": true,
-    "ticketNumber": "GRV-TKT-2026-000003",
-    "message": "Support ticket generated successfully"
-  }
-  ```
+## API behavior
 
----
+### Warranty/order lookup
 
-## 3. Helpdesk / CRM Integration Strategy
+`POST /apps/grooves-support/status`
 
-### Zendesk Integration
-In `backend/support-server.js`, you can configure the Zendesk REST API:
-```javascript
-// POST to https://{subdomain}.zendesk.com/api/v2/tickets.json
-const zendeskPayload = {
-  ticket: {
-    subject: `[Grooves Support] ${product} - ${category}`,
-    comment: { body: description },
-    requester: { name: name, email: email },
-    custom_fields: [{ id: 1234567, value: invoice }]
-  }
-};
+```json
+{
+  "type": "warranty",
+  "reference": "#1001",
+  "email": "customer@example.com"
+}
 ```
 
-### Gorgias Integration
-Gorgias accepts tickets via HTTP REST:
-```javascript
-// POST to https://{subdomain}.gorgias.com/api/tickets/
-const gorgiasPayload = {
-  customer: { name, email },
-  subject: `Grooves Issue: ${category} (${invoice})`,
-  messages: [{ channel: 'email', from_agent: false, text: description }]
-};
+### Ticket lookup
+
+```json
+{
+  "type": "ticket",
+  "reference": "GRV-TKT-2026-000001",
+  "email": "customer@example.com"
+}
 ```
 
-### Freshdesk Integration
-```javascript
-// POST to https://{domain}.freshdesk.com/api/v2/tickets
-const freshdeskPayload = {
-  name,
-  email,
-  subject: `[Warranty / Support] ${product}`,
-  description,
-  status: 2, // Open
-  priority: 2 // Medium
-};
-```
-
----
-
-## 4. Running the Backend Locally
-
-```bash
-cd backend
-npm install
-npm start
-```
-The server will start on port `4000`. You can expose it via ngrok/localtunnel for live Shopify App Proxy testing:
-```bash
-npx ngrok http 4000
-```
-Update your Shopify Partners App Proxy URL to your ngrok URL.
+Both live storefront requests must travel through the signed Shopify app proxy. Direct `/api/status` access is intended only for local development and still requires production proxy authentication when `NODE_ENV=production`.

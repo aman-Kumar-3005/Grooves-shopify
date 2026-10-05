@@ -9,7 +9,6 @@
   ].join(',');
 
   let observer;
-  let mediaObserver;
 
   const setupPremiumMotion = (root = document) => {
     const items = [...root.querySelectorAll(revealSelector)].filter((item) => !item.hasAttribute('data-premium-reveal'));
@@ -46,20 +45,9 @@
       '.product-media-container', '.product-gallery__image'
     ].join(','))].filter((item) => !item.classList.contains('premium-media'));
     if (!media.length) return;
-    media.forEach((item) => item.classList.add('premium-media'));
+    media.forEach((item) => item.classList.add('premium-media', 'is-media-visible'));
 
-    if (reducedMotion.matches || !('IntersectionObserver' in window)) {
-      media.forEach((item) => item.classList.add('is-media-visible'));
-      return;
-    }
-    mediaObserver ||= new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-media-visible');
-      mediaObserver.unobserve(entry.target);
-    }), { rootMargin: '0px 0px -5% 0px', threshold: .08 });
-    media.forEach((item) => mediaObserver.observe(item));
-
-    if (!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    if (reducedMotion.matches || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
     media.filter((item) => item.matches('.tr-showcase-banner,.tr-speaker-card,.tr-reel-card')).forEach((item) => {
       item.addEventListener('pointermove', (event) => {
         const rect = item.getBoundingClientRect();

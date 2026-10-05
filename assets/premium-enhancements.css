@@ -193,28 +193,34 @@ html { scroll-padding-top: calc(var(--header-height, 72px) + 18px); }
   background: linear-gradient(115deg, rgba(255,255,255,.12), transparent 28%, transparent 70%, rgba(187,255,10,.08));
 }
 
-/* Samsung-inspired image stages: clipped entrance plus gentle pointer depth. */
+/* Samsung-inspired image stages with fail-safe visibility and gentle pointer depth. */
 .premium-media {
   --premium-media-x: 0px;
   --premium-media-y: 0px;
   --premium-media-scale: 1.02;
   overflow: clip;
-}
-
-.premium-motion-ready .premium-media:not(.is-media-visible) {
-  clip-path: inset(0 0 100% 0 round 24px);
-}
-
-.premium-media.is-media-visible {
-  clip-path: inset(0 0 0 0 round 0);
-  transition: clip-path 1s var(--premium-ease);
+  clip-path: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .premium-media > :is(img, video),
 .premium-media picture > img {
+  opacity: 1 !important;
+  visibility: visible !important;
   transform: translate3d(var(--premium-media-x), var(--premium-media-y), 0) scale(var(--premium-media-scale));
   transition: transform .65s var(--premium-ease), filter .45s ease;
   will-change: transform;
+}
+
+.premium-media.is-media-visible > :is(img, video),
+.premium-media.is-media-visible picture > img {
+  animation: premium-media-settle .8s var(--premium-ease) both;
+}
+
+@keyframes premium-media-settle {
+  from { transform: translate3d(0, 14px, 0) scale(1.055); filter: saturate(.92); }
+  to { transform: translate3d(var(--premium-media-x), var(--premium-media-y), 0) scale(var(--premium-media-scale)); filter: none; }
 }
 
 .premium-media:hover { --premium-media-scale: 1.055; }
@@ -282,6 +288,5 @@ html { scroll-padding-top: calc(var(--header-height, 72px) + 18px); }
     transition-duration: .01ms !important;
   }
   .premium-motion-ready [data-premium-reveal] { opacity: 1; transform: none; }
-  .premium-motion-ready .premium-media:not(.is-media-visible) { clip-path: none; }
   .premium-scroll-progress { display: none; }
 }

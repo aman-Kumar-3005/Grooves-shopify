@@ -140,7 +140,16 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    gap: 12px;
     margin-top: auto;
+  }
+
+  .cps-actions {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 7px;
+    flex-wrap: wrap;
   }
 
   .cps-price-wrapper {
@@ -172,6 +181,9 @@
     cursor: pointer;
     text-transform: uppercase;
     transition: opacity 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
   }
   .cps-add-btn:hover {
     opacity: 0.85;
@@ -179,6 +191,38 @@
   .cps-add-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  .cps-buy-btn {
+    background: #52ff00;
+    color: #0b0b0b;
+    box-shadow: 0 8px 22px rgba(82, 255, 0, 0.2);
+  }
+
+  .cps-buy-btn:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(82, 255, 0, 0.3);
+  }
+
+  @media screen and (max-width: 749px) {
+    .cps-bottom-row {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .cps-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cps-actions .cps-add-btn {
+      padding-inline: 10px;
+    }
+
+    .cps-actions .cps-add-btn:only-child {
+      grid-column: 1 / -1;
+    }
   }
 {%- endstyle -%}
 
@@ -227,17 +271,27 @@
                   <span class="cps-price">{{ product.price | money }}</span>
                 </div>
                 
-                {%- assign chosen_variant = product.selected_or_first_available_variant -%}
-                {%- if product.available and product.has_only_default_variant and product.requires_selling_plan == false and chosen_variant.available -%}
-                  <product-form-component data-product-id="{{ product.id }}" data-product-url="{{ product.url }}" on:submit="/handleSubmit"><form method="post" action="{{ routes.cart_add_url }}" class="cps-form" data-type="add-to-cart-form">
-                    <input type="hidden" name="id" value="{{ chosen_variant.id }}" />
-                    <button type="submit" class="cps-add-btn">ADD</button>
-                  </form></product-form-component>
-                {%- elsif product.available -%}
-                  <a href="{{ product.url }}" class="cps-add-btn">CHOOSE OPTIONS</a>
-                {%- else -%}
-                  <button type="button" class="cps-add-btn" disabled>SOLD OUT</button>
-                {%- endif -%}
+                <div class="cps-actions">
+                  {%- assign chosen_variant = product.selected_or_first_available_variant -%}
+                  {%- if product.available and product.has_only_default_variant and product.requires_selling_plan == false and chosen_variant.available -%}
+                    <product-form-component data-product-id="{{ product.id }}" data-product-url="{{ product.url }}" on:submit="/handleSubmit"><form method="post" action="{{ routes.cart_add_url }}" class="cps-form" data-type="add-to-cart-form">
+                      <input type="hidden" name="id" value="{{ chosen_variant.id }}" />
+                      <button type="submit" class="cps-add-btn">ADD</button>
+                    </form></product-form-component>
+                  {%- elsif product.available -%}
+                    <a href="{{ product.url }}" class="cps-add-btn">CHOOSE OPTIONS</a>
+                  {%- else -%}
+                    <button type="button" class="cps-add-btn" disabled>SOLD OUT</button>
+                  {%- endif -%}
+
+                  {%- if product.available and chosen_variant.available and product.requires_selling_plan == false -%}
+                    <a
+                      href="{{ routes.cart_url }}/{{ chosen_variant.id }}:1?checkout"
+                      class="cps-add-btn cps-buy-btn"
+                      aria-label="Buy {{ product.title | escape }} now"
+                    >BUY NOW</a>
+                  {%- endif -%}
+                </div>
 
               </div>
             </div>

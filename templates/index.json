@@ -674,30 +674,6 @@
         "font_size": 24
       }
     },
-    "feature_banners": {
-      "type": "tr-feature-banners",
-      "blocks": {
-        "banner_swirl": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify://shop_images/neon_tech_hero_1790518696234.jpg",
-            "image_url": "grooves-banner-turbo.jpg",
-            "mobile_image_url": "",
-            "tagline": "GROOVES TURBO CHARGE",
-            "title": "",
-            "button_text": "BUY NOW",
-            "button_link": "shopify://collections/all"
-          }
-        }
-      },
-      "block_order": [
-        "banner_swirl"
-      ],
-      "settings": {
-        "padding_top": 10,
-        "padding_bottom": 30
-      }
-    },
     "tabbed_tws": {
       "type": "tr-tabbed-tws",
       "disabled": true,
@@ -1479,7 +1455,6 @@
     "custom_product_slider_jjiczL",
     "product_list_Nfjc4K",
     "marque_sec_UHQFnE",
-    "feature_banners",
     "tabbed_tws",
     "dual_speakers",
     "custom_testimonials_dkWGJt",

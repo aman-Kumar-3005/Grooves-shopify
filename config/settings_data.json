@@ -73,6 +73,13 @@
     "grooves_accent": "#b3ff00",
     "grooves_radius": 16,
     "content_for_index": [],
+    "blocks": {
+      "1219337400145039034": {
+        "type": "shopify://apps/kwikpass/blocks/kp_login/603e209b-d585-47ff-8592-837a4faa325b",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_palette": {
       "background": "#ffffff",
       "foreground": "#090909",

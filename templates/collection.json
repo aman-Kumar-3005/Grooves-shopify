@@ -20,6 +20,29 @@
     "section": {
       "type": "section",
       "blocks": {
+        "image_Mephmn": {
+          "type": "image",
+          "name": "t:names.image",
+          "settings": {
+            "link": "",
+            "image_ratio": "landscape",
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "text_tqQTNE": {
           "type": "text",
           "name": "t:names.title",
@@ -48,8 +71,10 @@
         }
       },
       "block_order": [
+        "image_Mephmn",
         "text_tqQTNE"
       ],
+      "disabled": true,
       "name": "t:names.heading",
       "settings": {
         "content_direction": "column",
@@ -387,11 +412,72 @@
         "show_rating_badge": true,
         "price_prefix": "",
         "card_radius": 8,
-        "btn_bg_color": "#17243D",
+        "btn_bg_color": "#17243d",
         "btn_text_color": "#ffffff",
         "bg_color": "#ffffff",
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "shoppabl_videos_HNRFEw": {
+      "type": "shoppabl-videos",
+      "blocks": {
+        "video_Lj3wjm": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/Grooves Infinity Earbuds.mp4",
+            "youtube_id": "",
+            "product": "grooves-beat",
+            "custom_title": ""
+          }
+        },
+        "video_Vy4aW7": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1772072764_3840746963625776568_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-65-w-supervooc-2",
+            "custom_title": ""
+          }
+        },
+        "video_tFDf8e": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1789720206_3988779876240647754_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-fire-true-wireless-earbuds-ergonomic-bluetooth-in-ear-headphones-with-dual-tone-charging-case-touch-controls-deep-bass",
+            "custom_title": ""
+          }
+        },
+        "video_Bqcrqh": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1741417489_3583591983125800638_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-aximo-neckband",
+            "custom_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_Lj3wjm",
+        "video_Vy4aW7",
+        "video_tFDf8e",
+        "video_Bqcrqh"
+      ],
+      "name": "Shoppable VIDEO",
+      "settings": {
+        "full_width": false,
+        "title": "Shop the Trends Everyone’s Talking About.",
+        "heading_size": 24,
+        "heading_alignment": "left",
+        "card_width_desktop": 260,
+        "card_width_mobile": 220,
+        "card_radius": 16,
+        "bg_color": "#ffffff",
+        "text_color": "#121212",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "shogun-below": {
@@ -533,7 +619,7 @@
       "name": "Marquee",
       "settings": {
         "marquee_meta": "",
-        "colorBackground": "#17243D",
+        "colorBackground": "#17243d",
         "marquee_speed": 160,
         "colorText": "#fff",
         "link": "",
@@ -569,7 +655,6 @@
           "settings": {
             "title": "6 Month Warranty",
             "subtitle": "Check verified coverage",
-            "image": "",
             "icon_url": "grooves-icon-warranty.png",
             "link": "shopify://pages/track-status"
           }
@@ -579,7 +664,6 @@
           "settings": {
             "title": "48 Hours Replacement",
             "subtitle": "Policy terms apply",
-            "image": "",
             "icon_url": "grooves-icon-replacement.png",
             "link": ""
           }
@@ -638,6 +722,7 @@
     "section",
     "main",
     "custom_product_slider_V64N6Y",
+    "shoppabl_videos_HNRFEw",
     "shogun-below",
     "shogun-optimizer",
     "shoppabl_videos_EqdcLF",

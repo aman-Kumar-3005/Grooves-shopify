@@ -187,6 +187,15 @@ body.tr-theme,
   color: var(--grooves-navy) !important;
   border-bottom-color: rgba(23,36,61,.09) !important;
   box-shadow: 0 12px 36px rgba(23,36,61,.10);
+  /* A backdrop filter on the header itself makes fixed-position drawer children
+     use the 68px header as their containing block in Chromium. Keep the glass
+     treatment on the visual row instead so mobile drawers remain viewport-sized. */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.tr-theme .tr-header-inner,
+.tr-theme .g-header-row {
   backdrop-filter: blur(18px) saturate(145%);
   -webkit-backdrop-filter: blur(18px) saturate(145%);
 }

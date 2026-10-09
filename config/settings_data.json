@@ -95,6 +95,11 @@
         "type": "shopify://apps/hoppy-trust-badges/blocks/trust_badges_icon/6e9703d9-56af-47d9-80bb-0abc8eb8c38b",
         "disabled": false,
         "settings": {}
+      },
+      "5332588544499791172": {
+        "type": "shopify://apps/hoppy-free-shipping/blocks/shipping_bar/66159626-1fb8-4d18-901f-af7b6a63adaa",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_palette": {

@@ -598,6 +598,27 @@ body.tr-mobile-nav-active {
   border-bottom: 1px solid #e8ecf2;
 }
 
+.tr-mobile-drawer-logo {
+  display: inline-flex;
+  align-items: center;
+  max-width: 150px;
+  min-width: 0;
+  color: #17243d;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.tr-mobile-drawer-logo img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 38px;
+  object-fit: contain;
+}
+
 .tr-mobile-drawer-close {
   background: none;
   border: none;

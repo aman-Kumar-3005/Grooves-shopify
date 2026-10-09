@@ -188,13 +188,15 @@
     aria-hidden="true"
   >
     <div class="tr-mobile-drawer-header">
-      <div class="tr-brand-wordmark">
-        <span class="tr-logo-text">{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}</span>
-        <span class="tr-logo-reg">&reg;</span>
-        <span class="tr-soundwave-bars">
-          <span></span><span></span><span></span><span></span><span></span>
-        </span>
-      </div>
+      <a href="{{ routes.root_url }}" class="tr-mobile-drawer-logo" aria-label="{{ shop.name | escape }} home">
+        {% if logo_image != blank %}
+          {{ logo_image | image_url: width: 360 | image_tag: widths: '120,180,240,360', sizes: '150px', loading: 'eager', alt: shop.name }}
+        {% elsif logo_url != blank %}
+          <img src="{{ logo_url }}" alt="{{ shop.name | escape }}" width="150" height="44" loading="eager">
+        {% else %}
+          <span>{{ shop.name | default: 'Grooves Lifestyle' | escape }}</span>
+        {% endif %}
+      </a>
       <button class="tr-mobile-drawer-close" type="button" aria-label="Close navigation menu" data-tr-mobile-nav-close>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>

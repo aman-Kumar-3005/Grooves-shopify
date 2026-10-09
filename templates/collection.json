@@ -548,59 +548,59 @@
           "type": "support_item",
           "settings": {
             "title": "Customer Support",
-            "subtitle": "24/7 Dedicated Help",
+            "subtitle": "Contact the support team",
             "image": "shopify://shop_images/customer-support.svg",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Support.png?v=1745498991",
-            "link": ""
+            "icon_url": "grooves-icon-support.png",
+            "link": "shopify://pages/contact"
           }
         },
         "support_item_rPWpFb": {
           "type": "support_item",
           "settings": {
-            "title": "Free Shipping",
-            "subtitle": "On All Prepaid Orders",
+            "title": "Delivery Information",
+            "subtitle": "Calculated at checkout",
             "image": "shopify://shop_images/free-shipping.svg",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Track-order.png?v=1745498991",
+            "icon_url": "grooves-icon-support.png",
             "link": ""
           }
         },
         "support_item_qHAyBH": {
           "type": "support_item",
           "settings": {
-            "title": "Doorstep Warranty",
-            "subtitle": "1 Year Free Replacement",
+            "title": "Warranty & Order Status",
+            "subtitle": "Check verified coverage",
             "image": "shopify://shop_images/doorstep-warranty.svg",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/warranty_7c995ef0-7603-4c91-9e2c-358aa029fbf7.png?v=1745498991",
-            "link": ""
+            "icon_url": "grooves-icon-warranty.png",
+            "link": "shopify://pages/track-status"
           }
         },
         "support_item_CmDBk9": {
           "type": "support_item",
           "settings": {
-            "title": "Easy Return Policy",
-            "subtitle": "7 Days Hassle-Free",
+            "title": "Replacement Support",
+            "subtitle": "Policy terms apply",
             "image": "shopify://shop_images/easy-return.svg",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Return_product.png?v=1745498991",
+            "icon_url": "grooves-icon-replacement.png",
             "link": ""
           }
         },
         "support_item_RJUAH7": {
           "type": "support_item",
           "settings": {
-            "title": "Personalise Your Audio",
-            "subtitle": "Laser Name Engraving",
+            "title": "Product Help",
+            "subtitle": "Setup and usage assistance",
             "image": "shopify://shop_images/personalise-audio.svg",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Personalised.png?v=1745498991",
+            "icon_url": "grooves-icon-faq.png",
             "link": ""
           }
         },
         "support_item_yB6Fbq": {
           "type": "support_item",
           "settings": {
-            "title": "Made In India",
-            "subtitle": "Proudly Crafted For You",
+            "title": "Genuine Products",
+            "subtitle": "Shop the official Grooves store",
             "image": "shopify://shop_images/made-in-india.svg",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/corporate_gift.png?v=1745498991",
+            "icon_url": "grooves-icon-support.png",
             "link": ""
           }
         }
@@ -615,18 +615,18 @@
       ],
       "name": "TR Support & Policies",
       "settings": {
-        "badge_title": "TR Support",
+        "badge_title": "Grooves Support",
         "padding_top": 20,
         "padding_bottom": 0,
         "show_policy_strip": false,
         "policy_1_icon": "🚚",
         "policy_1_text": "Pan India Delivery",
         "policy_2_icon": "🛡️",
-        "policy_2_text": "1 Year Warranty",
+        "policy_2_text": "Warranty support",
         "policy_3_icon": "💵",
-        "policy_3_text": "COD Available",
+        "policy_3_text": "Payment options at checkout",
         "policy_4_icon": "🔄",
-        "policy_4_text": "72 Hours Replacement",
+        "policy_4_text": "Replacement support",
         "policy_5_icon": "🔒",
         "policy_5_text": "100% Secure Checkout"
       }

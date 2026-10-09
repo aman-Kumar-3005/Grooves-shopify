@@ -1,6 +1,8 @@
 {%- liquid
-  assign r_score = section.settings.rating_score | default: product.metafields.reviews.rating.value.rating | default: product.metafields.reviews.rating.value | default: product.metafields.custom.rating.value | default: "4.8"
-  assign r_count = section.settings.reviews_count | default: product.metafields.reviews.rating_count | default: product.metafields.custom.review_count | default: "128 Verified Reviews"
+  assign actual_rating = product.metafields.reviews.rating.value
+  assign r_count = product.metafields.reviews.rating_count.value | default: 0
+  assign photo_blocks = section.blocks | where: "type", "photo"
+  assign review_blocks = section.blocks | where: "type", "review_card"
 -%}
 
 <section class="tr-reviews-section" id="tr-reviews-{{ section.id }}" style="background: #0a0a0a; border-top: 1px solid #1f1f1f; position: relative; z-index: 20; clear: both; padding: 40px 0 60px;">
@@ -11,15 +13,17 @@
         <div class="tr-section-badge-wrap" style="margin-top: 0;">
           <span class="tr-section-pill">{{ section.settings.badge_title | default: 'CUSTOMER REVIEWS' }}</span>
         </div>
-        <div class="tr-reviews-score">{{ r_score }} <span style="font-size: 28px; color: var(--tr-gold);">★★★★★</span></div>
-        <p style="color: #888888; font-size: 15px; margin: 0;">Based on {{ r_count }}</p>
+        {% if actual_rating != blank and r_count > 0 %}
+          <div class="tr-reviews-score">{{ actual_rating.rating | round: 1 }} / {{ actual_rating.scale_max }} <span style="font-size: 28px; color: var(--tr-gold);">★★★★★</span></div>
+          <p style="color: #888888; font-size: 15px; margin: 0;">Based on {{ r_count }} reviews</p>
+        {% endif %}
       </div>
 
       <!-- Customer Photos Grid -->
       {% if section.settings.show_customer_photos %}
-        {% assign photo_blocks = section.blocks | where: "type", "photo" %}
-        <div class="tr-customer-photos-grid">
-          {% if photo_blocks.size > 0 %}
+        {% if photo_blocks.size > 0 or product.metafields.custom.customer_photos.value != blank %}
+          <div class="tr-customer-photos-grid">
+            {% if photo_blocks.size > 0 %}
             {% for block in photo_blocks %}
               {%- liquid
                 if block.settings.image != blank
@@ -32,40 +36,21 @@
                 <img src="{{ p_url }}" alt="Customer review photo" loading="lazy" width="200" height="200">
               </div>
             {% endfor %}
-          {% elsif product.metafields.custom.customer_photos.value != blank %}
-            {% for photo in product.metafields.custom.customer_photos.value limit: 6 %}
-              <div class="tr-customer-photo-card">
-                <img src="{{ photo | image_url: width: 300 }}" alt="Customer review photo" loading="lazy" width="200" height="200">
-              </div>
-            {% endfor %}
-            <div class="tr-customer-photo-card">
-              <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80" alt="Grooves Pulse Pro in Matte Black" loading="lazy" width="200" height="200">
-            </div>
-            <div class="tr-customer-photo-card">
-              <img src="https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400&q=80" alt="Grooves Pulse Pro Earbuds Unboxed" loading="lazy" width="200" height="200">
-            </div>
-            <div class="tr-customer-photo-card">
-              <img src="https://images.unsplash.com/photo-1608156639585-34a0a56ee6c9?w=400&q=80" alt="Grooves SoundWave Headphones" loading="lazy" width="200" height="200">
-            </div>
-            <div class="tr-customer-photo-card">
-              <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400&q=80" alt="Grooves ANC Earbuds Case" loading="lazy" width="200" height="200">
-            </div>
-            <div class="tr-customer-photo-card">
-              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80" alt="Grooves Pulse Pro with Wireless Charger" loading="lazy" width="200" height="200">
-            </div>
-            <div class="tr-customer-photo-card">
-              <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&q=80" alt="Grooves Acoustic Experience" loading="lazy" width="200" height="200">
-            </div>
-          {% endif %}
-        </div>
+            {% else %}
+              {% for photo in product.metafields.custom.customer_photos.value limit: 6 %}
+                <div class="tr-customer-photo-card">
+                  <img src="{{ photo | image_url: width: 300 }}" alt="Customer review photo" loading="lazy" width="200" height="200">
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endif %}
       {% endif %}
 
       <!-- Review Cards Grid -->
-      {% if section.settings.show_reviews_list %}
-        {% assign review_blocks = section.blocks | where: "type", "review_card" %}
+      {% if section.settings.show_reviews_list and review_blocks.size > 0 %}
         <div class="tr-review-cards-grid">
-          {% if review_blocks.size > 0 %}
-            {% for block in review_blocks %}
+          {% for block in review_blocks %}
               <div class="tr-review-card" {{ block.shopify_attributes }}>
                 <div class="tr-reviewer-header">
                   <span class="tr-reviewer-name">{{ block.settings.reviewer_name }}</span>
@@ -82,47 +67,7 @@
                   <span style="font-size: 11px; color: #666;">{{ block.settings.variant_info }}</span>
                 {% endif %}
               </div>
-            {% endfor %}
-          {% else %}
-            <div class="tr-review-card">
-              <div class="tr-reviewer-header">
-                <span class="tr-reviewer-name">Rahul Sharma</span>
-                <span class="tr-verified-badge">✓ Verified Buyer</span>
-              </div>
-                <div class="tr-pdp-stars">★★★★★</div>
-                <h4 style="color: #fff; margin: 0; font-size: 15px;">Hybrid ANC & Bass Are Incredible!</h4>
-                <p class="tr-review-text">
-                  The Hybrid Active Noise Cancellation on Grooves Pulse Pro is outstanding! Blocks out city noise and office chatter completely. The sound profile has crisp treble and punchy sub-bass. Wireless charging on my Qi pad works effortlessly.
-                </p>
-                <span style="font-size: 11px; color: #666;">Purchased: Carbon Black • 3 days ago</span>
-              </div>
-
-            <div class="tr-review-card">
-              <div class="tr-reviewer-header">
-                <span class="tr-reviewer-name">Aman Patel</span>
-                <span class="tr-verified-badge">✓ Verified Buyer</span>
-              </div>
-              <div class="tr-pdp-stars">★★★★★</div>
-              <h4 style="color: #fff; margin: 0; font-size: 15px;">Gaming Latency & Battery Life 10/10</h4>
-              <p class="tr-review-text">
-                Game mode 45ms latency is legit. Zero audio sync lag while playing BGMI. Plus the custom laser engraving on my Grooves case made it feel super premium. Delivery was done in 48 hours to Mumbai.
-              </p>
-              <span style="font-size: 11px; color: #666;">Purchased: Carbon Black • 1 week ago</span>
-            </div>
-
-            <div class="tr-review-card">
-              <div class="tr-reviewer-header">
-                <span class="tr-reviewer-name">Sneha Kulkarni</span>
-                <span class="tr-verified-badge">✓ Verified Buyer</span>
-              </div>
-              <div class="tr-pdp-stars">★★★★★</div>
-              <h4 style="color: #fff; margin: 0; font-size: 15px;">Best Premium Audio Under ₹2,999</h4>
-              <p class="tr-review-text">
-                Battery easily lasts all week with the charging case. Sound clarity is studio grade and the Quad Mic ENC filters out traffic noise completely during calls. Truly modern audio from Grooves Lifestyle!
-              </p>
-              <span style="font-size: 11px; color: #666;">Purchased: Moon White • 2 weeks ago</span>
-            </div>
-          {% endif %}
+          {% endfor %}
         </div>
       {% endif %}
     </div>
@@ -143,25 +88,25 @@
       "type": "text",
       "id": "rating_score",
       "label": "Rating Score",
-      "default": "4.8"
+      "default": ""
     },
     {
       "type": "text",
       "id": "reviews_count",
       "label": "Reviews Count Text",
-      "default": "128 Verified Reviews"
+      "default": ""
     },
     {
       "type": "checkbox",
       "id": "show_customer_photos",
       "label": "Show Customer Photos Grid",
-      "default": true
+      "default": false
     },
     {
       "type": "checkbox",
       "id": "show_reviews_list",
       "label": "Show Review Cards",
-      "default": true
+      "default": false
     }
   ],
   "blocks": [
@@ -173,13 +118,13 @@
           "type": "text",
           "id": "reviewer_name",
           "label": "Reviewer Name",
-          "default": "Rahul Sharma"
+          "default": ""
         },
         {
           "type": "checkbox",
           "id": "verified",
           "label": "Verified Buyer Badge",
-          "default": true
+          "default": false
         },
         {
           "type": "select",
@@ -196,19 +141,19 @@
           "type": "text",
           "id": "title",
           "label": "Review Heading",
-          "default": "Amazing Sound Quality & Design!"
+          "default": ""
         },
         {
           "type": "textarea",
           "id": "review_text",
           "label": "Review Body",
-          "default": "Grooves delivers punchy bass, crystal-clear calls, and amazing battery life. Very comfortable for long listening sessions."
+          "default": ""
         },
         {
           "type": "text",
           "id": "variant_info",
           "label": "Purchased Variant & Date",
-          "default": "Purchased: Carbon Black • 3 days ago"
+          "default": ""
         }
       ]
     },

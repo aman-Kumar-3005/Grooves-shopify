@@ -19,29 +19,29 @@
         "accent_color": "#4cf800",
         "padding_top": 40,
         "padding_bottom": 60,
-        "product_title": "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging",
-        "product_subtitle": "Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency",
+        "product_title": "Grooves Product",
+        "product_subtitle": "",
         "fallback_price": "₹1,499",
         "fallback_compare_price": "₹4,999",
         "discount_badge_text": "70% OFF",
         "show_rating": true,
-        "rating_score": "4.8",
-        "reviews_count": "128 Verified Reviews",
-        "enable_personalisation": true,
-        "personalise_label": "Make Your Product Personalised (Optional Free Engraving)",
+        "rating_score": "",
+        "reviews_count": "",
+        "enable_personalisation": false,
+        "personalise_label": "Add personalisation details",
         "personalise_placeholder": "Enter name or initials to engrave on case (Max 12 chars)",
-        "show_coupon": true,
-        "coupon_text": "Get 15% OFF on 2 or More Items",
-        "coupon_code": "Use Code: TR15",
+        "show_coupon": false,
+        "coupon_text": "",
+        "coupon_code": "",
         "show_pincode": true,
         "pincode_label": "Check Estimated Delivery Date",
         "show_buy_now": true,
-        "buy_now_label": "BUY IT NOW - PAY ON DELIVERY / UPI",
+        "buy_now_label": "BUY IT NOW",
         "add_to_cart_label": "ADD TO CART",
-        "badge_1_text": "Free Shipping",
-        "badge_2_text": "1 Year Warranty",
-        "badge_3_text": "72h Replacement",
-        "badge_4_text": "GST Billing"
+        "badge_1_text": "Delivery at checkout",
+        "badge_2_text": "Warranty support",
+        "badge_3_text": "Replacement support",
+        "badge_4_text": "Secure checkout"
       }
     },
     "product_recommendations_Nt8qQf": {
@@ -397,11 +397,11 @@
         "support_item_FtmBen": {
           "type": "support_item",
           "settings": {
-            "title": "1 Year Warranty",
-            "subtitle": "Hassle-Free Coverage",
+            "title": "Warranty & Order Status",
+            "subtitle": "Check verified coverage",
             "image": "shopify://shop_images/1_year_warranty.png",
             "icon_url": "grooves-icon-warranty.png",
-            "link": "shopify://pages/contact"
+            "link": "shopify://pages/track-status"
           }
         },
         "support_item_Be9UUe": {
@@ -447,8 +447,8 @@
         "support_item_zMR7qi": {
           "type": "support_item",
           "settings": {
-            "title": "72Hrs Replacement",
-            "subtitle": "No Questions Asked",
+            "title": "Replacement Support",
+            "subtitle": "Policy terms apply",
             "image": "shopify://shop_images/icon_72hrs_replacement.png",
             "icon_url": "grooves-icon-replacement.png",
             "link": "shopify://pages/contact"
@@ -471,11 +471,11 @@
         "policy_1_icon": "",
         "policy_1_text": "",
         "policy_2_icon": "🛡️",
-        "policy_2_text": "1 Year Warranty",
+        "policy_2_text": "Warranty support",
         "policy_3_icon": "💵",
-        "policy_3_text": "COD Available",
+        "policy_3_text": "Payment options at checkout",
         "policy_4_icon": "🔄",
-        "policy_4_text": "72 Hours Replacement",
+        "policy_4_text": "Replacement support",
         "policy_5_icon": "🔒",
         "policy_5_text": "100% Secure Checkout"
       }

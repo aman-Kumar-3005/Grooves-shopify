@@ -254,7 +254,15 @@
               {%- endif -%}
 
               {%- if product.featured_image != blank -%}
-                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+                {{ product.featured_image
+                  | image_url: width: 720
+                  | image_tag:
+                    widths: '240, 360, 480, 600, 720',
+                    sizes: '(max-width: 749px) 240px, 280px',
+                    loading: 'lazy',
+                    alt: product.title,
+                    class: 'cps-product-image'
+                }}
               {%- else -%}
                 {{ 'product-1' | placeholder_svg_tag }}
               {%- endif -%}
@@ -284,11 +292,17 @@
                     <button type="button" class="cps-add-btn" disabled>SOLD OUT</button>
                   {%- endif -%}
 
-                  {%- if product.available and chosen_variant.available and product.requires_selling_plan == false -%}
+                  {%- if product.available and product.has_only_default_variant and chosen_variant.available and product.requires_selling_plan == false -%}
                     <a
                       href="{{ routes.cart_url }}/{{ chosen_variant.id }}:1?checkout"
                       class="cps-add-btn cps-buy-btn"
                       aria-label="Buy {{ product.title | escape }} now"
+                    >BUY NOW</a>
+                  {%- elsif product.available -%}
+                    <a
+                      href="{{ product.url }}"
+                      class="cps-add-btn cps-buy-btn"
+                      aria-label="Choose options to buy {{ product.title | escape }}"
                     >BUY NOW</a>
                   {%- endif -%}
                 </div>
@@ -303,8 +317,6 @@
 
   </div>
 </div>
-<script src="{{ 'product-form.js' | asset_url }}" type="module"></script>
-
 {% schema %}
 {
   "name": "Dynamic Product Slider",

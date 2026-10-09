@@ -5,8 +5,10 @@
   endif
 
   assign current_variant = target_product.selected_or_first_available_variant
-  assign prod_title = target_product.title | default: section.settings.product_title | default: "DwOTS Fire - Dual Sharing TWS with Wireless Charging"
-  assign prod_subtitle = target_product.metafields.custom.subtitle.value | default: target_product.metafields.custom.subtitle | default: section.settings.product_subtitle | default: "Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency"
+  assign prod_title = target_product.title | default: section.settings.product_title | default: "Grooves Product"
+  assign prod_subtitle = target_product.metafields.custom.subtitle.value | default: target_product.metafields.custom.subtitle | default: section.settings.product_subtitle
+  assign actual_rating = target_product.metafields.reviews.rating.value
+  assign actual_rating_count = target_product.metafields.reviews.rating_count.value | default: 0
   
   if current_variant != blank
     assign p_price = current_variant.price | money
@@ -654,27 +656,15 @@
               </div>
             {% endfor %}
           {% else %}
-            <div class="tr-pdp-thumb-item active" data-media-src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774">
-              <img src="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774" alt="DwOTS Fire White" loading="lazy" width="70" height="70">
-            </div>
-            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394">
-              <img src="//acwo.com/cdn/shop/files/Fire_Black_New_3D.gif?v=1772180394" alt="DwOTS Fire 3D" loading="lazy" width="70" height="70">
-            </div>
-            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073">
-              <img src="//acwo.com/cdn/shop/files/fire-rotating-black.webp?v=1772185073" alt="DwOTS Fire Rotating" loading="lazy" width="70" height="70">
-            </div>
-            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073">
-              <img src="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073" alt="DwOTS Fire Black Case" loading="lazy" width="70" height="70">
-            </div>
-            <div class="tr-pdp-thumb-item" data-media-src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131">
-              <img src="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131" alt="DwOTS Fire In Ear" loading="lazy" width="70" height="70">
+            <div class="tr-pdp-thumb-item active" data-media-src="{{ 'grooves-prod-fire.jpg' | asset_url }}">
+              <img src="{{ 'grooves-prod-fire.jpg' | asset_url }}" alt="Grooves product preview" loading="lazy" width="70" height="70">
             </div>
           {% endif %}
         </div>
 
         <div class="tr-pdp-main-media">
           {%- liquid
-            assign initial_img = '//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774'
+            assign initial_img = 'grooves-prod-fire.jpg' | asset_url
             if current_variant.featured_image != blank
               assign initial_img = current_variant.featured_image | image_url: width: 1000
             elsif target_product.featured_image != blank
@@ -697,11 +687,11 @@
         <input type="hidden" name="quantity" value="1">
 
         <!-- Rating Row -->
-        {% if section.settings.show_rating %}
+        {% if section.settings.show_rating and actual_rating != blank and actual_rating_count > 0 %}
           <div class="tr-pdp-rating-row">
             <span class="tr-pdp-stars">★★★★★</span>
-            <strong>{{ section.settings.rating_score | default: '4.8' }}</strong>
-            <span class="tr-pdp-review-count">| {{ section.settings.reviews_count | default: '128 Verified Reviews' }}</span>
+            <strong>{{ actual_rating.rating | round: 1 }} / {{ actual_rating.scale_max }}</strong>
+            <span class="tr-pdp-review-count">| {{ actual_rating_count }} reviews</span>
           </div>
         {% endif %}
 
@@ -765,19 +755,19 @@
         {% elsif target_product == blank %}
           <!-- Fallback Swatches for Theme Editor Preview -->
           <div class="tr-swatch-section">
-            <div class="tr-swatch-label">Color: <span id="tr-selected-color-name-{{ section.id }}" style="color: var(--tr-accent);">Moon White</span></div>
+            <div class="tr-swatch-label">Color: <span id="tr-selected-color-name-{{ section.id }}" style="color: var(--tr-accent);">White</span></div>
             <div class="tr-swatches-row">
-              <button type="button" class="tr-swatch-btn active" data-color-name="Moon White" data-img-url="//acwo.com/cdn/shop/files/dwots_fire_9.png?v=1783600774">
+              <button type="button" class="tr-swatch-btn active" data-color-name="White" data-img-url="{{ 'grooves-prod-fire.jpg' | asset_url }}">
                 <span class="tr-swatch-color-circle" style="background: #ffffff;"></span>
-                Moon White
+                White
               </button>
-              <button type="button" class="tr-swatch-btn" data-color-name="Carbon Black" data-img-url="//acwo.com/cdn/shop/files/DwOTS_Firenew-black.png?v=1772185073">
+              <button type="button" class="tr-swatch-btn" data-color-name="Black" data-img-url="{{ 'grooves-prod-fire.jpg' | asset_url }}">
                 <span class="tr-swatch-color-circle" style="background: #111111;"></span>
-                Carbon Black
+                Black
               </button>
-              <button type="button" class="tr-swatch-btn" data-color-name="Steel Blue" data-img-url="//acwo.com/cdn/shop/files/dwots-fire_c6ef8f2a-15bc-4428-84ca-c1066661bf8d.webp?v=1772179131">
+              <button type="button" class="tr-swatch-btn" data-color-name="Blue" data-img-url="{{ 'grooves-prod-fire.jpg' | asset_url }}">
                 <span class="tr-swatch-color-circle" style="background: #3b5998;"></span>
-                Steel Blue
+                Blue
               </button>
             </div>
           </div>
@@ -831,7 +821,7 @@
               id="tr-buy-now-btn-{{ section.id }}"
               {% if current_variant != blank and current_variant.available == false %}disabled{% endif %}
             >
-              ⚡ {{ section.settings.buy_now_label | default: 'BUY IT NOW - PAY ON DELIVERY / UPI' }}
+              ⚡ {{ section.settings.buy_now_label | default: 'BUY IT NOW' }}
             </button>
           {% endif %}
           <button 
@@ -851,20 +841,20 @@
         <!-- 4 PDP Trust Badges -->
         <div class="tr-pdp-badges-grid">
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Free Shipping" width="32" height="32" loading="lazy">
-            <span>{{ section.settings.badge_1_text | default: 'Free Shipping' }}</span>
+            <img src="{{ 'grooves-icon-support.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_1_text | default: 'Delivery at checkout' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="1 Year Warranty" width="32" height="32" loading="lazy">
-            <span>{{ section.settings.badge_2_text | default: '1 Year Warranty' }}</span>
+            <img src="{{ 'grooves-icon-warranty.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_2_text | default: 'Warranty support' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="72Hrs Replacement" width="32" height="32" loading="lazy">
-            <span>{{ section.settings.badge_3_text | default: '72h Replacement' }}</span>
+            <img src="{{ 'grooves-icon-replacement.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_3_text | default: 'Replacement support' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="GST Billing" width="32" height="32" loading="lazy">
-            <span>{{ section.settings.badge_4_text | default: 'GST Billing' }}</span>
+            <img src="{{ 'grooves-icon-faq.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_4_text | default: 'Secure checkout' }}</span>
           </div>
         </div>
       </form>
@@ -1114,13 +1104,13 @@
       "type": "text",
       "id": "product_title",
       "label": "Product Title (Fallback)",
-      "default": "DwOTS Fire - India’s First Dual Sharing Wireless TWS Enabled With Wireless Charging"
+      "default": "Grooves Product"
     },
     {
       "type": "text",
       "id": "product_subtitle",
       "label": "Product Subtitle",
-      "default": "Dual Pairing | 52 Hours Playback | Wireless Charging | 45ms Low Latency"
+      "default": ""
     },
     {
       "type": "header",
@@ -1152,19 +1142,19 @@
       "type": "checkbox",
       "id": "show_rating",
       "label": "Show Rating",
-      "default": true
+      "default": false
     },
     {
       "type": "text",
       "id": "rating_score",
       "label": "Rating Score",
-      "default": "4.8"
+      "default": ""
     },
     {
       "type": "text",
       "id": "reviews_count",
       "label": "Reviews Count Text",
-      "default": "128 Verified Reviews"
+      "default": ""
     },
     {
       "type": "header",
@@ -1240,7 +1230,7 @@
       "type": "text",
       "id": "buy_now_label",
       "label": "Buy Now Button Label",
-      "default": "BUY IT NOW - PAY ON DELIVERY / UPI"
+      "default": "BUY IT NOW"
     },
     {
       "type": "text",
@@ -1256,25 +1246,25 @@
       "type": "text",
       "id": "badge_1_text",
       "label": "Badge 1 Text",
-      "default": "Free Shipping"
+      "default": "Delivery at checkout"
     },
     {
       "type": "text",
       "id": "badge_2_text",
       "label": "Badge 2 Text",
-      "default": "1 Year Warranty"
+      "default": "Warranty support"
     },
     {
       "type": "text",
       "id": "badge_3_text",
       "label": "Badge 3 Text",
-      "default": "72h Replacement"
+      "default": "Replacement support"
     },
     {
       "type": "text",
       "id": "badge_4_text",
       "label": "Badge 4 Text",
-      "default": "GST Billing"
+      "default": "Secure checkout"
     }
   ],
   "presets": [

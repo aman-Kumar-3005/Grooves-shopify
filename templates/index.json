@@ -1010,8 +1010,13 @@
         "sup_2": {
           "type": "support_item",
           "settings": {
+<<<<<<< HEAD
             "title": "Warranty & Order Status",
             "subtitle": "Check verified coverage",
+=======
+            "title": "6 Month Warranty",
+            "subtitle": "Hassle-Free Coverage",
+>>>>>>> 745782a4c92d386b1a061367a4559a9a5d6fa353
             "image": "shopify://shop_images/1_year_warranty.png",
             "icon_url": "grooves-icon-warranty.png",
             "link": "shopify://pages/track-status"
@@ -1060,8 +1065,13 @@
         "sup_6": {
           "type": "support_item",
           "settings": {
+<<<<<<< HEAD
             "title": "Replacement Support",
             "subtitle": "Policy terms apply",
+=======
+            "title": "48Hrs Replacement",
+            "subtitle": "No Questions Asked",
+>>>>>>> 745782a4c92d386b1a061367a4559a9a5d6fa353
             "image": "shopify://shop_images/icon_72hrs_replacement.png",
             "icon_url": "grooves-icon-replacement.png",
             "link": "shopify://pages/contact"

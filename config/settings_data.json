@@ -91,9 +91,9 @@
         "disabled": false,
         "settings": {}
       },
-      "1219337400145039034": {
-        "type": "shopify://apps/kwikpass/blocks/kp_login/603e209b-d585-47ff-8592-837a4faa325b",
-        "disabled": true,
+      "15620043091132039688": {
+        "type": "shopify://apps/hoppy-trust-badges/blocks/trust_badges_icon/6e9703d9-56af-47d9-80bb-0abc8eb8c38b",
+        "disabled": false,
         "settings": {}
       }
     },

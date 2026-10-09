@@ -85,7 +85,25 @@ body.tr-theme,
 .tr-theme :is(.tr-ann-text-lime, .tr-emi-lime) { color: var(--grooves-cyan) !important; }
 .tr-theme :is(.tr-nav-link, .g-desktop-nav, .g-header-search, .g-header-right) { color: var(--grooves-navy) !important; }
 .tr-theme :is(.tr-nav-link:hover, .tr-nav-link.active, .g-desktop-nav a:hover, .g-desktop-nav details[open] > summary) { color: var(--grooves-blue) !important; }
+.tr-theme .tr-header :is(.tr-header-icon-btn, .tr-mobile-menu-toggle, .tr-mobile-search-btn) {
+  color: var(--grooves-navy) !important;
+}
+.tr-theme .tr-header .tr-header-actions { flex: 0 0 auto; }
+.tr-theme .tr-header .tr-header-icon-btn {
+  min-width: 40px;
+  min-height: 40px;
+  flex: 0 0 40px;
+}
+.tr-theme .tr-header :is(.tr-header-icon-btn, .tr-mobile-menu-toggle) svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+}
 .tr-theme :is(.tr-mobile-drawer, .g-menu-dialog, .g-bottom-nav, .g-nav-submenu) { background: var(--grooves-white) !important; color: var(--grooves-navy) !important; }
+.tr-theme .tr-mobile-drawer :is(.tr-logo-text, .tr-logo-reg, .tr-mobile-drawer-close, .tr-mobile-drawer-link, .tr-mobile-drawer-btn) { color: var(--grooves-navy) !important; }
+.tr-theme .tr-mobile-drawer .tr-soundwave-bars span { background: var(--grooves-navy) !important; }
+.tr-theme .tr-mobile-drawer :is(.tr-mobile-drawer-header, .tr-mobile-drawer-link, .tr-mobile-drawer-footer) { border-color: var(--grooves-line) !important; }
 .tr-theme .g-bottom-nav { border-color: var(--grooves-line); box-shadow: 0 -8px 28px rgba(23,36,61,.10); }
 
 .tr-theme :is(.cps-heading, .testi-heading, .shoppable-vids-heading, .brand-marquee-heading,

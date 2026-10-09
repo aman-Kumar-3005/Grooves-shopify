@@ -252,17 +252,17 @@ body.tr-header-scrolled .tr-announcement-bar {
    Header Navigation (Exact Match with Screenshot)
    ========================================================================== */
 .tr-header {
-  background-color: #000000 !important;
+  background-color: #ffffff !important;
   position: sticky !important;
   top: 0 !important;
   z-index: 1000 !important;
-  border-bottom: 1px solid #141414;
+  border-bottom: 1px solid #e8ecf2;
   width: 100%;
   transition: box-shadow 0.25s ease;
 }
 
 body.tr-header-scrolled .tr-header {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 10px 30px rgba(23, 36, 61, 0.12);
 }
 
 .tr-header-inner {
@@ -302,7 +302,7 @@ body.tr-header-scrolled .tr-header {
   font-size: 26px;
   font-weight: 900;
   letter-spacing: -0.5px;
-  color: #ffffff;
+  color: #17243d;
   font-family: var(--tr-font);
   text-transform: uppercase;
   line-height: 1;
@@ -310,7 +310,7 @@ body.tr-header-scrolled .tr-header {
 
 .tr-logo-reg {
   font-size: 9px;
-  color: #ffffff;
+  color: #17243d;
   vertical-align: super;
   margin-right: 3px;
   line-height: 1;
@@ -327,7 +327,7 @@ body.tr-header-scrolled .tr-header {
 .tr-soundwave-bars span {
   display: inline-block;
   width: 2px;
-  background: #ffffff;
+  background: #17243d;
   border-radius: 1px;
 }
 
@@ -396,7 +396,7 @@ body.tr-header-scrolled .tr-header {
 .tr-header-icon-btn {
   background: none;
   border: none;
-  color: #ffffff !important;
+  color: #17243d !important;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -467,16 +467,24 @@ body.tr-header-scrolled .tr-header {
 
   .tr-mobile-menu-toggle {
     display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
     background: none !important;
     border: none !important;
-    color: #ffffff !important;
+    color: #17243d !important;
     cursor: pointer !important;
     padding: 4px !important;
   }
 
   .tr-mobile-search-btn {
     display: inline-flex !important;
-    color: #ffffff !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    color: #17243d !important;
     padding: 4px !important;
   }
 
@@ -534,7 +542,7 @@ body.tr-header-scrolled .tr-header {
   }
 
   .tr-header-icon-btn {
-    color: #ffffff !important;
+    color: #17243d !important;
     padding: 4px !important;
   }
 }
@@ -559,8 +567,8 @@ body.tr-header-scrolled .tr-header {
   bottom: 0;
   width: 82%;
   max-width: 320px;
-  background: #0d0d0d;
-  border-right: 1px solid #222222;
+  background: #ffffff;
+  border-right: 1px solid #e8ecf2;
   z-index: 10002;
   transform: translateX(-100%);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -587,13 +595,13 @@ body.tr-mobile-nav-active {
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid #e8ecf2;
 }
 
 .tr-mobile-drawer-close {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #17243d;
   cursor: pointer;
   padding: 4px;
 }
@@ -609,11 +617,11 @@ body.tr-mobile-nav-active {
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  color: #ffffff;
+  color: #17243d;
   text-decoration: none;
   font-size: 14.5px;
   font-weight: 700;
-  border-bottom: 1px solid #161616;
+  border-bottom: 1px solid #e8ecf2;
   transition: color 0.2s, background 0.2s;
 }
 
@@ -626,14 +634,14 @@ body.tr-mobile-nav-active {
 .tr-mobile-drawer-footer {
   margin-top: auto;
   padding: 20px;
-  border-top: 1px solid #1a1a1a;
+  border-top: 1px solid #e8ecf2;
 }
 
 .tr-mobile-drawer-btn {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #ffffff;
+  color: #17243d;
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;

@@ -19,7 +19,14 @@
       <!-- Left Side: Mobile Hamburger & Search / Desktop Logo -->
       <div class="tr-header-left">
         <!-- Mobile Menu Toggle Button (Visible on mobile/tablet) -->
-        <button class="tr-mobile-menu-toggle" type="button" aria-label="Open Navigation Menu" onclick="document.body.classList.toggle('tr-mobile-nav-active')">
+        <button
+          class="tr-mobile-menu-toggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-controls="tr-mobile-drawer-{{ section.id }}"
+          aria-expanded="false"
+          data-tr-mobile-nav-open
+        >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round">
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -171,8 +178,15 @@
   </div>
 
   <!-- Mobile Slideout Navigation Drawer (Connected to Shopify Main Menu) -->
-  <div class="tr-mobile-drawer-overlay" onclick="document.body.classList.remove('tr-mobile-nav-active')"></div>
-  <div class="tr-mobile-drawer" id="tr-mobile-drawer">
+  <div class="tr-mobile-drawer-overlay" data-tr-mobile-nav-overlay></div>
+  <div
+    class="tr-mobile-drawer"
+    id="tr-mobile-drawer-{{ section.id }}"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Navigation menu"
+    aria-hidden="true"
+  >
     <div class="tr-mobile-drawer-header">
       <div class="tr-brand-wordmark">
         <span class="tr-logo-text">{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}</span>
@@ -181,7 +195,7 @@
           <span></span><span></span><span></span><span></span><span></span>
         </span>
       </div>
-      <button class="tr-mobile-drawer-close" type="button" aria-label="Close Navigation Menu" onclick="document.body.classList.remove('tr-mobile-nav-active')">
+      <button class="tr-mobile-drawer-close" type="button" aria-label="Close navigation menu" data-tr-mobile-nav-close>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -226,8 +240,54 @@
 </header>
 
 <script>
-  // Ensure header remains sticky while announcement hides smoothly
   (function() {
+    const header = document.getElementById('tr-header-{{ section.id }}');
+    if (!header) return;
+
+    const openButton = header.querySelector('[data-tr-mobile-nav-open]');
+    const closeButton = header.querySelector('[data-tr-mobile-nav-close]');
+    const overlay = header.querySelector('[data-tr-mobile-nav-overlay]');
+    const drawer = header.querySelector('.tr-mobile-drawer');
+    const listenerKey = 'trHeaderController{{ section.id }}';
+
+    window[listenerKey]?.abort();
+    const controller = new AbortController();
+    window[listenerKey] = controller;
+    const listenerOptions = { signal: controller.signal };
+
+    function setMenuOpen(isOpen, restoreFocus) {
+      document.body.classList.toggle('tr-mobile-nav-active', isOpen);
+      openButton?.setAttribute('aria-expanded', String(isOpen));
+      drawer?.setAttribute('aria-hidden', String(!isOpen));
+
+      if (isOpen) {
+        window.requestAnimationFrame(function() {
+          drawer?.querySelector('a, button')?.focus({ preventScroll: true });
+        });
+      } else if (restoreFocus) {
+        openButton?.focus({ preventScroll: true });
+      }
+    }
+
+    openButton?.addEventListener('click', function() { setMenuOpen(true, false); }, listenerOptions);
+    closeButton?.addEventListener('click', function() { setMenuOpen(false, true); }, listenerOptions);
+    overlay?.addEventListener('click', function() { setMenuOpen(false, true); }, listenerOptions);
+    drawer?.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() { setMenuOpen(false, false); }, listenerOptions);
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && document.body.classList.contains('tr-mobile-nav-active')) {
+        setMenuOpen(false, true);
+      }
+    }, listenerOptions);
+
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 1024 && document.body.classList.contains('tr-mobile-nav-active')) {
+        setMenuOpen(false, false);
+      }
+    }, listenerOptions);
+
     function handleHeaderScroll() {
       if (window.pageYOffset > 15) {
         document.body.classList.add('tr-header-scrolled');
@@ -235,7 +295,7 @@
         document.body.classList.remove('tr-header-scrolled');
       }
     }
-    window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+    window.addEventListener('scroll', handleHeaderScroll, { passive: true, signal: controller.signal });
     handleHeaderScroll();
   })();
 </script>

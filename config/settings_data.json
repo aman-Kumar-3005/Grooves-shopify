@@ -74,11 +74,6 @@
     "grooves_radius": 18,
     "content_for_index": [],
     "blocks": {
-      "1409715032340194113": {
-        "type": "shopify://apps/gokwik-cart-slide-cart-drawer/blocks/app-embed/531cd8ff-cc36-43b1-9a44-c16d44927215",
-        "disabled": false,
-        "settings": {}
-      },
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,

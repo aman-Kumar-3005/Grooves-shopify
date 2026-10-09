@@ -513,7 +513,7 @@
         "show_rating_badge": true,
         "price_prefix": "Prebook @",
         "card_radius": 8,
-        "btn_bg_color": "#121212",
+        "btn_bg_color": "#17243D",
         "btn_text_color": "#ffffff",
         "bg_color": "#ffffff",
         "padding_top": 36,

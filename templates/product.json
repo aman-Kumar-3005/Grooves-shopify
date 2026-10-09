@@ -13,10 +13,10 @@
       "type": "tr-product-hero",
       "settings": {
         "fallback_product": "",
-        "bg_color": "#0b0b0b",
-        "card_bg": "#161616",
-        "text_color": "#ffffff",
-        "accent_color": "#4cf800",
+        "bg_color": "#F7F8FA",
+        "card_bg": "#FFFFFF",
+        "text_color": "#17243D",
+        "accent_color": "#45A8E8",
         "padding_top": 40,
         "padding_bottom": 60,
         "product_title": "Grooves Product",
@@ -397,9 +397,9 @@
         "support_item_FtmBen": {
           "type": "support_item",
           "settings": {
-            "title": "Warranty & Order Status",
+            "title": "6 Month Warranty",
             "subtitle": "Check verified coverage",
-            "image": "shopify://shop_images/1_year_warranty.png",
+            "image": "",
             "icon_url": "grooves-icon-warranty.png",
             "link": "shopify://pages/track-status"
           }
@@ -447,9 +447,9 @@
         "support_item_zMR7qi": {
           "type": "support_item",
           "settings": {
-            "title": "Replacement Support",
+            "title": "48 Hours Replacement",
             "subtitle": "Policy terms apply",
-            "image": "shopify://shop_images/icon_72hrs_replacement.png",
+            "image": "",
             "icon_url": "grooves-icon-replacement.png",
             "link": "shopify://pages/contact"
           }

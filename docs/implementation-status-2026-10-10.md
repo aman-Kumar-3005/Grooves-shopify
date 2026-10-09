@@ -2,6 +2,10 @@
 
 ## Completed and validated in this phase
 
+- Rebranded the global storefront from the legacy black/neon-lime treatment to the supplied packaging identity: deep navy, midnight blue, electric blue, sky/cyan, restrained purple/pink gradients, white, off-white, cool grey, and charcoal.
+- Updated the existing Shopify color-palette settings and final presentation layer instead of adding another competing theme system.
+- Applied the packaging palette to headers, navigation, announcement bar, hero overlays, product cards, PDP surfaces, forms, focus states, badges, drawers, support portal, cart-facing components, and both footer implementations.
+- Converted the custom footer's dummy JavaScript newsletter alert into Shopify's native customer/newsletter form with accessible success and error feedback.
 - Audited the active homepage, collection, product, cart/support templates, custom sections, global assets, Shogun hooks, and the existing order/warranty backend.
 - Compared the reference site's useful discovery and support workflows without copying its visual design.
 - Added a `BUY NOW` action to Dynamic Product Slider cards. Single/default-variant products use a direct cart-to-checkout permalink; multi-variant products open the product page so colour or option selection is never guessed.

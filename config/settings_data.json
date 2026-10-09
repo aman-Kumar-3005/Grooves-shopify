@@ -70,8 +70,8 @@
     "palette_selected_variant_border": "{{ settings.color_palette.foreground }}",
     "variant_button_radius": 10,
     "variant_button_width": "equal-width-buttons",
-    "grooves_accent": "#b3ff00",
-    "grooves_radius": 16,
+    "grooves_accent": "#45A8E8",
+    "grooves_radius": 18,
     "content_for_index": [],
     "blocks": {
       "1409715032340194113": {
@@ -104,10 +104,10 @@
     },
     "color_palette": {
       "background": "#ffffff",
-      "foreground": "#090909",
-      "color1": "#55ff00",
-      "color2": "#f4f5f2",
-      "color3": "#e6e6e6"
+      "foreground": "#17243D",
+      "color1": "#17243D",
+      "color2": "#F7F8FA",
+      "color3": "#E8ECF2"
     }
   },
   "presets": {
@@ -170,10 +170,10 @@
       "variant_button_width": "equal-width-buttons",
       "color_palette": {
         "background": "#ffffff",
-        "foreground": "#000000",
-        "color1": "#a42325",
-        "color2": "#e8d5c7",
-        "color3": "#E6E6E6"
+        "foreground": "#17243D",
+        "color1": "#17243D",
+        "color2": "#F7F8FA",
+        "color3": "#E8ECF2"
       }
     }
   }

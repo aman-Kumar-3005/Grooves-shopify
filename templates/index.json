@@ -171,7 +171,7 @@
         "show_rating_badge": true,
         "price_prefix": "always best",
         "card_radius": 8,
-        "btn_bg_color": "#121212",
+        "btn_bg_color": "#17243D",
         "btn_text_color": "#ffffff",
         "bg_color": "#ffffff",
         "padding_top": 12,
@@ -404,7 +404,7 @@
         "show_rating_badge": true,
         "price_prefix": "Prebook @",
         "card_radius": 8,
-        "btn_bg_color": "#121212",
+        "btn_bg_color": "#17243D",
         "btn_text_color": "#ffffff",
         "bg_color": "#ffffff",
         "padding_top": 36,
@@ -666,7 +666,7 @@
       "name": "Marquee",
       "settings": {
         "marquee_meta": "",
-        "colorBackground": "#000",
+        "colorBackground": "#17243D",
         "marquee_speed": 164,
         "colorText": "#fff",
         "link": "",
@@ -998,8 +998,8 @@
         "enable_desktop_carousel": true,
         "columns_mobile": 2,
         "enable_mobile_carousel": true,
-        "accent_color": "#4cf800",
-        "card_bg": "#141414",
+        "accent_color": "#45A8E8",
+        "card_bg": "#FFFFFF",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -1010,14 +1010,9 @@
         "sup_2": {
           "type": "support_item",
           "settings": {
-<<<<<<< HEAD
-            "title": "Warranty & Order Status",
-            "subtitle": "Check verified coverage",
-=======
             "title": "6 Month Warranty",
-            "subtitle": "Hassle-Free Coverage",
->>>>>>> 745782a4c92d386b1a061367a4559a9a5d6fa353
-            "image": "shopify://shop_images/1_year_warranty.png",
+            "subtitle": "Check verified coverage",
+            "image": "",
             "icon_url": "grooves-icon-warranty.png",
             "link": "shopify://pages/track-status"
           }
@@ -1065,14 +1060,9 @@
         "sup_6": {
           "type": "support_item",
           "settings": {
-<<<<<<< HEAD
-            "title": "Replacement Support",
+            "title": "48 Hours Replacement",
             "subtitle": "Policy terms apply",
-=======
-            "title": "48Hrs Replacement",
-            "subtitle": "No Questions Asked",
->>>>>>> 745782a4c92d386b1a061367a4559a9a5d6fa353
-            "image": "shopify://shop_images/icon_72hrs_replacement.png",
+            "image": "",
             "icon_url": "grooves-icon-replacement.png",
             "link": "shopify://pages/contact"
           }

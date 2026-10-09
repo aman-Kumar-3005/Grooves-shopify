@@ -2124,7 +2124,7 @@
         "type": "color",
         "id": "grooves_accent",
         "label": "Accent",
-        "default": "#b3ff00"
+        "default": "#45A8E8"
       },
       {
         "type": "range",

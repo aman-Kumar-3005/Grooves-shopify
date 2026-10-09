@@ -387,7 +387,7 @@
         "show_rating_badge": true,
         "price_prefix": "",
         "card_radius": 8,
-        "btn_bg_color": "#121212",
+        "btn_bg_color": "#17243D",
         "btn_text_color": "#ffffff",
         "bg_color": "#ffffff",
         "padding_top": 36,
@@ -533,7 +533,7 @@
       "name": "Marquee",
       "settings": {
         "marquee_meta": "",
-        "colorBackground": "#000",
+        "colorBackground": "#17243D",
         "marquee_speed": 160,
         "colorText": "#fff",
         "link": "",
@@ -567,9 +567,9 @@
         "support_item_qHAyBH": {
           "type": "support_item",
           "settings": {
-            "title": "Warranty & Order Status",
+            "title": "6 Month Warranty",
             "subtitle": "Check verified coverage",
-            "image": "shopify://shop_images/doorstep-warranty.svg",
+            "image": "",
             "icon_url": "grooves-icon-warranty.png",
             "link": "shopify://pages/track-status"
           }
@@ -577,9 +577,9 @@
         "support_item_CmDBk9": {
           "type": "support_item",
           "settings": {
-            "title": "Replacement Support",
+            "title": "48 Hours Replacement",
             "subtitle": "Policy terms apply",
-            "image": "shopify://shop_images/easy-return.svg",
+            "image": "",
             "icon_url": "grooves-icon-replacement.png",
             "link": ""
           }

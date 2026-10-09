@@ -148,17 +148,27 @@
         <p style="color: #888888; font-size: 13px; margin: 0 0 12px;">
           Subscribe for early product launches, secret discounts, and VIP updates.
         </p>
-        <form class="tr-newsletter-form" action="#" method="post" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Grooves Lifestyle!');">
+        {% form 'customer', class: 'tr-newsletter-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
           <input 
             type="email" 
+            name="contact[email]"
             placeholder="Enter your email" 
             class="tr-newsletter-input" 
+            value="{% if customer %}{{ customer.email }}{% endif %}"
+            autocomplete="email"
+            aria-label="Email address"
             required
           >
           <button type="submit" class="tr-btn tr-btn-accent" style="padding: 10px 20px; font-size: 12px;">
             JOIN
           </button>
-        </form>
+          {% if form.posted_successfully? %}
+            <p class="tr-newsletter-status" role="status">Thanks for subscribing.</p>
+          {% elsif form.errors %}
+            <div class="tr-newsletter-status" role="alert">{{ form.errors | default_errors }}</div>
+          {% endif %}
+        {% endform %}
       </div>
     </div>
 
@@ -168,8 +178,7 @@
         &copy; {{ 'now' | date: '%Y' }} {{ section.settings.brand_name | default: 'Grooves Lifestyle' }}. All Rights Reserved. | grooveslifestyle.com
       </div>
       <div>
-        <span style="color: #888888; font-size: 12px; margin-right: 12px;">100% SECURE PAYMENTS</span>
-        <span>💳 UPI | Cards | NetBanking | COD</span>
+        <span style="color: #a9ddf2; font-size: 12px;">Payment options are shown securely at checkout</span>
       </div>
     </div>
   </div>

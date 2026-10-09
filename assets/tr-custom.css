@@ -1,15 +1,15 @@
 /* ==========================================================================
    Grooves Lifestyle Brand Theme Stylesheet
    Brand: Grooves Lifestyle (grooveslifestyle.com)
-   Color Palette: #bbff0a (Neon Lime Accent), #000000 (Pure Black), #141414, #1e1e1e, #232323
+   Packaging palette: navy, electric blue, cyan, purple, pink, white, and cool grey
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;700;800&display=swap');
 
 :root {
-  --tr-accent: #bbff0a;
-  --tr-accent-hover: #d2ff4d;
-  --tr-accent-glow: rgba(187, 255, 10, 0.35);
+  --tr-accent: #45a8e8;
+  --tr-accent-hover: #76cbe8;
+  --tr-accent-glow: rgba(69, 168, 232, 0.30);
   --tr-bg: #000000;
   --tr-surface-1: #0d0d0d;
   --tr-surface-2: #161616;
@@ -121,7 +121,7 @@ body.tr-theme,
 .tr-btn-accent:hover {
   background-color: var(--tr-accent-hover);
   transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(187, 255, 10, 0.5);
+  box-shadow: 0 6px 20px rgba(69, 168, 232, 0.38);
 }
 
 .tr-btn-dark {
@@ -202,7 +202,7 @@ body.tr-header-scrolled .tr-announcement-bar {
 }
 
 .tr-ann-text-lime {
-  color: var(--tr-accent, #bbff0a);
+  color: var(--tr-accent, #45a8e8);
   font-weight: 800;
 }
 
@@ -370,7 +370,7 @@ body.tr-header-scrolled .tr-header {
 }
 
 .tr-nav-link {
-  color: var(--tr-accent, #bbff0a) !important;
+  color: var(--tr-accent, #45a8e8) !important;
   text-decoration: none;
   font-size: 13.5px;
   font-weight: 750;
@@ -384,7 +384,7 @@ body.tr-header-scrolled .tr-header {
 
 .tr-nav-link:hover,
 .tr-nav-link.active {
-  border-bottom-color: var(--tr-accent, #bbff0a);
+  border-bottom-color: var(--tr-accent, #45a8e8);
 }
 
 .tr-header-actions {
@@ -619,8 +619,8 @@ body.tr-mobile-nav-active {
 
 .tr-mobile-drawer-link:hover,
 .tr-mobile-drawer-link.active {
-  color: var(--tr-accent, #bbff0a);
-  background: rgba(187, 255, 10, 0.05);
+  color: var(--tr-accent, #45a8e8);
+  background: rgba(69, 168, 232, 0.07);
 }
 
 .tr-mobile-drawer-footer {
@@ -640,7 +640,7 @@ body.tr-mobile-nav-active {
 }
 
 .tr-mobile-drawer-btn:hover {
-  color: var(--tr-accent, #bbff0a);
+  color: var(--tr-accent, #45a8e8);
 }
 
 /* ==========================================================================
@@ -710,7 +710,7 @@ body.tr-mobile-nav-active {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(187, 255, 10, 0.15);
+  background: rgba(69, 168, 232, 0.15);
   border: 1px solid var(--tr-accent);
   color: var(--tr-accent);
   font-size: 13px;

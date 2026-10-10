@@ -67,6 +67,8 @@
       <div class="tr-explore-right-grid">
         {% for block in section.blocks %}
           {%- liquid
+            assign c_img_280 = blank
+            assign c_img_360 = blank
             assign blk_prod = block.settings.product
             if blk_prod != blank
               assign c_title = blk_prod.title
@@ -75,6 +77,8 @@
               assign c_link = blk_prod.url
               if block.settings.image != blank
                 assign c_img = block.settings.image | image_url: width: 320
+                assign c_img_280 = block.settings.image | image_url: width: 280
+                assign c_img_360 = block.settings.image | image_url: width: 360
               elsif block.settings.image_url != blank
                 if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
                   assign c_img = block.settings.image_url
@@ -83,6 +87,8 @@
                 endif
               elsif blk_prod.featured_image
                 assign c_img = blk_prod.featured_image | image_url: width: 320
+                assign c_img_280 = blk_prod.featured_image | image_url: width: 280
+                assign c_img_360 = blk_prod.featured_image | image_url: width: 360
               else
                 assign c_img = 'grooves-prod-fire.jpg' | asset_url
               endif
@@ -98,6 +104,8 @@
               assign c_discount = block.settings.discount_tag
               if block.settings.image != blank
                 assign c_img = block.settings.image | image_url: width: 320
+                assign c_img_280 = block.settings.image | image_url: width: 280
+                assign c_img_360 = block.settings.image | image_url: width: 360
               elsif block.settings.image_url != blank
                 if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
                   assign c_img = block.settings.image_url
@@ -114,6 +122,10 @@
             <a href="{{ c_link }}">
               <img 
                 src="{{ c_img }}" 
+                {% if c_img_280 != blank and c_img_360 != blank %}
+                  srcset="{{ c_img_280 }} 280w, {{ c_img_360 }} 360w"
+                  sizes="(max-width: 768px) calc((100vw - 44px) / 2), 263px"
+                {% endif %}
                 alt="{{ c_title }}" 
                 class="tr-product-thumb"
                 loading="lazy"

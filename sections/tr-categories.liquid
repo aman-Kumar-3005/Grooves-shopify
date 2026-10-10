@@ -16,8 +16,9 @@
   }
 
   #tr-categories-{{ section.id }} .tr-category-icon-box img {
-    width: {{ section.settings.image_size }}px !important;
-    height: {{ section.settings.image_size }}px !important;
+    width: min({{ section.settings.image_size }}px, 100%) !important;
+    height: auto !important;
+    aspect-ratio: 1;
     object-fit: contain;
     display: block;
   }
@@ -36,7 +37,7 @@
         {%- liquid
           assign col = block.settings.collection
           if block.settings.image != blank
-            assign c_img = block.settings.image | image_url: width: 256
+            assign c_img = block.settings.image | image_url: width: 160
           elsif block.settings.image_url != blank
             if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
               assign c_img = block.settings.image_url
@@ -44,9 +45,9 @@
               assign c_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
             endif
           elsif col != blank and col.featured_image
-            assign c_img = col.featured_image | image_url: width: 256
+            assign c_img = col.featured_image | image_url: width: 160
           elsif col != blank and col.products.first.featured_image
-            assign c_img = col.products.first.featured_image | image_url: width: 256
+            assign c_img = col.products.first.featured_image | image_url: width: 160
           else
             assign c_img = 'grooves-cat-earbuds.jpg' | asset_url
           endif

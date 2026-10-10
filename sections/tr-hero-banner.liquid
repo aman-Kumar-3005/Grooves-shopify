@@ -320,6 +320,11 @@
 
     function resetTimer() {
       if (timer) clearInterval(timer);
+      timer = null;
+      // Swapping to a lazy second banner during Lighthouse's observation window
+      // turns that banner into a very late LCP. Mobile users keep dots and swipe,
+      // while desktop retains the configured autoplay experience.
+      if (window.matchMedia('(max-width: 768px)').matches) return;
       if (slides.length > 1) {
         const speed = {{ section.settings.autoplay_speed | default: 5 | times: 1000 }};
         timer = setInterval(() => {
@@ -329,6 +334,11 @@
       }
     }
     resetTimer();
+
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+    const syncAutoplay = () => resetTimer();
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', syncAutoplay);
+    else mobileQuery.addListener(syncAutoplay);
 
     // Touch swipe support for mobile
     let touchStartX = 0;

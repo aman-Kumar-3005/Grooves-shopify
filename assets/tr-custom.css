@@ -1983,6 +1983,11 @@ body.tr-mobile-nav-active {
 }
 
 @media (max-width: 768px) {
+  .content-for-layout[data-template="index"] > .shopify-section:nth-child(n + 4) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+
   .tr-header-inner {
     padding-inline: 14px;
     height: 56px;

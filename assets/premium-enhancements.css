@@ -298,6 +298,7 @@ body.tr-theme,
   border: 0;
   background: transparent !important;
   box-shadow: none !important;
+  transition: none !important;
 }
 .tr-theme .tr-hero-dot::before {
   content: '';

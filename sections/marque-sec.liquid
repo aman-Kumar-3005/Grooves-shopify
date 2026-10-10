@@ -22,6 +22,11 @@
     will-change: transform;
     animation: marquee {{ section.settings.marquee_speed }}s linear infinite;
   }
+  .section-{{ section.id }}.custom-marquee .marquee-group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
   .section-{{ section.id }}.custom-marquee .content {
     margin-left: 40px;
     font-size: {{section.settings.font_size}}px;
@@ -32,6 +37,12 @@
     }
     to {
       transform: translateX(-50%); /* Optimized for seamless looping */
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .section-{{ section.id }}.custom-marquee .track {
+      animation-play-state: paused;
+      will-change: auto;
     }
   }
 </style>
@@ -58,10 +69,13 @@
 
       {%- endcapture -%}
 
-      {%- comment -%} Loop the content 12 times to ensure it covers ultra-wide screens seamlessly {%- endcomment -%}
-      {%- for i in (1..12) -%}
+      {%- comment -%} Two identical groups are sufficient for a seamless -50% loop. {%- endcomment -%}
+      <div class="marquee-group">
         {{ marquee_content }}
-      {%- endfor -%}
+      </div>
+      <div class="marquee-group" aria-hidden="true">
+        {{ marquee_content }}
+      </div>
       
       {%- if section.settings.link != blank -%}
         {% comment %} <span class="content" style="margin-left:20px;">{% render 'icon-arrow' %}</span> {% endcomment %}

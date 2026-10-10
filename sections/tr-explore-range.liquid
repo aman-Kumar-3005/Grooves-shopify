@@ -74,7 +74,7 @@
               assign c_compare = blk_prod.compare_at_price | money
               assign c_link = blk_prod.url
               if block.settings.image != blank
-                assign c_img = block.settings.image | image_url: width: 400
+                assign c_img = block.settings.image | image_url: width: 320
               elsif block.settings.image_url != blank
                 if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
                   assign c_img = block.settings.image_url
@@ -82,7 +82,7 @@
                   assign c_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
                 endif
               elsif blk_prod.featured_image
-                assign c_img = blk_prod.featured_image | image_url: width: 400
+                assign c_img = blk_prod.featured_image | image_url: width: 320
               else
                 assign c_img = 'grooves-prod-fire.jpg' | asset_url
               endif
@@ -97,7 +97,7 @@
               assign c_compare = block.settings.compare_price
               assign c_discount = block.settings.discount_tag
               if block.settings.image != blank
-                assign c_img = block.settings.image | image_url: width: 400
+                assign c_img = block.settings.image | image_url: width: 320
               elsif block.settings.image_url != blank
                 if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
                   assign c_img = block.settings.image_url
@@ -117,6 +117,7 @@
                 alt="{{ c_title }}" 
                 class="tr-product-thumb"
                 loading="lazy"
+                decoding="async"
                 width="200"
                 height="200"
               >

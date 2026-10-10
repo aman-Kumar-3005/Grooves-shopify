@@ -284,6 +284,36 @@ body.tr-theme,
   backdrop-filter: blur(10px);
 }
 
+/* Keep title text readable after the global heading color is applied. */
+.tr-theme .tr-section-title-box h2 { color: var(--grooves-white) !important; }
+
+/* Preserve the compact dot artwork while exposing a 44px touch target. Using
+   a transform-only active state also keeps the animation compositor-friendly. */
+.tr-theme .tr-hero-dots { gap: 0 !important; }
+.tr-theme .tr-hero-dot {
+  position: relative;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  border: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.tr-theme .tr-hero-dot::before {
+  content: '';
+  position: absolute;
+  inset: 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.25);
+  transition: transform .25s ease, background-color .25s ease, box-shadow .25s ease;
+}
+.tr-theme .tr-hero-dot.active::before {
+  background: var(--grooves-blue);
+  box-shadow: 0 0 18px rgba(69,168,232,.68);
+  transform: scaleX(3);
+}
+
 /* Premium cards */
 .tr-theme :is(.cps-card, .tr-product-mini-card, .tr-speaker-card, .tr-lifestyle-card,
   .tr-blog-card, .tr-reel-card, .testi-card, .shoppable-card, .pro-card-wrapper,

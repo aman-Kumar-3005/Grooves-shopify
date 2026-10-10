@@ -196,34 +196,62 @@
         assign desk_url = block.settings.image_url | default: default_hero_asset
         assign mob_img = block.settings.mobile_image
         assign mob_url = block.settings.mobile_image_url
+        assign desk_url_separator = '?'
+        if desk_url contains '?'
+          assign desk_url_separator = '&'
+        endif
+        assign desk_url_480 = desk_url | append: desk_url_separator | append: 'width=480'
+        assign desk_url_768 = desk_url | append: desk_url_separator | append: 'width=768'
+        assign desk_url_1200 = desk_url | append: desk_url_separator | append: 'width=1200'
+        assign desk_url_1600 = desk_url | append: desk_url_separator | append: 'width=1600'
+        assign mob_url_separator = '?'
+        if mob_url contains '?'
+          assign mob_url_separator = '&'
+        endif
       -%}
       <div class="tr-hero-slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
         <a href="{{ block.settings.button_link | default: '/collections/all' }}" class="tr-hero-slide-link">
           <div class="tr-hero-img-wrap">
             <picture>
               {% if mob_img != blank %}
-                <source media="(max-width: 768px)" srcset="{{ mob_img | image_url: width: 800 }}">
+                <source
+                  media="(max-width: 768px)"
+                  srcset="{{ mob_img | image_url: width: 360 }} 360w, {{ mob_img | image_url: width: 540 }} 540w, {{ mob_img | image_url: width: 768 }} 768w"
+                  sizes="100vw"
+                >
               {% elsif mob_url != blank %}
-                <source media="(max-width: 768px)" srcset="{{ mob_url }}">
+                <source
+                  media="(max-width: 768px)"
+                  srcset="{{ mob_url }}{{ mob_url_separator }}width=360 360w, {{ mob_url }}{{ mob_url_separator }}width=540 540w, {{ mob_url }}{{ mob_url_separator }}width=768 768w"
+                  sizes="100vw"
+                >
               {% endif %}
               
               {% if desk_img != blank %}
                 <img 
-                  src="{{ desk_img | image_url: width: 2000 }}" 
+                  src="{{ desk_img | image_url: width: 1200 }}"
+                  srcset="{{ desk_img | image_url: width: 480 }} 480w, {{ desk_img | image_url: width: 768 }} 768w, {{ desk_img | image_url: width: 1200 }} 1200w, {{ desk_img | image_url: width: 1600 }} 1600w, {{ desk_img | image_url: width: 2000 }} 2000w"
+                  sizes="100vw"
                   alt="{{ block.settings.heading | default: 'Grooves Lifestyle Tech Essentials' }}" 
                   class="tr-hero-img"
                   loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                  width="1920"
-                  height="auto"
+                  fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
+                  decoding="async"
+                  width="{{ desk_img.width }}"
+                  height="{{ desk_img.height }}"
                 >
               {% else %}
                 <img 
-                  src="{{ desk_url }}" 
+                  src="{{ desk_url_1200 }}"
+                  srcset="{{ desk_url_480 }} 480w, {{ desk_url_768 }} 768w, {{ desk_url_1200 }} 1200w, {{ desk_url_1600 }} 1600w"
+                  sizes="100vw"
                   alt="{{ block.settings.heading | default: 'Grooves Lifestyle Tech Essentials' }}" 
                   class="tr-hero-img"
                   loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
+                  decoding="async"
                   width="1920"
-                  height="auto"
+                  height="1080"
                 >
               {% endif %}
             </picture>

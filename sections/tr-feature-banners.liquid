@@ -3,6 +3,8 @@
     {% for block in section.blocks %}
       {%- liquid
         assign desk_img = block.settings.image
+        assign desk_width = desk_img.width | default: 1600
+        assign desk_height = desk_img.height | default: 900
         assign desk_raw = block.settings.image_url | default: 'grooves-banner-turbo.jpg'
         if desk_raw contains 'http' or desk_raw contains '//'
           assign desk_url = desk_raw
@@ -35,8 +37,9 @@
               alt="{{ block.settings.title | default: 'Grooves Lifestyle Product' }}" 
               class="tr-showcase-img"
               loading="lazy"
-              width="1600"
-              height="auto"
+              width="{{ desk_width }}"
+              height="{{ desk_height }}"
+              decoding="async"
             >
           {% else %}
             <img 
@@ -45,7 +48,8 @@
               class="tr-showcase-img"
               loading="lazy"
               width="1600"
-              height="auto"
+              height="900"
+              decoding="async"
             >
           {% endif %}
         </picture>

@@ -11,6 +11,9 @@
   let observer;
 
   const setupPremiumMotion = (root = document) => {
+    // Keep mobile's critical path lean; the content remains immediately visible
+    // and desktop users still receive the progressive reveal treatment.
+    if (reducedMotion.matches || matchMedia('(max-width: 749px)').matches) return;
     const items = [...root.querySelectorAll(revealSelector)].filter((item) => !item.hasAttribute('data-premium-reveal'));
     if (!items.length) return;
 
@@ -21,7 +24,7 @@
       item.style.setProperty('--premium-delay', `${Math.min(index * 55, 275)}ms`);
     });
 
-    if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+    if (!('IntersectionObserver' in window)) {
       items.forEach((item) => item.classList.add('is-visible'));
       return;
     }
@@ -66,6 +69,7 @@
   };
 
   const setupScrollProgress = () => {
+    if (reducedMotion.matches || matchMedia('(max-width: 989px)').matches) return;
     if (document.querySelector('.premium-scroll-progress')) return;
     const progress = document.createElement('div');
     progress.className = 'premium-scroll-progress';
@@ -84,7 +88,7 @@
     scroller.addEventListener('scroll', () => {
       if (!frame) frame = requestAnimationFrame(update);
     }, { passive: true });
-    update();
+    requestAnimationFrame(update);
   };
 
   const init = () => {

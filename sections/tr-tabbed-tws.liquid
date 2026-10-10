@@ -14,7 +14,11 @@
     {%- liquid
       if section.settings.earbuds_image != blank
         assign eb_img = section.settings.earbuds_image | image_url: width: 1600
+        assign eb_width = section.settings.earbuds_image.width
+        assign eb_height = section.settings.earbuds_image.height
       else
+        assign eb_width = 1600
+        assign eb_height = 900
         assign eb_raw = section.settings.earbuds_banner | default: 'grooves-tabbed-earbuds.jpg'
         if eb_raw contains 'http' or eb_raw contains '//'
           assign eb_img = eb_raw
@@ -29,8 +33,9 @@
         alt="{{ section.settings.earbuds_title | default: 'Grooves Earbuds Collection' }}" 
         class="tr-showcase-img"
         loading="lazy"
-        width="1600"
-        height="auto"
+        width="{{ eb_width }}"
+        height="{{ eb_height }}"
+        decoding="async"
       >
       <div class="tr-showcase-overlay" style="align-items: flex-start; padding: 40px 60px;">
         <h3 style="color: #ffffff; font-size: clamp(22px, 3.5vw, 42px); font-weight: 900; margin: 0 0 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">
@@ -46,7 +51,11 @@
     {%- liquid
       if section.settings.soundbar_image != blank
         assign sb_img = section.settings.soundbar_image | image_url: width: 1600
+        assign sb_width = section.settings.soundbar_image.width
+        assign sb_height = section.settings.soundbar_image.height
       else
+        assign sb_width = 1600
+        assign sb_height = 900
         assign sb_raw = section.settings.soundbar_banner | default: 'grooves-audio-desktop-branded.png'
         if sb_raw contains 'http' or sb_raw contains '//'
           assign sb_img = sb_raw
@@ -61,8 +70,9 @@
         alt="{{ section.settings.soundbar_title | default: 'Grooves Cinema Audio' }}" 
         class="tr-showcase-img"
         loading="lazy"
-        width="1600"
-        height="auto"
+        width="{{ sb_width }}"
+        height="{{ sb_height }}"
+        decoding="async"
       >
       <div class="tr-showcase-overlay" style="align-items: flex-end; padding: 40px 60px;">
         {% if section.settings.soundbar_badge != blank %}

@@ -175,7 +175,17 @@
           {%- endif -%}
           
           {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: block.settings.image.alt | escape }}
+            {%- assign press_logo_alt = block.settings.image.alt | default: 'Featured publication logo' -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 240 }}"
+              srcset="{{ block.settings.image | image_url: width: 160 }} 160w, {{ block.settings.image | image_url: width: 240 }} 240w, {{ block.settings.image | image_url: width: 320 }} 320w"
+              sizes="(max-width: 768px) {{ section.settings.logo_width_mobile }}px, {{ section.settings.logo_width }}px"
+              alt="{{ press_logo_alt | escape }}"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+              loading="lazy"
+              decoding="async"
+            >
           {%- else -%}
             {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}

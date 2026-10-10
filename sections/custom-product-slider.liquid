@@ -284,10 +284,10 @@
                   {%- if product.available and product.has_only_default_variant and product.requires_selling_plan == false and chosen_variant.available -%}
                     <product-form-component data-product-id="{{ product.id }}" data-product-url="{{ product.url }}" on:submit="/handleSubmit"><form method="post" action="{{ routes.cart_add_url }}" class="cps-form" data-type="add-to-cart-form">
                       <input type="hidden" name="id" value="{{ chosen_variant.id }}" />
-                      <button type="submit" class="cps-add-btn">ADD</button>
+                      <button type="submit" class="cps-add-btn" aria-label="Add {{ product.title | escape }} to cart">ADD</button>
                     </form></product-form-component>
                   {%- elsif product.available -%}
-                    <a href="{{ product.url }}" class="cps-add-btn">CHOOSE OPTIONS</a>
+                    <a href="{{ product.url }}" class="cps-add-btn" aria-label="Choose options for {{ product.title | escape }}">CHOOSE OPTIONS</a>
                   {%- else -%}
                     <button type="button" class="cps-add-btn" disabled>SOLD OUT</button>
                   {%- endif -%}

@@ -5,6 +5,9 @@
     assign footer_logo_url = 'campaign/grooves-brand-logo.png' | asset_url
   endif
   assign footer_logo_w = section.settings.logo_width | default: 140
+  assign footer_logo_ratio = footer_logo.aspect_ratio | default: 2.84
+  assign footer_logo_h = footer_logo_w | divided_by: footer_logo_ratio | round
+  assign footer_logo_src_w = footer_logo_w | times: 2
 
   assign footer_nav_menu = section.settings.menu | default: linklists['main-menu']
   if footer_nav_menu != blank and footer_nav_menu.links.size > 0
@@ -27,17 +30,23 @@
         <a href="/" class="tr-logo-link">
           {% if footer_logo != blank %}
             <img 
-              src="{{ footer_logo | image_url: width: 400 }}" 
+              src="{{ footer_logo | image_url: width: footer_logo_src_w }}"
               alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               style="width: {{ footer_logo_w }}px; height: auto; display: block;"
+              width="{{ footer_logo_w }}"
+              height="{{ footer_logo_h }}"
               loading="lazy"
+              decoding="async"
             >
           {% elsif footer_logo_url != blank %}
             <img 
               src="{{ footer_logo_url }}" 
               alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               style="width: {{ footer_logo_w }}px; height: auto; display: block;"
+              width="{{ footer_logo_w }}"
+              height="{{ footer_logo_h }}"
               loading="lazy"
+              decoding="async"
             >
           {% else %}
             <div class="tr-brand-wordmark">
@@ -60,7 +69,7 @@
 
       <!-- Column 1: Main Menu (Connected to Shopify Main Menu) -->
       <div class="tr-footer-col">
-        <h4>{{ section.settings.menu_heading | default: 'Quick Links' }}</h4>
+        <h3>{{ section.settings.menu_heading | default: 'Quick Links' }}</h3>
         <ul>
           {%- if footer_links != blank and footer_links.size > 0 -%}
             {% for link in footer_links %}
@@ -82,7 +91,7 @@
 
       <!-- Column 2: Customer Support & Policies -->
       <div class="tr-footer-col">
-        <h4>{{ section.settings.footer_menu_heading | default: 'Customer Support' }}</h4>
+        <h3>{{ section.settings.footer_menu_heading | default: 'Customer Support' }}</h3>
         <div class="tr-support-contact" style="margin: 0 0 16px; color: #888888; font-size: 13px; line-height: 1.55;">
           {%- if section.settings.support_email != blank -%}
             <div style="margin-bottom: 6px;">
@@ -144,7 +153,7 @@
 
       <!-- Column 3: Newsletter -->
       <div class="tr-footer-col">
-        <h4>Newsletter</h4>
+        <h3>Newsletter</h3>
         <p style="color: #888888; font-size: 13px; margin: 0 0 12px;">
           Subscribe for early product launches, secret discounts, and VIP updates.
         </p>

@@ -3,6 +3,11 @@
   assign logo_url = section.settings.logo_url
   assign logo_w_desk = section.settings.logo_width | default: 130
   assign logo_w_mob = section.settings.logo_width_mobile | default: 85
+  assign logo_ratio = logo_image.aspect_ratio | default: 2.84
+  assign logo_h_desk = logo_w_desk | divided_by: logo_ratio | round
+  assign logo_h_mob = logo_w_mob | divided_by: logo_ratio | round
+  assign logo_src_w_desk = logo_w_desk | times: 2
+  assign logo_src_w_mob = logo_w_mob | times: 2
 
   assign header_menu = section.settings.menu | default: linklists['main-menu']
   if header_menu != blank and header_menu.links.size > 0
@@ -46,12 +51,13 @@
         <a href="/" class="tr-logo-link tr-desktop-logo">
           {% if logo_image != blank %}
             <img 
-              src="{{ logo_image | image_url: width: 600 }}" 
+              src="{{ logo_image | image_url: width: logo_src_w_desk }}"
               alt="{{ shop.name | default: section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               class="tr-logo-image"
               width="{{ logo_w_desk }}"
-              height="auto"
+              height="{{ logo_h_desk }}"
               loading="eager"
+              decoding="async"
             >
           {% elsif logo_url != blank %}
             <img 
@@ -59,8 +65,9 @@
               alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               class="tr-logo-image"
               width="{{ logo_w_desk }}"
-              height="auto"
+              height="{{ logo_h_desk }}"
               loading="eager"
+              decoding="async"
             >
           {% else %}
             <div class="tr-brand-wordmark">
@@ -80,12 +87,13 @@
         <a href="/" class="tr-logo-link tr-mobile-logo">
           {% if logo_image != blank %}
             <img 
-              src="{{ logo_image | image_url: width: 600 }}" 
+              src="{{ logo_image | image_url: width: logo_src_w_mob }}"
               alt="{{ shop.name | default: section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               class="tr-logo-image"
               width="{{ logo_w_mob }}"
-              height="auto"
+              height="{{ logo_h_mob }}"
               loading="eager"
+              decoding="async"
             >
           {% elsif logo_url != blank %}
             <img 
@@ -93,8 +101,9 @@
               alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
               class="tr-logo-image"
               width="{{ logo_w_mob }}"
-              height="auto"
+              height="{{ logo_h_mob }}"
               loading="eager"
+              decoding="async"
             >
           {% else %}
             <div class="tr-brand-wordmark">
@@ -186,6 +195,7 @@
     aria-modal="true"
     aria-label="Navigation menu"
     aria-hidden="true"
+    inert
   >
     <div class="tr-mobile-drawer-header">
       <a href="{{ routes.root_url }}" class="tr-mobile-drawer-logo" aria-label="{{ shop.name | escape }} home">
@@ -261,6 +271,7 @@
       document.body.classList.toggle('tr-mobile-nav-active', isOpen);
       openButton?.setAttribute('aria-expanded', String(isOpen));
       drawer?.setAttribute('aria-hidden', String(!isOpen));
+      if (drawer) drawer.inert = !isOpen;
 
       if (isOpen) {
         window.requestAnimationFrame(function() {

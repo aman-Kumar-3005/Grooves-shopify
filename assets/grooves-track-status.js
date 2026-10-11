@@ -11,6 +11,11 @@
     `${HOSTINGER_BASE}/api/verify`,
     `${HOSTINGER_BASE}/verify.php`
   ];
+  const STATUS_URLS = [
+    `${HOSTINGER_BASE}/api/status.php`,
+    `${HOSTINGER_BASE}/api/status`,
+    `${HOSTINGER_BASE}/status.php`
+  ];
   const DISCOVER_URLS = [
     `${HOSTINGER_BASE}/api/discover-orders.php`,
     `${HOSTINGER_BASE}/api/discover-orders`
@@ -34,6 +39,7 @@
 
   document.querySelectorAll('[data-g-track]').forEach((section) => {
     const lookupEndpoints = getCandidateUrls(section.dataset.endpoint, VERIFY_URLS);
+    const statusEndpoints = getCandidateUrls(section.dataset.statusEndpoint, STATUS_URLS);
     const discoverEndpoints = getCandidateUrls(section.dataset.discoverEndpoint, DISCOVER_URLS);
     const registerEndpoints = getCandidateUrls(section.dataset.registerEndpoint, REGISTER_URLS);
     const createEndpoints = getCandidateUrls(section.dataset.createEndpoint, CREATE_TICKET_URLS);
@@ -231,7 +237,10 @@
         );
 
         try {
-          const endpoints = discoveringOrders ? discoverEndpoints : lookupEndpoints;
+          const endpoints = discoveringOrders
+            ? discoverEndpoints
+            : (type === 'ticket' ? statusEndpoints : lookupEndpoints);
+
           const payload = discoveringOrders
             ? { email, phone }
             : {
@@ -239,6 +248,8 @@
                 reference,
                 order_number: reference,
                 orderNumber: reference,
+                ticket_number: reference,
+                ticketNumber: reference,
                 email
               };
 

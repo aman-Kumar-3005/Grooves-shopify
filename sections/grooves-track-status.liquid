@@ -2,9 +2,10 @@
 <section
   class="g-track g-container"
   data-g-track
-  data-endpoint="{{ section.settings.lookup_endpoint | default: '/apps/grooves-support/status' | escape }}"
-  data-register-endpoint="{{ section.settings.register_warranty_endpoint | default: '/apps/grooves-support/register-warranty' | escape }}"
-  data-create-endpoint="{{ section.settings.create_ticket_endpoint | default: '/apps/grooves-support/create-ticket' | escape }}"
+  data-endpoint="{{ section.settings.lookup_endpoint | default: 'https://maroon-camel-617271.hostingersite.com/api/verify.php' | escape }}"
+  data-status-endpoint="{{ section.settings.status_endpoint | default: 'https://maroon-camel-617271.hostingersite.com/api/status.php' | escape }}"
+  data-register-endpoint="{{ section.settings.register_warranty_endpoint | default: 'https://maroon-camel-617271.hostingersite.com/api/register-warranty.php' | escape }}"
+  data-create-endpoint="{{ section.settings.create_ticket_endpoint | default: 'https://maroon-camel-617271.hostingersite.com/api/create-ticket.php' | escape }}"
 >
   <div class="g-track__intro">
     <span class="g-eyebrow">GROOVES CARE PORTAL</span>
@@ -200,7 +201,13 @@
       "type": "text",
       "id": "lookup_endpoint",
       "label": "Status app proxy endpoint",
-      "default": "/apps/grooves-support/status"
+      "default": "https://maroon-camel-617271.hostingersite.com/api/verify.php"
+    },
+    {
+      "type": "text",
+      "id": "status_endpoint",
+      "label": "Ticket status tracking endpoint",
+      "default": "https://maroon-camel-617271.hostingersite.com/api/status.php"
     },
     {
       "type": "text",

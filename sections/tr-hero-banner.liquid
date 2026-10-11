@@ -192,7 +192,7 @@
     {% for block in section.blocks %}
       {%- liquid
         assign desk_img = block.settings.image
-        assign default_hero_asset = 'campaign/grooves-audio-desktop-branded.png' | asset_url
+        assign default_hero_asset = 'grooves-audio-desktop-branded.png' | asset_url
         assign desk_url = block.settings.image_url | default: default_hero_asset
         assign mob_img = block.settings.mobile_image
         assign mob_url = block.settings.mobile_image_url

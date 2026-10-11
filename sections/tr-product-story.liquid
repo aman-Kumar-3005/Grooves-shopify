@@ -3,7 +3,7 @@
   if section.settings.box_image != blank
     assign box_content_img = section.settings.box_image | image_url: width: 1000
   else
-    assign default_box_img = 'campaign/grooves-audio-desktop-branded.png' | asset_url
+    assign default_box_img = 'grooves-audio-desktop-branded.png' | asset_url
     assign box_content_img = product.metafields.custom.box_contents_image | default: section.settings.box_image_url | default: default_box_img
   endif
 -%}

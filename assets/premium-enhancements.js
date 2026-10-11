@@ -5,7 +5,8 @@
     '.testi-header', '.shoppable-vids-heading', '.brand-marquee-heading', '.press-header-area',
     '.cps-card', '.tr-category-card', '.tr-product-mini-card', '.tr-showcase-banner',
     '.tr-speaker-card', '.testi-card', '.shoppable-card', '.tr-lifestyle-card',
-    '.tr-blog-card', '.tr-support-card', '.press-logo-item'
+    '.tr-blog-card', '.tr-support-card', '.press-logo-item', '.product-grid__item',
+    '.blog-post-item', '.cart-page__summary', '.facets-controls-wrapper'
   ].join(',');
 
   let observer;

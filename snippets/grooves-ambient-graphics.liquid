@@ -1,0 +1,36 @@
+{%- comment -%}
+  Decorative, non-interactive artwork shared across storefront templates.
+  Only one optimized WebP is requested per page to keep the visual layer lean.
+{%- endcomment -%}
+{%- liquid
+  assign ambient_kind = 'audio'
+  assign ambient_asset = 'grooves-3d-audio-orbit.webp'
+
+  case template.name
+    when 'collection', 'list-collections', 'search'
+      assign ambient_kind = 'earbuds'
+      assign ambient_asset = 'grooves-3d-earbuds-orbit.webp'
+    when 'cart', 'page', '404', 'customers'
+      assign ambient_kind = 'charge'
+      assign ambient_asset = 'grooves-3d-charge-orbit.webp'
+  endcase
+-%}
+
+<div
+  class="grooves-ambient-scene grooves-ambient-scene--{{ ambient_kind }}"
+  aria-hidden="true"
+  data-grooves-ambient
+>
+  <span class="grooves-ambient-scene__halo"></span>
+  <span class="grooves-ambient-scene__vector"></span>
+  <img
+    class="grooves-ambient-scene__object"
+    src="{{ ambient_asset | asset_url }}"
+    alt=""
+    width="900"
+    height="900"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+  >
+</div>

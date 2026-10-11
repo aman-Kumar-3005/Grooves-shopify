@@ -833,3 +833,176 @@ body.tr-theme,
   background: var(--grooves-navy) !important;
   color: #fff !important;
 }
+
+/* ========================================================================== 
+   Grooves ambient 3D + vector system
+   One low-priority WebP is selected in Liquid per template. The artwork is
+   decorative, isolated from commerce controls and composited on the GPU.
+   ========================================================================== */
+.content-for-layout,
+.password-main-content,
+body.tr-theme {
+  position: relative;
+}
+
+.content-for-layout {
+  isolation: isolate;
+  overflow: clip;
+}
+
+.content-for-layout > .shopify-section,
+.content-for-layout > section,
+.password-main-content > :not(.grooves-ambient-scene) {
+  position: relative;
+  z-index: 2;
+}
+
+.grooves-ambient-scene {
+  --ambient-size: clamp(250px, 31vw, 490px);
+  --ambient-x: 14%;
+  --ambient-y: -4%;
+  position: absolute;
+  z-index: 1;
+  top: clamp(34px, 7vw, 120px);
+  right: clamp(-190px, -10vw, -90px);
+  width: var(--ambient-size);
+  aspect-ratio: 1;
+  pointer-events: none;
+  contain: layout paint style;
+  filter: drop-shadow(0 34px 54px rgba(23,36,61,.18));
+  opacity: .32;
+  transform: translate3d(var(--ambient-x), var(--ambient-y), 0);
+}
+
+.grooves-ambient-scene__object,
+.grooves-ambient-scene__halo,
+.grooves-ambient-scene__vector {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.grooves-ambient-scene__object {
+  z-index: 2;
+  object-fit: contain;
+  animation: grooves-ambient-float 8.5s cubic-bezier(.45,.05,.35,1) infinite alternate;
+  will-change: transform;
+}
+
+.grooves-ambient-scene__halo {
+  inset: 13%;
+  width: 74%;
+  height: 74%;
+  border: 1px solid rgba(69,168,232,.42);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(69,168,232,.3), transparent 32%),
+    radial-gradient(circle at 72% 69%, rgba(217,76,145,.26), transparent 35%);
+  box-shadow: inset 0 0 50px rgba(112,83,214,.13), 0 0 50px rgba(69,168,232,.12);
+  animation: grooves-ambient-spin 18s linear infinite;
+}
+
+.grooves-ambient-scene__halo::before,
+.grooves-ambient-scene__halo::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.grooves-ambient-scene__halo::before {
+  inset: -11%;
+  border: 1px dashed rgba(112,83,214,.35);
+}
+
+.grooves-ambient-scene__halo::after {
+  width: 12px;
+  height: 12px;
+  top: 7%;
+  right: 10%;
+  background: #45a8e8;
+  box-shadow: 0 0 0 7px rgba(69,168,232,.11), 0 0 25px #45a8e8;
+  animation: grooves-ambient-pulse 2.8s ease-in-out infinite;
+}
+
+.grooves-ambient-scene__vector {
+  z-index: 1;
+  inset: 9% -13% auto -20%;
+  width: 132%;
+  height: 78%;
+  background: url('grooves-energy-ribbon.svg') center / contain no-repeat;
+  opacity: .7;
+  animation: grooves-vector-drift 10s ease-in-out infinite alternate;
+}
+
+.grooves-ambient-scene--earbuds { opacity: .28; transform: translate3d(9%, -3%, 0) rotate(4deg); }
+.grooves-ambient-scene--charge { opacity: .25; transform: translate3d(12%, -2%, 0) rotate(-3deg); }
+
+.content-for-layout[data-template="index"] > .grooves-ambient-scene {
+  top: clamp(520px, 68vw, 800px);
+  right: clamp(-160px, -7vw, -60px);
+  opacity: .38;
+}
+
+.content-for-layout[data-template^="product"] > .grooves-ambient-scene {
+  top: clamp(580px, 68vw, 900px);
+  left: clamp(-190px, -10vw, -90px);
+  right: auto;
+  opacity: .25;
+  transform: translate3d(-8%, -3%, 0) rotate(-7deg);
+}
+
+.content-for-layout[data-template="cart"] > .grooves-ambient-scene,
+.content-for-layout[data-template="404"] > .grooves-ambient-scene,
+.password-main-content > .grooves-ambient-scene {
+  opacity: .42;
+}
+
+@keyframes grooves-ambient-float {
+  from { transform: translate3d(-1.5%, 1.5%, 0) rotate(-1.2deg) scale(.98); }
+  to { transform: translate3d(2%, -2.5%, 0) rotate(1.4deg) scale(1.025); }
+}
+
+@keyframes grooves-ambient-spin { to { transform: rotate(360deg); } }
+
+@keyframes grooves-ambient-pulse {
+  0%, 100% { transform: scale(.75); opacity: .55; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes grooves-vector-drift {
+  from { transform: translate3d(-2%, 1%, 0) rotate(-2deg); opacity: .45; }
+  to { transform: translate3d(3%, -2%, 0) rotate(2deg); opacity: .82; }
+}
+
+@media (max-width: 749px) {
+  .grooves-ambient-scene {
+    --ambient-size: clamp(190px, 62vw, 290px);
+    top: 24px;
+    right: -112px;
+    opacity: .19;
+    filter: drop-shadow(0 18px 28px rgba(23,36,61,.13));
+  }
+
+  .content-for-layout[data-template="index"] > .grooves-ambient-scene {
+    top: min(118vw, 520px);
+    right: -110px;
+    opacity: .2;
+  }
+
+  .content-for-layout[data-template^="product"] > .grooves-ambient-scene {
+    top: 520px;
+    left: -118px;
+    opacity: .16;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grooves-ambient-scene__object,
+  .grooves-ambient-scene__halo,
+  .grooves-ambient-scene__halo::after,
+  .grooves-ambient-scene__vector {
+    animation: none !important;
+    will-change: auto;
+  }
+}

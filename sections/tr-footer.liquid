@@ -2,7 +2,7 @@
   assign footer_logo = section.settings.logo | default: settings.logo
   assign footer_logo_url = section.settings.logo_url
   if footer_logo == blank and footer_logo_url == blank
-    assign footer_logo_url = 'campaign/grooves-brand-logo.png' | asset_url
+    assign footer_logo_url = 'grooves-brand-logo.png' | asset_url
   endif
   assign footer_logo_w = section.settings.logo_width | default: 140
   assign footer_logo_ratio = footer_logo.aspect_ratio | default: 2.84

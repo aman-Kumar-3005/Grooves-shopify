@@ -1,0 +1,48 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Pass Authorization Header to PHP on Apache/LiteSpeed (crucial for Support Admin Key)
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Prevent direct access to sensitive configuration and schema files
+    <FilesMatch "^(config\.php|schema\.sql|\.env.*|\.git.*)$">
+        <IfModule !mod_authz_core.c>
+            Order allow,deny
+            Deny from all
+        </IfModule>
+        <IfModule mod_authz_core.c>
+            Require all denied
+        </IfModule>
+    </FilesMatch>
+
+    # Disable directory listings
+    Options -Indexes
+
+    # Serve existing files and directories (such as /staff/ UI and verify.php) directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Explicit route for /api/verify to verify.php
+    RewriteRule ^api/verify/?$ verify.php [QSA,L]
+
+    # Route API endpoints, proxy paths, and health checks to index.php
+    RewriteRule ^(health|apps/grooves-support/.*|api/.*)$ index.php [QSA,L]
+
+    # Catch-all route to index.php
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . index.php [QSA,L]
+</IfModule>
+
+# CORS and Cache Control Headers
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PATCH"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, Accept, X-Requested-With, X-HTTP-Method-Override"
+    Header set Cache-Control "no-store, max-age=0"
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>

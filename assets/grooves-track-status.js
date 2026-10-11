@@ -7,6 +7,7 @@
 
   document.querySelectorAll('[data-g-track]').forEach((section) => {
     const lookupEndpoint = section.dataset.endpoint || '/apps/grooves-support/status';
+    const discoverEndpoint = section.dataset.discoverEndpoint || '/apps/grooves-support/discover-orders';
     const registerEndpoint = section.dataset.registerEndpoint || '/apps/grooves-support/register-warranty';
     const createEndpoint = section.dataset.createEndpoint || '/apps/grooves-support/create-ticket';
     const dropzone = section.querySelector('[data-dropzone]');
@@ -62,8 +63,10 @@
         if (!form) return;
         const invoice = form.querySelector('[name="invoice_number"]');
         const email = form.querySelector('[name="customer_email"]');
+        const phone = form.querySelector('[name="customer_phone"]');
         if (invoice) invoice.value = data.orderNumber || '';
         if (email) email.value = data.verifiedEmail || '';
+        if (phone && data.verifiedPhone) phone.value = data.verifiedPhone;
         const select = form.querySelector('[data-order-product-select]');
         if (select) {
           select.innerHTML = '<option value="">Select a purchased product</option>';
@@ -94,42 +97,64 @@
       form.querySelector('[name="customer_name"]')?.focus({ preventScroll: true });
     };
 
+    const renderOrderChoices = (container, orders, referenceInput, phone) => {
+      container.innerHTML = `<div class="g-status-card"><div class="g-status-header"><div><span class="g-status-kicker">Contact verified</span><h4 class="g-status-title">Select your order</h4></div><span class="g-status-badge g-status-badge--active">${orders.length} found</span></div><div class="g-order-items">${orders.map((order, index) => `<div class="g-order-product"><div><strong>${escapeHtml(order.orderNumber)}</strong><small>${formatDate(order.purchaseDate)} · ${(order.items || []).map((item) => escapeHtml(item.title)).join(', ')}</small></div><div class="g-order-product__actions"><button type="button" data-select-order="${index}">Select</button></div></div>`).join('')}</div></div>`;
+      container.querySelectorAll('[data-select-order]').forEach((button) => button.addEventListener('click', () => {
+        const order = orders[Number(button.dataset.selectOrder)];
+        if (!order) return;
+        order.verifiedPhone = phone;
+        referenceInput.value = order.orderNumber || '';
+        hydrateVerifiedOrder(order);
+        renderWarrantyResult(container, order, prepareAction);
+      }));
+    };
+
     section.querySelectorAll('[data-lookup]').forEach((form) => {
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const type = form.dataset.lookup;
         const referenceInput = form.querySelector('[name="reference"]');
         const emailInput = form.querySelector('[name="email"]');
+        const phoneInput = form.querySelector('[name="phone"]');
         const button = form.querySelector('button[type="submit"]');
         const result = form.querySelector('[data-result]');
         const reference = referenceInput.value.trim();
         const email = emailInput.value.trim().toLowerCase();
+        const phone = phoneInput?.value.trim() || '';
 
         result.hidden = false;
         result.innerHTML = '';
-        if (!reference || reference.length > 80 || !EMAIL_PATTERN.test(email)) {
+        const discoveringOrders = type === 'warranty' && !reference;
+        if (reference.length > 80 || !EMAIL_PATTERN.test(email) || (discoveringOrders && phone.replace(/\D/g, '').length < 10) || (!discoveringOrders && !reference)) {
           result.dataset.state = 'error';
-          result.textContent = 'Valid number aur registered email dono enter karein.';
-          (!reference ? referenceInput : emailInput).focus();
+          result.textContent = discoveringOrders ? 'Orders fetch karne ke liye valid checkout email aur mobile number enter karein.' : 'Valid number aur registered email dono enter karein.';
+          (!EMAIL_PATTERN.test(email) ? emailInput : (discoveringOrders ? phoneInput : referenceInput)).focus();
           return;
         }
 
-        setLoading(button, result, type === 'warranty' ? 'Shopify order securely verify ho raha hai…' : 'Ticket status load ho raha hai…');
+        setLoading(button, result, discoveringOrders ? 'Checkout contact se purchased products fetch ho rahe hain…' : (type === 'warranty' ? 'Shopify order securely verify ho raha hai…' : 'Ticket status load ho raha hai…'));
         try {
-          const response = await fetch(lookupEndpoint, {
+          const response = await fetch(discoveringOrders ? discoverEndpoint : lookupEndpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({ type, reference, email }),
+            body: JSON.stringify(discoveringOrders ? { email, phone } : { type, reference, email }),
             credentials: 'same-origin'
           });
           const data = await readJson(response);
           if (!response.ok) throw new RequestError(response.status, data.error);
-          if (!data?.status) throw new RequestError(502, 'Invalid server response.');
           result.dataset.state = 'success';
-          if (type === 'warranty') {
-            if (data.lookupType === 'order') hydrateVerifiedOrder(data);
+          if (discoveringOrders) {
+            if (!Array.isArray(data.orders) || !data.orders.length) throw new RequestError(404, 'No data found.');
+            renderOrderChoices(result, data.orders, referenceInput, phone);
+          } else if (type === 'warranty') {
+            if (!data?.status) throw new RequestError(502, 'Invalid server response.');
+            if (data.lookupType === 'order') {
+              data.verifiedPhone = phone;
+              hydrateVerifiedOrder(data);
+            }
             renderWarrantyResult(result, data, prepareAction);
           } else {
+            if (!data?.status) throw new RequestError(502, 'Invalid server response.');
             renderTicketResult(result, data);
           }
         } catch (error) {

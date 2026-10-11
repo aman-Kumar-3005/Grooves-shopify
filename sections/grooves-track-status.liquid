@@ -3,6 +3,7 @@
   class="g-track g-container"
   data-g-track
   data-endpoint="{{ section.settings.lookup_endpoint | default: '/apps/grooves-support/status' | escape }}"
+  data-discover-endpoint="{{ section.settings.discover_orders_endpoint | default: '/apps/grooves-support/discover-orders' | escape }}"
   data-register-endpoint="{{ section.settings.register_warranty_endpoint | default: '/apps/grooves-support/register-warranty' | escape }}"
   data-create-endpoint="{{ section.settings.create_ticket_endpoint | default: '/apps/grooves-support/create-ticket' | escape }}"
 >
@@ -21,12 +22,14 @@
     <form class="g-track__card" data-lookup="warranty" novalidate>
       <span class="g-badge-pill">ORDER + WARRANTY</span>
       <h2>VERIFY YOUR COVERAGE</h2>
-      <p>Order number ya warranty ID aur checkout email se purchase, remaining warranty aur return eligibility dekhein.</p>
-      <label for="WarrantyInvoice-{{ section.id }}">Order Number / Warranty ID</label>
-      <input id="WarrantyInvoice-{{ section.id }}" name="reference" type="text" maxlength="80" autocomplete="off" required placeholder="Example: #1001 or GRV-WTY-2026-000001">
+      <p>Email aur mobile number se apne orders fetch karein. Order number ya warranty ID pata ho to optionally enter kar sakte hain.</p>
+      <label for="WarrantyInvoice-{{ section.id }}">Order Number / Warranty ID <small>(optional)</small></label>
+      <input id="WarrantyInvoice-{{ section.id }}" name="reference" type="text" maxlength="80" autocomplete="off" placeholder="Example: #1001 or leave blank">
       <label for="WarrantyEmail-{{ section.id }}">Checkout Email</label>
       <input id="WarrantyEmail-{{ section.id }}" name="email" type="email" maxlength="160" autocomplete="email" required placeholder="Email used at checkout">
-      <button class="g-button" type="submit">Verify Order & Warranty</button>
+      <label for="WarrantyPhoneLookup-{{ section.id }}">Checkout Mobile Number</label>
+      <input id="WarrantyPhoneLookup-{{ section.id }}" name="phone" type="tel" maxlength="30" autocomplete="tel" placeholder="Mobile used at checkout">
+      <button class="g-button" type="submit">Find / Verify My Orders</button>
       <div class="g-track__result" role="status" aria-live="polite" data-result hidden></div>
     </form>
 
@@ -207,6 +210,12 @@
       "id": "register_warranty_endpoint",
       "label": "Warranty registration endpoint",
       "default": "/apps/grooves-support/register-warranty"
+    },
+    {
+      "type": "text",
+      "id": "discover_orders_endpoint",
+      "label": "Order discovery endpoint",
+      "default": "/apps/grooves-support/discover-orders"
     },
     {
       "type": "text",

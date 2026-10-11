@@ -10,7 +10,9 @@ const {
   secureProductSelector,
   getOrderLineItem,
   publicWarranty,
-  buildOrderSearchQueries
+  buildOrderSearchQueries,
+  normalizePhone,
+  phoneMatches
 } = require('./support-server');
 
 test('normalizes customer order references and email addresses', () => {
@@ -25,6 +27,12 @@ test('Shopify order search quotes tokenized email and includes safe fallbacks', 
     'name:1001',
     'email:"amanchaursiya1234@gmail.com"'
   ]);
+});
+
+test('mobile verification accepts formatted Indian numbers but rejects a different number', () => {
+  assert.equal(normalizePhone('+91 91123 277705'), '9191123277705');
+  assert.equal(phoneMatches('+91 91123 277705', '91123277705'), true);
+  assert.equal(phoneMatches('+91 91123 277705', '9999999999'), false);
 });
 
 test('active paid order receives warranty and return eligibility', () => {
@@ -67,7 +75,7 @@ test('delivery-based return window uses Shopify deliveredAt instead of purchase 
   const order = {
     processedAt: new Date(Date.now() - 20 * 86400000).toISOString(),
     displayFinancialStatus: 'PAID',
-    fulfillments: { nodes: [{ deliveredAt: new Date(Date.now() - 2 * 86400000).toISOString() }] }
+    fulfillments: [{ deliveredAt: new Date(Date.now() - 2 * 86400000).toISOString() }]
   };
   const deliveryPolicy = orderEligibility(order, { warrantyDays: 365, returnWindowDays: 7, returnWindowBasis: 'delivery' });
   const purchasePolicy = orderEligibility(order, { warrantyDays: 365, returnWindowDays: 7, returnWindowBasis: 'purchase' });

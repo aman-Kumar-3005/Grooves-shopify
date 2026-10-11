@@ -16,6 +16,7 @@ const app = express();
 const PORT = positiveInteger(process.env.PORT, 4000);
 const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION || '2026-10';
 const DEFAULT_SHOPIFY_STORE_DOMAIN = String(process.env.SHOPIFY_STORE_DOMAIN || '').trim().toLowerCase();
+const SHOPIFY_CLIENT_ID = String(process.env.SHOPIFY_CLIENT_ID || '').trim();
 const SHOPIFY_ADMIN_ACCESS_TOKEN = String(process.env.SHOPIFY_ADMIN_ACCESS_TOKEN || '').trim();
 const SHOPIFY_API_SECRET = String(process.env.SHOPIFY_API_SECRET || '').trim();
 const SUPPORT_ADMIN_KEY = String(process.env.SUPPORT_ADMIN_KEY || '').trim();
@@ -29,6 +30,39 @@ const MAX_LOOKUPS = positiveInteger(process.env.MAX_LOOKUPS_PER_WINDOW, 20);
 const RATE_WINDOW_MS = positiveInteger(process.env.RATE_WINDOW_MINUTES, 15) * 60 * 1000;
 const STAFF_DIR = path.join(__dirname, 'staff');
 const lookupBuckets = new Map();
+
+function productionConfigurationErrors() {
+  const errors = [];
+  const hasLegacyToken = /^shpat_[A-Za-z0-9_-]+$/.test(SHOPIFY_ADMIN_ACCESS_TOKEN);
+  const hasClientCredentials = Boolean(SHOPIFY_CLIENT_ID && SHOPIFY_API_SECRET);
+
+  if (!/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/i.test(DEFAULT_SHOPIFY_STORE_DOMAIN)) {
+    errors.push('SHOPIFY_STORE_DOMAIN must be the permanent *.myshopify.com domain without https://.');
+  }
+  if (!/^\d{4}-\d{2}$/.test(SHOPIFY_API_VERSION)) {
+    errors.push('SHOPIFY_API_VERSION must use YYYY-MM format, for example 2026-10.');
+  }
+  if (!hasLegacyToken && !hasClientCredentials) {
+    errors.push('Configure SHOPIFY_CLIENT_ID plus SHOPIFY_API_SECRET, or a legacy shpat_ SHOPIFY_ADMIN_ACCESS_TOKEN.');
+  }
+  if (SHOPIFY_ADMIN_ACCESS_TOKEN && !hasLegacyToken) {
+    errors.push('SHOPIFY_ADMIN_ACCESS_TOKEN is set but is not a legacy shpat_ token. Move a Dev Dashboard Client ID to SHOPIFY_CLIENT_ID and leave this variable blank.');
+  }
+  if (SUPPORT_ADMIN_KEY.length < 32) {
+    errors.push('SUPPORT_ADMIN_KEY must be at least 32 random characters.');
+  }
+
+  return errors;
+}
+
+function assertProductionConfiguration() {
+  if (process.env.NODE_ENV !== 'production') return;
+  const errors = productionConfigurationErrors();
+  if (errors.length) {
+    throw new Error(`Unsafe production configuration:\n- ${errors.join('\n- ')}`);
+  }
+}
+let adminTokenCache = { token: '', expiresAt: 0, shop: '' };
 const ALLOWED_REQUEST_TYPES = new Set([
   'warranty_claim', 'return', 'replacement', 'repair', 'technical_support', 'order_issue', 'other'
 ]);
@@ -207,6 +241,17 @@ function normalizeEmail(value) {
   return String(value || '').trim().toLowerCase();
 }
 
+function normalizePhone(value) {
+  return String(value || '').replace(/\D/g, '');
+}
+
+function phoneMatches(left, right) {
+  const a = normalizePhone(left);
+  const b = normalizePhone(right);
+  if (!a || !b) return false;
+  return a === b || (a.length >= 10 && b.length >= 10 && a.slice(-10) === b.slice(-10));
+}
+
 function validEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
@@ -226,7 +271,9 @@ function buildOrderSearchQueries(orderReference, email) {
 }
 
 function assertShopifyConfigured(settings) {
-  if (!settings.shopifyStoreDomain || !SHOPIFY_ADMIN_ACCESS_TOKEN) {
+  const hasLegacyToken = Boolean(SHOPIFY_ADMIN_ACCESS_TOKEN);
+  const hasClientCredentials = Boolean(SHOPIFY_CLIENT_ID && SHOPIFY_API_SECRET);
+  if (!settings.shopifyStoreDomain || (!hasLegacyToken && !hasClientCredentials)) {
     throw serviceError(503, 'Shopify Admin API is not configured.');
   }
   if (!/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(settings.shopifyStoreDomain)) {
@@ -234,11 +281,41 @@ function assertShopifyConfigured(settings) {
   }
 }
 
+async function getAdminAccessToken(settings) {
+  if (SHOPIFY_ADMIN_ACCESS_TOKEN) return SHOPIFY_ADMIN_ACCESS_TOKEN;
+  const now = Date.now();
+  if (adminTokenCache.token && adminTokenCache.shop === settings.shopifyStoreDomain && adminTokenCache.expiresAt - now > 5 * 60 * 1000) {
+    return adminTokenCache.token;
+  }
+  const response = await fetch(`https://${settings.shopifyStoreDomain}/admin/oauth/access_token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'client_credentials',
+      client_id: SHOPIFY_CLIENT_ID,
+      client_secret: SHOPIFY_API_SECRET
+    }),
+    signal: AbortSignal.timeout(10000)
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || !payload.access_token) {
+    console.error('Shopify token exchange failed:', response.status, payload.error || payload.error_description || 'Unknown error');
+    throw serviceError(502, 'Shopify authentication failed.');
+  }
+  adminTokenCache = {
+    token: payload.access_token,
+    expiresAt: now + (Number(payload.expires_in) || 86399) * 1000,
+    shop: settings.shopifyStoreDomain
+  };
+  return adminTokenCache.token;
+}
+
 async function shopifyGraphql(query, variables, settings) {
   assertShopifyConfigured(settings);
+  const accessToken = await getAdminAccessToken(settings);
   const response = await fetch(`https://${settings.shopifyStoreDomain}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Shopify-Access-Token': SHOPIFY_ADMIN_ACCESS_TOKEN },
+    headers: { 'Content-Type': 'application/json', 'X-Shopify-Access-Token': accessToken },
     body: JSON.stringify({ query, variables }),
     signal: AbortSignal.timeout(10000)
   });
@@ -261,7 +338,7 @@ async function findVerifiedOrder(reference, email, loggedInCustomerId, settings)
           id name confirmationNumber processedAt displayFinancialStatus displayFulfillmentStatus email test
           customer { legacyResourceId }
           currentTotalPriceSet { shopMoney { amount currencyCode } }
-          fulfillments(first: 20) { nodes { deliveredAt } }
+          fulfillments(first: 20) { deliveredAt }
           lineItems(first: 50) {
             nodes {
               id name title quantity sku
@@ -286,11 +363,43 @@ async function findVerifiedOrder(reference, email, loggedInCustomerId, settings)
   return null;
 }
 
+async function findVerifiedOrdersByContact(email, phone, loggedInCustomerId, settings) {
+  const normalizedEmail = normalizeEmail(email);
+  const normalizedPhone = normalizePhone(phone);
+  if (!validEmail(normalizedEmail) || normalizedPhone.length < 10 || normalizedPhone.length > 15) return [];
+  const query = `email:"${graphqlSearchValue(normalizedEmail)}"`;
+  const data = await shopifyGraphql(`
+    query FindOrdersByContact($query: String!) {
+      orders(first: 20, query: $query, sortKey: PROCESSED_AT, reverse: true) {
+        nodes {
+          id name confirmationNumber processedAt displayFinancialStatus displayFulfillmentStatus email phone test
+          shippingAddress { phone }
+          customer { legacyResourceId }
+          currentTotalPriceSet { shopMoney { amount currencyCode } }
+          fulfillments(first: 20) { deliveredAt }
+          lineItems(first: 20) {
+            nodes {
+              id name title quantity sku
+              variant { id title product { id handle } }
+            }
+          }
+        }
+      }
+    }
+  `, { query }, settings);
+  return (data.orders?.nodes || []).filter((order) => {
+    const exactEmail = normalizeEmail(order.email) === normalizedEmail;
+    const exactPhone = phoneMatches(order.phone, normalizedPhone) || phoneMatches(order.shippingAddress?.phone, normalizedPhone);
+    const customerMatches = !loggedInCustomerId || String(order.customer?.legacyResourceId || '') === String(loggedInCustomerId);
+    return exactEmail && exactPhone && customerMatches;
+  });
+}
+
 function orderEligibility(order, policy = defaultSettings()) {
   const settings = sanitizeSettings(policy);
   const purchase = new Date(order.processedAt);
   if (Number.isNaN(purchase.getTime())) throw serviceError(502, 'Order date is unavailable.');
-  const deliveredDates = (order.fulfillments?.nodes || [])
+  const deliveredDates = (order.fulfillments || [])
     .map((fulfillment) => new Date(fulfillment.deliveredAt))
     .filter((date) => !Number.isNaN(date.getTime()));
   const deliveredAt = deliveredDates.length ? new Date(Math.max(...deliveredDates.map((date) => date.getTime()))) : null;
@@ -458,10 +567,33 @@ app.get('/health', (_req, res) => {
   const settings = loadDatabase().settings;
   res.json({
     status: 'ok',
-    shopifyConfigured: Boolean(settings.shopifyStoreDomain && SHOPIFY_ADMIN_ACCESS_TOKEN && SHOPIFY_API_SECRET),
+    shopifyConfigured: Boolean(settings.shopifyStoreDomain && SHOPIFY_API_SECRET && (SHOPIFY_ADMIN_ACCESS_TOKEN || SHOPIFY_CLIENT_ID)),
     storageWritable: fs.existsSync(DATA_DIR),
     timestamp: new Date().toISOString()
   });
+});
+
+app.post(['/apps/grooves-support/discover-orders', '/api/discover-orders'], requireProxy, rateLimit, async (req, res) => {
+  try {
+    const email = normalizeEmail(req.body?.email);
+    const phone = String(req.body?.phone || '').trim();
+    if (!validEmail(email) || normalizePhone(phone).length < 10) {
+      return res.status(400).json({ error: 'Valid checkout email and mobile number are required.' });
+    }
+    const database = loadDatabase();
+    const orders = await findVerifiedOrdersByContact(email, phone, req.query.logged_in_customer_id, database.settings);
+    if (!orders.length) return res.status(404).json({ error: 'No data found.' });
+    res.json({
+      orders: orders.map((order) => ({
+        ...warrantyFromOrder(order, email, database),
+        verifiedEmail: email,
+        lookupType: 'order'
+      }))
+    });
+  } catch (error) {
+    console.error('Order discovery failed:', error.message);
+    res.status(error.status || 500).json({ error: error.message || 'Order discovery failed.' });
+  }
 });
 
 app.post(['/apps/grooves-support/status', '/api/status'], requireProxy, rateLimit, async (req, res) => {
@@ -709,16 +841,18 @@ app.use((error, _req, res, _next) => {
 });
 
 if (require.main === module) {
+  assertProductionConfiguration();
   app.listen(PORT, () => {
     console.log(`Grooves support service listening on port ${PORT}`);
     const settings = loadDatabase().settings;
-    console.log(`Shopify integration: ${settings.shopifyStoreDomain && SHOPIFY_ADMIN_ACCESS_TOKEN ? 'configured' : 'not configured'}`);
+    console.log(`Shopify integration: ${settings.shopifyStoreDomain && SHOPIFY_API_SECRET && (SHOPIFY_ADMIN_ACCESS_TOKEN || SHOPIFY_CLIENT_ID) ? 'configured' : 'not configured'}`);
     console.log(`Support storage: ${DB_FILE}`);
   });
 }
 
 module.exports = {
   app,
+  productionConfigurationErrors,
   verifyShopifyProxy,
   orderEligibility,
   normalizeOrderReference,
@@ -726,5 +860,7 @@ module.exports = {
   secureProductSelector,
   getOrderLineItem,
   publicWarranty,
-  buildOrderSearchQueries
+  buildOrderSearchQueries,
+  normalizePhone,
+  phoneMatches
 };

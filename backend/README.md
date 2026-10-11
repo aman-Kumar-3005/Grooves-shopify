@@ -18,14 +18,16 @@ Files are restricted to JPEG, PNG, WebP, or PDF, up to 10 MB each and five files
 The repository does not contain live store secrets. The store owner must securely configure these values on the backend host:
 
 1. Permanent Shopify domain such as `your-store.myshopify.com`, not the public custom domain.
-2. A custom-app Admin API token with `read_orders`. Because a 365-day warranty needs older orders, request and approve `read_all_orders` too.
+2. A Dev Dashboard app with `read_orders` and protected order email/phone access. Because a 365-day warranty needs older orders, request and approve `read_all_orders` too.
 3. Protected customer data access for the order email field, if Shopify requires approval for the store/app.
-4. The app client secret used to verify every Shopify app-proxy signature.
+4. The Dev Dashboard Client ID and Client secret. The backend automatically exchanges them for a 24-hour Admin API token and refreshes it before expiry. An existing legacy admin-created custom app can instead supply its `shpat_...` token.
 5. A long random `SUPPORT_ADMIN_KEY` for private staff endpoints.
 6. Initial warranty and return defaults (`WARRANTY_DAYS` and `RETURN_WINDOW_DAYS`). The admin can change both later from the staff console.
 7. A Node 20+ hosting URL with persistent disk, or a production database/object-storage replacement.
 
 Copy `.env.example` to `.env` only on the backend host and set its values there. Never put the Admin token, app secret, or admin key into Liquid, storefront JavaScript, Git, or chat messages.
+
+In current Dev Dashboard apps, the value that looks like a 32-character API key belongs in `SHOPIFY_CLIENT_ID`; it is not an Admin API access token. Leave `SHOPIFY_ADMIN_ACCESS_TOKEN` empty unless the value is an older `shpat_...` token. Production startup now stops with a safe configuration error if these values are mixed up or the staff key is shorter than 32 characters.
 
 ```bash
 npm install
@@ -48,6 +50,7 @@ Configure one app proxy in the Shopify app:
 The theme uses these child paths:
 
 - `POST /apps/grooves-support/status`
+- `POST /apps/grooves-support/discover-orders`
 - `POST /apps/grooves-support/register-warranty`
 - `POST /apps/grooves-support/create-ticket`
 
@@ -85,7 +88,9 @@ Track a service ticket:
 }
 ```
 
-Direct `/api/status`, `/api/register-warranty`, and `/api/create-ticket` aliases are provided for local development. When `NODE_ENV=production`, they still require a valid Shopify proxy signature.
+Direct `/api/status`, `/api/discover-orders`, `/api/register-warranty`, and `/api/create-ticket` aliases are provided for local development. When `NODE_ENV=production`, they still require a valid Shopify proxy signature.
+
+`discover-orders` accepts checkout email plus mobile number, fetches recent matching Shopify orders, verifies both contact values server-side, and returns only customer-safe order/product choices. It needs protected customer-data access for order email and phone fields. If the checkout order has no phone number, the customer must use order number plus email instead.
 
 ## Private staff API
 

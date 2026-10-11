@@ -191,7 +191,8 @@
         try {
           const response = await fetch(url, options);
           lastResponse = response;
-          if (response.status !== 404) {
+          const contentType = response.headers.get('content-type') || '';
+          if (response.status !== 404 || contentType.includes('application/json')) {
             return response;
           }
         } catch (err) {

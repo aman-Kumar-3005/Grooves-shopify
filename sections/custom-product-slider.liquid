@@ -1,0 +1,447 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .custom-product-slider-wrapper {
+    max-width: var(--page-width, 1400px);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .cps-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #121212;
+    text-align: left;
+  }
+
+  /* Slider Track */
+  .cps-track {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 15px;
+  }
+  .cps-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Product Card */
+  .cps-card {
+    flex: 0 0 auto;
+    width: 280px;
+    scroll-snap-align: start;
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: {{ section.settings.card_radius }}px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+  }
+  @media screen and (max-width: 749px) {
+    .cps-card {
+      width: 240px;
+    }
+  }
+  .cps-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  }
+
+  /* Badges */
+  .cps-badge-left {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ffffff;
+    color: #333;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #eaeaea;
+    z-index: 2;
+  }
+  .cps-badge-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffffff;
+    color: #13a8b9;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #eaeaea;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .cps-badge-right svg {
+    width: 12px;
+    height: 12px;
+    fill: #13a8b9;
+  }
+
+  /* Image Area */
+  .cps-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f8f8f8;
+    display: block;
+  }
+  .cps-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px;
+  }
+
+  /* Card Info Area */
+  .cps-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+  
+  .cps-title {
+    font-size: 14px;
+    color: #333;
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .cps-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    margin-top: auto;
+  }
+
+  .cps-actions {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+
+  .cps-price-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cps-price-prefix {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 2px;
+  }
+
+  .cps-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #121212;
+  }
+
+  /* Add to Cart Button */
+  .cps-add-btn {
+    background-color: {{ section.settings.btn_bg_color }};
+    color: {{ section.settings.btn_text_color }};
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .cps-add-btn:hover {
+    opacity: 0.85;
+  }
+  .cps-add-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .cps-buy-btn {
+    background: #45a8e8;
+    color: #17243d;
+    box-shadow: 0 8px 22px rgba(69, 168, 232, 0.22);
+  }
+
+  .cps-buy-btn:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(69, 168, 232, 0.32);
+  }
+
+  @media screen and (max-width: 749px) {
+    .cps-bottom-row {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .cps-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cps-actions .cps-add-btn {
+      padding-inline: 10px;
+    }
+
+    .cps-actions .cps-add-btn:only-child {
+      grid-column: 1 / -1;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="custom-product-slider-wrapper">
+    {%- if section.settings.title != blank -%}
+      <h2 class="cps-heading">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="cps-track">
+      {%- assign collection = collections[section.settings.collection] -%}
+      
+      {%- if collection != blank and collection.products_count > 0 -%}
+        {%- for product in collection.products limit: section.settings.products_to_show -%}
+          <div class="cps-card">
+            
+            <a href="{{ product.url }}" class="cps-image-wrapper">
+              {%- if section.settings.show_new_badge -%}
+                <span class="cps-badge-left">{{ section.settings.new_badge_text }}</span>
+              {%- endif -%}
+              
+              {%- assign rating = product.metafields.reviews.rating.value -%}
+              {%- assign rating_count = product.metafields.reviews.rating_count.value | default: 0 -%}
+              {%- if section.settings.show_rating_badge and rating != blank and rating_count > 0 -%}
+                <span class="cps-badge-right">
+                  <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  {{ rating.rating | round: 1 }} ({{ rating_count }})
+                </span>
+              {%- endif -%}
+
+              {%- if product.featured_image != blank -%}
+                {{ product.featured_image
+                  | image_url: width: 720
+                  | image_tag:
+                    widths: '240, 360, 480, 600, 720',
+                    sizes: '(max-width: 749px) 240px, 280px',
+                    loading: 'lazy',
+                    alt: product.title,
+                    class: 'cps-product-image'
+                }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </a>
+
+            <div class="cps-info">
+              <a href="{{ product.url }}" class="cps-title">{{ product.title }}</a>
+              
+              <div class="cps-bottom-row">
+                <div class="cps-price-wrapper">
+                  {%- if section.settings.price_prefix != blank -%}
+                    <span class="cps-price-prefix">{{ section.settings.price_prefix }}</span>
+                  {%- endif -%}
+                  <span class="cps-price">{{ product.price | money }}</span>
+                </div>
+                
+                <div class="cps-actions">
+                  {%- assign chosen_variant = product.selected_or_first_available_variant -%}
+                  {%- if product.available and product.has_only_default_variant and product.requires_selling_plan == false and chosen_variant.available -%}
+                    <product-form-component data-product-id="{{ product.id }}" data-product-url="{{ product.url }}" on:submit="/handleSubmit"><form method="post" action="{{ routes.cart_add_url }}" class="cps-form" data-type="add-to-cart-form">
+                      <input type="hidden" name="id" value="{{ chosen_variant.id }}" />
+                      <button type="submit" class="cps-add-btn" aria-label="Add {{ product.title | escape }} to cart">ADD</button>
+                    </form></product-form-component>
+                  {%- elsif product.available -%}
+                    <a href="{{ product.url }}" class="cps-add-btn" aria-label="Choose options for {{ product.title | escape }}">CHOOSE OPTIONS</a>
+                  {%- else -%}
+                    <button type="button" class="cps-add-btn" disabled>SOLD OUT</button>
+                  {%- endif -%}
+
+                  {%- if product.available and product.has_only_default_variant and chosen_variant.available and product.requires_selling_plan == false -%}
+                    <a
+                      href="{{ routes.cart_url }}/{{ chosen_variant.id }}:1?checkout"
+                      class="cps-add-btn cps-buy-btn"
+                      aria-label="Buy {{ product.title | escape }} now"
+                    >BUY NOW</a>
+                  {%- elsif product.available -%}
+                    <a
+                      href="{{ product.url }}"
+                      class="cps-add-btn cps-buy-btn"
+                      aria-label="Choose options to buy {{ product.title | escape }}"
+                    >BUY NOW</a>
+                  {%- endif -%}
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Dynamic Product Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Newly In"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 24
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "Maximum products to show"
+    },
+    {
+      "type": "header",
+      "content": "Card Badges & Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_new_badge",
+      "label": "Show Top Left Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "new_badge_text",
+      "label": "Top Left Badge Text",
+      "default": "Newly In"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating_badge",
+      "label": "Show Star Rating Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "price_prefix",
+      "label": "Price Prefix Text",
+      "default": "Prebook @ ",
+      "info": "Appears just above the price (e.g. 'Prebook @')"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Background Color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic Product Slider",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

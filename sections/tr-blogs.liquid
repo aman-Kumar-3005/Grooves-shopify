@@ -1,0 +1,538 @@
+{%- style -%}
+  #tr-blogs-{{ section.id }} {
+    --tr-accent: {{ section.settings.accent_color | default: '#45a8e8' }};
+    --tr-card-bg: {{ section.settings.card_bg | default: '#141414' }};
+    --tr-cols-desktop: {{ section.settings.columns_desktop }};
+    --tr-cols-mobile: {{ section.settings.columns_mobile }};
+    font-family: inherit;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* --- Top Pill Badge --- */
+  #tr-blogs-{{ section.id }} .tr-section-badge-wrap {
+    text-align: center;
+    margin-bottom: 35px;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-section-pill {
+    display: inline-block;
+    background-color: var(--tr-accent);
+    color: #000000;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 8px 22px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* --- Grid & Carousel Layout --- */
+  #tr-blogs-{{ section.id }} .tr-blogs-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--tr-cols-desktop), 1fr);
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  /* Desktop Carousel Setup */
+  {% if section.settings.enable_desktop_carousel %}
+  @media screen and (min-width: 1025px) {
+    #tr-blogs-{{ section.id }} .tr-blogs-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Firefox */
+      padding-bottom: 15px; /* shadow clipping fix */
+    }
+    #tr-blogs-{{ section.id }} .tr-blogs-grid::-webkit-scrollbar {
+      display: none; /* Chrome */
+    }
+    #tr-blogs-{{ section.id }} .tr-blogs-grid .tr-blog-card {
+      flex: 0 0 calc((100% - (24px * (var(--tr-cols-desktop) - 1))) / var(--tr-cols-desktop));
+      scroll-snap-align: start;
+    }
+  }
+  {% endif %}
+
+  /* Tablet Adjustments */
+  @media screen and (max-width: 1024px) and (min-width: 768px) {
+    #tr-blogs-{{ section.id }} .tr-blogs-grid {
+      grid-template-columns: repeat(2, 1fr);
+      display: grid; 
+    }
+  }
+
+  /* Mobile Grid & Carousel Setup */
+  @media screen and (max-width: 767px) {
+    #tr-blogs-{{ section.id }} .tr-blogs-grid {
+      gap: 16px;
+      {% if section.settings.enable_mobile_carousel %}
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        padding-bottom: 15px;
+      {% else %}
+        display: grid;
+        grid-template-columns: repeat(var(--tr-cols-mobile), 1fr);
+      {% endif %}
+    }
+    
+    {% if section.settings.enable_mobile_carousel %}
+    #tr-blogs-{{ section.id }} .tr-blogs-grid::-webkit-scrollbar {
+      display: none;
+    }
+    #tr-blogs-{{ section.id }} .tr-blogs-grid .tr-blog-card {
+      flex: 0 0 calc((100% - (16px * (var(--tr-cols-mobile) - 1))) / var(--tr-cols-mobile));
+      scroll-snap-align: start;
+    }
+    {% endif %}
+  }
+
+  /* --- Dark Blog Card --- */
+  #tr-blogs-{{ section.id }} .tr-blog-card {
+    background-color: var(--tr-card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: auto; /* Changed for flex child */
+    min-height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  }
+
+  /* --- Fixed Image Ratio --- */
+  #tr-blogs-{{ section.id }} .tr-blog-img-wrap {
+    display: block;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    background: #222;
+    flex-shrink: 0;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-img-wrap img,
+  #tr-blogs-{{ section.id }} .tr-blog-img-wrap svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-card:hover .tr-blog-img-wrap img {
+    transform: scale(1.05);
+  }
+
+  /* --- Card Content & Alignment --- */
+  #tr-blogs-{{ section.id }} .tr-blog-content {
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-tag {
+    font-size: 11px;
+    color: var(--tr-accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+    text-transform: uppercase;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-title a:hover {
+    color: var(--tr-accent);
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-desc {
+    color: #999999;
+    font-size: 13px;
+    margin: 0 0 20px 0;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-link {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--tr-accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  #tr-blogs-{{ section.id }} .tr-blog-link:hover {
+    opacity: 0.85;
+    transform: translateX(3px);
+  }
+{%- endstyle -%}
+
+<section class="tr-blogs-section" id="tr-blogs-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
+  <div class="tr-container">
+    {% if section.settings.badge_title != blank %}
+      <div class="tr-section-badge-wrap">
+        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+      </div>
+    {% endif %}
+
+    {%- liquid
+      assign real_blog = blogs[section.settings.blog]
+      if real_blog == blank or real_blog.articles_count == 0
+        if blog != blank and blog.articles_count > 0
+          assign real_blog = blog
+        elsif blogs['news'].articles_count > 0
+          assign real_blog = blogs['news']
+        endif
+      endif
+
+      assign limit_count = section.settings.articles_count | default: 8
+    -%}
+
+    <div class="tr-blogs-grid">
+      {% if real_blog != blank and real_blog.articles_count > 0 %}
+        {% for article in real_blog.articles limit: limit_count %}
+          <article class="tr-blog-card">
+            <a href="{{ article.url }}" class="tr-blog-img-wrap">
+              {% if article.image %}
+                <img 
+                  src="{{ article.image | image_url: width: 600 }}" 
+                  alt="{{ article.title | escape }}" 
+                  loading="lazy"
+                  width="400"
+                  height="250"
+                >
+              {% else %}
+                {{ 'lifestyle-1' | placeholder_svg_tag }}
+              {% endif %}
+            </a>
+            <div class="tr-blog-content">
+              <div>
+                <span class="tr-blog-tag">
+                  {{ article.tags.first | default: 'TECH & AUDIO' }}
+                </span>
+                <h3 class="tr-blog-title">
+                  <a href="{{ article.url }}">
+                    {{ article.title }}
+                  </a>
+                </h3>
+                <p class="tr-blog-desc">
+                  {{ article.excerpt_or_content | strip_html | truncatewords: 22 }}
+                </p>
+              </div>
+              <a href="{{ article.url }}" class="tr-blog-link">
+                Read more &rarr;
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        {% for block in section.blocks %}
+          {%- liquid
+            assign blk_article = articles[block.settings.article]
+            if blk_article != blank
+              assign art_title = blk_article.title
+              assign art_link = blk_article.url
+              assign art_desc = blk_article.excerpt_or_content | strip_html | truncatewords: 22
+              assign art_cat = blk_article.tags.first | default: 'TECH & AUDIO'
+              if block.settings.image != blank
+                assign art_img = block.settings.image | image_url: width: 600
+              elsif block.settings.image_url != blank
+                if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                  assign art_img = block.settings.image_url
+                else
+                  assign art_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+                endif
+              elsif blk_article.image
+                assign art_img = blk_article.image | image_url: width: 600
+              else
+                assign art_img = ''
+              endif
+            else
+              assign art_title = block.settings.title
+              assign art_link = block.settings.link | default: '/blogs/news'
+              assign art_desc = block.settings.excerpt
+              assign art_cat = block.settings.category | default: 'TECH & AUDIO'
+              if block.settings.image != blank
+                assign art_img = block.settings.image | image_url: width: 600
+              elsif block.settings.image_url != blank
+                if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                  assign art_img = block.settings.image_url
+                else
+                  assign art_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+                endif
+              else
+                assign art_img = ''
+              endif
+            endif
+          -%}
+          <article class="tr-blog-card" {{ block.shopify_attributes }}>
+            <a href="{{ art_link }}" class="tr-blog-img-wrap">
+              {% if art_img != blank %}
+                <img 
+                  src="{{ art_img }}" 
+                  alt="{{ art_title | escape }}" 
+                  loading="lazy"
+                  width="400"
+                  height="250"
+                >
+              {% else %}
+                {{ 'lifestyle-1' | placeholder_svg_tag }}
+              {% endif %}
+            </a>
+            <div class="tr-blog-content">
+              <div>
+                <span class="tr-blog-tag">
+                  {{ art_cat }}
+                </span>
+                <h3 class="tr-blog-title">
+                  <a href="{{ art_link }}">
+                    {{ art_title }}
+                  </a>
+                </h3>
+                <p class="tr-blog-desc">
+                  {{ art_desc }}
+                </p>
+              </div>
+              <a href="{{ art_link }}" class="tr-blog-link">
+                Read more &rarr;
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grooves Blogs & News",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "BLOGS"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select Dynamic Blog",
+      "info": "Select your store blog here. If left blank, it automatically pulls from your 'News' blog."
+    },
+    {
+      "type": "range",
+      "id": "articles_count",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Total Articles to Load",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Layout & Carousel Settings"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Cards per row (Desktop)",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_desktop_carousel",
+      "label": "Enable Swipe/Carousel on Desktop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Cards per row (Mobile)",
+      "default": 1,
+      "info": "Set to 1 or 2 for best visual experience."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_carousel",
+      "label": "Enable Swipe/Carousel on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Badge & Links)",
+      "default": "#45A8E8"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background Color",
+      "default": "#141414"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Blog Article Fallback",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Select Specific Article"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Article Image (Upload)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Article Title Fallback",
+          "default": "BEST OPEN EAR EARBUDS IN 2026"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category Tag Fallback",
+          "default": "TECH & AUDIO"
+        },
+        {
+          "type": "textarea",
+          "id": "excerpt",
+          "label": "Excerpt Fallback",
+          "default": "Discover how open-ear audio tech delivers spatial acoustics while keeping you aware of your surroundings."
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL Fallback",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Article Link Fallback"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Blogs & News",
+      "blocks": [
+        {
+          "type": "article",
+          "settings": {
+            "title": "BEST OPEN EAR EARBUDS IN 2026",
+            "category": "TECH & AUDIO",
+            "excerpt": "Discover how open-ear audio tech delivers spatial acoustics while keeping you aware of your surroundings.",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "GROOVES TURBO GAN: NEXT-GEN CHARGING HUB",
+            "category": "INNOVATION",
+            "excerpt": "A high-speed GaN fast charger engineered with portable battery backup and smart multi-device protection.",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesNews.png?v=1782984314"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "BEST EARBUDS UNDER ₹5000 IN INDIA",
+            "category": "BUYER GUIDE",
+            "excerpt": "Compare features, battery life, quad-mic ENC, and ultra low gaming latency across top contenders.",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "WHAT IS THE BEST SOUND SYSTEM FOR HOME?",
+            "category": "HOME THEATRE",
+            "excerpt": "Transform your entertainment room with deep bass soundbars and dedicated wireless subwoofers.",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesNews.png?v=1782984314"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

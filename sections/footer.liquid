@@ -1,0 +1,270 @@
+<footer class="g-footer" style="background:{{ section.settings.bg_color }};color:{{ section.settings.text_color }};--g-footer-heading:{{ section.settings.heading_color }};padding-block:{{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px"><div class="g-container">
+<div class="g-footer-grid">{% for block in section.blocks %}<div {{ block.shopify_attributes }}>{% case block.type %}
+{% when 'brand_info' %}{% if block.settings.logo != blank %}{{ block.settings.logo | image_url:width:400 | image_tag: class:'g-footer-logo', loading:'lazy', widths:'150,300,400', sizes:'150px' }}{% else %}<h2>{{ shop.name | escape }}</h2>{% endif %}<p>{{ block.settings.subtitle | escape }}</p><div>{{ block.settings.description }}</div>
+{% when 'link_list' %}<grooves-footer-menu><details class="g-footer-menu" open><summary>{{ block.settings.heading | escape }}<span>+</span></summary><ul>{% for link in block.settings.menu.links %}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{% if link.url contains '/search' or link.title == 'Search' %}<li><a href="/pages/track-status">Track warranty &amp; ticket status</a></li>{% endif %}{% endfor %}</ul></details></grooves-footer-menu>
+{% when 'contact_info' %}<h3>{{ block.settings.heading | escape }}</h3>{% if block.settings.phone != blank %}<a class="g-support-phone" href="tel:{{ block.settings.phone | remove:' ' | remove:'(' | remove:')' | escape }}">{{ block.settings.phone | escape }}</a>{% endif %}{% if block.settings.email != blank %}<p><a href="mailto:{{ block.settings.email | escape }}">{{ block.settings.email | escape }}</a></p>{% endif %}{% assign tracking_page = pages['track-status'] %}{% if tracking_page != blank %}<p class="g-footer-tracking"><a href="{{ tracking_page.url }}">Track warranty &amp; ticket status</a></p>{% endif %}
+{% when 'text_block' %}<grooves-footer-menu><details class="g-footer-menu" open><summary>{{ block.settings.heading | escape }}<span>+</span></summary><div>{{ block.settings.text }}</div></details></grooves-footer-menu>
+{% endcase %}</div>{% endfor %}</div>
+{% if section.settings.newsletter %}<div class="g-newsletter"><div><h2>{{ section.settings.newsletter_heading | escape }}</h2><p>{{ section.settings.newsletter_copy | escape }}</p></div>{% assign newsletter_id = 'Newsletter-' | append:section.id %}{% form 'customer',id:newsletter_id %}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="Email-{{ section.id }}">Email address</label><div class="g-newsletter-input"><input type="email" id="Email-{{ section.id }}" name="contact[email]" required autocomplete="email" placeholder="Enter your email address" {% if form.errors %}aria-invalid="true" aria-describedby="NewsletterError-{{ section.id }}"{% endif %}><button class="g-button" type="submit">{{ section.settings.subscribe_label | escape }}</button></div>{% if form.errors %}<div id="NewsletterError-{{ section.id }}" role="alert">{{ form.errors | default_errors }}</div>{% endif %}{% if form.posted_successfully? %}<p role="status">Thanks for subscribing.</p>{% endif %}{% endform %}</div>{% endif %}
+{% if section.settings.show_social %}<div class="g-footer-social">{% if settings.social_instagram_link != blank %}<a href="{{ settings.social_instagram_link }}" aria-label="Instagram">◎ Instagram</a>{% endif %}{% if settings.social_facebook_link != blank %}<a href="{{ settings.social_facebook_link }}" aria-label="Facebook">f Facebook</a>{% endif %}{% if settings.social_youtube_link != blank %}<a href="{{ settings.social_youtube_link }}" aria-label="YouTube">▷ YouTube</a>{% endif %}{% if settings.social_twitter_link != blank %}<a href="{{ settings.social_twitter_link }}" aria-label="X">X</a>{% endif %}</div>{% endif %}
+{% if section.settings.show_policies %}<div class="g-footer-policies">{% for policy in shop.policies %}{% if policy != blank %}<a href="{{ policy.url }}">{{ policy.title | escape }}</a>{% endif %}{% endfor %}</div>{% endif %}
+<div class="g-footer-bottom"><small>&copy; {{ 'now' | date:'%Y' }} {{ section.settings.copyright_name | default:shop.name | escape }}</small>{% if section.settings.show_payment_icons %}<div class="g-payment-icons" aria-label="Accepted payment methods">{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}{% if section.settings.payment_image != blank %}{{ section.settings.payment_image | image_url:width:500 | image_tag: loading:'lazy', sizes:'200px' }}{% endif %}</div>{% endif %}</div>
+</div></footer>
+
+{% schema %}
+{
+  "name": "Custom Premium Footer",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#444444"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 160
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Policies Links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policies",
+      "label": "Show store policies (Return, Privacy, Terms, etc.)",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Footer Bottom"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social media icons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Grooves Social Links"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "X/Twitter URL"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_url",
+      "label": "LinkedIn URL"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_url",
+      "label": "WhatsApp URL"
+    },
+    {
+      "type": "text",
+      "id": "copyright_name",
+      "label": "Copyright Entity Name",
+      "default": "Grooves Lifestyle",
+      "info": "Leave blank to use store name."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter",
+      "label": "Show newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Stay in the loop."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_copy",
+      "label": "Newsletter description",
+      "default": "New launches, fresh sound and updates from Grooves."
+    },
+    {
+      "type": "text",
+      "id": "subscribe_label",
+      "label": "Subscribe button",
+      "default": "Subscribe"
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image",
+      "label": "Additional payment logos",
+      "info": "Use only payment methods enabled at checkout."
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Quick Links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "contact_info",
+      "name": "Contact Info",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Support"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email Address",
+          "default": "support@yourdomain.com"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone Number",
+          "default": "(+91) 0000-0000-00"
+        }
+      ]
+    },
+    {
+      "type": "text_block",
+      "name": "Text Box / Address",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Address"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>SB 68 / A95 SECTOR 63A NOIDA 201307</p>"
+        }
+      ]
+    },
+    {
+      "type": "brand_info",
+      "name": "Brand Information",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle / Locations",
+          "default": "India | Saudi Arabia | Dubai"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>An Indian brand delivering high-performance audio, smart wearables, and mobile accessories at affordable prices. Engineered for everyday life.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Premium Footer",
+      "blocks": [
+        {
+          "type": "link_list"
+        },
+        {
+          "type": "contact_info"
+        },
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "brand_info"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

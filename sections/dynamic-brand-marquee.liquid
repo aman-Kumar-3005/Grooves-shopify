@@ -1,0 +1,262 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .brand-marquee-wrapper {
+    max-width: var(--page-width, 1400px);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .brand-marquee-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: {{ section.settings.text_color }};
+    text-align: {{ section.settings.heading_alignment }};
+  }
+
+  /* Marquee Container Styles matching your HTML */
+  .brands-row.marquee {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .js-marquee-wrapper {
+    display: flex;
+    width: max-content;
+    animation: marqueeAnimation-{{ section.id }} {{ section.settings.marquee_speed }}s linear infinite;
+  }
+
+  .brands-row.marquee:hover .js-marquee-wrapper {
+    animation-play-state: {% if section.settings.pause_on_hover %}paused{% else %}running{% endif %};
+  }
+
+  .js-marquee {
+    display: flex;
+    align-items: center;
+    gap: {{ section.settings.logo_gap }}px;
+    margin-right: {{ section.settings.logo_gap }}px;
+    float: left;
+  }
+
+  .feed-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brands-row .image {
+    width: {{ section.settings.logo_width }}px;
+    height: {{ section.settings.logo_height }}px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  @keyframes marqueeAnimation-{{ section.id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="brand-marquee-wrapper">
+    {%- if section.settings.title != blank -%}
+      <h2 class="brand-marquee-heading">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="brands-row marquee">
+      <div class="js-marquee-wrapper">
+        
+        <!-- First Loop of Logos -->
+        <div class="js-marquee">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.logo_image != blank -%}
+              <div class="feed-img" {{ block.shopify_attributes }}>
+                <div class="image" style="background-image: url('{{ block.settings.logo_image | image_url: width: 400 }}')"></div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <!-- Second Loop for Seamless Infinite Marquee Effect -->
+        <div class="js-marquee">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.logo_image != blank -%}
+              <div class="feed-img" {{ block.shopify_attributes }}>
+                <div class="image" style="background-image: url('{{ block.settings.logo_image | image_url: width: 400 }}')"></div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Brand Marquee Logos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Best selling brand on..."
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 22
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Logo Dimensions & Spacing"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 80,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo Image Width",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo Image Height",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "logo_gap",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Space Between Logos",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Animation Settings"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "unit": "s",
+      "label": "Scroll Speed (Lower = Faster)",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on Hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors & Padding"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo_item",
+      "name": "Brand Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Brand Logo Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Marquee Logos",
+      "blocks": [
+        { "type": "logo_item" },
+        { "type": "logo_item" },
+        { "type": "logo_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

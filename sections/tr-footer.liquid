@@ -1,0 +1,297 @@
+{%- liquid
+  assign footer_logo = section.settings.logo | default: settings.logo
+  assign footer_logo_url = section.settings.logo_url
+  if footer_logo == blank and footer_logo_url == blank
+    assign footer_logo_url = 'grooves-brand-logo.png' | asset_url
+  endif
+  assign footer_logo_w = section.settings.logo_width | default: 140
+  assign footer_logo_ratio = footer_logo.aspect_ratio | default: 2.84
+  assign footer_logo_h = footer_logo_w | divided_by: footer_logo_ratio | round
+  assign footer_logo_src_w = footer_logo_w | times: 2
+
+  assign footer_nav_menu = section.settings.menu | default: linklists['main-menu']
+  if footer_nav_menu != blank and footer_nav_menu.links.size > 0
+    assign footer_links = footer_nav_menu.links
+  elsif linklists['main-menu'].links.size > 0
+    assign footer_links = linklists['main-menu'].links
+  endif
+
+  assign sec_menu = section.settings.footer_menu | default: linklists['footer']
+  if sec_menu != blank and sec_menu.links.size > 0
+    assign sec_links = sec_menu.links
+  endif
+-%}
+
+<footer class="tr-footer" id="tr-footer-{{ section.id }}">
+  <div class="tr-container">
+    <div class="tr-footer-grid">
+      <!-- Brand Column -->
+      <div class="tr-footer-brand">
+        <a href="/" class="tr-logo-link">
+          {% if footer_logo != blank %}
+            <img 
+              src="{{ footer_logo | image_url: width: footer_logo_src_w }}"
+              alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
+              style="width: {{ footer_logo_w }}px; height: auto; display: block;"
+              width="{{ footer_logo_w }}"
+              height="{{ footer_logo_h }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {% elsif footer_logo_url != blank %}
+            <img 
+              src="{{ footer_logo_url }}" 
+              alt="{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}"
+              style="width: {{ footer_logo_w }}px; height: auto; display: block;"
+              width="{{ footer_logo_w }}"
+              height="{{ footer_logo_h }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {% else %}
+            <div class="tr-brand-wordmark">
+              <span class="tr-logo-text">{{ section.settings.brand_name | default: 'Grooves Lifestyle' }}</span>
+              <span class="tr-logo-reg">&reg;</span>
+              <span class="tr-soundwave-bars">
+                <span></span><span></span><span></span><span></span><span></span>
+              </span>
+            </div>
+          {% endif %}
+        </a>
+        <p>{{ section.settings.brand_desc | default: 'Grooves Lifestyle - High Definition Audio, Powerful Fast Chargers & Smart Everyday Gear. Engineered for bass lovers and modern tech enthusiasts.' }}</p>
+        <div style="margin-top: 16px; display: flex; gap: 14px;">
+          <a href="https://instagram.com/grooveslifestyle" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="Instagram">📸</a>
+          <a href="https://youtube.com/@grooveslifestyle" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="YouTube">▶️</a>
+          <a href="https://twitter.com/grooveslife" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="Twitter">🐦</a>
+          <a href="https://facebook.com/grooveslifestyle" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="Facebook">📘</a>
+        </div>
+      </div>
+
+      <!-- Column 1: Main Menu (Connected to Shopify Main Menu) -->
+      <div class="tr-footer-col">
+        <h3>{{ section.settings.menu_heading | default: 'Quick Links' }}</h3>
+        <ul>
+          {%- if footer_links != blank and footer_links.size > 0 -%}
+            {% for link in footer_links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          {%- else -%}
+            <li><a href="/">Home</a></li>
+            <li><a href="/collections/earbuds">Earbuds</a></li>
+            <li><a href="/collections/headphones">Headphones</a></li>
+            <li><a href="/collections/accessories">Accessories</a></li>
+            <li><a href="/collections/combo">Combo</a></li>
+            <li><a href="/collections/power-bank">Power Bank</a></li>
+            <li><a href="/collections/adaptor">Adaptor</a></li>
+            <li><a href="/pages/contact">Contact</a></li>
+            <li><a href="/pages/about-us">About Us</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      <!-- Column 2: Customer Support & Policies -->
+      <div class="tr-footer-col">
+        <h3>{{ section.settings.footer_menu_heading | default: 'Customer Support' }}</h3>
+        <div class="tr-support-contact" style="margin: 0 0 16px; color: #888888; font-size: 13px; line-height: 1.55;">
+          {%- if section.settings.support_email != blank -%}
+            <div style="margin-bottom: 6px;">
+              <a
+                href="mailto:{{ section.settings.support_email | escape }}"
+                style="color: inherit; text-decoration: none; overflow-wrap: anywhere;"
+              >
+                {{ section.settings.support_email }}
+              </a>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.support_phone != blank -%}
+            {%- assign support_phone_link = section.settings.support_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' -%}
+            <div style="margin-bottom: 6px;">
+              <a
+                href="tel:{{ support_phone_link }}"
+                style="color: inherit; text-decoration: none;"
+              >
+                {{ section.settings.support_phone }}
+              </a>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.support_address != blank -%}
+            <address style="margin: 0; color: inherit; font: inherit; font-style: normal;">
+              {{ section.settings.support_address | newline_to_br }}
+            </address>
+          {%- endif -%}
+        </div>
+        <ul>
+          {%- if sec_links != blank and sec_links.size > 0 -%}
+            {% assign has_track = false %}
+            {% for link in sec_links %}
+              {% if link.url contains 'track-status' %}{% assign has_track = true %}{% endif %}
+            {% endfor %}
+            {% for link in sec_links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- if link.url contains '/search' or link.title == 'Search' -%}
+                <li><a href="/pages/track-status">Track warranty &amp; ticket status</a></li>
+                {% assign has_track = true %}
+              {%- endif -%}
+            {% endfor %}
+            {%- unless has_track -%}
+              <li><a href="/pages/track-status">Track warranty &amp; ticket status</a></li>
+            {%- endunless -%}
+          {%- else -%}
+            <li><a href="/search">Search</a></li>
+            <li><a href="/pages/track-status">Track warranty &amp; ticket status</a></li>
+            <li><a href="/pages/warranty">Warranty Claim</a></li>
+            <li><a href="/pages/faqs">FAQs & Troubleshooting</a></li>
+            <li><a href="/pages/shipping-policy">Shipping Policy</a></li>
+            <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/pages/terms">Terms of Service</a></li>
+            <li><a href="/pages/contact">Support Helpdesk</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      <!-- Column 3: Newsletter -->
+      <div class="tr-footer-col">
+        <h3>Newsletter</h3>
+        <p style="color: #888888; font-size: 13px; margin: 0 0 12px;">
+          Subscribe for early product launches, secret discounts, and VIP updates.
+        </p>
+        {% form 'customer', class: 'tr-newsletter-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input 
+            type="email" 
+            name="contact[email]"
+            placeholder="Enter your email" 
+            class="tr-newsletter-input" 
+            value="{% if customer %}{{ customer.email }}{% endif %}"
+            autocomplete="email"
+            aria-label="Email address"
+            required
+          >
+          <button type="submit" class="tr-btn tr-btn-accent" style="padding: 10px 20px; font-size: 12px;">
+            JOIN
+          </button>
+          {% if form.posted_successfully? %}
+            <p class="tr-newsletter-status" role="status">Thanks for subscribing.</p>
+          {% elsif form.errors %}
+            <div class="tr-newsletter-status" role="alert">{{ form.errors | default_errors }}</div>
+          {% endif %}
+        {% endform %}
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="tr-footer-bottom">
+      <div>
+        &copy; {{ 'now' | date: '%Y' }} {{ section.settings.brand_name | default: 'Grooves Lifestyle' }}. All Rights Reserved. | grooveslifestyle.com
+      </div>
+      <div>
+        <span style="color: #a9ddf2; font-size: 12px;">Payment options are shown securely at checkout</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Grooves Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_url",
+      "label": "Or Footer Logo URL"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 40,
+      "max": 250,
+      "step": 5,
+      "unit": "px",
+      "label": "Footer Logo Width",
+      "default": 140
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name Fallback",
+      "default": "Grooves Lifestyle"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_desc",
+      "label": "Brand Description",
+      "default": "Grooves Lifestyle - High Definition Audio, Powerful Fast Chargers & Smart Everyday Gear. Engineered for bass lovers and modern tech enthusiasts."
+    },
+    {
+      "type": "header",
+      "content": "Navigation Menus"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Primary Menu (Main menu)",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "menu_heading",
+      "label": "Primary Menu Heading",
+      "default": "Quick Links"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Secondary Menu (Policies / Support)",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "footer_menu_heading",
+      "label": "Secondary Menu Heading",
+      "default": "Customer Support"
+    },
+    {
+      "type": "header",
+      "content": "Customer Support Contact Details"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support Email",
+      "default": "support@grooveslifestyle.com"
+    },
+    {
+      "type": "text",
+      "id": "support_phone",
+      "label": "Support Phone Number",
+      "default": "(+91) 9216-9216-61"
+    },
+    {
+      "type": "textarea",
+      "id": "support_address",
+      "label": "Support Address",
+      "default": "SB 68 / A95 SECTOR 63A NOIDA 201307"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Footer",
+      "settings": {
+        "menu": "main-menu",
+        "menu_heading": "Quick Links"
+      }
+    }
+  ]
+}
+{% endschema %}

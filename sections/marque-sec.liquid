@@ -1,0 +1,180 @@
+<style>
+  .section-{{ section.id }}.custom-marquee {
+    display: flex;
+    align-items: center;
+    height: {{section.settings.marquee_height}}px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background: {{section.settings.colorBackground}}; 
+    color: {{section.settings.colorText}}; 
+  }
+  .section-{{ section.id }}.custom-marquee a {
+    color: {{section.settings.colorText}}; 
+    text-decoration: none;
+    display: flex;
+    width: 100%;
+  }
+  .section-{{ section.id }}.custom-marquee .track {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee {{ section.settings.marquee_speed }}s linear infinite;
+  }
+  .section-{{ section.id }}.custom-marquee .marquee-group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .section-{{ section.id }}.custom-marquee .content {
+    margin-left: 40px;
+    font-size: {{section.settings.font_size}}px;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%); /* Optimized for seamless looping */
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .section-{{ section.id }}.custom-marquee .track {
+      animation-play-state: paused;
+      will-change: auto;
+    }
+  }
+</style>
+
+<div class="section-{{ section.id }} custom-marquee" role="region" {{ block.shopify_attributes }}>
+  {%- if section.settings.link != blank -%}
+    <a href="{{ section.settings.link }}">
+  {%- endif -%}
+    
+    <div class="track">
+      {%- comment -%} Capture the content once (either from Metaobject or Blocks) {%- endcomment -%}
+      {%- capture marquee_content -%}
+        
+        {%- if section.settings.marquee_meta != blank -%}
+          {%- assign meta_texts = section.settings.marquee_meta.text_list.value -%}
+          {%- for text in meta_texts -%}
+            <span class="content marquee-text">{{ text | escape }}</span>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            <span class="content marquee-text">{{ block.settings.new_text | escape }}</span>
+          {%- endfor -%}
+        {%- endif -%}
+
+      {%- endcapture -%}
+
+      {%- comment -%} Two identical groups are sufficient for a seamless -50% loop. {%- endcomment -%}
+      <div class="marquee-group">
+        {{ marquee_content }}
+      </div>
+      <div class="marquee-group" aria-hidden="true">
+        {{ marquee_content }}
+      </div>
+      
+      {%- if section.settings.link != blank -%}
+        {% comment %} <span class="content" style="margin-left:20px;">{% render 'icon-arrow' %}</span> {% endcomment %}
+      {%- endif -%}
+    </div>
+
+  {%- if section.settings.link != blank -%}
+    </a>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Marquee Text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Metaobject Connection"
+    },
+    {
+      "type": "metaobject",
+      "id": "marquee_meta",
+      "label": "Connect Marquee Metaobject",
+      "metaobject_type": "marquee_ticker",
+      "info": "To use this, create a Metaobject with type 'marquee_ticker' and a 'List of single-line texts' field named 'text_list'."
+    },
+    {
+      "type": "header",
+      "content": "Styling & Settings"
+    },
+    {
+      "type": "color",
+      "id": "colorBackground",
+      "label": "Background color",
+      "default": "#000"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 20,
+      "label": "Marquee Speed"
+    },
+    {
+      "type": "color",
+      "id": "colorText",
+      "label": "Text color",
+      "default": "#fff"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "range",
+      "id": "marquee_height",
+      "min": 24,
+      "max": 200,
+      "step": 2,
+      "default": 46,
+      "label": "Marquee height"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 8,
+      "max": 100,
+      "step": 2,
+      "default": 24,
+      "label": "Font size"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 20,
+      "settings": [
+         {
+          "type": "text",
+          "id": "new_text",
+          "default": "Welcome to store",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee",
+      "blocks": [
+        { "type": "text" },
+        { "type": "text" },
+        { "type": "text" }
+      ]
+    }
+  ]
+}
+{% endschema %}

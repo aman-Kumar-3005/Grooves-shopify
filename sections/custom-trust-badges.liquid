@@ -1,0 +1,149 @@
+{%- style -%}
+  .trust-badges-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_y }}px 20px;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+  }
+  .trust-badges-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media screen and (min-width: 768px) {
+    .trust-badges-inner {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .trust-badge-item {
+    text-align: center;
+    padding: 15px;
+  }
+  .trust-badge-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 15px;
+    color: {{ section.settings.icon_color }};
+  }
+  .trust-badge-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+  .trust-badge-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .trust-badge-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.4;
+  }
+{%- endstyle -%}
+
+<div class="trust-badges-{{ section.id }}">
+  <div class="trust-badges-inner">
+    {%- for block in section.blocks -%}
+      <div class="trust-badge-item" {{ block.shopify_attributes }}>
+        <div class="trust-badge-icon">
+          {%- if block.settings.icon == 'shipping' -%}
+            <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+          {%- elsif block.settings.icon == 'shield' -%}
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          {%- elsif block.settings.icon == 'support' -%}
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+          {%- elsif block.settings.icon == 'return' -%}
+            <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+          {%- endif -%}
+        </div>
+        <div class="trust-badge-title">{{ block.settings.title }}</div>
+        <div class="trust-badge-desc">{{ block.settings.text }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust Badges",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical Padding",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shipping", "label": "Free Shipping" },
+            { "value": "shield", "label": "Warranty/Secure" },
+            { "value": "support", "label": "24/7 Support" },
+            { "value": "return", "label": "Easy Returns" }
+          ],
+          "default": "shipping"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "On all orders across the country."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Badges",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "shipping", "title": "DELIVERY OPTIONS", "text": "See available delivery options at checkout." } },
+        { "type": "feature", "settings": { "icon": "shield", "title": "1 YEAR WARRANTY", "text": "Peace of mind with 12 months warranty." } },
+        { "type": "feature", "settings": { "icon": "return", "title": "7 DAYS RETURN", "text": "Hassle-free returns and exchanges." } },
+        { "type": "feature", "settings": { "icon": "support", "title": "24/7 SUPPORT", "text": "We are here to help you anytime." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

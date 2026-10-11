@@ -1,0 +1,1469 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_slider": {
+      "type": "tr-hero-banner",
+      "blocks": {
+        "slide_swirl": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_25_44_AM.png?v=1790117888",
+            "mobile_image_url": "",
+            "button_link": "shopify://collections/all",
+            "show_text_overlay": false,
+            "badge_text": "",
+            "heading": "",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "slide_bold": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_26_53_AM.png?v=1790117887",
+            "mobile_image_url": "",
+            "button_link": "shopify://collections/all",
+            "show_text_overlay": false,
+            "badge_text": "",
+            "heading": "",
+            "subheading": "",
+            "button_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_swirl",
+        "slide_bold"
+      ],
+      "settings": {
+        "desktop_height": 500,
+        "desktop_image_fit": "cover",
+        "desktop_banner_width": 100,
+        "mobile_height": 350,
+        "mobile_image_fit": "contain",
+        "mobile_banner_width": 100,
+        "slider_bg": "#000000",
+        "autoplay_speed": 5
+      }
+    },
+    "categories": {
+      "type": "tr-categories",
+      "blocks": {
+        "category_mKDHmx": {
+          "type": "category",
+          "settings": {
+            "collection": "neck-band",
+            "block_bg_color": "{{ settings.color_palette.background }}",
+            "title": "Earbuds",
+            "image_url": "",
+            "url": ""
+          }
+        },
+        "cat_bestseller": {
+          "type": "category",
+          "settings": {
+            "collection": "accessories",
+            "block_bg_color": "{{ settings.color_palette.background }}",
+            "title": "Accessories",
+            "image_url": "",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_fan": {
+          "type": "category",
+          "settings": {
+            "collection": "adaptor",
+            "block_bg_color": "{{ settings.color_palette.background }}",
+            "title": "Adaptor",
+            "image_url": "",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_soundbars": {
+          "type": "category",
+          "settings": {
+            "collection": "combo",
+            "block_bg_color": "{{ settings.color_palette.background }}",
+            "title": "Combo",
+            "image_url": "",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_translucent": {
+          "type": "category",
+          "settings": {
+            "collection": "earbuds",
+            "block_bg_color": "{{ settings.color_palette.background }}",
+            "title": "Earbuds",
+            "image_url": "",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_powerbank": {
+          "type": "category",
+          "settings": {
+            "collection": "headphones",
+            "block_bg_color": "{{ settings.color_palette.background }}",
+            "title": "Headphones",
+            "image_url": "",
+            "url": "shopify://collections/all"
+          }
+        },
+        "cat_earbuds": {
+          "type": "category",
+          "settings": {
+            "collection": "power-bank",
+            "block_bg_color": "{{ settings.color_palette.background }}",
+            "title": "Powerbank",
+            "image_url": "",
+            "url": "shopify://collections/all"
+          }
+        },
+        "category_9bcadb": {
+          "type": "category",
+          "settings": {
+            "collection": "offers",
+            "block_bg_color": "{{ settings.color_palette.background }}",
+            "title": "Earbuds",
+            "image_url": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_mKDHmx",
+        "cat_bestseller",
+        "cat_fan",
+        "cat_soundbars",
+        "cat_translucent",
+        "cat_powerbank",
+        "cat_earbuds",
+        "category_9bcadb"
+      ],
+      "settings": {
+        "badge_title": "Shop By Categories",
+        "image_bg_color": "{{ settings.color_palette.color1 }}",
+        "image_size": 180,
+        "image_box_padding": 0,
+        "image_border_radius": 10,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_product_slider_x9FpRN": {
+      "type": "custom-product-slider",
+      "name": "Dynamic Product Slider",
+      "settings": {
+        "title": "Best Offers",
+        "heading_size": 24,
+        "collection": "earbuds",
+        "products_to_show": 8,
+        "show_new_badge": true,
+        "new_badge_text": "Newly In",
+        "show_rating_badge": true,
+        "price_prefix": "always best",
+        "card_radius": 8,
+        "btn_bg_color": "#17243D",
+        "btn_text_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "product_recommendations_TMJdaG": {
+      "type": "product-recommendations",
+      "blocks": {
+        "text_cFT3GU": {
+          "type": "text",
+          "name": "t:names.header",
+          "settings": {
+            "text": "<h2>Related products</h2>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h3",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_rgy4NV": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_dd7wJx": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_CifaeX": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_rgy4NV",
+            "product_title_dd7wJx",
+            "price_CifaeX"
+          ]
+        }
+      },
+      "block_order": [
+        "text_cFT3GU"
+      ],
+      "name": "t:names.product_recommendations",
+      "settings": {
+        "product": "alpha-100x",
+        "recommendation_type": "related",
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 28,
+        "background_color": "",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "explore_range": {
+      "type": "tr-explore-range",
+      "blocks": {
+        "prod_fire": {
+          "type": "product_card",
+          "settings": {
+            "product": "grooves-beat",
+            "title": "Grooves Fire Earbuds",
+            "price": "₹1,499",
+            "compare_price": "₹4,999",
+            "discount_tag": "70% OFF",
+            "image_url": "grooves-prod-fire.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "prod_muze": {
+          "type": "product_card",
+          "settings": {
+            "product": "grooves-25-w-pd",
+            "title": "Grooves Muze Open-Ear",
+            "price": "₹1,699",
+            "compare_price": "₹5,499",
+            "discount_tag": "69% OFF",
+            "image_url": "grooves-prod-muze.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "prod_bold": {
+          "type": "product_card",
+          "settings": {
+            "product": "grooves-65-w-supervooc-2",
+            "title": "Grooves Bold Studio",
+            "price": "₹1,299",
+            "compare_price": "₹3,999",
+            "discount_tag": "67% OFF",
+            "image_url": "grooves-prod-bold.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "prod_wave": {
+          "type": "product_card",
+          "settings": {
+            "product": "grooves-signature2-0",
+            "title": "Grooves Wave Clear",
+            "price": "₹1,399",
+            "compare_price": "₹4,499",
+            "discount_tag": "68% OFF",
+            "image_url": "grooves-prod-wave.jpg",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "prod_fire",
+        "prod_muze",
+        "prod_bold",
+        "prod_wave"
+      ],
+      "settings": {
+        "section_title": "EXPLORE GROOVES AUDIO RANGE",
+        "padding_top": 20,
+        "padding_bottom": 40,
+        "hero_product": "grooves-robo-x-thunder",
+        "hero_image": "grooves-explore-hero.jpg",
+        "hero_title": "Grooves 107 Pro - Fast Charging Wireless Earbuds",
+        "hero_tag": "SUPER FAST CHARGING",
+        "hero_link": "shopify://collections/all",
+        "hero_btn_text": "BUY NOW"
+      }
+    },
+    "custom_product_slider_jjiczL": {
+      "type": "custom-product-slider",
+      "name": "Dynamic Product Slider",
+      "settings": {
+        "title": "Newly In",
+        "heading_size": 24,
+        "collection": "headphones",
+        "products_to_show": 8,
+        "show_new_badge": true,
+        "new_badge_text": "Newly In",
+        "show_rating_badge": true,
+        "price_prefix": "Prebook @",
+        "card_radius": 8,
+        "btn_bg_color": "#17243D",
+        "btn_text_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "product_list_Nfjc4K": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_G8r7ii": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>{{ closest.collection.title }}</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.background }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_EhmetX": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "button-unstyled",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_G8r7ii",
+            "product_list_button_EhmetX"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_4A9prQ": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_xnU4LL": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_WzNYcH": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_4A9prQ",
+            "product_title_xnU4LL",
+            "price_WzNYcH"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "custom_heading": "",
+        "custom_subheading": "",
+        "heading_alignment": "left",
+        "max_section_width": 1800,
+        "card_max_width": 300,
+        "collection": "accessories",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 6,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "center",
+        "gap": 28,
+        "background_color": "",
+        "padding-block-start": 12,
+        "padding-block-end": 10
+      }
+    },
+    "marque_sec_UHQFnE": {
+      "type": "marque-sec",
+      "blocks": {
+        "text_rYK6MH": {
+          "type": "text",
+          "settings": {
+            "new_text": "⭐ India’s Fastest Growing Audio Brand | Over 2.5 Crore+ Happy Customers."
+          }
+        },
+        "text_nn3WUA": {
+          "type": "text",
+          "settings": {
+            "new_text": "🎁 Use Coupon Code PREPAID at Checkout for an Extra 5% OFF!"
+          }
+        },
+        "text_wWdYgJ": {
+          "type": "text",
+          "settings": {
+            "new_text": "🛡️ 100% Secure Checkout & 24-Hour Easy Replacement Policy."
+          }
+        },
+        "text_q4VYtA": {
+          "type": "text",
+          "settings": {
+            "new_text": "⚡ Special Launch Offer: Flat 50% OFF on All Wireless Earbuds & Headphones!"
+          }
+        },
+        "text_cYrqzw": {
+          "type": "text",
+          "settings": {
+            "new_text": "🚀 Fast & Secure Delivery: Free Shipping on All Prepaid Orders."
+          }
+        },
+        "text_MnXRhM": {
+          "type": "text",
+          "settings": {
+            "new_text": "🔥 High Demand Alert: Grab Your True Wireless Stereo Before Stock Runs Out!"
+          }
+        }
+      },
+      "block_order": [
+        "text_rYK6MH",
+        "text_nn3WUA",
+        "text_wWdYgJ",
+        "text_q4VYtA",
+        "text_cYrqzw",
+        "text_MnXRhM"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "marquee_meta": "",
+        "colorBackground": "#17243D",
+        "marquee_speed": 164,
+        "colorText": "#fff",
+        "link": "",
+        "marquee_height": 46,
+        "font_size": 24
+      }
+    },
+    "tabbed_tws": {
+      "type": "tr-tabbed-tws",
+      "disabled": true,
+      "settings": {
+        "section_title": "Grooves Earbuds built for seamless sound",
+        "tabs_list": "All,ANC / ENC,Translucent,Wireless Charging,Dual Mic,Display Earbuds,Gaming",
+        "padding_top": 20,
+        "padding_bottom": 40,
+        "earbuds_banner": "grooves-tabbed-earbuds.jpg",
+        "earbuds_title": "Open sound that feels Light . Natural . & Easy",
+        "earbuds_btn": "Shop Now",
+        "earbuds_link": "shopify://collections/all",
+        "soundbar_banner": "grooves-audio-desktop-branded.png",
+        "soundbar_badge": "CINEMATIC SOUND AT HOME",
+        "soundbar_title": "Crafted for Cinematic Precision",
+        "soundbar_btn": "BUY NOW",
+        "soundbar_link": "shopify://collections/all"
+      }
+    },
+    "dual_speakers": {
+      "type": "tr-dual-speakers",
+      "disabled": true,
+      "settings": {
+        "padding_top": 10,
+        "padding_bottom": 30,
+        "speaker1_image": "grooves-speaker-1.jpg",
+        "speaker1_btn": "BUY NOW",
+        "speaker1_link": "shopify://collections/all",
+        "speaker2_image": "grooves-speaker-2.jpg",
+        "speaker2_btn": "BUY NOW",
+        "speaker2_link": "shopify://collections/all"
+      }
+    },
+    "custom_testimonials_dkWGJt": {
+      "type": "custom-testimonials",
+      "blocks": {
+        "review_83Tpc6": {
+          "type": "review",
+          "settings": {
+            "review_text": "The ANC on these earbuds is insane! The bass is deep, and the battery easily lasts me all week. Total value for money.",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_pVJYzt": {
+          "type": "review",
+          "settings": {
+            "review_text": "Got the smartwatch combo. The display is super crisp, and the Bluetooth calling works flawlessly even in traffic.",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_RVJQmL": {
+          "type": "review",
+          "settings": {
+            "review_text": "Delivery was super fast, and the build quality feels extremely premium. Definitely switching to this brand permanently.",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_wkUJFM": {
+          "type": "review",
+          "settings": {
+            "review_text": "Been using their headphones for my workouts and gaming. Zero audio lag, super comfortable on the ears, and the mic is crystal clear during calls.",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_qFmPcG": {
+          "type": "review",
+          "settings": {
+            "review_text": "The fast-charging adapter and power bank are lifesavers. Charges my phone super quick and the build is very sturdy. Highly recommend!",
+            "author_name": "Rahul Sharma"
+          }
+        },
+        "review_hQpydt": {
+          "type": "review",
+          "settings": {
+            "review_text": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended.",
+            "author_name": "Rahul Sharma"
+          }
+        }
+      },
+      "block_order": [
+        "review_83Tpc6",
+        "review_pVJYzt",
+        "review_RVJQmL",
+        "review_wkUJFM",
+        "review_qFmPcG",
+        "review_hQpydt"
+      ],
+      "name": "Customer Testimonials",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "subheading": "Loved by thousands of music lovers across the country.",
+        "bg_color": "#f4f6f8",
+        "text_color": "#111111",
+        "padding_y": 20,
+        "auto_scroll": 0
+      }
+    },
+    "shoppabl_videos_npt6gF": {
+      "type": "shoppabl-videos",
+      "blocks": {
+        "video_Rc6MEe": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/Grooves Infinity Earbuds.mp4",
+            "youtube_id": "",
+            "product": "grooves-18-w-pd",
+            "custom_title": ""
+          }
+        },
+        "video_3LXF9G": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1772575077_3844960367529934968_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-alpha-200-with-anc",
+            "custom_title": ""
+          }
+        },
+        "video_dhBPDt": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1772072764_3840746963625776568_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-beat",
+            "custom_title": ""
+          }
+        },
+        "video_zWxT8g": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1782331211_3926800424393116968_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-bang-60w",
+            "custom_title": ""
+          }
+        },
+        "video_aDLzMt": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1757052781_3714750295289939891_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-beat",
+            "custom_title": ""
+          }
+        },
+        "video_E9mxFB": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1741417489_3583591983125800638_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-delta-plus",
+            "custom_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_Rc6MEe",
+        "video_3LXF9G",
+        "video_dhBPDt",
+        "video_zWxT8g",
+        "video_aDLzMt",
+        "video_E9mxFB"
+      ],
+      "name": "Shoppable VIDEO",
+      "settings": {
+        "full_width": true,
+        "title": "Shop the Trends Everyone’s Talking About.",
+        "heading_size": 24,
+        "heading_alignment": "left",
+        "card_width_desktop": 260,
+        "card_width_mobile": 220,
+        "card_radius": 16,
+        "bg_color": "#ffffff",
+        "text_color": "#121212",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "lifestyle": {
+      "type": "tr-lifestyle",
+      "blocks": {
+        "lifestyle_item_B8JNBG": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/68619e343b02d_bc5dba57-b45f-45c3-b417-7c5483254001.webp",
+            "title": "Daily Commute & Travel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281",
+            "link": ""
+          }
+        },
+        "lifestyle_item_XtCAc6": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Daily Commute & Travel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281",
+            "link": ""
+          }
+        },
+        "life_movie": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Movie Night",
+            "image_url": "grooves-life-movie.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_news": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "News & Podcasts",
+            "image_url": "grooves-life-news.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_innovators": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Innovators",
+            "image_url": "grooves-life-innovators.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_workout": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Workout & Fitness",
+            "image_url": "grooves-life-workout.jpg",
+            "link": "shopify://collections/all"
+          }
+        },
+        "life_party": {
+          "type": "lifestyle_item",
+          "settings": {
+            "collection": "",
+            "title": "Party & Travel",
+            "image_url": "grooves-life-party.jpg",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "lifestyle_item_B8JNBG",
+        "lifestyle_item_XtCAc6",
+        "life_movie",
+        "life_news",
+        "life_innovators",
+        "life_workout",
+        "life_party"
+      ],
+      "disabled": true,
+      "settings": {
+        "badge_title": "Shop By Lifestyle",
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
+    },
+    "blogs": {
+      "type": "tr-blogs",
+      "blocks": {
+        "blog_1": {
+          "type": "article",
+          "settings": {
+            "article": "",
+            "title": "Best Open Ear Earbuds in 2026",
+            "category": "TECH & AUDIO",
+            "excerpt": "Discover how open-ear audio tech delivers spatial acoustics while keeping you aware of your surroundings.",
+            "image_url": "grooves-blog-open-ear.jpg",
+            "link": "shopify://blogs/news"
+          }
+        },
+        "blog_2": {
+          "type": "article",
+          "settings": {
+            "article": "",
+            "title": "Grooves Turbo GaN: Next-Gen Charging Hub",
+            "category": "INNOVATION",
+            "excerpt": "A high-speed GaN fast charger engineered with portable battery backup and smart multi-device protection.",
+            "image_url": "grooves-blog-swirl-fan.jpg",
+            "link": "shopify://blogs/news"
+          }
+        },
+        "blog_3": {
+          "type": "article",
+          "settings": {
+            "article": "",
+            "title": "Best Earbuds Under ₹5000 in India",
+            "category": "BUYER GUIDE",
+            "excerpt": "Compare features, battery life, quad-mic ENC, and ultra low gaming latency across top contenders.",
+            "image_url": "grooves-blog-budget-tws.jpg",
+            "link": "shopify://blogs/news"
+          }
+        },
+        "blog_4": {
+          "type": "article",
+          "settings": {
+            "article": "",
+            "title": "What Is the Best Sound System For Home?",
+            "category": "HOME THEATRE",
+            "excerpt": "Transform your entertainment room with deep bass soundbars and dedicated wireless subwoofers.",
+            "image_url": "grooves-blog-festival-sound.jpg",
+            "link": "shopify://blogs/news"
+          }
+        }
+      },
+      "block_order": [
+        "blog_1",
+        "blog_2",
+        "blog_3",
+        "blog_4"
+      ],
+      "settings": {
+        "badge_title": "Blogs",
+        "blog": "news",
+        "articles_count": 6,
+        "columns_desktop": 4,
+        "enable_desktop_carousel": true,
+        "columns_mobile": 2,
+        "enable_mobile_carousel": true,
+        "accent_color": "#45A8E8",
+        "card_bg": "#FFFFFF",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "support_policies": {
+      "type": "tr-support-policies",
+      "blocks": {
+        "sup_2": {
+          "type": "support_item",
+          "settings": {
+            "title": "6 Month Warranty",
+            "subtitle": "Check verified coverage",
+            "image": "",
+            "icon_url": "grooves-icon-warranty.png",
+            "link": "shopify://pages/track-status"
+          }
+        },
+        "sup_1": {
+          "type": "support_item",
+          "settings": {
+            "title": "Customer Support",
+            "subtitle": "+91 Support Desk",
+            "image": "shopify://shop_images/customer_support.png",
+            "icon_url": "",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_4": {
+          "type": "support_item",
+          "settings": {
+            "title": "Instagram",
+            "subtitle": "@grooveslifestyle",
+            "image": "shopify://shop_images/icon_instagram.png",
+            "icon_url": "grooves-icon-instagram.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_3": {
+          "type": "support_item",
+          "settings": {
+            "title": "FAQs",
+            "subtitle": "Instant Answers",
+            "image": "shopify://shop_images/faqs.png",
+            "icon_url": "grooves-icon-faq.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_5": {
+          "type": "support_item",
+          "settings": {
+            "title": "YouTube",
+            "subtitle": "Unboxing & Reviews",
+            "image": "shopify://shop_images/icon_youtube.png",
+            "icon_url": "grooves-icon-youtube.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "sup_6": {
+          "type": "support_item",
+          "settings": {
+            "title": "48 Hours Replacement",
+            "subtitle": "Policy terms apply",
+            "image": "",
+            "icon_url": "grooves-icon-replacement.png",
+            "link": "shopify://pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "sup_2",
+        "sup_1",
+        "sup_4",
+        "sup_3",
+        "sup_5",
+        "sup_6"
+      ],
+      "settings": {
+        "badge_title": "Grooves Support",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_policy_strip": false,
+        "policy_1_icon": "",
+        "policy_1_text": "",
+        "policy_2_icon": "🛡️",
+        "policy_2_text": "Warranty support",
+        "policy_3_icon": "💵",
+        "policy_3_text": "Payment options at checkout",
+        "policy_4_icon": "🔄",
+        "policy_4_text": "Replacement support",
+        "policy_5_icon": "🔒",
+        "policy_5_text": "100% Secure Checkout"
+      }
+    },
+    "dynamic_brand_marquee_a8rq38": {
+      "type": "dynamic-brand-marquee",
+      "blocks": {
+        "logo_item_heVjmw": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/66600d4f21404_de2ed2a7-b62b-4624-9832-ef4413a171d2.webp"
+          }
+        },
+        "logo_item_Bf4LYQ": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/665ed54001ffc_5cd5d867-655c-4461-b355-40c1a52f87a4.webp"
+          }
+        },
+        "logo_item_ntAJyG": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/66600d39807c0_1759a2fa-c045-4969-8823-7a527281f9eb.webp"
+          }
+        },
+        "logo_item_bKBa4F": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/665ed4071e862_c403fb9e-989e-4d35-ba0f-63c8153c5d15.webp"
+          }
+        },
+        "logo_item_EnFaVG": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/665ed3d45cb08_9a319a11-a1ff-4cc7-ac6c-8afd2d11b602.webp"
+          }
+        },
+        "logo_item_kxDmYi": {
+          "type": "logo_item",
+          "settings": {
+            "logo_image": "shopify://shop_images/665ed573a6b72_53b22507-bf40-459d-b327-93d2a447087e.webp"
+          }
+        }
+      },
+      "block_order": [
+        "logo_item_heVjmw",
+        "logo_item_Bf4LYQ",
+        "logo_item_ntAJyG",
+        "logo_item_bKBa4F",
+        "logo_item_EnFaVG",
+        "logo_item_kxDmYi"
+      ],
+      "name": "Brand Marquee Logos",
+      "settings": {
+        "title": "Best selling brand on...",
+        "heading_size": 22,
+        "heading_alignment": "center",
+        "logo_width": 170,
+        "logo_height": 60,
+        "logo_gap": 40,
+        "marquee_speed": 20,
+        "pause_on_hover": true,
+        "bg_color": "#ffffff",
+        "text_color": "#121212",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "section_NcG6nn": {
+      "type": "section",
+      "blocks": {
+        "video_8db4MY": {
+          "type": "video",
+          "name": "t:names.video",
+          "settings": {
+            "source": "uploaded",
+            "video": "shopify://files/videos/GROOVES-premium-product-showcase-4K.mp4",
+            "video_url": "",
+            "video_autoplay": false,
+            "video_loop": true,
+            "alt": "",
+            "custom_width": 100,
+            "custom_width_mobile": 100,
+            "aspect_ratio": "16/9",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 10,
+            "padding-block-start": 10,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_xpegmM": {
+          "type": "group",
+          "name": "t:names.caption",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 33,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 40,
+            "padding-block-end": 40,
+            "padding-inline-start": 40,
+            "padding-inline-end": 40
+          },
+          "blocks": {
+            "text_H7r3Fj": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h3>Engineered for the Ultimate Audio Experience</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_RCVGb4": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>We believe music should be felt, not just heard. Designed with cutting-edge acoustics, deep bass technology, and ergonomic comfort, our gear is built to power your daily hustle.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "button_Fwb9yt": {
+              "type": "button",
+              "name": "t:names.button",
+              "disabled": true,
+              "settings": {
+                "label": "Discover the collection",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "button-unstyled",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_H7r3Fj",
+            "text_RCVGb4",
+            "button_Fwb9yt"
+          ]
+        }
+      },
+      "block_order": [
+        "video_8db4MY",
+        "group_xpegmM"
+      ],
+      "name": "t:names.video_section",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "page-width",
+        "section_height": "custom",
+        "section_height_custom": 0,
+        "background_media": "none",
+        "background_color": "#000000",
+        "enable_audio": false,
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "press_logos_slider_AKyL3Y": {
+      "type": "press-logos-slider",
+      "blocks": {
+        "logo_item_FqABNA": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b2350c63d71_b4c43c0b-3f2b-43df-af16-c37d2e1554f4.webp",
+            "link": ""
+          }
+        },
+        "logo_item_tJWFjQ": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b239b6c266f_d47ab000-0f86-40be-bacd-3c681fe335f2.webp",
+            "link": ""
+          }
+        },
+        "logo_item_tbRiYr": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b23567ef7e7_8a083325-0f7a-4c02-9a93-7388b2bdc6f6.webp",
+            "link": ""
+          }
+        },
+        "logo_item_xdCCRr": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b3101a37034_1a487ab4-9475-4f3b-ad25-eafe0c9beb10.webp",
+            "link": ""
+          }
+        },
+        "logo_item_8Mnzwj": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25ff9d6f37_b4b18a4d-72f5-41f7-98ee-6d17524362fc.webp",
+            "link": ""
+          }
+        },
+        "logo_item_whizrX": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25f2b2fe2c_15e8a0a6-5795-47bb-a9e3-25914b9fca9e.webp",
+            "link": ""
+          }
+        },
+        "logo_item_V8HHXN": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25fb4ebbf7_ae2a576f-c9ce-4230-8833-ff11d6b33acf.webp",
+            "link": ""
+          }
+        },
+        "logo_item_4qxD6a": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25f49763f9_0195774f-d202-4a2e-a714-d743c753538c.webp",
+            "link": ""
+          }
+        },
+        "logo_item_jJ3QGF": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b25fe63e0bf_dbe1541e-dc2a-4978-b55f-354fe5236153.webp",
+            "link": ""
+          }
+        },
+        "logo_item_VyRPWd": {
+          "type": "logo_item",
+          "settings": {
+            "image": "shopify://shop_images/66b234e4aee4b_f6b620bd-8dff-420e-967d-e34ec631b9cd.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_item_FqABNA",
+        "logo_item_tJWFjQ",
+        "logo_item_tbRiYr",
+        "logo_item_xdCCRr",
+        "logo_item_8Mnzwj",
+        "logo_item_whizrX",
+        "logo_item_V8HHXN",
+        "logo_item_4qxD6a",
+        "logo_item_jJ3QGF",
+        "logo_item_VyRPWd"
+      ],
+      "name": "Press Logos Slider",
+      "settings": {
+        "subtitle": "Places where we have been featured",
+        "subtitle_color": "#3b82f6",
+        "title": "In The Press",
+        "heading_size": 24,
+        "text_color": "#1a1a1a",
+        "logo_width": 180,
+        "logo_height": 80,
+        "logo_gap": 30,
+        "logo_width_mobile": 140,
+        "logo_height_mobile": 60,
+        "bg_color": "#f8f9fa",
+        "card_bg": "rgba(0,0,0,0)",
+        "card_radius": 8,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    }
+  },
+  "order": [
+    "hero_slider",
+    "categories",
+    "custom_product_slider_x9FpRN",
+    "product_recommendations_TMJdaG",
+    "explore_range",
+    "custom_product_slider_jjiczL",
+    "product_list_Nfjc4K",
+    "marque_sec_UHQFnE",
+    "tabbed_tws",
+    "dual_speakers",
+    "custom_testimonials_dkWGJt",
+    "shoppabl_videos_npt6gF",
+    "lifestyle",
+    "blogs",
+    "support_policies",
+    "dynamic_brand_marquee_a8rq38",
+    "section_NcG6nn",
+    "press_logos_slider_AKyL3Y"
+  ]
+}

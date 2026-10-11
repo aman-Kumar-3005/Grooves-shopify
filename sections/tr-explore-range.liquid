@@ -1,0 +1,332 @@
+<section class="tr-explore-range-section" id="tr-explore-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
+  <div class="tr-container">
+    {% if section.settings.section_title != blank %}
+      <div style="text-align: center; margin-bottom: 30px;">
+        <div class="tr-section-title-box">
+          <h2>{{ section.settings.section_title }}</h2>
+        </div>
+      </div>
+    {% endif %}
+
+    {%- liquid
+      assign hero_prod = section.settings.hero_product
+      if hero_prod != blank
+        if section.settings.hero_image_file != blank
+          assign hero_img = section.settings.hero_image_file | image_url: width: 800
+        elsif hero_prod.featured_image
+          assign hero_img = hero_prod.featured_image | image_url: width: 800
+        else
+          assign hero_img = section.settings.hero_image
+        endif
+        assign hero_title = hero_prod.title
+        assign hero_link = hero_prod.url
+      else
+        if section.settings.hero_image_file != blank
+          assign hero_img = section.settings.hero_image_file | image_url: width: 800
+        elsif section.settings.hero_image != blank
+          if section.settings.hero_image contains 'http' or section.settings.hero_image contains '//'
+            assign hero_img = section.settings.hero_image
+          else
+            assign hero_img = section.settings.hero_image | replace: 'campaign/', '' | asset_url
+          endif
+        else
+          assign hero_img = 'grooves-explore-hero.jpg' | asset_url
+        endif
+        assign hero_title = section.settings.hero_title | default: 'Grooves 107 Pro ANC - Fast Charging Wireless Earbuds'
+        assign hero_link = section.settings.hero_link | default: '/collections/all'
+      endif
+    -%}
+
+    <div class="tr-explore-range-grid">
+      <!-- Large Hero Feature Card (Left) -->
+      <div class="tr-explore-hero-card">
+        <img 
+          src="{{ hero_img }}" 
+          alt="{{ hero_title }}"
+          class="tr-explore-hero-bg"
+          loading="lazy"
+          width="600"
+          height="600"
+        >
+        <div class="tr-explore-hero-content">
+          {% if section.settings.hero_tag != blank %}
+            <span style="color: var(--tr-accent); font-weight: 800; font-size: 13px; text-transform: uppercase;">
+              {{ section.settings.hero_tag }}
+            </span>
+          {% endif %}
+          <h3 style="font-size: 24px; font-weight: 900; color: #fff; margin: 6px 0 14px;">
+            {{ hero_title }}
+          </h3>
+          <a href="{{ hero_link }}" class="tr-btn tr-btn-accent" style="padding: 10px 24px;">
+            {{ section.settings.hero_btn_text | default: 'BUY NOW' }}
+          </a>
+        </div>
+      </div>
+
+      <!-- 4-Grid Cards (Right) -->
+      <div class="tr-explore-right-grid">
+        {% for block in section.blocks %}
+          {%- liquid
+            assign c_img_280 = blank
+            assign c_img_360 = blank
+            assign blk_prod = block.settings.product
+            if blk_prod != blank
+              assign c_title = blk_prod.title
+              assign c_price = blk_prod.price | money
+              assign c_compare = blk_prod.compare_at_price | money
+              assign c_link = blk_prod.url
+              if block.settings.image != blank
+                assign c_img = block.settings.image | image_url: width: 320
+                assign c_img_280 = block.settings.image | image_url: width: 280
+                assign c_img_360 = block.settings.image | image_url: width: 360
+              elsif block.settings.image_url != blank
+                if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                  assign c_img = block.settings.image_url
+                else
+                  assign c_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+                endif
+              elsif blk_prod.featured_image
+                assign c_img = blk_prod.featured_image | image_url: width: 320
+                assign c_img_280 = blk_prod.featured_image | image_url: width: 280
+                assign c_img_360 = blk_prod.featured_image | image_url: width: 360
+              else
+                assign c_img = 'grooves-prod-fire.jpg' | asset_url
+              endif
+              if blk_prod.compare_at_price > blk_prod.price
+                assign c_discount = blk_prod.compare_at_price | minus: blk_prod.price | times: 100 | divided_by: blk_prod.compare_at_price | append: '% OFF'
+              else
+                assign c_discount = ''
+              endif
+            else
+              assign c_title = block.settings.title
+              assign c_price = block.settings.price
+              assign c_compare = block.settings.compare_price
+              assign c_discount = block.settings.discount_tag
+              if block.settings.image != blank
+                assign c_img = block.settings.image | image_url: width: 320
+                assign c_img_280 = block.settings.image | image_url: width: 280
+                assign c_img_360 = block.settings.image | image_url: width: 360
+              elsif block.settings.image_url != blank
+                if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                  assign c_img = block.settings.image_url
+                else
+                  assign c_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+                endif
+              else
+                assign c_img = 'grooves-prod-fire.jpg' | asset_url
+              endif
+              assign c_link = block.settings.link | default: '/collections/all'
+            endif
+          -%}
+          <div class="tr-product-mini-card" {{ block.shopify_attributes }}>
+            <a href="{{ c_link }}">
+              <img 
+                src="{{ c_img }}" 
+                {% if c_img_280 != blank and c_img_360 != blank %}
+                  srcset="{{ c_img_280 }} 280w, {{ c_img_360 }} 360w"
+                  sizes="(max-width: 768px) calc((100vw - 44px) / 2), 263px"
+                {% endif %}
+                alt="{{ c_title }}" 
+                class="tr-product-thumb"
+                loading="lazy"
+                decoding="async"
+                width="200"
+                height="200"
+              >
+            </a>
+            <div class="tr-product-info">
+              <h4 class="tr-product-title">{{ c_title }}</h4>
+              <div class="tr-product-price-row">
+                <span class="tr-price-current">{{ c_price }}</span>
+                {% if c_compare != blank and c_compare != '$0.00' %}
+                  <span class="tr-price-compare">{{ c_compare }}</span>
+                  <span class="tr-price-discount">{{ c_discount }}</span>
+                {% endif %}
+              </div>
+              <a href="{{ c_link }}" class="tr-btn tr-btn-accent tr-card-btn">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grooves Explore Range",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "EXPLORE GROOVES AUDIO & POWER RANGE"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Hero Featured Card (Left)"
+    },
+    {
+      "type": "product",
+      "id": "hero_product",
+      "label": "Select Hero Product (Dynamic)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_file",
+      "label": "Hero Image (Upload)"
+    },
+    {
+      "type": "text",
+      "id": "hero_image",
+      "label": "Or Hero Image URL (Fallback)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Product Title Fallback",
+      "default": "Grooves Pulse Pro ANC - Wireless Earbuds with Qi Fast Charging"
+    },
+    {
+      "type": "text",
+      "id": "hero_tag",
+      "label": "Hero Tagline",
+      "default": "HYBRID ANC & FAST WIRELESS CHARGE"
+    },
+    {
+      "type": "url",
+      "id": "hero_link",
+      "label": "Hero Button Link Fallback"
+    },
+    {
+      "type": "text",
+      "id": "hero_btn_text",
+      "label": "Hero Button Label",
+      "default": "BUY NOW"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product (Dynamic)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Product Image (Upload)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title Fallback",
+          "default": "Grooves Pulse Pro ANC"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price Fallback",
+          "default": "₹1,499"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare at Price Fallback",
+          "default": "₹4,999"
+        },
+        {
+          "type": "text",
+          "id": "discount_tag",
+          "label": "Discount Tag Fallback",
+          "default": "70% OFF"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL Fallback",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product Link Fallback"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Explore Range",
+      "blocks": [
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "Grooves Pulse Pro ANC Earbuds",
+            "price": "₹1,499",
+            "compare_price": "₹4,999",
+            "discount_tag": "70% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "Grooves SoundWave Studio Headphones",
+            "price": "₹2,199",
+            "compare_price": "₹5,999",
+            "discount_tag": "63% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/wireless-audio.jpg?v=1781096198"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "Grooves Turbo Charge 20000mAh Power Bank",
+            "price": "₹1,299",
+            "compare_price": "₹3,499",
+            "discount_tag": "63% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "Grooves 65W GaN Dual Port Adaptor",
+            "price": "₹1,199",
+            "compare_price": "₹2,999",
+            "discount_tag": "60% OFF",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/soundbar.png?v=1742213430"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

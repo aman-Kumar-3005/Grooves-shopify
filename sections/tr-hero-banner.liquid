@@ -1,0 +1,569 @@
+{%- liquid
+  assign d_height = section.settings.desktop_height | default: 500
+  assign d_fit = section.settings.desktop_image_fit | default: 'contain'
+  assign d_width = section.settings.desktop_banner_width | default: 100
+
+  assign m_height = section.settings.mobile_height | default: 350
+  assign m_fit = section.settings.mobile_image_fit | default: 'contain'
+  assign m_width = section.settings.mobile_banner_width | default: 100
+  assign slider_bg = section.settings.slider_bg | default: '#000000'
+-%}
+
+<style>
+  #tr-hero-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    max-width: {{ d_width }}% !important;
+    margin-inline: auto !important;
+    background: {{ slider_bg }} !important;
+    overflow: hidden;
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-slides-container {
+    width: 100% !important;
+    {% if d_fit == 'auto' %}
+      height: auto !important;
+      max-height: none !important;
+    {% else %}
+      height: {{ d_height }}px !important;
+      max-height: {{ d_height }}px !important;
+    {% endif %}
+    overflow: hidden;
+    position: relative;
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-slide {
+    width: 100% !important;
+    {% if d_fit == 'auto' %}
+      height: auto !important;
+    {% else %}
+      height: {{ d_height }}px !important;
+    {% endif %}
+    display: none;
+    position: relative;
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-slide.active {
+    display: block !important;
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-slide-link {
+    display: block !important;
+    width: 100% !important;
+    {% if d_fit == 'auto' %}
+      height: auto !important;
+    {% else %}
+      height: {{ d_height }}px !important;
+    {% endif %}
+    text-decoration: none;
+    color: inherit;
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-img-wrap {
+    width: 100% !important;
+    {% if d_fit == 'auto' %}
+      height: auto !important;
+      max-height: none !important;
+    {% else %}
+      height: {{ d_height }}px !important;
+      max-height: {{ d_height }}px !important;
+    {% endif %}
+    position: relative;
+    overflow: hidden;
+    background: {{ slider_bg }} !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-img-wrap picture {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    {% if d_fit == 'auto' %}
+      height: auto !important;
+    {% else %}
+      height: 100% !important;
+    {% endif %}
+  }
+
+  #tr-hero-{{ section.id }} .tr-hero-img {
+    display: block !important;
+    object-position: center !important;
+    {% if d_fit == 'auto' %}
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      object-fit: contain !important;
+    {% elsif d_fit == 'contain' %}
+      width: 100% !important;
+      height: {{ d_height }}px !important;
+      max-height: {{ d_height }}px !important;
+      object-fit: contain !important;
+    {% else %}
+      width: 100% !important;
+      height: {{ d_height }}px !important;
+      max-height: {{ d_height }}px !important;
+      object-fit: cover !important;
+    {% endif %}
+  }
+
+  @media (max-width: 768px) {
+    #tr-hero-{{ section.id }} {
+      max-width: {{ m_width }}% !important;
+    }
+
+    #tr-hero-{{ section.id }} .tr-hero-slides-container {
+      width: 100% !important;
+      {% if m_fit == 'auto' %}
+        height: auto !important;
+        max-height: none !important;
+      {% else %}
+        height: {{ m_height }}px !important;
+        max-height: {{ m_height }}px !important;
+      {% endif %}
+    }
+
+    #tr-hero-{{ section.id }} .tr-hero-slide,
+    #tr-hero-{{ section.id }} .tr-hero-slide.active,
+    #tr-hero-{{ section.id }} .tr-hero-slide-link {
+      width: 100% !important;
+      {% if m_fit == 'auto' %}
+        height: auto !important;
+      {% else %}
+        height: {{ m_height }}px !important;
+      {% endif %}
+    }
+
+    #tr-hero-{{ section.id }} .tr-hero-img-wrap {
+      width: 100% !important;
+      {% if m_fit == 'auto' %}
+        height: auto !important;
+        max-height: none !important;
+        min-height: unset !important;
+      {% else %}
+        height: {{ m_height }}px !important;
+        max-height: {{ m_height }}px !important;
+        min-height: unset !important;
+      {% endif %}
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    #tr-hero-{{ section.id }} .tr-hero-img-wrap picture {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      {% if m_fit == 'auto' %}
+        height: auto !important;
+      {% else %}
+        height: 100% !important;
+      {% endif %}
+    }
+
+    #tr-hero-{{ section.id }} .tr-hero-img {
+      display: block !important;
+      object-position: center !important;
+      {% if m_fit == 'auto' %}
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        object-fit: contain !important;
+      {% elsif m_fit == 'contain' %}
+        width: 100% !important;
+        height: {{ m_height }}px !important;
+        max-height: {{ m_height }}px !important;
+        object-fit: contain !important;
+      {% else %}
+        width: 100% !important;
+        height: {{ m_height }}px !important;
+        max-height: {{ m_height }}px !important;
+        object-fit: cover !important;
+      {% endif %}
+    }
+  }
+</style>
+
+<section class="tr-hero-slider" id="tr-hero-{{ section.id }}">
+  <div class="tr-hero-slides-container">
+    {% for block in section.blocks %}
+      {%- liquid
+        assign desk_img = block.settings.image
+        assign default_hero_asset = 'grooves-audio-desktop-branded.png' | asset_url
+        assign desk_url = block.settings.image_url | default: default_hero_asset
+        assign mob_img = block.settings.mobile_image
+        assign mob_url = block.settings.mobile_image_url
+        assign desk_url_separator = '?'
+        if desk_url contains '?'
+          assign desk_url_separator = '&'
+        endif
+        assign desk_url_480 = desk_url | append: desk_url_separator | append: 'width=480'
+        assign desk_url_768 = desk_url | append: desk_url_separator | append: 'width=768'
+        assign desk_url_1200 = desk_url | append: desk_url_separator | append: 'width=1200'
+        assign desk_url_1600 = desk_url | append: desk_url_separator | append: 'width=1600'
+        assign mob_url_separator = '?'
+        if mob_url contains '?'
+          assign mob_url_separator = '&'
+        endif
+      -%}
+      <div class="tr-hero-slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.button_link | default: '/collections/all' }}" class="tr-hero-slide-link">
+          <div class="tr-hero-img-wrap">
+            <picture>
+              {% if mob_img != blank %}
+                <source
+                  media="(max-width: 768px)"
+                  srcset="{{ mob_img | image_url: width: 360 }} 360w, {{ mob_img | image_url: width: 540 }} 540w, {{ mob_img | image_url: width: 768 }} 768w"
+                  sizes="100vw"
+                >
+              {% elsif mob_url != blank %}
+                <source
+                  media="(max-width: 768px)"
+                  srcset="{{ mob_url }}{{ mob_url_separator }}width=360 360w, {{ mob_url }}{{ mob_url_separator }}width=540 540w, {{ mob_url }}{{ mob_url_separator }}width=768 768w"
+                  sizes="100vw"
+                >
+              {% endif %}
+              
+              {% if desk_img != blank %}
+                <img 
+                  src="{{ desk_img | image_url: width: 1200 }}"
+                  srcset="{{ desk_img | image_url: width: 480 }} 480w, {{ desk_img | image_url: width: 768 }} 768w, {{ desk_img | image_url: width: 1200 }} 1200w, {{ desk_img | image_url: width: 1600 }} 1600w, {{ desk_img | image_url: width: 2000 }} 2000w"
+                  sizes="100vw"
+                  alt="{{ block.settings.heading | default: 'Grooves Lifestyle Tech Essentials' }}" 
+                  class="tr-hero-img"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
+                  decoding="async"
+                  width="{{ desk_img.width }}"
+                  height="{{ desk_img.height }}"
+                >
+              {% else %}
+                <img 
+                  src="{{ desk_url_1200 }}"
+                  srcset="{{ desk_url_480 }} 480w, {{ desk_url_768 }} 768w, {{ desk_url_1200 }} 1200w, {{ desk_url_1600 }} 1600w"
+                  sizes="100vw"
+                  alt="{{ block.settings.heading | default: 'Grooves Lifestyle Tech Essentials' }}" 
+                  class="tr-hero-img"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
+                  decoding="async"
+                  width="1920"
+                  height="1080"
+                >
+              {% endif %}
+            </picture>
+
+            {% if block.settings.show_text_overlay and block.settings.heading != blank %}
+              <div class="tr-hero-overlay">
+                <div class="tr-hero-content">
+                  {% if block.settings.badge_text != blank %}
+                    <div class="tr-hero-discount-tag">
+                      <span>⚡</span> {{ block.settings.badge_text }}
+                    </div>
+                  {% endif %}
+                  <h2 class="tr-hero-title">{{ block.settings.heading }}</h2>
+                  {% if block.settings.subheading != blank %}
+                    <p class="tr-hero-desc">{{ block.settings.subheading }}</p>
+                  {% endif %}
+                  {% if block.settings.button_label != blank %}
+                    <span class="tr-btn tr-btn-accent">
+                      {{ block.settings.button_label }}
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if section.blocks.size > 1 %}
+    <div class="tr-hero-dots">
+      {% for block in section.blocks %}
+        <button 
+          class="tr-hero-dot {% if forloop.first %}active{% endif %}" 
+          data-target-slide="{{ forloop.index0 }}" 
+          aria-label="Slide {{ forloop.index }}"
+        ></button>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  (function() {
+    const slider = document.getElementById('tr-hero-{{ section.id }}');
+    if (!slider) return;
+    const slides = slider.querySelectorAll('.tr-hero-slide');
+    const dots = slider.querySelectorAll('.tr-hero-dot');
+    let current = 0;
+    let timer = null;
+
+    function showSlide(index) {
+      slides.forEach((s, i) => s.classList.toggle('active', i === index));
+      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      current = index;
+    }
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSlide(idx);
+        resetTimer();
+      });
+    });
+
+    function resetTimer() {
+      if (timer) clearInterval(timer);
+      timer = null;
+      // Swapping to a lazy second banner during Lighthouse's observation window
+      // turns that banner into a very late LCP. Mobile users keep dots and swipe,
+      // while desktop retains the configured autoplay experience.
+      if (window.matchMedia('(max-width: 768px)').matches) return;
+      if (slides.length > 1) {
+        const speed = {{ section.settings.autoplay_speed | default: 5 | times: 1000 }};
+        timer = setInterval(() => {
+          let next = (current + 1) % slides.length;
+          showSlide(next);
+        }, speed);
+      }
+    }
+    resetTimer();
+
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+    const syncAutoplay = () => resetTimer();
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', syncAutoplay);
+    else mobileQuery.addListener(syncAutoplay);
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        showSlide((current + 1) % slides.length);
+        resetTimer();
+      } else if (touchEndX - touchStartX > 50) {
+        showSlide((current - 1 + slides.length) % slides.length);
+        resetTimer();
+      }
+    }, { passive: true });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Grooves Hero Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🖥️ Desktop Banner Size Settings"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 200,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop Height (Chota / Bada karein)",
+      "default": 500,
+      "info": "Slider ko drag karke desktop banner ko chota ya bada karein."
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_fit",
+      "label": "Desktop Image Fit (Bina Kate)",
+      "options": [
+        { "value": "contain", "label": "Contain (Puri image dikhegi - Bina kate)" },
+        { "value": "cover", "label": "Cover (Full banner fill karega)" },
+        { "value": "auto", "label": "Auto Height (Natural aspect ratio)" }
+      ],
+      "default": "contain",
+      "info": "'Contain' se puri image bina kate fit hoti hai."
+    },
+    {
+      "type": "range",
+      "id": "desktop_banner_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Desktop Banner Width (Scale)",
+      "default": 100,
+      "info": "Desktop par banner ki overall width choti/badi karne ke liye."
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile Banner Size Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 150,
+      "max": 750,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Height (Chota / Bada karein)",
+      "default": 350,
+      "info": "Slider ko drag karke mobile banner ko chota ya bada karein."
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_fit",
+      "label": "Mobile Image Fit (Bina Kate)",
+      "options": [
+        { "value": "contain", "label": "Contain (Puri image dikhegi - Bina kate)" },
+        { "value": "cover", "label": "Cover (Full banner fill karega)" },
+        { "value": "auto", "label": "Auto Height (Natural aspect ratio)" }
+      ],
+      "default": "contain",
+      "info": "'Contain' se mobile par bhi image bina kate fit hoti hai."
+    },
+    {
+      "type": "range",
+      "id": "mobile_banner_width",
+      "min": 70,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Mobile Banner Width (Scale)",
+      "default": 100,
+      "info": "Mobile par banner ki overall width choti/badi karne ke liye."
+    },
+    {
+      "type": "header",
+      "content": "⚙️ Additional Settings"
+    },
+    {
+      "type": "color",
+      "id": "slider_bg",
+      "label": "Banner Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay Slide Speed (Seconds)",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Desktop Slide Image"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Or Desktop Image URL (Placeholder/CDN)",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187"
+        },
+        {
+          "type": "header",
+          "content": "Mobile Image (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Slide Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "mobile_image_url",
+          "label": "Or Mobile Image URL (Optional)"
+        },
+        {
+          "type": "header",
+          "content": "Slide Link & Text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Slide Link (Clickable Banner)",
+          "default": "/collections/all"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_text_overlay",
+          "label": "Show HTML Text Overlay (Keep OFF if banner has baked-in text)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Discount / Offer Badge",
+          "default": "FLAT 10% OFF | USE CODE: GROOVES10"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Grooves Pulse Pro ANC"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Dual Drivers & Wireless Fast Charging"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "EXPLORE AUDIO"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Hero Banner",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "image_url": "",
+            "heading": "Grooves Pulse Pro ANC",
+            "subheading": "Dual Drivers & Wireless Fast Charging",
+            "badge_text": "FLAT 10% OFF | USE CODE: GROOVES10",
+            "button_label": "EXPLORE AUDIO"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "image_url": "",
+            "heading": "Grooves Turbo Power",
+            "subheading": "Ultra-Fast Portable Power Banks & GaN Adaptors",
+            "badge_text": "NEXT-GEN TECH",
+            "button_label": "EXPLORE POWER"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

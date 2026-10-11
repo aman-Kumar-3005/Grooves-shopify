@@ -1,0 +1,272 @@
+{%- style -%}
+  .testi-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_y }}px 20px;
+    overflow: hidden;
+  }
+  .testi-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .testi-heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+  /* Slider CSS */
+  .testi-slider-container {
+    max-width: 1400px; /* Thoda wide kiya hai taaki 5 items fit ho sakein */
+    margin: 0 auto;
+    position: relative;
+  }
+  .testi-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding-bottom: 20px;
+    /* Hide scrollbar for clean look */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+  .testi-grid::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+  
+  .testi-card {
+    scroll-snap-align: start;
+    background: #fff;
+    padding: 25px 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: transform 0.3s ease;
+    /* Mobile: Show 2 items */
+    flex: 0 0 calc(50% - 7.5px); 
+  }
+  
+  @media screen and (min-width: 768px) {
+    .testi-card {
+      /* Tablet: Show 3 items */
+      flex: 0 0 calc(33.333% - 10px); 
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .testi-grid {
+      gap: 20px;
+    }
+    .testi-card {
+      /* Desktop: Show 5 items */
+      flex: 0 0 calc(20% - 16px); 
+      padding: 30px 20px;
+    }
+    .testi-card:hover {
+      transform: translateY(-5px);
+    }
+  }
+  
+  /* Customer Image Styles */
+  .testi-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px auto;
+    border: 2px solid #eaeaea;
+  }
+  .testi-avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #111111;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px auto;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  /* Horizontal Stars Fix */
+  .testi-stars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    color: #FFB800;
+    margin-bottom: 12px;
+  }
+  .testi-stars svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+  
+  .testi-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+    margin-bottom: 15px;
+    font-style: italic;
+  }
+  .testi-author {
+    font-weight: 700;
+    color: {{ section.settings.text_color }};
+    font-size: 15px;
+  }
+  .testi-verified {
+    font-size: 11px;
+    color: #28a745;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+{%- endstyle -%}
+
+<div class="testi-section-{{ section.id }}">
+  <div class="testi-header">
+    <h2 class="testi-heading">{{ section.settings.heading }}</h2>
+    <p style="color: #666;">{{ section.settings.subheading }}</p>
+  </div>
+  
+  <div class="testi-slider-container">
+    <div class="testi-grid" id="TestimonialSlider-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        <div class="testi-card" {{ block.shopify_attributes }}>
+          
+          <!-- Customer Image -->
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 120 }}" alt="{{ block.settings.author_name }}" class="testi-avatar" loading="lazy">
+          {%- else -%}
+            <div class="testi-avatar-placeholder">
+              {{ block.settings.author_name | slice: 0 | upcase }}
+            </div>
+          {%- endif -%}
+
+          <div class="testi-text">"{{ block.settings.review_text }}"</div>
+          <div class="testi-author">- {{ block.settings.author_name }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.getElementById('TestimonialSlider-{{ section.id }}');
+    const autoScrollSpeed = {{ section.settings.auto_scroll }} * 1000;
+    
+    if (autoScrollSpeed > 0 && slider) {
+      setInterval(() => {
+        const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+        
+        // Agar slider end tak pahunch gaya hai, toh start par wapas le aao
+        if (slider.scrollLeft >= maxScrollLeft - 10) {
+          slider.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Ek card ki width nikal kar utna aage slide karo
+          const cardWidth = slider.querySelector('.testi-card').offsetWidth;
+          const gap = window.innerWidth >= 1024 ? 20 : 15;
+          slider.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
+        }
+      }, autoScrollSpeed);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Customer Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Loved by thousands of music lovers across the country."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f4f6f8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "auto_scroll",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "sec",
+      "label": "Auto Scroll Speed",
+      "info": "Set to 0 to disable auto-scroll.",
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Customer Image (Optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review",
+          "default": "The sound quality is amazing! Best earbuds I have ever purchased. Highly recommended."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Customer Name",
+          "default": "Rahul Sharma"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Testimonials",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}

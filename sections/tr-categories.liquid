@@ -1,0 +1,252 @@
+{%- style -%}
+  #tr-categories-{{ section.id }} .tr-category-card,
+  #tr-categories-{{ section.id }} .tr-category-name,
+  #tr-categories-{{ section.id }} .tr-section-pill {
+    color: #000000 !important;
+  }
+
+  #tr-categories-{{ section.id }} .tr-category-icon-box {
+    background-color: {{ section.settings.image_bg_color }};
+    padding: {{ section.settings.image_box_padding }}px;
+    border-radius: {{ section.settings.image_border_radius }}px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  #tr-categories-{{ section.id }} .tr-category-icon-box img {
+    width: min({{ section.settings.image_size }}px, 100%) !important;
+    height: auto !important;
+    aspect-ratio: 1;
+    object-fit: contain;
+    display: block;
+  }
+{%- endstyle -%}
+
+<section class="tr-categories-section" id="tr-categories-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 30 }}px;">
+  <div class="tr-container">
+    {% if section.settings.badge_title != blank %}
+      <div class="tr-section-badge-wrap">
+        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+      </div>
+    {% endif %}
+
+    <div class="tr-categories-grid">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign col = block.settings.collection
+          if block.settings.image != blank
+            assign c_img = block.settings.image | image_url: width: 160
+          elsif block.settings.image_url != blank
+            if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+              assign c_img = block.settings.image_url
+            else
+              assign c_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+            endif
+          elsif col != blank and col.featured_image
+            assign c_img = col.featured_image | image_url: width: 160
+          elsif col != blank and col.products.first.featured_image
+            assign c_img = col.products.first.featured_image | image_url: width: 160
+          else
+            assign c_img = 'grooves-cat-earbuds.jpg' | asset_url
+          endif
+
+          if col != blank and col.title != blank
+            assign c_title = col.title
+            assign c_url = col.url
+          else
+            assign c_title = block.settings.title
+            assign c_url = block.settings.url | default: '/collections/all'
+          endif
+        -%}
+        <a href="{{ c_url }}" class="tr-category-card" {{ block.shopify_attributes }}>
+          <div 
+            class="tr-category-icon-box" 
+            {% if block.settings.block_bg_color != blank and block.settings.block_bg_color != 'rgba(0,0,0,0)' %}
+              style="background-color: {{ block.settings.block_bg_color }};"
+            {% endif %}
+          >
+            <img 
+              src="{{ c_img }}" 
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              width="{{ section.settings.image_size }}"
+              height="{{ section.settings.image_size }}"
+            >
+          </div>
+          <span class="tr-category-name">{{ c_title }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grooves Categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "EXPLORE GROOVES CATEGORIES"
+    },
+    {
+      "type": "header",
+      "content": "Image & Background Settings"
+    },
+    {
+      "type": "color",
+      "id": "image_bg_color",
+      "label": "Image Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "min": 40,
+      "max": 180,
+      "step": 5,
+      "unit": "px",
+      "label": "Card Image Size",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "image_box_padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Background Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Box Corner Radius",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Item",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection (Dynamic)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Category Icon"
+        },
+        {
+          "type": "color",
+          "id": "block_bg_color",
+          "label": "Custom Image BG Color (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Name (Fallback if no collection selected)",
+          "default": "Earbuds"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Icon Image URL (Fallback)",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Category Link (Fallback)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Categories",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Earbuds",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Earbuds.png?v=1723186673"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Headphones",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/wireless-audio.jpg?v=1781096198"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Accessories",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/sense__jpg.jpg?v=1776665934"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Combo",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/bestseller.jpg?v=1781096198"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Power Bank",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Portable-Powerbank.jpg?v=1776514365"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Adaptor",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/soundbar.png?v=1742213430"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

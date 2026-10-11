@@ -1,0 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "tr_announcement": {
+      "type": "tr-announcement-bar",
+      "settings": {
+        "text_part_1": "Guaranteed",
+        "highlight_part_1": "Safe Checkout",
+        "text_part_2": "Order Dispatched within",
+        "highlight_part_2": "24 Hours!!",
+        "show_emi": true
+      }
+    },
+    "tr_header": {
+      "type": "tr-header",
+      "blocks": {
+        "nav_hot_deals": {
+          "type": "nav_item",
+          "settings": {
+            "title": "HOT DEALS",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
+        "nav_earbuds": {
+          "type": "nav_item",
+          "settings": {
+            "title": "EARBUDS",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
+        "nav_smartwatch": {
+          "type": "nav_item",
+          "settings": {
+            "title": "SMARTWATCH",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
+        "nav_neckband": {
+          "type": "nav_item",
+          "settings": {
+            "title": "NECKBAND",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
+        "nav_headphones": {
+          "type": "nav_item",
+          "settings": {
+            "title": "HEADPHONES",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
+        "nav_speakers": {
+          "type": "nav_item",
+          "settings": {
+            "title": "SPEAKERS",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        },
+        "nav_more": {
+          "type": "nav_item",
+          "settings": {
+            "title": "MORE",
+            "url": "shopify://collections/all",
+            "is_active": false
+          }
+        }
+      },
+      "block_order": [
+        "nav_hot_deals",
+        "nav_earbuds",
+        "nav_smartwatch",
+        "nav_neckband",
+        "nav_headphones",
+        "nav_speakers",
+        "nav_more"
+      ],
+      "settings": {
+        "menu": "main-menu",
+        "logo": "shopify://shop_images/logo_1_d1ed5919-9e18-4173-a370-0b8aa4c5b58e.png",
+        "logo_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/logog-removebg-preview.png?v=1789673586",
+        "logo_width": 120,
+        "logo_width_mobile": 85,
+        "brand_name": ""
+      }
+    }
+  },
+  "order": [
+    "tr_announcement",
+    "tr_header"
+  ]
+}

@@ -1,0 +1,347 @@
+{% comment %}
+  Save this code as a new section named 'dynamic-collection-slider.liquid'
+{% endcomment %}
+
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.section_bg }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .collection-slider-wrapper {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .collection-slider-heading {
+    text-align: {{ section.settings.heading_alignment }};
+    margin-bottom: 2rem;
+    color: {{ section.settings.text_color }};
+  }
+
+  /* Slider Container */
+  .collection-slider-track {
+    display: flex;
+    gap: {{ section.settings.gap }}px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    padding-bottom: 1rem;
+  }
+  
+  .collection-slider-track::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  @media screen and (min-width: 750px) {
+    .collection-slider-track {
+      {% if section.settings.center_desktop %}
+        justify-content: center;
+      {% endif %}
+      flex-wrap: wrap;
+      overflow-x: visible;
+    }
+  }
+
+  /* Individual Collection Item */
+  .collection-3d-item {
+    flex: 0 0 auto;
+    width: {{ section.settings.item_width_mobile }}px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    group-hover: transform;
+    transition: transform 0.3s ease;
+  }
+
+  @media screen and (min-width: 750px) {
+    .collection-3d-item {
+      width: {{ section.settings.item_width_desktop }}px;
+    }
+  }
+
+  .collection-3d-item:hover {
+    transform: translateY(-5px);
+  }
+
+  /* 3D Image Effect Container */
+  .collection-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  /* The colored rounded rectangle behind the image */
+  .collection-image-container::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65%; /* Adjust this to change how much the image pops out */
+    background-color: var(--bg-color, #f4f4f4);
+    border-radius: {{ section.settings.border_radius }}px;
+    z-index: 1;
+    transition: height 0.3s ease;
+  }
+
+  .collection-3d-item:hover .collection-image-container::before {
+    height: 75%;
+  }
+
+  /* The Collection Image */
+  .collection-image-container img {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    height: 110%; /* Makes image taller than container to create 3D pop effect */
+    object-fit: contain;
+    object-position: bottom center;
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+
+  .collection-3d-item:hover .collection-image-container img {
+    transform: scale(1.08);
+  }
+
+  /* Collection Title */
+  .collection-title {
+    font-family: var(--font-body-family); /* Adheres to theme font */
+    font-size: {{ section.settings.font_size }}px;
+    font-weight: {{ section.settings.font_weight }};
+    color: {{ section.settings.text_color }};
+    text-align: center;
+    margin: 0;
+    line-height: 1.2;
+  }
+</style>
+
+<div class="section-{{ section.id }}">
+  <div class="collection-slider-wrapper">
+    {%- if section.settings.title != blank -%}
+      <h2 class="collection-slider-heading">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="collection-slider-track">
+      {%- for block in section.blocks -%}
+        {%- assign collection = collections[block.settings.collection] -%}
+        
+        {%- if collection != blank -%}
+          <a href="{{ collection.url }}" class="collection-3d-item" {{ block.shopify_attributes }}>
+            <div class="collection-image-container" style="--bg-color: {{ block.settings.card_bg_color }};">
+              {%- if block.settings.custom_image != blank -%}
+                {{ block.settings.custom_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: collection.title }}
+              {%- elsif collection.image != blank -%}
+                {{ collection.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: collection.title }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+            <p class="collection-title">
+              {%- if block.settings.custom_title != blank -%}
+                {{ block.settings.custom_title }}
+              {%- else -%}
+                {{ collection.title }}
+              {%- endif -%}
+            </p>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "3D Collection Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Sizing & Spacing"
+    },
+    {
+      "type": "range",
+      "id": "item_width_desktop",
+      "min": 80,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Item Width (Desktop)",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "item_width_mobile",
+      "min": 60,
+      "max": 180,
+      "step": 10,
+      "unit": "px",
+      "label": "Item Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between items",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "center_desktop",
+      "label": "Center items on Desktop",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Typography & Colors"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection Item",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "color",
+          "id": "card_bg_color",
+          "label": "Card Background Color",
+          "default": "#e6f2f5",
+          "info": "The colored box that sits behind the product image."
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Transparent Image (Optional)",
+          "info": "Upload a PNG with a transparent background for the 3D effect. Overrides default collection image."
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title (Optional)",
+          "info": "Overrides the default collection name."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "3D Collection Slider",
+      "blocks": [
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,171 @@
+<section class="tr-lifestyle-section" id="tr-lifestyle-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
+  <div class="tr-container">
+    {% if section.settings.badge_title != blank %}
+      <div class="tr-section-badge-wrap">
+        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+      </div>
+    {% endif %}
+
+    <div class="tr-lifestyle-grid">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign col = block.settings.collection
+          if col != blank
+            assign item_title = col.title
+            assign item_link = col.url
+            if block.settings.image != blank
+              assign item_img = block.settings.image | image_url: width: 400
+            elsif block.settings.image_url != blank
+              if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                assign item_img = block.settings.image_url
+              else
+                assign item_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+              endif
+            elsif col.featured_image
+              assign item_img = col.featured_image | image_url: width: 400
+            else
+              assign item_img = 'grooves-life-movie.jpg' | asset_url
+            endif
+          else
+            assign item_title = block.settings.title
+            assign item_link = block.settings.link | default: '/collections/all'
+            if block.settings.image != blank
+              assign item_img = block.settings.image | image_url: width: 400
+            elsif block.settings.image_url != blank
+              if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
+                assign item_img = block.settings.image_url
+              else
+                assign item_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
+              endif
+            else
+              assign item_img = 'grooves-life-movie.jpg' | asset_url
+            endif
+          endif
+        -%}
+        <a href="{{ item_link }}" class="tr-lifestyle-card" {{ block.shopify_attributes }}>
+          <div class="tr-lifestyle-img-wrap">
+            <img 
+              src="{{ item_img }}" 
+              alt="{{ item_title }}"
+              loading="lazy"
+              width="200"
+              height="260"
+            >
+          </div>
+          <span class="tr-lifestyle-label">{{ item_title }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grooves Lifestyle",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "DESIGNED FOR YOUR LIFESTYLE"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "lifestyle_item",
+      "name": "Lifestyle Item",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection (Dynamic)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Image (Upload)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Lifestyle Name Fallback",
+          "default": "Daily Commute & Travel"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL Fallback",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection Link Fallback"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Lifestyle",
+      "blocks": [
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Daily Commute & Travel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
+          }
+        },
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Work, Focus & Coding",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesNews.png?v=1782984314"
+          }
+        },
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Workout & Fitness",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesWorkout.png?v=1782984362"
+          }
+        },
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Gaming & Low Latency",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesinnovators.png?v=1782984337"
+          }
+        },
+        {
+          "type": "lifestyle_item",
+          "settings": {
+            "title": "Home & Entertainment",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesParty.png?v=1782984388"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,10 @@
+# Grooves Shopify 2.0 setup
+
+1. In **Online Store → Themes → Customize**, open the header group. Configure the `Grooves header` logo, main menu, announcement messages and optional mobile bottom menu. The section is sticky and its mobile drawer inherits the menu hierarchy.
+2. On the homepage, configure `Grooves hero slider` first. Each slide supports separate desktop/mobile images or Shopify-hosted videos, text, CTA, link, overlay and focal position. The homepage then uses `Grooves categories`, three `Grooves product slider` sections, `Grooves lifestyle banner` and `Grooves trust and support`.
+3. Select a real collection for each product slider. Cards read the selected variant's price and compare-at price. In **Settings → Custom data → Products**, create optional single-line text metafields `custom.card_badge` (left; e.g. New Launch) and `custom.feature_badge` (right; e.g. Recording Mode). Ratings come from the standard `reviews.rating` and `reviews.rating_count` metafields when a review app populates them.
+4. On the product template, configure `Offers and delivery` with a discount code that already exists in Shopify Admin. EMI text is informational only and should name only payment providers enabled in checkout. For delivery estimates, configure a same-origin `/apps/` proxy returning JSON with `available` (boolean) and `message` (string), or provide an exact pincode list. Without either, the checker correctly defers the final estimate to checkout.
+5. Add specifications, box contents, FAQs, product imagery and verified reviews in `Grooves product details`. Only mark a review verified after matching it to a real order, or use a review app block for automatic verification.
+6. Configure footer menus, newsletter and contact details in the footer section. Test cart updates and checkout on a Shopify preview before publishing.
+
+The theme uses the existing Shopify product form and cart drawer flow. CSS/JS live in `assets/grooves.css` and `assets/grooves.js`. The original homepage configuration is preserved in `docs/original-home-layout.json` for reference.

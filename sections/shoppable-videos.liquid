@@ -1,0 +1,354 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .shoppable-vids-wrapper {
+    {%- if section.settings.full_width -%}
+      max-width: 100%;
+      padding: 0 15px;
+    {%- else -%}
+      max-width: var(--page-width, 1400px);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    {%- endif -%}
+  }
+
+  .shoppable-vids-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: {{ section.settings.text_color }};
+    text-align: {{ section.settings.heading_alignment }};
+    {%- if section.settings.full_width -%}
+      padding: 0 10px;
+    {%- endif -%}
+  }
+
+  /* Slider Track */
+  .shoppable-track {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 20px;
+  }
+  .shoppable-track::-webkit-scrollbar {
+    display: none;
+  }
+  
+  {%- if section.settings.full_width -%}
+    .shoppable-track {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  {%- endif -%}
+
+  /* Video Card */
+  .shoppable-card {
+    flex: 0 0 auto;
+    width: {{ section.settings.card_width_mobile }}px;
+    aspect-ratio: 9 / 16;
+    scroll-snap-align: start;
+    border-radius: {{ section.settings.card_radius }}px;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+    display: block;
+    text-decoration: none;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+  }
+  
+  @media screen and (min-width: 750px) {
+    .shoppable-card {
+      width: {{ section.settings.card_width_desktop }}px;
+    }
+    .shoppable-card:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  /* Clean Video Element */
+  .shoppable-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; 
+  }
+
+  /* Glassmorphism Product Overlay */
+  .shoppable-glass-card {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+  }
+
+  .shoppable-glass-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    object-fit: cover;
+    background: #fff;
+  }
+
+  .shoppable-glass-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .shoppable-glass-title {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+  }
+
+  .shoppable-glass-price {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="shoppable-vids-wrapper">
+    {%- if section.settings.title != blank -%}
+      <h2 class="shoppable-vids-heading">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="shoppable-track" data-autoplay="{{ section.settings.enable_autoplay }}">
+      {%- for block in section.blocks -%}
+        {%- assign product = all_products[block.settings.product] -%}
+        {%- if product != blank and block.settings.shopify_video != blank -%}
+          <a href="{{ product.url }}" class="shoppable-card" {{ block.shopify_attributes }}>
+            {{ block.settings.shopify_video | video_tag: class: 'shoppable-video-bg html5-vid', autoplay: section.settings.enable_autoplay, loop: true, muted: true, controls: false, playsinline: true, image_size: '400x' }}
+            <div class="shoppable-glass-card">
+              <img src="{{ product.featured_image | image_url: width: 100 }}" class="shoppable-glass-img" alt="{{ product.title | escape }}" loading="lazy">
+              <div class="shoppable-glass-info">
+                <p class="shoppable-glass-title">{{ block.settings.custom_title | default: product.title }}</p>
+                <p class="shoppable-glass-price">{{ product.price | money }}</p>
+              </div>
+            </div>
+          </a>
+        {%- elsif request.design_mode -%}
+          <div class="shoppable-editor-notice" {{ block.shopify_attributes }}>
+            Assign a product and video to publish this card.
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const track = document.querySelector('.shoppable-track');
+    if(!track) return;
+    const isAutoplay = track.getAttribute('data-autoplay') === 'true';
+
+    const cards = document.querySelectorAll('.shoppable-card');
+    cards.forEach(card => {
+      const vid = card.querySelector('.html5-vid');
+      if(vid) {
+        if(isAutoplay) {
+          vid.play().catch(e => console.log("Autoplay prevented:", e));
+        } else {
+          card.addEventListener('mouseenter', () => vid.play());
+          card.addEventListener('mouseleave', () => {
+            vid.pause();
+            vid.currentTime = 0;
+          });
+        }
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Shoppable Videos Slider",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make Section Full Width",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable Continuous Autoplay",
+      "default": false,
+      "info": "If checked, videos will play automatically and continuously without needing cursor hover."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Watch & Shop"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Card Dimensions"
+    },
+    {
+      "type": "range",
+      "id": "card_width_desktop",
+      "min": 200,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Card Width (Desktop)",
+      "default": 260
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "min": 150,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Card Width (Mobile)",
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Shoppable Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "shopify_video",
+          "label": "Upload MP4 Video"
+        },
+        {
+          "type": "header",
+          "content": "Linked Product"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product to Link"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Product Title (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable Videos Slider",
+      "blocks": [
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" }
+      ]
+    }
+  ]
+}
+{% endschema %}

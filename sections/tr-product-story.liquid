@@ -1,0 +1,344 @@
+{%- liquid
+  assign video_src = product.metafields.custom.feature_video_url.value | default: product.metafields.custom.feature_video_url | default: section.settings.video_url | default: 'https://cdn.shopify.com/videos/c/o/v/e0ce3ba6e0c04294b29bb85973da94a7.mp4'
+  if section.settings.box_image != blank
+    assign box_content_img = section.settings.box_image | image_url: width: 1000
+  else
+    assign default_box_img = 'grooves-audio-desktop-branded.png' | asset_url
+    assign box_content_img = product.metafields.custom.box_contents_image | default: section.settings.box_image_url | default: default_box_img
+  endif
+-%}
+
+<section class="tr-story-section" id="tr-story-{{ section.id }}" style="background: #000000; position: relative; z-index: 20; clear: both;">
+  <!-- Section Title -->
+  <div class="tr-container" style="padding-top: 40px; text-align: center;">
+    <div class="tr-section-badge-wrap">
+      <span class="tr-section-pill">{{ section.settings.badge_title | default: 'PRODUCT STORY & HIGHLIGHTS' }}</span>
+    </div>
+  </div>
+
+  <!-- Big Feature Video (Plays inline looping) -->
+  {% if section.settings.show_video and video_src != blank %}
+    <div class="tr-story-video-wrap">
+      <video 
+        src="{{ video_src }}" 
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        class="tr-story-video"
+      ></video>
+    </div>
+  {% endif %}
+
+  <!-- Core Highlights Infographics -->
+  {% if section.settings.show_features_grid %}
+    <div>
+      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/fire-new-banner-2_02.webp?v=1742814093" alt="Grooves Sound Engineering" class="tr-story-img-full" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Dual-Pairing-banner-new-fire.webp?v=1742814093" alt="Dual Pairing Feature" class="tr-story-img-full" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Wireless-Charging-fire-new-4.webp?v=1742814093" alt="Wireless Qi Charging" class="tr-story-img-full" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Music-Playtime-fire-new-5.webp?v=1742814093" alt="Music Playtime" class="tr-story-img-full" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/EQ-Mode-fire-new-10.webp?v=1742814093" alt="EQ Mode" class="tr-story-img-full" loading="lazy">
+      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/AI-ENC-fire-new-11.webp?v=1742814093" alt="AI ENC Quad Mic" class="tr-story-img-full" loading="lazy">
+    </div>
+  {% endif %}
+
+  <!-- Comparison Graphic -->
+  {% if section.settings.show_comparison %}
+    <div>
+      <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Regular-VS-Fire.webp?v=1743578870" alt="Grooves Pulse Pro Feature Comparison" class="tr-story-img-full" loading="lazy">
+    </div>
+  {% endif %}
+
+  <!-- What's in the box graphic & list -->
+  {% if section.settings.show_box_contents %}
+    <div style="background: #0d0d0d; padding: 40px 0;">
+      <div class="tr-container" style="text-align: center;">
+        <h2 style="font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 24px;">{{ section.settings.box_title | default: "WHAT'S IN THE BOX" }}</h2>
+        <img 
+          src="{{ box_content_img }}" 
+          alt="Grooves Pulse Pro Box Contents" 
+          style="max-width: 900px; width: 100%; height: auto; border-radius: 16px;"
+          loading="lazy"
+        >
+        {%- assign box_text = product.metafields.custom.box_contents_list | default: section.settings.box_items_text -%}
+        {% if box_text != blank %}
+          <p style="color: #aaa; font-size: 14px; margin-top: 16px;">
+            {{ box_text }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Dynamic / Custom FAQs Accordion -->
+  {% if section.settings.show_faqs %}
+    <div class="tr-accordion-wrap">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <span class="tr-section-pill">{{ section.settings.faq_title | default: 'FREQUENTLY ASKED QUESTIONS' }}</span>
+      </div>
+
+      {% assign custom_faqs = section.blocks | where: "type", "faq" %}
+      {% if custom_faqs.size > 0 %}
+        {% for block in custom_faqs %}
+          <div class="tr-accordion-item" {{ block.shopify_attributes }}>
+            <button class="tr-accordion-trigger" type="button">
+              <span>{{ block.settings.question }}</span>
+              <span class="tr-accordion-icon">+</span>
+            </button>
+            <div class="tr-accordion-content">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        {% endfor %}
+      {% elsif product.metafields.custom.faqs.value != blank %}
+        {% for faq in product.metafields.custom.faqs.value %}
+          <div class="tr-accordion-item">
+            <button class="tr-accordion-trigger" type="button">
+              <span>{{ faq.question }}</span>
+              <span class="tr-accordion-icon">+</span>
+            </button>
+            <div class="tr-accordion-content">
+              {{ faq.answer }}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="tr-accordion-item">
+          <button class="tr-accordion-trigger" type="button">
+            <span>Q. How does Grooves Pulse Pro Active Noise Cancellation work?</span>
+            <span class="tr-accordion-icon">+</span>
+          </button>
+          <div class="tr-accordion-content">
+            Grooves Pulse Pro features Hybrid Active Noise Cancellation using dual internal and external microphones to suppress up to 35dB of ambient noise for pristine, uninterrupted listening.
+          </div>
+        </div>
+
+        <div class="tr-accordion-item">
+          <button class="tr-accordion-trigger" type="button">
+            <span>Q. Can I charge the Grooves case wirelessly?</span>
+            <span class="tr-accordion-icon">+</span>
+          </button>
+          <div class="tr-accordion-content">
+            Yes — simply place the smart charging case on any Qi-certified wireless charging pad or use the included USB Type-C fast charging cable.
+          </div>
+        </div>
+
+        <div class="tr-accordion-item">
+          <button class="tr-accordion-trigger" type="button">
+            <span>Q. What does the Grooves 1-Year Warranty cover?</span>
+            <span class="tr-accordion-icon">+</span>
+          </button>
+          <div class="tr-accordion-content">
+            All Grooves Lifestyle products include a 1-Year Comprehensive Replacement Warranty covering manufacturing defects with dedicated pan-India customer support.
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <!-- Technical Specifications Accordion -->
+  {% if section.settings.show_specs %}
+    <div class="tr-accordion-wrap" style="margin-top: 0; padding-bottom: 50px;">
+      <div class="tr-accordion-item">
+        <button class="tr-accordion-trigger" type="button">
+          <span>{{ section.settings.specs_title | default: 'Technical Specifications' }}</span>
+          <span class="tr-accordion-icon">+</span>
+        </button>
+        <div class="tr-accordion-content">
+          <table class="tr-specs-table">
+            <tbody>
+              {% assign custom_specs = section.blocks | where: "type", "spec_row" %}
+              {% if custom_specs.size > 0 %}
+                {% for block in custom_specs %}
+                  <tr {{ block.shopify_attributes }}>
+                    <td>{{ block.settings.label }}</td>
+                    <td>{{ block.settings.value }}</td>
+                  </tr>
+                {% endfor %}
+              {% elsif product.metafields.custom.specs.value != blank %}
+                {% for spec in product.metafields.custom.specs.value %}
+                  <tr><td>{{ spec.label }}</td><td>{{ spec.value }}</td></tr>
+                {% endfor %}
+              {% else %}
+                <tr><td>Speaker Driver</td><td>{{ product.metafields.custom.driver.value | default: '13mm Dynamic Titanium Bass Drivers' }}</td></tr>
+                <tr><td>Bluetooth Version</td><td>{{ product.metafields.custom.bluetooth.value | default: 'v5.4 + Instant Fast Pair' }}</td></tr>
+                <tr><td>Wireless Range</td><td>10 meters (33 ft)</td></tr>
+                <tr><td>Total Playtime</td><td>{{ product.metafields.custom.playtime.value | default: 'Up to 60 Hours (with Case)' }}</td></tr>
+                <tr><td>Charging Tech</td><td>Qi Wireless Fast Charging + Type-C Fast Fuel</td></tr>
+                <tr><td>Gaming Latency</td><td>{{ product.metafields.custom.latency.value | default: '40ms Ultra-Low Latency Mode' }}</td></tr>
+                <tr><td>Water Resistance</td><td>{{ product.metafields.custom.water_resistance.value | default: 'IPX5 Sweat & Splash Proof' }}</td></tr>
+                <tr><td>Microphones</td><td>Quad Mic ENC with ClearVoice™ AI</td></tr>
+                <tr><td>Compatibility</td><td>Android, iOS, Windows, macOS</td></tr>
+                <tr><td>Country of Origin</td><td>India</td></tr>
+                <tr><td>Brand</td><td>Grooves Lifestyle (grooveslifestyle.com)</td></tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  document.querySelectorAll('.tr-accordion-trigger').forEach(trigger => {
+    trigger.addEventListener('click', function() {
+      const item = this.parentElement;
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Grooves Product Story & Specs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Section Badge Title",
+      "default": "PRODUCT STORY & HIGHLIGHTS"
+    },
+    {
+      "type": "header",
+      "content": "Feature Video"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_video",
+      "label": "Show Feature Video",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Feature Video URL (Fallback MP4)",
+      "default": "https://cdn.shopify.com/videos/c/o/v/e0ce3ba6e0c04294b29bb85973da94a7.mp4"
+    },
+    {
+      "type": "header",
+      "content": "Story Infographics & Comparison"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features_grid",
+      "label": "Show Highlights Infographics",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comparison",
+      "label": "Show Regular vs Fire Comparison",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Box Contents"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_box_contents",
+      "label": "Show Box Contents Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "box_title",
+      "label": "Box Contents Heading",
+      "default": "WHAT'S IN THE BOX"
+    },
+    {
+      "type": "image_picker",
+      "id": "box_image",
+      "label": "Box Contents Image (Upload)"
+    },
+    {
+      "type": "text",
+      "id": "box_image_url",
+      "label": "Or Box Contents Image URL (Fallback)",
+      "default": ""
+    },
+    {
+      "type": "textarea",
+      "id": "box_items_text",
+      "label": "Box Items Description",
+      "default": "1x Grooves Pulse Pro Earbuds, 1x Wireless Fast-Charging Case, 3x Silicone Ear-Tip Pairs (S/M/L), 1x Type-C Fast Fuel Cable, 1x User Manual & Warranty Card"
+    },
+    {
+      "type": "header",
+      "content": "Frequently Asked Questions"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_faqs",
+      "label": "Show FAQs Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "FAQs Heading",
+      "default": "FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+      "type": "header",
+      "content": "Technical Specifications"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_specs",
+      "label": "Show Specifications Accordion",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "specs_title",
+      "label": "Specs Accordion Title",
+      "default": "Technical Specifications"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Custom FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Q. How do I pair the earbuds?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Open the lid of the charging case, enable Bluetooth on your smartphone or laptop, and select Grooves Pulse Pro to connect instantly."
+        }
+      ]
+    },
+    {
+      "type": "spec_row",
+      "name": "Custom Spec Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Specification Label",
+          "default": "Battery Capacity"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Specification Value",
+          "default": "500mAh Case + 40mAh per Earbud"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Product Story & Specs"
+    }
+  ]
+}
+{% endschema %}

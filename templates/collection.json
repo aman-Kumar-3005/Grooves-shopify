@@ -1,0 +1,707 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
+    "shogun-above": {
+      "type": "shogun-above",
+      "settings": {}
+    },
+    "section": {
+      "type": "section",
+      "blocks": {
+        "text_tqQTNE": {
+          "type": "text",
+          "name": "t:names.title",
+          "settings": {
+            "text": "<h6>{{ closest.collection.title }}</h6>",
+            "width": "fit-content",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "h4",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 100,
+            "padding-block-end": 51,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_tqQTNE"
+      ],
+      "name": "t:names.heading",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 39,
+        "background_media": "image",
+        "background_color": "{{ settings.color_palette.foreground }}",
+        "enable_audio": false,
+        "video_position": "cover",
+        "background_image": "{{ collection.metafields.custom.collection_banner.value }}",
+        "background_image_position": "cover",
+        "toggle_overlay": true,
+        "overlay_color": "#00000061",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 100,
+        "padding-block-end": 0
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "filters": {
+          "type": "filters",
+          "static": true,
+          "settings": {
+            "enable_filtering": true,
+            "filter_style": "horizontal",
+            "filter_width": "full-width",
+            "text_label_case": "default",
+            "show_swatch_label": false,
+            "show_filter_label": false,
+            "enable_sorting": true,
+            "enable_grid_density": false,
+            "background_color": "{{ settings.color_palette.color1 }}",
+            "text_color": "",
+            "padding-block-start": 8,
+            "padding-block-end": 8,
+            "padding-inline-start": 40,
+            "padding-inline-end": 40,
+            "facets_margin_bottom": 0,
+            "facets_margin_right": 0
+          },
+          "blocks": {}
+        },
+        "product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 0,
+            "background_color": "{{ settings.color_palette.background }}",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_68C7TN": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "solid",
+                "border_width": 0,
+                "border_opacity": 0,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "group_JNegy4": {
+              "type": "_product-card-group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "space-between",
+                "vertical_alignment": "flex-start",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "space-between",
+                "gap": 4,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "{{ settings.color_palette.background }}",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 12,
+                "padding-block-end": 12,
+                "padding-inline-start": 12,
+                "padding-inline-end": 12
+              },
+              "blocks": {
+                "group_i9KeQ7": {
+                  "type": "_product-card-group",
+                  "name": "t:names.group",
+                  "settings": {
+                    "content_direction": "row",
+                    "vertical_on_mobile": true,
+                    "horizontal_alignment": "space-between",
+                    "vertical_alignment": "center",
+                    "align_baseline": false,
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "flex-start",
+                    "gap": 8,
+                    "width": "fill",
+                    "custom_width": 75,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 75,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "background_media": "none",
+                    "background_color": "",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_color": "",
+                    "border_radius": 0,
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "product_title_X4Hxci": {
+                      "type": "product-title",
+                      "name": "t:names.product_title",
+                      "settings": {
+                        "width": "fit-content",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "h5",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "price_r3D933": {
+                      "type": "price",
+                      "name": "t:names.product_price",
+                      "settings": {
+                        "show_sale_price_first": true,
+                        "show_installments": false,
+                        "show_tax_info": false,
+                        "type_preset": "paragraph",
+                        "width": "fit-content",
+                        "alignment": "right",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "text_color": "",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "product_title_X4Hxci",
+                    "price_r3D933"
+                  ]
+                },
+                "group_HnURV7": {
+                  "type": "_product-card-group",
+                  "name": "t:names.group",
+                  "settings": {
+                    "content_direction": "column",
+                    "vertical_on_mobile": true,
+                    "horizontal_alignment": "flex-start",
+                    "vertical_alignment": "center",
+                    "align_baseline": false,
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "flex-start",
+                    "gap": 12,
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 25,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "background_media": "none",
+                    "background_color": "",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_color": "",
+                    "border_radius": 0,
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "text_yYkK7E": {
+                      "type": "text",
+                      "name": "t:names.text",
+                      "settings": {
+                        "text": "<p>{{ closest.product.metafields.descriptors.subtitle.value }}</p>",
+                        "width": "fit-content",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_yYkK7E"
+                  ]
+                }
+              },
+              "block_order": [
+                "group_i9KeQ7",
+                "group_HnURV7"
+              ]
+            }
+          },
+          "block_order": [
+            "product_card_gallery_68C7TN",
+            "group_JNegy4"
+          ]
+        }
+      },
+      "settings": {
+        "layout_type": "grid",
+        "product_card_size": "large",
+        "mobile_product_card_size": "small",
+        "enable_infinite_scroll": true,
+        "products_per_page": 24,
+        "product_grid_width": "full-width",
+        "full_width_on_mobile": true,
+        "columns_gap_horizontal": 1,
+        "columns_gap_vertical": 1,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 0,
+        "padding-block-end": 1
+      }
+    },
+    "custom_product_slider_V64N6Y": {
+      "type": "custom-product-slider",
+      "name": "Dynamic Product Slider",
+      "settings": {
+        "title": "Newly In",
+        "heading_size": 24,
+        "collection": "accessories",
+        "products_to_show": 8,
+        "show_new_badge": true,
+        "new_badge_text": "Newly In",
+        "show_rating_badge": true,
+        "price_prefix": "",
+        "card_radius": 8,
+        "btn_bg_color": "#17243d",
+        "btn_text_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "shoppabl_videos_HNRFEw": {
+      "type": "shoppabl-videos",
+      "blocks": {
+        "video_Lj3wjm": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/Grooves Infinity Earbuds.mp4",
+            "youtube_id": "",
+            "product": "grooves-beat",
+            "custom_title": ""
+          }
+        },
+        "video_Vy4aW7": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1772072764_3840746963625776568_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-65-w-supervooc-2",
+            "custom_title": ""
+          }
+        },
+        "video_tFDf8e": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1789720206_3988779876240647754_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-fire-true-wireless-earbuds-ergonomic-bluetooth-in-ear-headphones-with-dual-tone-charging-case-touch-controls-deep-bass",
+            "custom_title": ""
+          }
+        },
+        "video_Bqcrqh": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1741417489_3583591983125800638_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-aximo-neckband",
+            "custom_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_Lj3wjm",
+        "video_Vy4aW7",
+        "video_tFDf8e",
+        "video_Bqcrqh"
+      ],
+      "name": "Shoppable VIDEO",
+      "settings": {
+        "full_width": false,
+        "title": "Shop the Trends Everyone’s Talking About.",
+        "heading_size": 24,
+        "heading_alignment": "left",
+        "card_width_desktop": 260,
+        "card_width_mobile": 220,
+        "card_radius": 16,
+        "bg_color": "#ffffff",
+        "text_color": "#121212",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "shogun-below": {
+      "type": "shogun-below",
+      "settings": {}
+    },
+    "shogun-optimizer": {
+      "type": "shogun-optimizer",
+      "settings": {}
+    },
+    "shoppabl_videos_EqdcLF": {
+      "type": "shoppabl-videos",
+      "blocks": {
+        "video_JYQkTb": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/Grooves Infinity Earbuds.mp4",
+            "youtube_id": "",
+            "product": "grooves-delta-plus",
+            "custom_title": ""
+          }
+        },
+        "video_6YhYB3": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1772072764_3840746963625776568_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-bang-60w",
+            "custom_title": ""
+          }
+        },
+        "video_kUfyQm": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1757052781_3714750295289939891_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-fire-true-wireless-earbuds-ergonomic-bluetooth-in-ear-headphones-with-dual-tone-charging-case-touch-controls-deep-bass",
+            "custom_title": ""
+          }
+        },
+        "video_yQVW8M": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1755612927_3702671967315569579_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-alpha100",
+            "custom_title": ""
+          }
+        },
+        "video_BDAfqn": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1741417489_3583591983125800638_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-metal-blast",
+            "custom_title": ""
+          }
+        },
+        "video_BqeP3h": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1753118286_3681745028289685219_64911717332.mp4",
+            "youtube_id": "",
+            "product": "guru-35w",
+            "custom_title": ""
+          }
+        },
+        "video_W6WdEr": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1759587830_3736015819072475952_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-45-w-pd",
+            "custom_title": ""
+          }
+        },
+        "video_frrkpA": {
+          "type": "video",
+          "settings": {
+            "shopify_video": "shopify://files/videos/grooves_audio_1736266188_3540379778268922748_64911717332.mp4",
+            "youtube_id": "",
+            "product": "grooves-theta-pro",
+            "custom_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_JYQkTb",
+        "video_6YhYB3",
+        "video_kUfyQm",
+        "video_yQVW8M",
+        "video_BDAfqn",
+        "video_BqeP3h",
+        "video_W6WdEr",
+        "video_frrkpA"
+      ],
+      "name": "Shoppable VIDEO",
+      "settings": {
+        "full_width": false,
+        "title": "Shop the Trends Everyone’s Talking About.",
+        "heading_size": 24,
+        "heading_alignment": "left",
+        "card_width_desktop": 260,
+        "card_width_mobile": 220,
+        "card_radius": 16,
+        "bg_color": "#ffffff",
+        "text_color": "#121212",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "marque_sec_DxwKEC": {
+      "type": "marque-sec",
+      "blocks": {
+        "text_YUJDKX": {
+          "type": "text",
+          "settings": {
+            "new_text": "Welcome to store"
+          }
+        },
+        "text_nmmtpK": {
+          "type": "text",
+          "settings": {
+            "new_text": "Welcome to store"
+          }
+        },
+        "text_8rB6hK": {
+          "type": "text",
+          "settings": {
+            "new_text": "Welcome to store"
+          }
+        }
+      },
+      "block_order": [
+        "text_YUJDKX",
+        "text_nmmtpK",
+        "text_8rB6hK"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "marquee_meta": "",
+        "colorBackground": "#17243d",
+        "marquee_speed": 160,
+        "colorText": "#fff",
+        "link": "",
+        "marquee_height": 46,
+        "font_size": 24
+      }
+    },
+    "tr_support_policies_ym7M4e": {
+      "type": "tr-support-policies",
+      "blocks": {
+        "support_item_RVCBe7": {
+          "type": "support_item",
+          "settings": {
+            "title": "Customer Support",
+            "subtitle": "Contact the support team",
+            "image": "shopify://shop_images/customer-support.svg",
+            "icon_url": "grooves-icon-support.png",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "support_item_rPWpFb": {
+          "type": "support_item",
+          "settings": {
+            "title": "Delivery Information",
+            "subtitle": "Calculated at checkout",
+            "image": "shopify://shop_images/free-shipping.svg",
+            "icon_url": "grooves-icon-support.png",
+            "link": ""
+          }
+        },
+        "support_item_qHAyBH": {
+          "type": "support_item",
+          "settings": {
+            "title": "6 Month Warranty",
+            "subtitle": "Check verified coverage",
+            "icon_url": "grooves-icon-warranty.png",
+            "link": "shopify://pages/track-status"
+          }
+        },
+        "support_item_CmDBk9": {
+          "type": "support_item",
+          "settings": {
+            "title": "48 Hours Replacement",
+            "subtitle": "Policy terms apply",
+            "icon_url": "grooves-icon-replacement.png",
+            "link": ""
+          }
+        },
+        "support_item_RJUAH7": {
+          "type": "support_item",
+          "settings": {
+            "title": "Product Help",
+            "subtitle": "Setup and usage assistance",
+            "image": "shopify://shop_images/personalise-audio.svg",
+            "icon_url": "grooves-icon-faq.png",
+            "link": ""
+          }
+        },
+        "support_item_yB6Fbq": {
+          "type": "support_item",
+          "settings": {
+            "title": "Genuine Products",
+            "subtitle": "Shop the official Grooves store",
+            "image": "shopify://shop_images/made-in-india.svg",
+            "icon_url": "grooves-icon-support.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "support_item_RVCBe7",
+        "support_item_rPWpFb",
+        "support_item_qHAyBH",
+        "support_item_CmDBk9",
+        "support_item_RJUAH7",
+        "support_item_yB6Fbq"
+      ],
+      "name": "TR Support & Policies",
+      "settings": {
+        "badge_title": "Grooves Support",
+        "padding_top": 20,
+        "padding_bottom": 0,
+        "show_policy_strip": false,
+        "policy_1_icon": "🚚",
+        "policy_1_text": "Pan India Delivery",
+        "policy_2_icon": "🛡️",
+        "policy_2_text": "Warranty support",
+        "policy_3_icon": "💵",
+        "policy_3_text": "Payment options at checkout",
+        "policy_4_icon": "🔄",
+        "policy_4_text": "Replacement support",
+        "policy_5_icon": "🔒",
+        "policy_5_text": "100% Secure Checkout"
+      }
+    }
+  },
+  "order": [
+    "shogun-helper",
+    "shogun-above",
+    "section",
+    "main",
+    "custom_product_slider_V64N6Y",
+    "shoppabl_videos_HNRFEw",
+    "shogun-below",
+    "shogun-optimizer",
+    "shoppabl_videos_EqdcLF",
+    "marque_sec_DxwKEC",
+    "tr_support_policies_ym7M4e"
+  ]
+}

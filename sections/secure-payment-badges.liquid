@@ -1,0 +1,272 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.section_bg }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .secure-payment-wrapper {
+    {%- if section.settings.full_width -%}
+      max-width: 100%;
+      padding: 0 15px;
+    {%- else -%}
+      max-width: var(--page-width, 1200px);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    {%- endif -%}
+  }
+
+  .secure-payment-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.text_color }};
+    text-align: {{ section.settings.heading_alignment }};
+    margin-bottom: 20px;
+    font-family: var(--font-body-family, sans-serif);
+  }
+
+  .secure-payment-row {
+    width: 100%;
+    display: flex;
+    justify-content: {{ section.settings.heading_alignment }};
+    flex-wrap: wrap;
+    gap: {{ section.settings.item_gap }}px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .secure-payment-row {
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+
+  .secure-payment-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ section.settings.card_bg }};
+    border-radius: {{ section.settings.card_radius }}px;
+    padding: {{ section.settings.card_padding }}px;
+    width: {{ section.settings.card_width }}px;
+    height: {{ section.settings.card_height }}px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease;
+  }
+
+  .secure-payment-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .secure-payment-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="secure-payment-wrapper">
+    
+    {%- if section.settings.title != blank -%}
+      <h3 class="secure-payment-heading">{{ section.settings.title }}</h3>
+    {%- endif -%}
+
+    <div class="secure-payment-row">
+      {%- for block in section.blocks -%}
+        <div class="secure-payment-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.payment_logo != blank -%}
+            <img src="{{ block.settings.payment_logo | image_url: width: 300 }}" alt="{{ block.settings.payment_logo.alt | default: 'Payment Logo' }}" loading="lazy" width="120" height="54">
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Secure Payment Badges",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make Section Full Width",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading Text",
+      "default": "100% Secure Payment"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading Font Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alignment / Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Card & Grid Settings"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "min": 70,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "label": "Card Width",
+      "default": 110
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Card Height",
+      "default": 65
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Internal Card Padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "min": 4,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Between Cards",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Colors & Background"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Text Color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Payment Badge Box Background",
+      "default": "#f4f4f5"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "payment_logo",
+      "name": "Payment Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "payment_logo",
+          "label": "Logo Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Secure Payment Badges",
+      "blocks": [
+        { "type": "payment_logo" },
+        { "type": "payment_logo" },
+        { "type": "payment_logo" },
+        { "type": "payment_logo" },
+        { "type": "payment_logo" },
+        { "type": "payment_logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,675 @@
+/* Grooves Support & Status Tracking Stylesheet */
+.g-track {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 72px) 20px;
+  color: #242936;
+}
+
+.g-track *, .g-track *::before, .g-track *::after {
+  box-sizing: border-box;
+}
+
+/* Header & intro */
+.g-track__intro {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 36px;
+}
+
+.g-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #45a8e8;
+  opacity: 0.95;
+  margin-bottom: 8px;
+}
+
+.g-badge-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #a9ddf2;
+  color: #17243d;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.g-track__intro h1 {
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 8px 0 14px;
+  color: #17243d;
+}
+
+.g-track__intro p {
+  color: #4b566d;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* 2-Column Lookup Grid */
+.g-track__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.g-track__card {
+  min-width: 0;
+  border: 1px solid #e8ecf2;
+  border-radius: 20px;
+  padding: clamp(24px, 3vw, 36px);
+  background: #ffffff;
+  box-shadow: 0 18px 48px rgba(23, 36, 61, 0.09);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.g-track__card h2 {
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  color: #17243d;
+}
+
+.g-track__card > p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 20px;
+  min-height: 42px;
+}
+
+.g-track__card label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #242936;
+  margin-bottom: 8px;
+}
+
+.g-track__card input + label,
+.g-track__card select + label,
+.g-track__card textarea + label {
+  margin-top: 16px;
+}
+
+.g-track__card input,
+.g-track__card select,
+.g-track__card textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  border: 1px solid #c8c8c8;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font: inherit;
+  font-size: 15px;
+  color: #151515;
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.g-track__card input:focus,
+.g-track__card select:focus,
+.g-track__card textarea:focus {
+  outline: none;
+  border-color: #45a8e8;
+  box-shadow: 0 0 0 4px rgba(69, 168, 232, 0.16);
+}
+
+.g-track__card .g-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 18px;
+  background: #17243d;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.g-track__card .g-button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.g-track__card .g-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Create Support Ticket Section (Card 3) */
+.g-track__create-section {
+  margin-top: 32px;
+}
+
+.g-track__card--full {
+  max-width: 100%;
+}
+
+.g-track__create-header {
+  margin-bottom: 24px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 18px;
+}
+
+.g-track__create-header h2 {
+  font-size: clamp(24px, 2.5vw, 32px);
+  margin: 4px 0 8px;
+}
+
+.g-track__create-header p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.g-track__form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+}
+
+.g-track__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.g-track__field--full {
+  grid-column: 1 / -1;
+}
+
+.g-req {
+  color: #e02424;
+  font-weight: 700;
+}
+
+.g-track__card select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23333' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.g-track__card textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* File Dropzone */
+.g-track__dropzone {
+  position: relative;
+  border: 2px dashed #d0d0d0;
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: center;
+  background: #fafafa;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.g-track__dropzone:hover,
+.g-track__dropzone.is-dragover {
+  border-color: #45a8e8;
+  background: #eef8fc;
+}
+
+.g-track__file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.g-track__dropzone-icon {
+  font-size: 26px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.g-track__dropzone-content p {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+.g-track__dropzone-content small {
+  color: #888;
+  font-size: 12px;
+}
+
+.g-track__file-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  justify-content: center;
+}
+
+.g-track__file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #222;
+}
+
+.g-track__file-chip-remove {
+  cursor: pointer;
+  color: #999;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  padding: 0 2px;
+}
+
+.g-track__file-chip-remove:hover {
+  color: #e02424;
+}
+
+.g-button--submit {
+  max-width: 320px;
+  margin: 24px 0 0;
+}
+
+/* Result Box Styling */
+.g-track__result {
+  margin-top: 20px;
+  border-radius: 14px;
+  padding: 20px;
+  background: #f7f9f4;
+  border: 1px solid #e2ebd6;
+  overflow-wrap: anywhere;
+  animation: gFadeIn 0.3s ease;
+}
+
+.g-track__result[data-state="error"] {
+  background: #fff5f5;
+  border-color: #fed7d7;
+  color: #c53030;
+}
+
+.g-track__result[data-state="loading"] {
+  background: #f9f9f9;
+  border-color: #eaeaea;
+  color: #666;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Rich Status Cards */
+.g-status-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.g-status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 12px;
+}
+
+.g-status-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #17243d;
+  margin: 0;
+}
+
+.g-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.g-status-badge--active {
+  background: #e6f7ec;
+  color: #0d8239;
+  border: 1px solid #c2eccd;
+}
+
+.g-status-badge--expired {
+  background: #fde8e8;
+  color: #c81e1e;
+  border: 1px solid #f8b4b4;
+}
+
+.g-status-badge--open {
+  background: #e1effe;
+  color: #1a56db;
+  border: 1px solid #b4c6fc;
+}
+
+.g-status-badge--in-progress {
+  background: #fef08a;
+  color: #854d0e;
+  border: 1px solid #fde047;
+}
+
+.g-status-badge--resolved {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.g-status-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.g-status-detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.g-status-detail-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #777;
+  margin-bottom: 3px;
+  font-weight: 600;
+}
+
+.g-status-detail-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #17243d;
+}
+
+/* Warranty Progress Bar */
+.g-warranty-progress-wrap {
+  margin-top: 6px;
+}
+
+.g-warranty-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.g-warranty-bar {
+  width: 100%;
+  height: 8px;
+  background: #e5e5e5;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.g-warranty-fill {
+  height: 100%;
+  background: #0d8239;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.g-warranty-fill--low {
+  background: #e3a008;
+}
+
+.g-warranty-fill--expired {
+  background: #c81e1e;
+  width: 100% !important;
+}
+
+/* Support Notes Callout */
+.g-status-note {
+  background: #ffffff;
+  border-left: 3px solid #45a8e8;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #333;
+  margin-top: 6px;
+}
+
+.g-status-note strong {
+  display: block;
+  font-size: 12px;
+  color: #555;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* Action Button inside Results */
+.g-btn-action-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background: #17243d;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 8px;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.g-btn-action-inline:hover {
+  background: #333;
+}
+
+/* Ticket Creation Success Card */
+.g-create-success-card {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.g-create-success-icon {
+  font-size: 44px;
+  display: inline-block;
+  margin-bottom: 8px;
+  animation: gPop 0.4s ease;
+}
+
+.g-create-ticket-number {
+  display: inline-block;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  background: #ffffff;
+  border: 2px dashed #45a8e8;
+  border-radius: 12px;
+  padding: 10px 24px;
+  margin: 12px 0 16px;
+  color: #17243d;
+}
+
+.g-create-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.g-btn-copy {
+  background: #eeeeee;
+  color: #222;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.g-btn-copy:hover {
+  background: #e2e2e2;
+}
+
+.g-btn-track-now {
+  background: #45a8e8;
+  color: #17243d;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.g-track__help {
+  text-align: center;
+  margin-top: 36px;
+  font-size: 14px;
+  color: #4b566d;
+}
+
+.g-track__privacy-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px auto 32px;
+  padding: 14px 18px;
+  max-width: 780px;
+  border: 1px solid rgba(69, 168, 232, .28);
+  border-radius: 999px;
+  background: rgba(169, 221, 242, .18);
+  color: #4b566d;
+  backdrop-filter: blur(12px);
+}
+
+.g-track__privacy-note > span { color: #45a8e8; }
+.g-track__privacy-note p { margin: 0; font-size: 12px; line-height: 1.5; }
+.g-status-kicker { display: block; margin-bottom: 3px; color: #6a6a6a; font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.g-status-detail-value.is-active { color: #0d8239; }
+.g-status-detail-value.is-expired { color: #c81e1e; }
+.g-order-items { padding: 14px; border: 1px solid #e6e6e6; border-radius: 12px; background: #fff; }
+.g-order-items > div { display: flex; justify-content: space-between; gap: 16px; padding-top: 9px; color: #222; font-size: 13px; }
+.g-order-items strong { white-space: nowrap; }
+
+/* Premium support portal surface */
+.g-track::before {
+  content: '';
+  position: absolute;
+  width: min(58vw, 720px);
+  aspect-ratio: 1;
+  top: -24%;
+  left: 50%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(118,203,232,.25), rgba(101,85,167,.08) 42%, transparent 68%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.g-track { position: relative; isolation: isolate; }
+.g-track__card { border-color: #e8ecf2; box-shadow: 0 22px 58px rgba(23,36,61,.11); }
+.g-track__card:hover { transform: translateY(-4px); box-shadow: 0 30px 72px rgba(23,36,61,.16), 0 0 0 1px rgba(69,168,232,.14); }
+.g-track__intro h1 { text-shadow: 0 12px 40px rgba(69,168,232,.13); }
+.g-warranty-fill { box-shadow: 0 0 18px rgba(13,130,57,.38); }
+
+.g-track__help a {
+  color: #17243d;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.g-track__help a:hover {
+  color: #237fb9;
+}
+
+/* Animations */
+@keyframes gFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gPop {
+  0% { transform: scale(0.5); }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 749px) {
+  .g-track {
+    padding-block: 28px;
+  }
+  .g-track__intro {
+    margin-bottom: 24px;
+  }
+  .g-track__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .g-track__card {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+  .g-track__card > p {
+    min-height: 0;
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+  .g-track__form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .g-button--submit {
+    max-width: 100%;
+  }
+  .g-status-details-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .g-track__privacy-note { align-items: flex-start; border-radius: 16px; }
+}

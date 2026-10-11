@@ -1,0 +1,1276 @@
+{%- liquid
+  assign target_product = product
+  if target_product == blank and section.settings.fallback_product != blank
+    assign target_product = all_products[section.settings.fallback_product]
+  endif
+
+  assign current_variant = target_product.selected_or_first_available_variant
+  assign prod_title = target_product.title | default: section.settings.product_title | default: "Grooves Product"
+  assign prod_subtitle = target_product.metafields.custom.subtitle.value | default: target_product.metafields.custom.subtitle | default: section.settings.product_subtitle
+  assign actual_rating = target_product.metafields.reviews.rating.value
+  assign actual_rating_count = target_product.metafields.reviews.rating_count.value | default: 0
+  
+  if current_variant != blank
+    assign p_price = current_variant.price | money
+    if current_variant.compare_at_price > current_variant.price
+      assign p_compare = current_variant.compare_at_price | money
+      assign discount_pct = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round
+      assign discount_text = discount_pct | append: '% OFF'
+    else
+      assign p_compare = ''
+      assign discount_text = section.settings.discount_badge_text
+    endif
+  else
+    assign p_price = section.settings.fallback_price | default: "₹1,499"
+    assign p_compare = section.settings.fallback_compare_price | default: "₹4,999"
+    assign discount_text = section.settings.discount_badge_text | default: "70% OFF"
+  endif
+-%}
+
+{%- style -%}
+  #tr-pdp-hero-{{ section.id }} {
+    --tr-bg: {{ section.settings.bg_color | default: '#0b0b0b' }};
+    --tr-card: {{ section.settings.card_bg | default: '#161616' }};
+    --tr-border: rgba(255, 255, 255, 0.1);
+    --tr-text: {{ section.settings.text_color | default: '#ffffff' }};
+    --tr-muted: #999999;
+    --tr-accent: {{ section.settings.accent_color | default: '#45a8e8' }};
+    background-color: var(--tr-bg);
+    color: var(--tr-text);
+    padding-top: {{ section.settings.padding_top | default: 40 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 60 }}px;
+    font-family: inherit;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  #tr-pdp-hero-{{ section.id }} *,
+  #tr-pdp-hero-{{ section.id }} *::before,
+  #tr-pdp-hero-{{ section.id }} *::after {
+    box-sizing: border-box;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-container {
+    width: 100% !important;
+    max-width: 1320px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+  }
+
+  /* --- Main Responsive Grid --- */
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 44px;
+    align-items: start;
+    width: 100%;
+  }
+
+  /* --- Left: Media Gallery --- */
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-gallery-wrap {
+    display: flex;
+    gap: 16px;
+    position: sticky;
+    top: 24px;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 520px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-thumb-item {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 2px solid var(--tr-border);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-thumb-item.active,
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-thumb-item:hover {
+    border-color: var(--tr-accent);
+    box-shadow: 0 0 10px rgba(76, 248, 0, 0.35);
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-main-media {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid var(--tr-border);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-main-media img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    margin: 0 auto;
+    transition: opacity 0.25s ease;
+  }
+
+  /* --- Right: Product Details --- */
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-details {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-rating-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--tr-card);
+    border: 1px solid var(--tr-border);
+    padding: 6px 14px;
+    border-radius: 30px;
+    width: fit-content;
+    max-width: 100%;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-stars {
+    color: #ffb800;
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-review-count {
+    color: var(--tr-muted);
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-title {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0;
+    color: var(--tr-text);
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-subtitle {
+    font-size: 14px;
+    color: var(--tr-muted);
+    line-height: 1.5;
+    margin: -6px 0 0 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  /* --- Price Box --- */
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-price-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 14px 18px;
+    background: var(--tr-card);
+    border: 1px solid var(--tr-border);
+    border-radius: 14px;
+    width: 100%;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-price {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--tr-text);
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-mrp {
+    font-size: 16px;
+    color: var(--tr-muted);
+    text-decoration: line-through;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-discount-badge {
+    background: var(--tr-accent);
+    color: #000000;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  /* --- Dynamic Swatches --- */
+  #tr-pdp-hero-{{ section.id }} .tr-swatch-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-swatch-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--tr-text);
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-swatches-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-swatch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--tr-card);
+    color: var(--tr-text);
+    border: 1.5px solid var(--tr-border);
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    max-width: 100%;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-swatch-btn.active,
+  #tr-pdp-hero-{{ section.id }} .tr-swatch-btn:hover {
+    border-color: var(--tr-accent);
+    background: rgba(76, 248, 0, 0.08);
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-swatch-color-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.3);
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+  }
+
+  /* --- Personalisation Box --- */
+  #tr-pdp-hero-{{ section.id }} .tr-personalise-box {
+    background: var(--tr-card);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    padding: 14px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-personalise-box label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--tr-text);
+    line-height: 1.4;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-personalise-input {
+    width: 100%;
+    background: var(--tr-bg);
+    border: 1px solid var(--tr-border);
+    color: var(--tr-text) !important;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-personalise-input::placeholder,
+  #tr-pdp-hero-{{ section.id }} .tr-pincode-input::placeholder {
+    color: #888888 !important;
+    opacity: 1;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-personalise-input:focus {
+    border-color: var(--tr-accent);
+  }
+
+  /* --- Coupon Banner --- */
+  #tr-pdp-hero-{{ section.id }} .tr-coupon-banner {
+    background: rgba(76, 248, 0, 0.08);
+    border: 1px solid var(--tr-accent);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-coupon-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--tr-text);
+    flex: 1 1 180px;
+    min-width: 0;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-coupon-code-pill {
+    background: var(--tr-accent);
+    color: #000000;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-coupon-code-pill:active {
+    transform: scale(0.95);
+  }
+
+  /* --- Pincode Checker --- */
+  #tr-pdp-hero-{{ section.id }} .tr-pincode-block {
+    width: 100%;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pincode-wrap {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pincode-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    background: var(--tr-card);
+    border: 1px solid var(--tr-border);
+    color: var(--tr-text) !important;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    outline: none;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pincode-input:focus {
+    border-color: var(--tr-accent);
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-btn-check {
+    background: var(--tr-card);
+    color: var(--tr-accent);
+    border: 1px solid var(--tr-accent);
+    padding: 0 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-btn-check:hover {
+    background: var(--tr-accent);
+    color: #000;
+  }
+
+  /* --- CTA Buttons --- */
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 4px;
+    width: 100%;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-btn-buy-now {
+    width: 100%;
+    max-width: 100%;
+    background: var(--tr-accent);
+    color: #000000;
+    border: none;
+    padding: 15px 16px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-btn-buy-now:hover {
+    opacity: 0.92;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(76, 248, 0, 0.25);
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-btn-add-cart {
+    width: 100%;
+    max-width: 100%;
+    background: transparent;
+    color: var(--tr-text);
+    border: 2px solid var(--tr-text);
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: center;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-btn-add-cart:hover {
+    background: var(--tr-text);
+    color: var(--tr-bg);
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-btn-buy-now[disabled],
+  #tr-pdp-hero-{{ section.id }} .tr-btn-add-cart[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* --- 4 Trust Badges --- */
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-badges-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--tr-border);
+    margin-top: 4px;
+    width: 100%;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-badge-item {
+    background: var(--tr-card);
+    border: 1px solid var(--tr-border);
+    border-radius: 12px;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-badge-item img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 6px;
+    padding: 2px;
+  }
+
+  #tr-pdp-hero-{{ section.id }} .tr-pdp-badge-item span {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--tr-text);
+    line-height: 1.3;
+    overflow-wrap: break-word;
+  }
+
+  /* ===================================================
+     TABLET & MOBILE RESPONSIVE BREAKPOINTS
+     =================================================== */
+  @media screen and (max-width: 991px) {
+    #tr-pdp-hero-{{ section.id }} {
+      padding-top: 16px;
+      padding-bottom: 36px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-container {
+      padding: 0 16px !important;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-gallery-wrap {
+      position: static;
+      flex-direction: column-reverse;
+      gap: 12px;
+      width: 100%;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-thumbnails {
+      flex-direction: row;
+      width: 100%;
+      max-height: none;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      gap: 10px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-thumb-item {
+      width: 62px;
+      height: 62px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    #tr-pdp-hero-{{ section.id }} .tr-container {
+      padding: 0 14px !important;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-title {
+      font-size: 22px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-subtitle {
+      font-size: 12.5px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-price-box {
+      padding: 12px 14px;
+      gap: 10px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-price {
+      font-size: 22px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-mrp {
+      font-size: 14px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-discount-badge {
+      font-size: 11px;
+      padding: 4px 10px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-coupon-banner {
+      padding: 10px 12px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-coupon-text {
+      font-size: 12px;
+      flex: 1 1 140px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-coupon-code-pill {
+      font-size: 11px;
+      padding: 6px 10px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-badges-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-pdp-badge-item {
+      flex-direction: row;
+      justify-content: flex-start;
+      text-align: left;
+      padding: 10px;
+    }
+
+    #tr-pdp-hero-{{ section.id }} .tr-btn-buy-now,
+    #tr-pdp-hero-{{ section.id }} .tr-btn-add-cart {
+      font-size: 13px;
+      padding: 14px 12px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="tr-pdp-top-wrapper" id="tr-pdp-hero-{{ section.id }}">
+  <div class="tr-container">
+    <div class="tr-pdp-grid">
+      
+      <!-- Media Gallery (Left on Desktop, Top on Mobile) -->
+      <div class="tr-pdp-gallery-wrap">
+        <div class="tr-pdp-thumbnails">
+          {% if target_product != blank and target_product.media.size > 0 %}
+            {% for media in target_product.media %}
+              <div 
+                class="tr-pdp-thumb-item {% if forloop.first %}active{% endif %}" 
+                data-media-src="{{ media | image_url: width: 1000 }}" 
+                data-media-id="{{ media.id }}"
+              >
+                <img src="{{ media | image_url: width: 200 }}" alt="{{ media.alt | default: prod_title | escape }}" loading="lazy" width="70" height="70">
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="tr-pdp-thumb-item active" data-media-src="{{ 'grooves-prod-fire.jpg' | asset_url }}">
+              <img src="{{ 'grooves-prod-fire.jpg' | asset_url }}" alt="Grooves product preview" loading="lazy" width="70" height="70">
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="tr-pdp-main-media">
+          {%- liquid
+            assign initial_img = 'grooves-prod-fire.jpg' | asset_url
+            if current_variant.featured_image != blank
+              assign initial_img = current_variant.featured_image | image_url: width: 1000
+            elsif target_product.featured_image != blank
+              assign initial_img = target_product.featured_image | image_url: width: 1000
+            endif
+          -%}
+          <img 
+            id="tr-main-display-img-{{ section.id }}" 
+            src="{{ initial_img }}" 
+            alt="{{ prod_title | escape }}"
+            width="600"
+            height="600"
+          >
+        </div>
+      </div>
+
+      <!-- Product Info Column (Right on Desktop, Bottom on Mobile) -->
+      <form action="/cart/add" method="post" enctype="multipart/form-data" id="tr-pdp-form-{{ section.id }}" class="tr-pdp-details">
+        <input type="hidden" name="id" id="tr-variant-id-{{ section.id }}" value="{{ current_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+
+        <!-- Rating Row -->
+        {% if section.settings.show_rating and actual_rating != blank and actual_rating_count > 0 %}
+          <div class="tr-pdp-rating-row">
+            <span class="tr-pdp-stars">★★★★★</span>
+            <strong>{{ actual_rating.rating | round: 1 }} / {{ actual_rating.scale_max }}</strong>
+            <span class="tr-pdp-review-count">| {{ actual_rating_count }} reviews</span>
+          </div>
+        {% endif %}
+
+        <!-- Title & Subtitle -->
+        <h1 class="tr-pdp-title">{{ prod_title }}</h1>
+        {% if prod_subtitle != blank %}
+          <p class="tr-pdp-subtitle">{{ prod_subtitle }}</p>
+        {% endif %}
+
+        <!-- Dynamic Price Box -->
+        <div class="tr-pdp-price-box">
+          <span class="tr-pdp-price" id="tr-pdp-price-val-{{ section.id }}">{{ p_price }}</span>
+          <span class="tr-pdp-mrp" id="tr-pdp-compare-val-{{ section.id }}" {% if p_compare == blank %}style="display:none;"{% endif %}>{{ p_compare }}</span>
+          <span class="tr-pdp-discount-badge" id="tr-pdp-discount-val-{{ section.id }}" {% if discount_text == blank %}style="display:none;"{% endif %}>{{ discount_text }}</span>
+        </div>
+
+        <!-- Dynamic Variant / Color Swatches -->
+        {% if target_product != blank and target_product.variants.size > 1 %}
+          <div class="tr-swatch-section">
+            <div class="tr-swatch-label">
+              {{ target_product.options.first | default: 'Option' }}: 
+              <span id="tr-selected-color-name-{{ section.id }}" style="color: var(--tr-accent);">{{ current_variant.title }}</span>
+            </div>
+            <div class="tr-swatches-row">
+              {% for variant in target_product.variants %}
+                {%- liquid
+                  assign v_price = variant.price | money
+                  assign v_compare = ''
+                  assign v_discount = ''
+                  if variant.compare_at_price > variant.price
+                    assign v_compare = variant.compare_at_price | money
+                    assign v_pct = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round
+                    assign v_discount = v_pct | append: '% OFF'
+                  endif
+                  assign v_img = ''
+                  if variant.featured_image != blank
+                    assign v_img = variant.featured_image | image_url: width: 1000
+                  endif
+                -%}
+                <button 
+                  type="button"
+                  class="tr-swatch-btn {% if variant.id == current_variant.id %}active{% endif %}" 
+                  data-variant-id="{{ variant.id }}"
+                  data-available="{{ variant.available }}"
+                  data-color-name="{{ variant.title | escape }}" 
+                  data-price="{{ v_price }}"
+                  data-compare="{{ v_compare }}"
+                  data-discount="{{ v_discount }}"
+                  data-img-url="{{ v_img }}"
+                >
+                  {% if variant.featured_image != blank %}
+                    <span class="tr-swatch-color-circle" style="background-image: url('{{ variant.featured_image | image_url: width: 60 }}');"></span>
+                  {% else %}
+                    <span class="tr-swatch-color-circle" style="background: {{ variant.title | split: ' ' | last | downcase }};"></span>
+                  {% endif %}
+                  {{ variant.title }}
+                </button>
+              {% endfor %}
+            </div>
+          </div>
+        {% elsif target_product == blank %}
+          <!-- Fallback Swatches for Theme Editor Preview -->
+          <div class="tr-swatch-section">
+            <div class="tr-swatch-label">Color: <span id="tr-selected-color-name-{{ section.id }}" style="color: var(--tr-accent);">White</span></div>
+            <div class="tr-swatches-row">
+              <button type="button" class="tr-swatch-btn active" data-color-name="White" data-img-url="{{ 'grooves-prod-fire.jpg' | asset_url }}">
+                <span class="tr-swatch-color-circle" style="background: #ffffff;"></span>
+                White
+              </button>
+              <button type="button" class="tr-swatch-btn" data-color-name="Black" data-img-url="{{ 'grooves-prod-fire.jpg' | asset_url }}">
+                <span class="tr-swatch-color-circle" style="background: #111111;"></span>
+                Black
+              </button>
+              <button type="button" class="tr-swatch-btn" data-color-name="Blue" data-img-url="{{ 'grooves-prod-fire.jpg' | asset_url }}">
+                <span class="tr-swatch-color-circle" style="background: #3b5998;"></span>
+                Blue
+              </button>
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Personalise Engraving (Connected to Order Line Item Properties) -->
+        {% if section.settings.enable_personalisation %}
+          <div class="tr-personalise-box">
+            <label for="tr-engrave-text-{{ section.id }}">✨ {{ section.settings.personalise_label | default: 'Make Your Product Personalised (Optional Free Engraving)' }}</label>
+            <input 
+              type="text" 
+              name="properties[Engraving]"
+              id="tr-engrave-text-{{ section.id }}" 
+              class="tr-personalise-input" 
+              placeholder="{{ section.settings.personalise_placeholder | default: 'Enter name or initials to engrave on case (Max 12 chars)' }}" 
+              maxlength="12"
+            >
+          </div>
+        {% endif %}
+
+        <!-- Offer Coupon Box -->
+        {% if section.settings.show_coupon %}
+          <div class="tr-coupon-banner">
+            <div class="tr-coupon-text">
+              <span>🏷️ {{ section.settings.coupon_text | default: 'Get 15% OFF on 2 or More Items' }}</span>
+            </div>
+            <span class="tr-coupon-code-pill" id="tr-coupon-pill-{{ section.id }}" title="Click to copy">
+              {{ section.settings.coupon_code | default: 'Use Code: TR15' }}
+            </span>
+          </div>
+        {% endif %}
+
+        <!-- Pincode Delivery Check -->
+        {% if section.settings.show_pincode %}
+          <div class="tr-pincode-block">
+            <label style="font-size: 13px; font-weight: 700; margin-bottom: 8px; display: block;">{{ section.settings.pincode_label | default: 'Check Estimated Delivery Date' }}</label>
+            <div class="tr-pincode-wrap">
+              <input type="text" class="tr-pincode-input" id="tr-pincode-input-{{ section.id }}" placeholder="Enter 6-Digit Delivery Pincode" maxlength="6" inputmode="numeric">
+              <button type="button" class="tr-btn-check" id="tr-pincode-btn-{{ section.id }}">CHECK</button>
+            </div>
+            <div id="tr-pincode-msg-{{ section.id }}" style="font-size: 12.5px; margin-top: 8px; font-weight: 600; display: none;"></div>
+          </div>
+        {% endif %}
+
+        <!-- Dynamic CTA Buttons -->
+        <div class="tr-pdp-actions">
+          {% if section.settings.show_buy_now %}
+            <button 
+              type="button" 
+              class="tr-btn-buy-now" 
+              id="tr-buy-now-btn-{{ section.id }}"
+              {% if current_variant != blank and current_variant.available == false %}disabled{% endif %}
+            >
+              ⚡ {{ section.settings.buy_now_label | default: 'BUY IT NOW' }}
+            </button>
+          {% endif %}
+          <button 
+            type="submit" 
+            class="tr-btn-add-cart" 
+            id="tr-add-cart-btn-{{ section.id }}"
+            {% if current_variant != blank and current_variant.available == false %}disabled{% endif %}
+          >
+            {% if current_variant != blank and current_variant.available == false %}
+              SOLD OUT
+            {% else %}
+              {{ section.settings.add_to_cart_label | default: 'ADD TO CART' }}
+            {% endif %}
+          </button>
+        </div>
+
+        <!-- 4 PDP Trust Badges -->
+        <div class="tr-pdp-badges-grid">
+          <div class="tr-pdp-badge-item">
+            <img src="{{ 'grooves-icon-support.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_1_text | default: 'Delivery at checkout' }}</span>
+          </div>
+          <div class="tr-pdp-badge-item">
+            <img src="{{ 'grooves-icon-warranty.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_2_text | default: 'Warranty support' }}</span>
+          </div>
+          <div class="tr-pdp-badge-item">
+            <img src="{{ 'grooves-icon-replacement.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_3_text | default: 'Replacement support' }}</span>
+          </div>
+          <div class="tr-pdp-badge-item">
+            <img src="{{ 'grooves-icon-faq.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_4_text | default: 'Secure checkout' }}</span>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const sectionEl = document.getElementById('tr-pdp-hero-{{ section.id }}');
+  if (!sectionEl) return;
+
+  const mainImg = document.getElementById('tr-main-display-img-{{ section.id }}');
+  const variantInput = document.getElementById('tr-variant-id-{{ section.id }}');
+  const colorNameEl = document.getElementById('tr-selected-color-name-{{ section.id }}');
+  const priceEl = document.getElementById('tr-pdp-price-val-{{ section.id }}');
+  const compareEl = document.getElementById('tr-pdp-compare-val-{{ section.id }}');
+  const discountEl = document.getElementById('tr-pdp-discount-val-{{ section.id }}');
+  const addToCartBtn = document.getElementById('tr-add-cart-btn-{{ section.id }}');
+  const buyNowBtn = document.getElementById('tr-buy-now-btn-{{ section.id }}');
+  const form = document.getElementById('tr-pdp-form-{{ section.id }}');
+  const defaultAddText = {{ section.settings.add_to_cart_label | default: 'ADD TO CART' | json }};
+
+  // 1. Thumbnail Switching
+  sectionEl.querySelectorAll('.tr-pdp-thumb-item').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      sectionEl.querySelectorAll('.tr-pdp-thumb-item').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const src = this.getAttribute('data-media-src');
+      if (src && mainImg) mainImg.src = src;
+    });
+  });
+
+  // 2. Dynamic Variant / Color Swatch Switching
+  sectionEl.querySelectorAll('.tr-swatch-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      sectionEl.querySelectorAll('.tr-swatch-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+
+      const vId = this.getAttribute('data-variant-id');
+      const colorName = this.getAttribute('data-color-name');
+      const imgUrl = this.getAttribute('data-img-url');
+      const price = this.getAttribute('data-price');
+      const compare = this.getAttribute('data-compare');
+      const discount = this.getAttribute('data-discount');
+      const available = this.getAttribute('data-available') !== 'false';
+
+      if (colorNameEl && colorName) colorNameEl.textContent = colorName;
+      if (imgUrl && mainImg) mainImg.src = imgUrl;
+      if (vId && variantInput) {
+        variantInput.value = vId;
+        if (window.history && window.history.replaceState && window.location.pathname.includes('/products/')) {
+          const newUrl = window.location.pathname + '?variant=' + vId;
+          window.history.replaceState({ path: newUrl }, '', newUrl);
+        }
+      }
+
+      if (price && priceEl) priceEl.textContent = price;
+      if (compareEl) {
+        if (compare) {
+          compareEl.textContent = compare;
+          compareEl.style.display = 'inline';
+        } else {
+          compareEl.style.display = 'none';
+        }
+      }
+      if (discountEl) {
+        if (discount) {
+          discountEl.textContent = discount;
+          discountEl.style.display = 'inline-block';
+        } else {
+          discountEl.style.display = 'none';
+        }
+      }
+
+      if (addToCartBtn) {
+        addToCartBtn.disabled = !available;
+        addToCartBtn.textContent = available ? defaultAddText : 'SOLD OUT';
+      }
+      if (buyNowBtn) {
+        buyNowBtn.disabled = !available;
+      }
+    });
+  });
+
+  // 3. Pincode Delivery Checker
+  const pinBtn = document.getElementById('tr-pincode-btn-{{ section.id }}');
+  const pinInput = document.getElementById('tr-pincode-input-{{ section.id }}');
+  const pinMsg = document.getElementById('tr-pincode-msg-{{ section.id }}');
+
+  if (pinBtn && pinInput && pinMsg) {
+    pinBtn.addEventListener('click', function() {
+      const val = pinInput.value.trim();
+      if (/^[1-9][0-9]{5}$/.test(val)) {
+        pinMsg.style.display = 'block';
+        pinMsg.style.color = 'var(--tr-accent)';
+        pinMsg.textContent = '✓ Delivery expected in 2-4 business days to ' + val + '. Free shipping eligible!';
+      } else {
+        pinMsg.style.display = 'block';
+        pinMsg.style.color = '#ff4d4d';
+        pinMsg.textContent = '✕ Please enter a valid 6-digit Indian PIN code.';
+      }
+    });
+  }
+
+  // 4. Coupon Copy on Click
+  const couponPill = document.getElementById('tr-coupon-pill-{{ section.id }}');
+  if (couponPill) {
+    couponPill.addEventListener('click', function() {
+      const rawText = this.textContent.replace(/Use Code:/i, '').trim();
+      navigator.clipboard.writeText(rawText).then(() => {
+        const old = this.textContent;
+        this.textContent = 'COPIED: ' + rawText + ' ✓';
+        setTimeout(() => { this.textContent = old; }, 2000);
+      });
+    });
+  }
+
+  // 5. Real Shopify Add to Cart & Buy Now AJAX
+  async function handleCartAction(redirectToCheckout) {
+    if (!form) return;
+    const vId = variantInput ? variantInput.value : '';
+    if (!vId) {
+      alert('Please select a product in Theme Customizer settings or open this on a Product page.');
+      return;
+    }
+
+    const formData = new FormData(form);
+    const activeBtn = redirectToCheckout ? buyNowBtn : addToCartBtn;
+    const originalText = activeBtn ? activeBtn.innerHTML : '';
+
+    if (activeBtn) {
+      activeBtn.disabled = true;
+      activeBtn.innerHTML = redirectToCheckout ? 'REDIRECTING TO CHECKOUT...' : 'ADDING TO CART...';
+    }
+
+    try {
+      const response = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        body: formData
+      });
+
+      if (!response.ok) throw new Error('Failed to add item');
+      const itemData = await response.json();
+
+      if (redirectToCheckout) {
+        window.location.href = '/checkout';
+      } else {
+        if (activeBtn) activeBtn.innerHTML = 'ADDED TO CART ✓';
+        window.dispatchEvent(new Event('cart:refresh'));
+        document.dispatchEvent(new CustomEvent('ajaxProduct:added', { detail: { product: itemData } }));
+        setTimeout(() => {
+          window.location.href = '/cart';
+        }, 500);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Could not add product to cart. Please check stock availability.');
+      if (activeBtn) {
+        activeBtn.disabled = false;
+        activeBtn.innerHTML = originalText;
+      }
+    }
+  }
+
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      handleCartAction(false);
+    });
+  }
+
+  if (buyNowBtn) {
+    buyNowBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      handleCartAction(true);
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "TR PDP Hero",
+  "settings": [
+    {
+      "type": "product",
+      "id": "fallback_product",
+      "label": "Select Product (Optional if not on Product Page)",
+      "info": "On Product pages, it automatically detects the current product."
+    },
+    {
+      "type": "header",
+      "content": "Colors & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#0b0b0b"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card / Box Background",
+      "default": "#161616"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Neon Green)",
+      "default": "#45A8E8"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Product Title & Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product Title (Fallback)",
+      "default": "Grooves Product"
+    },
+    {
+      "type": "text",
+      "id": "product_subtitle",
+      "label": "Product Subtitle",
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "Pricing"
+    },
+    {
+      "type": "text",
+      "id": "fallback_price",
+      "label": "Price (Fallback)",
+      "default": "₹1,499"
+    },
+    {
+      "type": "text",
+      "id": "fallback_compare_price",
+      "label": "Compare at Price (Fallback)",
+      "default": "₹4,999"
+    },
+    {
+      "type": "text",
+      "id": "discount_badge_text",
+      "label": "Discount Badge Text",
+      "default": "70% OFF"
+    },
+    {
+      "type": "header",
+      "content": "Star Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show Rating",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating Score",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "reviews_count",
+      "label": "Reviews Count Text",
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "Personalisation / Laser Engraving"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_personalisation",
+      "label": "Enable Personalisation Input",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "personalise_label",
+      "label": "Personalisation Label",
+      "default": "Make Your Product Personalised (Optional Free Engraving)"
+    },
+    {
+      "type": "text",
+      "id": "personalise_placeholder",
+      "label": "Input Placeholder",
+      "default": "Enter name or initials to engrave on case (Max 12 chars)"
+    },
+    {
+      "type": "header",
+      "content": "Offer Coupon Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_coupon",
+      "label": "Show Coupon Banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "coupon_text",
+      "label": "Coupon Text",
+      "default": "Get 15% OFF on 2 or More Items"
+    },
+    {
+      "type": "text",
+      "id": "coupon_code",
+      "label": "Coupon Code Badge",
+      "default": "Use Code: TR15"
+    },
+    {
+      "type": "header",
+      "content": "Pincode Checker"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pincode",
+      "label": "Show Pincode Checker",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pincode_label",
+      "label": "Pincode Label",
+      "default": "Check Estimated Delivery Date"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action Buttons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy_now",
+      "label": "Show Instant Buy Now Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "buy_now_label",
+      "label": "Buy Now Button Label",
+      "default": "BUY IT NOW"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to Cart Button Label",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "header",
+      "content": "Trust Badges"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_text",
+      "label": "Badge 1 Text",
+      "default": "Delivery at checkout"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_text",
+      "label": "Badge 2 Text",
+      "default": "Warranty support"
+    },
+    {
+      "type": "text",
+      "id": "badge_3_text",
+      "label": "Badge 3 Text",
+      "default": "Replacement support"
+    },
+    {
+      "type": "text",
+      "id": "badge_4_text",
+      "label": "Badge 4 Text",
+      "default": "Secure checkout"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TR PDP Hero"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,266 @@
+<section class="tr-support-section" id="tr-support-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 0 }}px;">
+  <div class="tr-container">
+    {% if section.settings.badge_title != blank %}
+      <div class="tr-section-badge-wrap">
+        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+      </div>
+    {% endif %}
+
+    <!-- Support Cards -->
+    <div class="tr-support-grid">
+      {% for block in section.blocks %}
+        {%- liquid
+          if block.settings.image != blank
+            assign sup_icon = block.settings.image | image_url: width: 120
+          elsif block.settings.icon_url != blank
+            if block.settings.icon_url contains 'http' or block.settings.icon_url contains '//'
+              assign sup_icon = block.settings.icon_url
+            else
+              assign sup_icon = block.settings.icon_url | replace: 'campaign/', '' | asset_url
+            endif
+          else
+            assign sup_icon = 'grooves-icon-support.png' | asset_url
+          endif
+        -%}
+        <a href="{{ block.settings.link | default: '/pages/contact' }}" class="tr-support-card" style="text-decoration: none;" {{ block.shopify_attributes }}>
+          <img 
+            src="{{ sup_icon }}" 
+            alt="{{ block.settings.title }}" 
+            loading="lazy"
+            width="50"
+            height="50"
+          >
+          <h4 class="tr-support-title">{{ block.settings.title }}</h4>
+          {% if block.settings.subtitle != blank %}
+            <span style="font-size: 11px; color: #888888;">{{ block.settings.subtitle }}</span>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Bottom Policy Strip -->
+  {% if section.settings.show_policy_strip %}
+    <div class="tr-policy-strip">
+      <div class="tr-container">
+        <div class="tr-policy-strip-inner">
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_1_icon | default: '🚚' }}</span>
+            <span>{{ section.settings.policy_1_text | default: 'Pan India Delivery' }}</span>
+          </div>
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_2_icon | default: '🛡️' }}</span>
+            <span>{{ section.settings.policy_2_text | default: 'Warranty support' }}</span>
+          </div>
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_3_icon | default: '💵' }}</span>
+            <span>{{ section.settings.policy_3_text | default: 'COD Available' }}</span>
+          </div>
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_4_icon | default: '🔄' }}</span>
+            <span>{{ section.settings.policy_4_text | default: 'Replacement support' }}</span>
+          </div>
+          <div class="tr-policy-item">
+            <span>{{ section.settings.policy_5_icon | default: '🔒' }}</span>
+            <span>{{ section.settings.policy_5_text | default: '100% Secure Checkout' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Grooves Support & Policies",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge Title",
+      "default": "GROOVES PROMISE & CUSTOMER CARE"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Bottom Policy Strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy_strip",
+      "label": "Show Bottom Policy Strip",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "policy_1_icon",
+      "label": "Policy 1 Icon",
+      "default": "🚚"
+    },
+    {
+      "type": "text",
+      "id": "policy_1_text",
+      "label": "Policy 1 Text",
+      "default": "Pan India Delivery"
+    },
+    {
+      "type": "text",
+      "id": "policy_2_icon",
+      "label": "Policy 2 Icon",
+      "default": "🛡️"
+    },
+    {
+      "type": "text",
+      "id": "policy_2_text",
+      "label": "Policy 2 Text",
+      "default": "Warranty support"
+    },
+    {
+      "type": "text",
+      "id": "policy_3_icon",
+      "label": "Policy 3 Icon",
+      "default": "💵"
+    },
+    {
+      "type": "text",
+      "id": "policy_3_text",
+      "label": "Policy 3 Text",
+      "default": "Payment options at checkout"
+    },
+    {
+      "type": "text",
+      "id": "policy_4_icon",
+      "label": "Policy 4 Icon",
+      "default": "🔄"
+    },
+    {
+      "type": "text",
+      "id": "policy_4_text",
+      "label": "Policy 4 Text",
+      "default": "Replacement support"
+    },
+    {
+      "type": "text",
+      "id": "policy_5_icon",
+      "label": "Policy 5 Icon",
+      "default": "🔒"
+    },
+    {
+      "type": "text",
+      "id": "policy_5_text",
+      "label": "Policy 5 Text",
+      "default": "100% Secure Checkout"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "support_item",
+      "name": "Support Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Customer Support"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "24/7 Dedicated Help"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon Image (Upload)"
+        },
+        {
+          "type": "text",
+          "id": "icon_url",
+          "label": "Or Icon Image URL (Fallback)",
+          "default": "grooves-icon-support.png"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Support & Policies",
+      "blocks": [
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "Customer Support",
+            "subtitle": "24/7 Dedicated Help",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Track-order.png?v=1745498991"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "Free Shipping",
+            "subtitle": "On All Prepaid Orders",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Track-order.png?v=1745498991"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "Doorstep Warranty",
+            "subtitle": "Check product coverage",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/warranty_7c995ef0-7603-4c91-9e2c-358aa029fbf7.png?v=1745498991"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "Easy Return Policy",
+            "subtitle": "7 Days Hassle-Free",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Return_product.png?v=1745498991"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "Personalise Your Audio",
+            "subtitle": "Laser Name Engraving",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Personalised.png?v=1745498991"
+          }
+        },
+        {
+          "type": "support_item",
+          "settings": {
+            "title": "100% Genuine Tech",
+            "subtitle": "Authentic Grooves Lifestyle",
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/corporate_gift.png?v=1745498991"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

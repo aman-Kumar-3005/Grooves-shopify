@@ -1,0 +1,196 @@
+<section class="tr-reels-section" id="tr-reels-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 20 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
+  <div class="tr-container">
+    {% if section.settings.title != blank %}
+      <div style="text-align: center; margin-bottom: 24px;">
+        <h2 style="font-size: 24px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 6px;">
+          {{ section.settings.title }}
+        </h2>
+        {% if section.settings.subtitle != blank %}
+          <p style="color: #888; font-size: 13px; margin: 0;">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="tr-reels-slider">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign blk_prod = block.settings.product
+          if block.settings.image != blank
+            assign thumb = block.settings.image | image_url: width: 600
+          elsif block.settings.thumbnail_url != blank
+            if block.settings.thumbnail_url contains 'http' or block.settings.thumbnail_url contains '//'
+              assign thumb = block.settings.thumbnail_url
+            else
+              assign thumb = block.settings.thumbnail_url | replace: 'campaign/', '' | asset_url
+            endif
+          elsif blk_prod != blank and blk_prod.featured_image
+            assign thumb = blk_prod.featured_image | image_url: width: 600
+          else
+            assign thumb = 'grooves-reel-1.jpg' | asset_url
+          endif
+
+          if blk_prod != blank
+            assign prod_name = blk_prod.title
+            assign prod_link = blk_prod.url
+          else
+            assign prod_name = block.settings.product_name
+            assign prod_link = block.settings.product_link | default: '/collections/all'
+          endif
+        -%}
+        <div class="tr-reel-card" {{ block.shopify_attributes }}>
+          <img 
+            src="{{ thumb }}" 
+            alt="{{ block.settings.creator_name | default: 'Grooves Lifestyle Community' }}"
+            loading="lazy"
+            width="300"
+            height="500"
+          >
+          <div class="tr-reel-play-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </div>
+          <div class="tr-reel-info">
+            <div>
+              <span style="font-size: 13px; font-weight: 700; color: #fff; display: block;">
+                {{ block.settings.creator_name }}
+              </span>
+              <span style="font-size: 11px; color: var(--tr-accent);">
+                {{ prod_name }}
+              </span>
+            </div>
+            <a href="{{ prod_link }}" class="tr-btn tr-btn-accent" style="padding: 6px 14px; font-size: 11px;">
+              {{ block.settings.button_label | default: 'SHOP' }}
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grooves Community Reels",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "TALK OF THE TOWN - SOCIAL"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "See how creators and fans groove with Grooves Lifestyle"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Reel Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Reel Thumbnail (Upload)"
+        },
+        {
+          "type": "text",
+          "id": "thumbnail_url",
+          "label": "Or Thumbnail URL (Fallback)",
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesWorkout.png?v=1782984362"
+        },
+        {
+          "type": "text",
+          "id": "creator_name",
+          "label": "Creator Handle",
+          "default": "@tech_vibes"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Tagged Product (Dynamic)"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product Name Fallback",
+          "default": "Grooves Pulse Pro"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product Link Fallback"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "SHOP"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Community Reels",
+      "blocks": [
+        {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@alex_audio",
+            "product_name": "Grooves Pulse Pro ANC",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281"
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@priya_lifestyle",
+            "product_name": "Grooves Turbo Power Bank",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesNews.png?v=1782984314"
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@rohit_fitness",
+            "product_name": "Grooves SoundWave Headphones",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesinnovators.png?v=1782984337"
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "creator_name": "@tanya_beats",
+            "product_name": "Grooves GaN Adaptor",
+            "thumbnail_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesParty.png?v=1782984388"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

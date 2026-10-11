@@ -1,0 +1,441 @@
+<grooves-hero class="g-hero" aria-label="Featured collections" aria-roledescription="carousel" data-autoplay="{{ section.settings.auto_play }}" data-interval="{{ section.settings.auto_play_time | times:1000 }}" style="--hero-desktop:{% if section.settings.full_height %}100svh{% else %}{{ section.settings.desktop_height }}px{% endif %};--hero-mobile:{% if section.settings.full_height %}100svh{% else %}{{ section.settings.mobile_height }}px{% endif %};--hero-speed:{{ section.settings.transition_speed }}ms;--hero-image-fit:{{ section.settings.image_fit | default: 'contain' }};--hero-heading:{{ section.settings.heading_size_desktop }}px;--hero-heading-mobile:{{ section.settings.heading_size_mobile }}px;--hero-copy:{{ section.settings.subheading_size_desktop }}px;--hero-copy-mobile:{{ section.settings.subheading_size_mobile }}px;--hero-text:{{ section.settings.heading_color }};--hero-subtext:{{ section.settings.subheading_color }};--g-accent:{{ section.settings.button_bg_color }};--g-button-text:{{ section.settings.button_text_color }};--g-radius:{{ section.settings.button_radius }}px;background:{{ section.settings.background }};text-align:{{ section.settings.text_alignment }};margin-block:{{ section.settings.margin_top }}px {{ section.settings.margin_bottom }}px;{% unless section.settings.full_width %}max-width:{{ section.settings.max_width }}px;margin-inline:auto;{% endunless %}">
+ <div class="g-hero-track" data-track>
+ {% for block in section.blocks %}{% liquid
+ assign hero_link = block.settings.slide_link | default: routes.all_products_collection_url
+ assign desktop_image = block.settings.desktop_image | default: block.settings.mobile_image
+ assign desktop_video = block.settings.desktop_video
+ assign mobile_video = block.settings.mobile_video | default: desktop_video
+ %}
+ <article class="g-hero-slide{% if section.settings.show_gradient %} g-hero-gradient{% endif %}" data-slide role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}" {% unless forloop.first %}inert aria-hidden="true"{% endunless %} style="--hero-position:{{ block.settings.image_position }};--hero-mobile-position:{{ block.settings.mobile_image_position }}" {{ block.shopify_attributes }}>
+ <div class="g-hero-media g-hero-desktop">{% if desktop_video != blank %}{{ desktop_video | video_tag: class:'g-hero-video', loop:true, muted:true, controls:true, playsinline:true, preload:'none', image_size:'1600x' }}{% elsif desktop_image != blank %}{% if forloop.first %}{{ desktop_image | image_url: width:2400 | image_tag: widths:'480,750,960,1440,1920,2400', sizes:'100vw', loading:'eager', fetchpriority:'high' }}{% else %}{{ desktop_image | image_url: width:2400 | image_tag: widths:'480,750,960,1440,1920,2400', sizes:'100vw', loading:'lazy' }}{% endif %}{% else %}{{ 'lifestyle-2' | placeholder_svg_tag }}{% endif %}</div>
+ {% if mobile_video != blank or block.settings.mobile_image != blank %}<div class="g-hero-media g-hero-mobile">{% if mobile_video != blank %}{{ mobile_video | video_tag: class:'g-hero-video', loop:true, muted:true, controls:true, playsinline:true, preload:'none', image_size:'750x' }}{% else %}{% if forloop.first %}{{ block.settings.mobile_image | image_url:width:900 | image_tag: widths:'360,540,750,900', sizes:'100vw', loading:'eager', fetchpriority:'high' }}{% else %}{{ block.settings.mobile_image | image_url:width:900 | image_tag: widths:'360,540,750,900', sizes:'100vw', loading:'lazy' }}{% endif %}{% endif %}</div>{% endif %}
+ <div class="g-hero-shade" style="opacity:{{ block.settings.overlay_opacity | divided_by:100.0 }}"></div>
+ {% if block.settings.button_label == blank %}<a class="g-hero-link" href="{{ hero_link }}" aria-label="{{ block.settings.heading | default:'Explore collection' | escape }}"></a>{% endif %}
+ <div class="g-hero-content" data-position="{{ block.settings.content_position }}">
+ {% if block.settings.eyebrow != blank %}<span class="g-eyebrow">{{ block.settings.eyebrow | escape }}</span>{% endif %}
+ {% if block.settings.heading != blank %}<h2>{{ block.settings.heading | escape }}</h2>{% endif %}
+ {% if block.settings.subheading != blank %}<p>{{ block.settings.subheading | escape }}</p>{% endif %}
+ {% if block.settings.button_label != blank %}<a class="g-button" href="{{ hero_link }}">{{ block.settings.button_label | escape }} <span aria-hidden="true">&rarr;</span></a>{% endif %}
+ </div></article>{% endfor %}
+ </div>
+ {% if section.blocks.size > 1 %}<div class="g-hero-controls">
+ {% if section.settings.show_arrows %}<button type="button" data-prev aria-label="Previous slide">&larr;</button>{% endif %}
+ {% if section.settings.show_dots %}<div class="g-hero-dots">{% for block in section.blocks %}<button type="button" data-dot="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"><span></span></button>{% endfor %}</div>{% endif %}
+ {% if section.settings.show_arrows %}<button type="button" data-next aria-label="Next slide">&rarr;</button>{% endif %}
+ <button type="button" data-pause aria-label="Pause slideshow">&#8545;</button></div>{% endif %}
+</grooves-hero>
+<noscript><style>.g-hero-track{overflow-x:auto}.g-hero-slide{visibility:visible}.g-hero-controls{display:none}</style></noscript>
+
+{% schema %}
+{
+  "name": "Grooves hero slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Carousel Functionality"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_play",
+      "label": "Enable Auto Play",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "auto_play_time",
+      "label": "Auto Play Duration",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "sec",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "label": "Slide transition speed",
+      "min": 300,
+      "max": 1200,
+      "step": 100,
+      "unit": "ms",
+      "default": 600
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show Dots",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout & Sizing"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make section full width",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum Width (if not full width)",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "checkbox",
+      "id": "full_height",
+      "label": "Full Screen Height (100vh)",
+      "info": "UNCHECK this if you want to use the height sliders below.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop Height (if not full screen)",
+      "min": 300,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile Height (if not full screen)",
+      "min": 200,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },{
+      "type": "select",
+      "id": "image_fit",
+      "label": "Banner image fit",
+      "info": "Show full image prevents the sides from being cropped.",
+      "default": "contain",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Show full image (no crop)"
+        },
+        {
+          "value": "cover",
+          "label": "Fill banner (may crop)"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography & Alignment"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading Size (Desktop)",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading Size (Mobile)",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "label": "Subheading Size (Desktop)",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Subheading Size (Mobile)",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#45A8E8"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button Corner Radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gradient",
+      "label": "Show text contrast gradient",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fallback background",
+      "default": "#ededed"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "video",
+          "id": "desktop_video",
+          "label": "Desktop video",
+          "info": "Optional. Video is used instead of the desktop image."
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image"
+        },
+        {
+          "type": "video",
+          "id": "mobile_video",
+          "label": "Mobile video",
+          "info": "Optional portrait video. Falls back to the desktop video."
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Desktop media position",
+          "default": "center center",
+          "options": [
+            {
+              "value": "left center",
+              "label": "Left"
+            },
+            {
+              "value": "center center",
+              "label": "Center"
+            },
+            {
+              "value": "right center",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "mobile_image_position",
+          "label": "Mobile media position",
+          "default": "center center",
+          "options": [
+            {
+              "value": "left center",
+              "label": "Left"
+            },
+            {
+              "value": "center center",
+              "label": "Center"
+            },
+            {
+              "value": "right center",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay Opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 20
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Sound that moves you."
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Discover your next everyday essential."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "slide_link",
+          "label": "Slide Link"
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Content position",
+          "default": "middle-left",
+          "options": [
+            {
+              "value": "top-left",
+              "label": "Top left"
+            },
+            {
+              "value": "middle-left",
+              "label": "Middle left"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Bottom left"
+            },
+            {
+              "value": "top-center",
+              "label": "Top center"
+            },
+            {
+              "value": "middle-center",
+              "label": "Middle center"
+            },
+            {
+              "value": "bottom-center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "top-right",
+              "label": "Top right"
+            },
+            {
+              "value": "middle-right",
+              "label": "Middle right"
+            },
+            {
+              "value": "bottom-right",
+              "label": "Bottom right"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves hero slider",
+      "blocks": [
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10
+}
+{% endschema %}

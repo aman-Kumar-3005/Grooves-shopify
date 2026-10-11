@@ -1,0 +1,96 @@
+<div class="tr-announcement-bar" id="tr-announcement-{{ section.id }}">
+  <div class="tr-container">
+    <div class="tr-announcement-row">
+      <!-- Trust & Safe Checkout Promo (Exact from User Uploaded Screenshot) -->
+      <div class="tr-announcement-trust-promo">
+        <span class="tr-ann-lock-icon">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+          </svg>
+        </span>
+        <span class="tr-ann-text-white">{{ section.settings.text_part_1 | default: 'Guaranteed' }}</span>
+        <span class="tr-ann-text-lime">{{ section.settings.highlight_part_1 | default: 'Safe Checkout' }}</span>
+        <span class="tr-ann-divider">|</span>
+        <span class="tr-ann-text-white">{{ section.settings.text_part_2 | default: 'Order Dispatched within' }}</span>
+        <span class="tr-ann-text-lime">{{ section.settings.highlight_part_2 | default: '24 Hours!!' }}</span>
+      </div>
+
+      <!-- Desktop Extra EMI Banner (Right side as seen in Desktop Screenshot 2) -->
+      {% if section.settings.show_emi %}
+        <div class="tr-announcement-emi-box">
+          <span class="tr-emi-icon">💳</span>
+          <span class="tr-emi-lime">0% Interest</span>
+          <span class="tr-emi-text">on EMI</span>
+          <span class="tr-emi-lime">No-Cost EMI</span>
+          <span class="tr-emi-text">Available!!</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Hide announcement bar smoothly on scroll down (Desktop & Mobile)
+  (function() {
+    function onScroll() {
+      if (window.pageYOffset > 15) {
+        document.body.classList.add('tr-header-scrolled');
+      } else {
+        document.body.classList.remove('tr-header-scrolled');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Grooves Announcement Bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Trust Promo Message"
+    },
+    {
+      "type": "text",
+      "id": "text_part_1",
+      "label": "Text Part 1 (White)",
+      "default": "Guaranteed"
+    },
+    {
+      "type": "text",
+      "id": "highlight_part_1",
+      "label": "Highlight Part 1 (Neon Lime)",
+      "default": "Safe Checkout"
+    },
+    {
+      "type": "text",
+      "id": "text_part_2",
+      "label": "Text Part 2 (White)",
+      "default": "Order Dispatched within"
+    },
+    {
+      "type": "text",
+      "id": "highlight_part_2",
+      "label": "Highlight Part 2 (Neon Lime)",
+      "default": "24 Hours!!"
+    },
+    {
+      "type": "header",
+      "content": "Desktop EMI Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_emi",
+      "label": "Show EMI Banner on Desktop",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grooves Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

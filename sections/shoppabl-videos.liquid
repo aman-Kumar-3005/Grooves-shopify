@@ -1,0 +1,490 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .shoppable-vids-wrapper {
+    {%- if section.settings.full_width -%}
+      max-width: 100%;
+      padding: 0 15px;
+    {%- else -%}
+      max-width: var(--page-width, 1400px);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    {%- endif -%}
+  }
+
+  .shoppable-vids-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: {{ section.settings.text_color }};
+    text-align: {{ section.settings.heading_alignment }};
+    {%- if section.settings.full_width -%}
+      padding: 0 10px;
+    {%- endif -%}
+  }
+
+  /* Slider Track */
+  .shoppable-track {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 20px;
+  }
+  .shoppable-track::-webkit-scrollbar {
+    display: none;
+  }
+  
+  {%- if section.settings.full_width -%}
+    .shoppable-track {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  {%- endif -%}
+
+  /* Video Card Container */
+  .shoppable-card {
+    flex: 0 0 auto;
+    width: {{ section.settings.card_width_mobile }}px;
+    aspect-ratio: 9 / 16;
+    scroll-snap-align: start;
+    border-radius: {{ section.settings.card_radius }}px;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+    display: block;
+    text-decoration: none;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+  }
+  
+  @media screen and (min-width: 750px) {
+    .shoppable-card {
+      width: {{ section.settings.card_width_desktop }}px;
+    }
+    .shoppable-card:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  /* Video Element Styling */
+  .shoppable-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; 
+    opacity: 0.95;
+  }
+
+  .shoppable-video-poster {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .shoppable-iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  /* Glassmorphism Product Overlay (Matching your provided structure) */
+  .shoppable-glass-card {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .shoppable-glass-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    object-fit: cover;
+    background: #fff;
+    flex-shrink: 0;
+  }
+
+  .shoppable-glass-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .shoppable-glass-title {
+    color: #121212;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 0 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .shoppable-glass-price {
+    color: #121212;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0;
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="shoppable-vids-wrapper">
+    {%- if section.settings.title != blank -%}
+      <h2 class="shoppable-vids-heading">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="shoppable-track">
+      {%- for block in section.blocks -%}
+        {%- assign product = all_products[block.settings.product] -%}
+        {%- liquid
+          assign smallest_video_source = blank
+          if block.settings.shopify_video != blank
+            for video_source in block.settings.shopify_video.sources
+              if video_source.mime_type contains 'mp4'
+                if smallest_video_source == blank or video_source.height < smallest_video_source.height
+                  assign smallest_video_source = video_source
+                endif
+              endif
+            endfor
+            if smallest_video_source == blank
+              assign smallest_video_source = block.settings.shopify_video.sources.first
+            endif
+          endif
+        -%}
+        
+        <a href="{{ product.url | default: '#' }}" class="shoppable-card" data-video-type="{% if block.settings.shopify_video != blank %}html5{% elsif block.settings.youtube_id != blank %}youtube{% endif %}" {{ block.shopify_attributes }}>
+          
+          <!-- Video Layer -->
+          {%- if block.settings.shopify_video != blank -%}
+            <div
+              class="shoppable-video-bg html5-video-shell"
+              data-video-src="{{ smallest_video_source.url | escape }}"
+              data-video-type="{{ smallest_video_source.mime_type | default: 'video/mp4' | escape }}"
+            >
+              <img
+                class="shoppable-video-poster"
+                src="{{ block.settings.shopify_video.preview_image | image_url: width: 360 }}"
+                srcset="{{ block.settings.shopify_video.preview_image | image_url: width: 240 }} 240w, {{ block.settings.shopify_video.preview_image | image_url: width: 360 }} 360w, {{ block.settings.shopify_video.preview_image | image_url: width: 480 }} 480w"
+                sizes="(max-width: 768px) 240px, 280px"
+                alt=""
+                aria-hidden="true"
+                width="{{ block.settings.shopify_video.preview_image.width }}"
+                height="{{ block.settings.shopify_video.preview_image.height }}"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          {%- elsif block.settings.youtube_id != blank -%}
+            <div class="shoppable-video-bg">
+              <div id="yt-player-{{ block.id }}" class="yt-vid" data-yt-id="{{ block.settings.youtube_id }}"></div>
+            </div>
+          {%- else -%}
+             <div class="shoppable-video-bg" style="background:#222; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px;">Add Video</div>
+          {%- endif -%}
+
+          <!-- Product Overlay Bar -->
+          {%- if product != blank -%}
+            <div class="shoppable-glass-card">
+              <img src="{{ product.featured_image | image_url: width: 84 }}" class="shoppable-glass-img" alt="" aria-hidden="true" loading="lazy" decoding="async" width="42" height="42">
+              <div class="shoppable-glass-info">
+                <p class="shoppable-glass-title">{{ block.settings.custom_title | default: product.title }}</p>
+                <p class="shoppable-glass-price">{{ product.price | money }}</p>
+              </div>
+            </div>
+          {%- else -%}
+            <div class="shoppable-glass-card">
+              {{ 'product-1' | placeholder_svg_tag: 'shoppable-glass-img' }}
+              <div class="shoppable-glass-info">
+                <p class="shoppable-glass-title">Select a Product</p>
+                <p class="shoppable-glass-price">₹1,499</p>
+              </div>
+            </div>
+          {%- endif -%}
+          
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 1. HTML5 Video Hover Logic
+    const htmlCards = document.querySelectorAll('.shoppable-card[data-video-type="html5"]');
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    function getHtmlVideo(card) {
+      const shell = card.querySelector('.html5-video-shell');
+      if (!shell) return null;
+      const existing = shell.querySelector('video');
+      if (existing) return existing;
+
+      const src = shell.dataset.videoSrc;
+      if (!src) return null;
+      const video = document.createElement('video');
+      video.className = 'shoppable-video-poster html5-vid';
+      video.loop = true;
+      video.muted = true;
+      video.playsInline = true;
+      video.preload = 'none';
+      video.setAttribute('aria-hidden', 'true');
+      const source = document.createElement('source');
+      source.src = src;
+      source.type = shell.dataset.videoType || 'video/mp4';
+      video.appendChild(source);
+      shell.replaceChildren(video);
+      return video;
+    }
+
+    htmlCards.forEach(card => {
+      const play = () => {
+        const video = getHtmlVideo(card);
+        video?.play().catch(() => {});
+      };
+      if (canHover) {
+        card.addEventListener('mouseenter', play);
+        card.addEventListener('mouseleave', () => card.querySelector('video')?.pause());
+      }
+      card.addEventListener('focusin', play);
+    });
+
+    // 2. YouTube API Hover Logic
+    const ytCards = document.querySelectorAll('.shoppable-card[data-video-type="youtube"]');
+    if(ytCards.length > 0) {
+      if(!window.YT) {
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
+
+      window.onYouTubeIframeAPIReady = function() {
+        ytCards.forEach(card => {
+          const playerDiv = card.querySelector('.yt-vid');
+          const videoId = playerDiv.getAttribute('data-yt-id');
+          if(!videoId) return;
+          
+          const player = new YT.Player(playerDiv.id, {
+            videoId: videoId,
+            playerVars: {
+              'autoplay': 0,
+              'controls': 0,
+              'disablekb': 1,
+              'loop': 1,
+              'modestbranding': 1,
+              'mute': 1,
+              'playlist': videoId,
+              'showinfo': 0
+            },
+            events: {
+              'onReady': function(event) {
+                card.addEventListener('mouseenter', () => event.target.playVideo());
+                card.addEventListener('mouseleave', () => event.target.pauseVideo());
+              }
+            }
+          });
+          playerDiv.classList.add('shoppable-iframe');
+        });
+      };
+      
+      // If YT is already loaded
+      if (window.YT && window.YT.Player) {
+        window.onYouTubeIframeAPIReady();
+      }
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Shoppable Videos Slider",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make Section Full Width",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop the Trends Everyone’s Talking About."
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Card Dimensions"
+    },
+    {
+      "type": "range",
+      "id": "card_width_desktop",
+      "min": 200,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Card Width (Desktop)",
+      "default": 260
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "min": 150,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Card Width (Mobile)",
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Shoppable Video",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Video Source (Choose One)"
+        },
+        {
+          "type": "video",
+          "id": "shopify_video",
+          "label": "Upload Video (Recommended)"
+        },
+        {
+          "type": "text",
+          "id": "youtube_id",
+          "label": "YouTube Video ID (Fallback)"
+        },
+        {
+          "type": "header",
+          "content": "Linked Product"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product to Link"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Product Title (Optional)",
+          "info": "Leave blank to use the actual product name."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable VIDEO",
+      "blocks": [
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" }
+      ]
+    }
+  ]
+}
+{% endschema %}

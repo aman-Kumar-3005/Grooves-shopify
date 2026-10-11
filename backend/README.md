@@ -106,12 +106,12 @@ Example status update body:
 
 Every update is appended to the customer-visible timeline. Do not expose the admin key in a browser. Connect these endpoints to a private staff dashboard, helpdesk, or approved internal automation.
 
-A lightweight private staff console is included at `https://YOUR-BACKEND-DOMAIN/staff/`. Its **Settings** tab controls the permanent `*.myshopify.com` domain, warranty duration, and return-window duration without code changes or redeployment. Changes apply to the next customer request immediately. The admin can optionally apply a new warranty duration to existing registrations; otherwise their original coverage end dates are preserved. The admin key is kept only in the open browser tab. For a larger support team, place this route behind the hosting provider's access control or replace it with company SSO.
+A lightweight private staff console is included at `https://YOUR-BACKEND-DOMAIN/staff/`. Its **Settings** tab controls the permanent `*.myshopify.com` domain, warranty duration, return-window duration, and whether returns start from delivery or purchase date—without code changes or redeployment. Changes apply to the next customer request immediately. The admin can optionally apply a new warranty duration to existing registrations; otherwise their original coverage end dates are preserved. The admin key is kept only in the open browser tab. For a larger support team, place this route behind the hosting provider's access control or replace it with company SSO.
 
 ## Policy and storage notes
 
 - Warranty is calculated from the Shopify processed/purchase date.
-- Return eligibility currently uses the same verified purchase date. If Grooves policy starts the return window from delivery, connect shipment-delivery events and store the delivered timestamp before publishing that rule.
+- Return eligibility uses Shopify's fulfillment `deliveredAt` date when the admin selects delivery-based returns; it safely falls back to purchase date when Shopify has no delivery timestamp.
 - The bundled atomic JSON store is safe only for a single backend instance with persistent disk. Before using multiple instances or serverless hosting, move warranties/tickets to PostgreSQL or MySQL and attachments to private object storage.
 - Customer email/SMS notifications are not sent until a provider is selected and its credentials are configured. IDs are displayed immediately in the portal and records remain available through the staff API.
 

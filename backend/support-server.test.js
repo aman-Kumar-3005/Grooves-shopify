@@ -9,13 +9,22 @@ const {
   verifyShopifyProxy,
   secureProductSelector,
   getOrderLineItem,
-  publicWarranty
+  publicWarranty,
+  buildOrderSearchQueries
 } = require('./support-server');
 
 test('normalizes customer order references and email addresses', () => {
   assert.equal(normalizeOrderReference('  #grv-1001  '), 'GRV-1001');
   assert.equal(normalizeOrderReference('1002'), '1002');
   assert.equal(normalizeEmail('  Customer@Example.COM '), 'customer@example.com');
+});
+
+test('Shopify order search quotes tokenized email and includes safe fallbacks', () => {
+  assert.deepEqual(buildOrderSearchQueries('#1001', 'AmanChaursiya1234@gmail.com'), [
+    'name:1001 email:"amanchaursiya1234@gmail.com"',
+    'name:1001',
+    'email:"amanchaursiya1234@gmail.com"'
+  ]);
 });
 
 test('active paid order receives warranty and return eligibility', () => {
@@ -52,6 +61,20 @@ test('admin policy values change warranty and return calculations dynamically', 
   assert.equal(result.returnEligible, true);
   assert.ok(result.remainingDays >= 719 && result.remainingDays <= 721);
   assert.ok(result.returnDaysRemaining >= 19 && result.returnDaysRemaining <= 21);
+});
+
+test('delivery-based return window uses Shopify deliveredAt instead of purchase date', () => {
+  const order = {
+    processedAt: new Date(Date.now() - 20 * 86400000).toISOString(),
+    displayFinancialStatus: 'PAID',
+    fulfillments: { nodes: [{ deliveredAt: new Date(Date.now() - 2 * 86400000).toISOString() }] }
+  };
+  const deliveryPolicy = orderEligibility(order, { warrantyDays: 365, returnWindowDays: 7, returnWindowBasis: 'delivery' });
+  const purchasePolicy = orderEligibility(order, { warrantyDays: 365, returnWindowDays: 7, returnWindowBasis: 'purchase' });
+  assert.equal(deliveryPolicy.returnEligible, true);
+  assert.equal(deliveryPolicy.returnWindowBasis, 'delivery');
+  assert.equal(purchasePolicy.returnEligible, false);
+  assert.equal(purchasePolicy.returnWindowBasis, 'purchase');
 });
 
 test('old paid order has expired warranty and return window', () => {

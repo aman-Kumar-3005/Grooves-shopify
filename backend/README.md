@@ -1,58 +1,61 @@
-# Grooves order, warranty, and support backend
+# Grooves warranty, returns, and support backend
 
-This service powers `/pages/track-status`. It verifies a Shopify order number and checkout email before returning order or warranty information. Unknown numbers, mismatched emails, and unknown tickets return `404 No data found`; there is no demo-data fallback.
+This service powers `/pages/track-status`. It verifies a real Shopify order and checkout email before showing purchase details. Customers can register an item warranty, raise a warranty claim, request a return/replacement/repair, and track the resulting ticket. Unknown references and mismatched emails return `No data found`; the service never invents demo data.
 
-## What is implemented
+## Customer flow implemented
 
-- Shopify Admin GraphQL order lookup by order number and checkout email.
-- Optional logged-in customer ownership check from the signed Shopify app-proxy request.
-- Remaining warranty calculation from the real order purchase date.
-- Safe public response containing order status, product names, total, and warranty dates—never payment details or a full address.
-- Ticket creation only after the Shopify order and email match.
-- Ticket lookup requires both ticket number and registered email.
-- Shopify app-proxy HMAC verification, five-minute timestamp tolerance, timing-safe signature comparison, input limits, attachment restrictions, and lookup rate limiting.
+1. Customer enters an order number (for example `#1001`) and checkout email.
+2. The backend securely queries Shopify Admin GraphQL and confirms ownership.
+3. The portal loads the actual purchased line items, warranty balance, and return-window eligibility.
+4. Customer selects the exact purchased item and can register its warranty or raise a warranty claim, return, replacement, repair, technical-support, or order-issue request.
+5. The customer receives a permanent `GRV-WTY-...` warranty ID or `GRV-TKT-...` ticket ID.
+6. Ticket status and its update timeline can be viewed using the ID plus registered email.
+
+Files are restricted to JPEG, PNG, WebP, or PDF, up to 10 MB each and five files per request. Public responses never include payment details, a full address, Admin API IDs, or stored upload paths.
 
 ## Merchant setup required
 
-The code cannot connect to live orders until the store owner supplies credentials and deploys the service.
+The repository does not contain live store secrets. The store owner must securely configure these values on the backend host:
 
-1. Create or configure a Shopify app for the Grooves store.
-2. Grant `read_orders`. A 365-day warranty needs orders older than Shopify's normal 60-day window, so also request and grant `read_all_orders`.
-3. If Shopify asks for protected customer data approval, request access to the order email field. The portal uses it only to verify ownership.
-4. Copy `.env.example` to `.env` on the backend host and set:
-   - `SHOPIFY_STORE_DOMAIN` to the permanent `*.myshopify.com` domain, not the public custom domain.
-   - `SHOPIFY_ADMIN_ACCESS_TOKEN` to the app's Admin API token.
-   - `SHOPIFY_API_SECRET` to the app client secret used to validate proxy signatures.
-   - `WARRANTY_DAYS` to the approved store-wide warranty term.
-5. Deploy the `backend` directory to a persistent Node.js host. The host must use Node 20+ and persistent disk for `data.json` and `uploads/`.
-6. Install and start:
+1. Permanent Shopify domain such as `your-store.myshopify.com`, not the public custom domain.
+2. A custom-app Admin API token with `read_orders`. Because a 365-day warranty needs older orders, request and approve `read_all_orders` too.
+3. Protected customer data access for the order email field, if Shopify requires approval for the store/app.
+4. The app client secret used to verify every Shopify app-proxy signature.
+5. A long random `SUPPORT_ADMIN_KEY` for private staff endpoints.
+6. Initial warranty and return defaults (`WARRANTY_DAYS` and `RETURN_WINDOW_DAYS`). The admin can change both later from the staff console.
+7. A Node 20+ hosting URL with persistent disk, or a production database/object-storage replacement.
 
-   ```bash
-   npm install
-   npm start
-   ```
+Copy `.env.example` to `.env` only on the backend host and set its values there. Never put the Admin token, app secret, or admin key into Liquid, storefront JavaScript, Git, or chat messages.
 
-7. Confirm `https://YOUR-BACKEND-DOMAIN/health` returns `"shopifyConfigured": true`.
-8. Configure the Shopify app proxy:
-   - Prefix: `apps`
-   - Subpath: `grooves-support`
-   - Proxy destination: `https://YOUR-BACKEND-DOMAIN/apps/grooves-support`
-9. Keep the theme section endpoint as `/apps/grooves-support/status` and ticket endpoint as `/apps/grooves-support/create-ticket`.
-10. Test one recent real order, one order older than 60 days, a wrong email, a random order number, a new ticket, and a wrong ticket email before publishing.
+```bash
+npm install
+npm test
+npm start
+```
 
-## Environment variables
+Confirm `https://YOUR-BACKEND-DOMAIN/health` returns `"shopifyConfigured": true` before enabling the storefront.
 
-See `.env.example`. Secrets belong only on the backend host. Never paste the Admin token or app secret into Shopify theme code.
+For container hosting, `backend/Dockerfile` is ready to use. Mount a persistent volume at `/app/data`; without that volume, warranty records, tickets, and private attachments will be lost when the container is replaced.
 
-## Production storage note
+## Shopify app proxy
 
-The included ticket store uses an atomic JSON file and is suitable for a single persistent backend instance. Before running multiple instances or serverless deployments, replace `loadDatabase` and `saveDatabase` with PostgreSQL, MySQL, or another shared database, and move attachments to private object storage.
+Configure one app proxy in the Shopify app:
 
-## API behavior
+- Prefix: `apps`
+- Subpath: `grooves-support`
+- Proxy destination: `https://YOUR-BACKEND-DOMAIN/apps/grooves-support`
 
-### Warranty/order lookup
+The theme uses these child paths:
 
-`POST /apps/grooves-support/status`
+- `POST /apps/grooves-support/status`
+- `POST /apps/grooves-support/register-warranty`
+- `POST /apps/grooves-support/create-ticket`
+
+Shopify adds signed query parameters to these calls. In production the backend rejects missing, expired, or invalid signatures and validates the signed logged-in customer ID when one is present.
+
+## Public API examples
+
+Verify an order and calculate eligibility:
 
 ```json
 {
@@ -62,7 +65,17 @@ The included ticket store uses an atomic JSON file and is suitable for a single 
 }
 ```
 
-### Ticket lookup
+Track a warranty registration:
+
+```json
+{
+  "type": "warranty",
+  "reference": "GRV-WTY-2026-000001",
+  "email": "customer@example.com"
+}
+```
+
+Track a service ticket:
 
 ```json
 {
@@ -72,4 +85,46 @@ The included ticket store uses an atomic JSON file and is suitable for a single 
 }
 ```
 
-Both live storefront requests must travel through the signed Shopify app proxy. Direct `/api/status` access is intended only for local development and still requires production proxy authentication when `NODE_ENV=production`.
+Direct `/api/status`, `/api/register-warranty`, and `/api/create-ticket` aliases are provided for local development. When `NODE_ENV=production`, they still require a valid Shopify proxy signature.
+
+## Private staff API
+
+These routes require `Authorization: Bearer YOUR_SUPPORT_ADMIN_KEY`:
+
+- `GET /api/admin/tickets?status=Open&limit=100`
+- `PATCH /api/admin/tickets/GRV-TKT-2026-000001`
+- `GET /api/admin/warranties?status=Active&limit=100`
+
+Example status update body:
+
+```json
+{
+  "status": "In Progress",
+  "note": "Product received at service centre and diagnosis started."
+}
+```
+
+Every update is appended to the customer-visible timeline. Do not expose the admin key in a browser. Connect these endpoints to a private staff dashboard, helpdesk, or approved internal automation.
+
+A lightweight private staff console is included at `https://YOUR-BACKEND-DOMAIN/staff/`. Its **Settings** tab controls the permanent `*.myshopify.com` domain, warranty duration, and return-window duration without code changes or redeployment. Changes apply to the next customer request immediately. The admin can optionally apply a new warranty duration to existing registrations; otherwise their original coverage end dates are preserved. The admin key is kept only in the open browser tab. For a larger support team, place this route behind the hosting provider's access control or replace it with company SSO.
+
+## Policy and storage notes
+
+- Warranty is calculated from the Shopify processed/purchase date.
+- Return eligibility currently uses the same verified purchase date. If Grooves policy starts the return window from delivery, connect shipment-delivery events and store the delivered timestamp before publishing that rule.
+- The bundled atomic JSON store is safe only for a single backend instance with persistent disk. Before using multiple instances or serverless hosting, move warranties/tickets to PostgreSQL or MySQL and attachments to private object storage.
+- Customer email/SMS notifications are not sent until a provider is selected and its credentials are configured. IDs are displayed immediately in the portal and records remain available through the staff API.
+
+## Go-live verification
+
+Test all of the following before publishing:
+
+- a recent genuine order and matching email;
+- an order older than 60 days (proves `read_all_orders` works);
+- a wrong email and a random order number (both must show no data);
+- warranty registration twice for the same item (must return the existing ID);
+- an eligible and ineligible return request;
+- a claim after the configured warranty end date;
+- ticket creation with and without attachments;
+- ticket status update from the private API and customer timeline lookup;
+- invalid/expired app-proxy signatures and repeated requests over the rate limit.

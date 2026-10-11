@@ -5,7 +5,8 @@
   "main": "support-server.js",
   "scripts": {
     "start": "node support-server.js",
-    "dev": "node --watch support-server.js"
+    "dev": "node --watch support-server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

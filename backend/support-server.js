@@ -21,6 +21,7 @@ const SHOPIFY_API_SECRET = String(process.env.SHOPIFY_API_SECRET || '').trim();
 const SUPPORT_ADMIN_KEY = String(process.env.SUPPORT_ADMIN_KEY || '').trim();
 const DEFAULT_WARRANTY_DAYS = positiveInteger(process.env.WARRANTY_DAYS, 365);
 const DEFAULT_RETURN_WINDOW_DAYS = positiveInteger(process.env.RETURN_WINDOW_DAYS, 7);
+const DEFAULT_RETURN_WINDOW_BASIS = process.env.RETURN_WINDOW_BASIS === 'purchase' ? 'purchase' : 'delivery';
 const DATA_DIR = path.resolve(process.env.DATA_DIR || __dirname);
 const DB_FILE = path.join(DATA_DIR, 'data.json');
 const UPLOAD_DIR = path.resolve(process.env.UPLOAD_DIR || path.join(DATA_DIR, 'uploads'));
@@ -81,6 +82,7 @@ function defaultSettings() {
     shopifyStoreDomain: DEFAULT_SHOPIFY_STORE_DOMAIN,
     warrantyDays: DEFAULT_WARRANTY_DAYS,
     returnWindowDays: DEFAULT_RETURN_WINDOW_DAYS,
+    returnWindowBasis: DEFAULT_RETURN_WINDOW_BASIS,
     updatedAt: null
   };
 }
@@ -90,6 +92,7 @@ function sanitizeSettings(settings = {}) {
     shopifyStoreDomain: String(settings.shopifyStoreDomain || DEFAULT_SHOPIFY_STORE_DOMAIN).trim().toLowerCase(),
     warrantyDays: positiveInteger(settings.warrantyDays, DEFAULT_WARRANTY_DAYS),
     returnWindowDays: positiveInteger(settings.returnWindowDays, DEFAULT_RETURN_WINDOW_DAYS),
+    returnWindowBasis: ['purchase', 'delivery'].includes(settings.returnWindowBasis) ? settings.returnWindowBasis : DEFAULT_RETURN_WINDOW_BASIS,
     updatedAt: settings.updatedAt || null
   };
 }
@@ -212,6 +215,16 @@ function graphqlSearchValue(value) {
   return String(value).replace(/[^a-zA-Z0-9@._+\-]/g, '');
 }
 
+function buildOrderSearchQueries(orderReference, email) {
+  const name = graphqlSearchValue(normalizeOrderReference(orderReference));
+  const exactEmail = graphqlSearchValue(normalizeEmail(email));
+  return [
+    `name:${name} email:"${exactEmail}"`,
+    `name:${name}`,
+    `email:"${exactEmail}"`
+  ];
+}
+
 function assertShopifyConfigured(settings) {
   if (!settings.shopifyStoreDomain || !SHOPIFY_ADMIN_ACCESS_TOKEN) {
     throw serviceError(503, 'Shopify Admin API is not configured.');
@@ -241,14 +254,14 @@ async function findVerifiedOrder(reference, email, loggedInCustomerId, settings)
   const orderReference = normalizeOrderReference(reference);
   const normalizedEmail = normalizeEmail(email);
   if (!orderReference || orderReference.length > 80 || !validEmail(normalizedEmail)) return null;
-  const search = `name:${graphqlSearchValue(orderReference)} email:${graphqlSearchValue(normalizedEmail)}`;
-  const data = await shopifyGraphql(`
+  const orderQuery = `
     query FindCustomerOrder($query: String!) {
-      orders(first: 5, query: $query, sortKey: CREATED_AT, reverse: true) {
+      orders(first: 10, query: $query, sortKey: PROCESSED_AT, reverse: true) {
         nodes {
-          id name confirmationNumber processedAt displayFinancialStatus displayFulfillmentStatus email
+          id name confirmationNumber processedAt displayFinancialStatus displayFulfillmentStatus email test
           customer { legacyResourceId }
           currentTotalPriceSet { shopMoney { amount currencyCode } }
+          fulfillments(first: 20) { nodes { deliveredAt } }
           lineItems(first: 50) {
             nodes {
               id name title quantity sku
@@ -258,22 +271,32 @@ async function findVerifiedOrder(reference, email, loggedInCustomerId, settings)
         }
       }
     }
-  `, { query: search }, settings);
+  `;
 
-  return (data.orders?.nodes || []).find((order) => {
-    const exactOrder = normalizeOrderReference(order.name) === orderReference || String(order.confirmationNumber || '').toUpperCase() === orderReference;
-    const exactEmail = normalizeEmail(order.email) === normalizedEmail;
-    const customerMatches = !loggedInCustomerId || String(order.customer?.legacyResourceId || '') === String(loggedInCustomerId);
-    return exactOrder && exactEmail && customerMatches;
-  }) || null;
+  for (const search of buildOrderSearchQueries(orderReference, normalizedEmail)) {
+    const data = await shopifyGraphql(orderQuery, { query: search }, settings);
+    const verified = (data.orders?.nodes || []).find((order) => {
+      const exactOrder = normalizeOrderReference(order.name) === orderReference || String(order.confirmationNumber || '').toUpperCase() === orderReference;
+      const exactEmail = normalizeEmail(order.email) === normalizedEmail;
+      const customerMatches = !loggedInCustomerId || String(order.customer?.legacyResourceId || '') === String(loggedInCustomerId);
+      return exactOrder && exactEmail && customerMatches;
+    });
+    if (verified) return verified;
+  }
+  return null;
 }
 
 function orderEligibility(order, policy = defaultSettings()) {
   const settings = sanitizeSettings(policy);
   const purchase = new Date(order.processedAt);
   if (Number.isNaN(purchase.getTime())) throw serviceError(502, 'Order date is unavailable.');
+  const deliveredDates = (order.fulfillments?.nodes || [])
+    .map((fulfillment) => new Date(fulfillment.deliveredAt))
+    .filter((date) => !Number.isNaN(date.getTime()));
+  const deliveredAt = deliveredDates.length ? new Date(Math.max(...deliveredDates.map((date) => date.getTime()))) : null;
+  const returnStartsAt = settings.returnWindowBasis === 'delivery' && deliveredAt ? deliveredAt : purchase;
   const warrantyExpiresAt = new Date(purchase.getTime() + settings.warrantyDays * 86400000);
-  const returnExpiresAt = new Date(purchase.getTime() + settings.returnWindowDays * 86400000);
+  const returnExpiresAt = new Date(returnStartsAt.getTime() + settings.returnWindowDays * 86400000);
   const remainingDays = Math.max(0, Math.ceil((warrantyExpiresAt.getTime() - Date.now()) / 86400000));
   const returnDaysRemaining = Math.max(0, Math.ceil((returnExpiresAt.getTime() - Date.now()) / 86400000));
   const disqualified = ['REFUNDED', 'VOIDED', 'EXPIRED'].includes(order.displayFinancialStatus);
@@ -281,6 +304,8 @@ function orderEligibility(order, policy = defaultSettings()) {
     purchase,
     warrantyExpiresAt,
     returnExpiresAt,
+    returnStartsAt,
+    returnWindowBasis: settings.returnWindowBasis === 'delivery' && deliveredAt ? 'delivery' : 'purchase',
     remainingDays: disqualified ? 0 : remainingDays,
     returnDaysRemaining: disqualified ? 0 : returnDaysRemaining,
     warrantyStatus: disqualified ? 'Not eligible' : (remainingDays > 0 ? 'Active' : 'Expired'),
@@ -334,10 +359,13 @@ function warrantyFromOrder(order, email, database) {
     remainingDays: eligibility.remainingDays,
     expiresAt: eligibility.warrantyExpiresAt.toISOString(),
     returnWindowDays: settings.returnWindowDays,
+    returnWindowBasis: eligibility.returnWindowBasis,
+    returnStartsAt: eligibility.returnStartsAt.toISOString(),
     returnDaysRemaining: eligibility.returnDaysRemaining,
     returnEligible: eligibility.returnEligible,
     financialStatus: order.displayFinancialStatus,
     fulfillmentStatus: order.displayFulfillmentStatus,
+    testOrder: Boolean(order.test),
     total: order.currentTotalPriceSet?.shopMoney || null,
     items: lineItems.map((item) => {
       const registration = findWarrantyForLine(database, order, item, email);
@@ -630,6 +658,7 @@ app.patch('/api/admin/settings', requireAdmin, (req, res) => {
     const shopifyStoreDomain = String(req.body?.shopifyStoreDomain || '').trim().toLowerCase();
     const warrantyDays = Number(req.body?.warrantyDays);
     const returnWindowDays = Number(req.body?.returnWindowDays);
+    const returnWindowBasis = String(req.body?.returnWindowBasis || 'delivery').trim().toLowerCase();
     const applyWarrantyToExisting = req.body?.applyWarrantyToExisting === true;
     if (!/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(shopifyStoreDomain)) {
       return res.status(400).json({ error: 'Enter the permanent store domain ending in .myshopify.com.' });
@@ -640,9 +669,12 @@ app.patch('/api/admin/settings', requireAdmin, (req, res) => {
     if (!Number.isInteger(returnWindowDays) || returnWindowDays < 1 || returnWindowDays > 365) {
       return res.status(400).json({ error: 'Return window must be between 1 and 365 days.' });
     }
+    if (!['delivery', 'purchase'].includes(returnWindowBasis)) {
+      return res.status(400).json({ error: 'Return window basis must be delivery or purchase.' });
+    }
     const database = loadDatabase();
     const now = new Date().toISOString();
-    database.settings = { shopifyStoreDomain, warrantyDays, returnWindowDays, updatedAt: now };
+    database.settings = { shopifyStoreDomain, warrantyDays, returnWindowDays, returnWindowBasis, updatedAt: now };
     if (applyWarrantyToExisting) {
       Object.values(database.warranties).forEach((warranty) => {
         const purchase = new Date(warranty.purchaseDate);
@@ -693,5 +725,6 @@ module.exports = {
   normalizeEmail,
   secureProductSelector,
   getOrderLineItem,
-  publicWarranty
+  publicWarranty,
+  buildOrderSearchQueries
 };

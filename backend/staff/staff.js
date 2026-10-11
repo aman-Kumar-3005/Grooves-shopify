@@ -88,11 +88,17 @@
     warranty.input.min = '1'; warranty.input.max = '3650';
     const returns = field('Return window (days)', 'number', settings.returnWindowDays || 7);
     returns.input.min = '1'; returns.input.max = '365';
+    const basisWrap = element('div'); basisWrap.append(element('label', '', 'Return window starts from'));
+    const basis = element('select');
+    [['delivery', 'Delivered date'], ['purchase', 'Purchase date']].forEach(([value, text]) => {
+      const option = element('option', '', text); option.value = value; option.selected = value === (settings.returnWindowBasis || 'delivery'); basis.append(option);
+    });
+    basisWrap.append(basis);
     const checkLabel = element('label', 'check full');
     const checkbox = element('input'); checkbox.type = 'checkbox';
     checkLabel.append(checkbox, document.createTextNode('Apply the new warranty duration to existing registrations too. Leave unchecked to preserve their original end date.'));
     const submit = element('button', 'full', 'Save settings'); submit.type = 'submit';
-    form.append(domain.wrap, warranty.wrap, returns.wrap, checkLabel, submit);
+    form.append(domain.wrap, warranty.wrap, returns.wrap, basisWrap, checkLabel, submit);
     form.addEventListener('submit', async (event) => {
       event.preventDefault(); submit.disabled = true;
       try {
@@ -103,6 +109,7 @@
             shopifyStoreDomain: domain.input.value.trim(),
             warrantyDays: Number(warranty.input.value),
             returnWindowDays: Number(returns.input.value),
+            returnWindowBasis: basis.value,
             applyWarrantyToExisting: checkbox.checked
           })
         });

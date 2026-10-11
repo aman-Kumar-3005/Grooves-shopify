@@ -32,6 +32,6 @@ Shopify Admin credentials, app secret, and the staff API key live only as backen
 
 The backend exposes private bearer-token endpoints to list warranties/tickets and update a ticket. Every public update is appended to the timeline visible to the customer. A private staff dashboard or existing helpdesk can be connected to these endpoints after the preferred system is selected.
 
-The included staff console also has dynamic policy settings. An authorized admin can change the permanent Shopify domain, warranty days, and return-window days without editing code. These values are stored with the support database and take effect on subsequent customer requests.
+The included staff console also has dynamic policy settings. An authorized admin can change the permanent Shopify domain, warranty days, return-window days, and whether the return window starts from delivery or purchase without editing code. These values are stored with the support database and take effect on subsequent customer requests.
 
 Production credentials, scopes, app-proxy configuration, policy decisions, hosting requirements, and go-live tests are documented in `backend/README.md`.

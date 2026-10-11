@@ -862,7 +862,7 @@ body.tr-theme {
   --ambient-x: 14%;
   --ambient-y: -4%;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   top: clamp(34px, 7vw, 120px);
   right: clamp(-190px, -10vw, -90px);
   width: var(--ambient-size);
@@ -979,20 +979,20 @@ body.tr-theme {
   .grooves-ambient-scene {
     --ambient-size: clamp(190px, 62vw, 290px);
     top: 24px;
-    right: -112px;
+    right: -72px;
     opacity: .19;
     filter: drop-shadow(0 18px 28px rgba(23,36,61,.13));
   }
 
   .content-for-layout[data-template="index"] > .grooves-ambient-scene {
     top: min(118vw, 520px);
-    right: -110px;
+    right: -78px;
     opacity: .2;
   }
 
   .content-for-layout[data-template^="product"] > .grooves-ambient-scene {
     top: 520px;
-    left: -118px;
+    left: -76px;
     opacity: .16;
   }
 }

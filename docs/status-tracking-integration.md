@@ -5,10 +5,7 @@ The Shopify page template `templates/page.track-status.json` renders `sections/g
 ## Live customer workflows
 
 - Verify an actual Shopify order number plus checkout email.
-<<<<<<< HEAD
 - Discover matching orders/products using checkout email plus mobile number, then select an order without typing its number.
-=======
->>>>>>> 65f68d4db9c9288d3627d9c409168a21554df447
 - Show only customer-safe purchase data, purchased line items, remaining warranty, and return eligibility.
 - Register a warranty for one exact purchased line item.
 - Create warranty claim, return, replacement, repair, technical-support, order-issue, or other service tickets.
@@ -21,10 +18,7 @@ No fallback/demo record is returned. Unknown references and wrong emails return 
 ## Theme endpoints
 
 - `/apps/grooves-support/status`
-<<<<<<< HEAD
 - `/apps/grooves-support/discover-orders`
-=======
->>>>>>> 65f68d4db9c9288d3627d9c409168a21554df447
 - `/apps/grooves-support/register-warranty`
 - `/apps/grooves-support/create-ticket`
 

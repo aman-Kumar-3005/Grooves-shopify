@@ -168,8 +168,8 @@
         "products_to_show": 8,
         "show_new_badge": true,
         "new_badge_text": "Newly In",
-        "show_rating_badge": true,
-        "price_prefix": "always best",
+        "show_rating_badge": false,
+        "price_prefix": "Price",
         "card_radius": 8,
         "btn_bg_color": "#17243D",
         "btn_text_color": "#ffffff",
@@ -386,7 +386,7 @@
         "hero_product": "grooves-robo-x-thunder",
         "hero_image": "grooves-explore-hero.jpg",
         "hero_title": "Grooves 107 Pro - Fast Charging Wireless Earbuds",
-        "hero_tag": "SUPER FAST CHARGING",
+        "hero_tag": "Explore Grooves",
         "hero_link": "shopify://collections/all",
         "hero_btn_text": "BUY NOW"
       }
@@ -401,8 +401,8 @@
         "products_to_show": 8,
         "show_new_badge": true,
         "new_badge_text": "Newly In",
-        "show_rating_badge": true,
-        "price_prefix": "Prebook @",
+        "show_rating_badge": false,
+        "price_prefix": "Price",
         "card_radius": 8,
         "btn_bg_color": "#17243D",
         "btn_text_color": "#ffffff",
@@ -672,7 +672,8 @@
         "link": "",
         "marquee_height": 46,
         "font_size": 24
-      }
+      },
+      "disabled": true
     },
     "tabbed_tws": {
       "type": "tr-tabbed-tws",
@@ -769,7 +770,8 @@
         "text_color": "#111111",
         "padding_y": 20,
         "auto_scroll": 0
-      }
+      },
+      "disabled": true
     },
     "shoppabl_videos_npt6gF": {
       "type": "shoppabl-videos",
@@ -779,7 +781,7 @@
           "settings": {
             "shopify_video": "shopify://files/videos/Grooves Infinity Earbuds.mp4",
             "youtube_id": "",
-            "product": "grooves-18-w-pd",
+            "product": "grooves-infinity",
             "custom_title": ""
           }
         },
@@ -1155,7 +1157,8 @@
         "text_color": "#121212",
         "padding_top": 12,
         "padding_bottom": 12
-      }
+      },
+      "disabled": true
     },
     "section_NcG6nn": {
       "type": "section",
@@ -1443,7 +1446,8 @@
         "card_radius": 8,
         "padding_top": 20,
         "padding_bottom": 20
-      }
+      },
+      "disabled": true
     }
   },
   "order": [

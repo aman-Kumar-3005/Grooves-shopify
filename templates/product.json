@@ -23,8 +23,8 @@
         "product_subtitle": "",
         "fallback_price": "₹1,499",
         "fallback_compare_price": "₹4,999",
-        "discount_badge_text": "70% OFF",
-        "show_rating": true,
+        "discount_badge_text": "",
+        "show_rating": false,
         "rating_score": "",
         "reviews_count": "",
         "enable_personalisation": false,
@@ -481,6 +481,7 @@
       }
     },
     "dynamic_brand_marquee_ATjJDi": {
+      "disabled": true,
       "type": "dynamic-brand-marquee",
       "blocks": {
         "logo_item_rhKNjT": {
@@ -613,7 +614,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Our signature product</h2>",
+                "text": "<h2>Explore Grooves</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -638,7 +639,7 @@
             "text_4kb7jf": {
               "type": "text",
               "settings": {
-                "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+                "text": "<p>Browse the Grooves collection for current product details, prices and availability.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",

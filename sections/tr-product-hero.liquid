@@ -5,10 +5,8 @@
   endif
 
   assign current_variant = target_product.selected_or_first_available_variant
-  assign prod_title = target_product.title | default: section.settings.product_title | default: "Grooves Product"
-  assign prod_subtitle = target_product.metafields.custom.subtitle.value | default: target_product.metafields.custom.subtitle | default: section.settings.product_subtitle
-  assign actual_rating = target_product.metafields.reviews.rating.value
-  assign actual_rating_count = target_product.metafields.reviews.rating_count.value | default: 0
+  assign prod_title = target_product.title
+  assign prod_subtitle = ''
   
   if current_variant != blank
     assign p_price = current_variant.price | money
@@ -34,7 +32,7 @@
     --tr-border: rgba(255, 255, 255, 0.1);
     --tr-text: {{ section.settings.text_color | default: '#ffffff' }};
     --tr-muted: #999999;
-    --tr-accent: {{ section.settings.accent_color | default: '#45a8e8' }};
+    --tr-accent: {{ section.settings.accent_color | default: '#4cf800' }};
     background-color: var(--tr-bg);
     color: var(--tr-text);
     padding-top: {{ section.settings.padding_top | default: 40 }}px;
@@ -655,16 +653,12 @@
                 <img src="{{ media | image_url: width: 200 }}" alt="{{ media.alt | default: prod_title | escape }}" loading="lazy" width="70" height="70">
               </div>
             {% endfor %}
-          {% else %}
-            <div class="tr-pdp-thumb-item active" data-media-src="{{ 'grooves-prod-fire.jpg' | asset_url }}">
-              <img src="{{ 'grooves-prod-fire.jpg' | asset_url }}" alt="Grooves product preview" loading="lazy" width="70" height="70">
-            </div>
           {% endif %}
         </div>
 
         <div class="tr-pdp-main-media">
           {%- liquid
-            assign initial_img = 'grooves-prod-fire.jpg' | asset_url
+            assign initial_img = ''
             if current_variant.featured_image != blank
               assign initial_img = current_variant.featured_image | image_url: width: 1000
             elsif target_product.featured_image != blank
@@ -686,14 +680,7 @@
         <input type="hidden" name="id" id="tr-variant-id-{{ section.id }}" value="{{ current_variant.id }}">
         <input type="hidden" name="quantity" value="1">
 
-        <!-- Rating Row -->
-        {% if section.settings.show_rating and actual_rating != blank and actual_rating_count > 0 %}
-          <div class="tr-pdp-rating-row">
-            <span class="tr-pdp-stars">★★★★★</span>
-            <strong>{{ actual_rating.rating | round: 1 }} / {{ actual_rating.scale_max }}</strong>
-            <span class="tr-pdp-review-count">| {{ actual_rating_count }} reviews</span>
-          </div>
-        {% endif %}
+        {% comment %}Unverified template ratings removed. Genuine reviews must come from a verified review provider.{% endcomment %}
 
         <!-- Title & Subtitle -->
         <h1 class="tr-pdp-title">{{ prod_title }}</h1>
@@ -752,25 +739,6 @@
               {% endfor %}
             </div>
           </div>
-        {% elsif target_product == blank %}
-          <!-- Fallback Swatches for Theme Editor Preview -->
-          <div class="tr-swatch-section">
-            <div class="tr-swatch-label">Color: <span id="tr-selected-color-name-{{ section.id }}" style="color: var(--tr-accent);">White</span></div>
-            <div class="tr-swatches-row">
-              <button type="button" class="tr-swatch-btn active" data-color-name="White" data-img-url="{{ 'grooves-prod-fire.jpg' | asset_url }}">
-                <span class="tr-swatch-color-circle" style="background: #ffffff;"></span>
-                White
-              </button>
-              <button type="button" class="tr-swatch-btn" data-color-name="Black" data-img-url="{{ 'grooves-prod-fire.jpg' | asset_url }}">
-                <span class="tr-swatch-color-circle" style="background: #111111;"></span>
-                Black
-              </button>
-              <button type="button" class="tr-swatch-btn" data-color-name="Blue" data-img-url="{{ 'grooves-prod-fire.jpg' | asset_url }}">
-                <span class="tr-swatch-color-circle" style="background: #3b5998;"></span>
-                Blue
-              </button>
-            </div>
-          </div>
         {% endif %}
 
         <!-- Personalise Engraving (Connected to Order Line Item Properties) -->
@@ -821,7 +789,7 @@
               id="tr-buy-now-btn-{{ section.id }}"
               {% if current_variant != blank and current_variant.available == false %}disabled{% endif %}
             >
-              ⚡ {{ section.settings.buy_now_label | default: 'BUY IT NOW' }}
+              ⚡ {{ section.settings.buy_now_label | default: 'BUY IT NOW - PAY ON DELIVERY / UPI' }}
             </button>
           {% endif %}
           <button 
@@ -841,20 +809,20 @@
         <!-- 4 PDP Trust Badges -->
         <div class="tr-pdp-badges-grid">
           <div class="tr-pdp-badge-item">
-            <img src="{{ 'grooves-icon-support.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
-            <span>{{ section.settings.badge_1_text | default: 'Delivery at checkout' }}</span>
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Free Shipping" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_1_text | default: 'Free Shipping' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="{{ 'grooves-icon-warranty.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
-            <span>{{ section.settings.badge_2_text | default: 'Warranty support' }}</span>
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="1 Year Warranty" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_2_text | default: '1 Year Warranty' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="{{ 'grooves-icon-replacement.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
-            <span>{{ section.settings.badge_3_text | default: 'Replacement support' }}</span>
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="72Hrs Replacement" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_3_text | default: '72h Replacement' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="{{ 'grooves-icon-faq.png' | asset_url }}" alt="" width="32" height="32" loading="lazy">
-            <span>{{ section.settings.badge_4_text | default: 'Secure checkout' }}</span>
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="GST Billing" width="32" height="32" loading="lazy">
+            <span>{{ section.settings.badge_4_text | default: 'GST Billing' }}</span>
           </div>
         </div>
       </form>
@@ -1074,7 +1042,7 @@
       "type": "color",
       "id": "accent_color",
       "label": "Accent Color (Neon Green)",
-      "default": "#45A8E8"
+      "default": "#4cf800"
     },
     {
       "type": "range",
@@ -1103,14 +1071,12 @@
     {
       "type": "text",
       "id": "product_title",
-      "label": "Product Title (Fallback)",
-      "default": "Grooves Product"
+      "label": "Product Title (Fallback)"
     },
     {
       "type": "text",
       "id": "product_subtitle",
-      "label": "Product Subtitle",
-      "default": ""
+      "label": "Product Subtitle"
     },
     {
       "type": "header",
@@ -1147,14 +1113,12 @@
     {
       "type": "text",
       "id": "rating_score",
-      "label": "Rating Score",
-      "default": ""
+      "label": "Rating Score"
     },
     {
       "type": "text",
       "id": "reviews_count",
-      "label": "Reviews Count Text",
-      "default": ""
+      "label": "Reviews Count Text"
     },
     {
       "type": "header",
@@ -1230,7 +1194,7 @@
       "type": "text",
       "id": "buy_now_label",
       "label": "Buy Now Button Label",
-      "default": "BUY IT NOW"
+      "default": "BUY IT NOW - PAY ON DELIVERY / UPI"
     },
     {
       "type": "text",
@@ -1246,25 +1210,25 @@
       "type": "text",
       "id": "badge_1_text",
       "label": "Badge 1 Text",
-      "default": "Delivery at checkout"
+      "default": "Free Shipping"
     },
     {
       "type": "text",
       "id": "badge_2_text",
       "label": "Badge 2 Text",
-      "default": "Warranty support"
+      "default": "1 Year Warranty"
     },
     {
       "type": "text",
       "id": "badge_3_text",
       "label": "Badge 3 Text",
-      "default": "Replacement support"
+      "default": "72h Replacement"
     },
     {
       "type": "text",
       "id": "badge_4_text",
       "label": "Badge 4 Text",
-      "default": "Secure checkout"
+      "default": "GST Billing"
     }
   ],
   "presets": [

@@ -882,3 +882,8 @@ body.tr-theme,
 .tr-theme .cps-title { line-height:1.4; min-height:2.8em; }
 .tr-theme .cps-bottom-row { flex-direction:row !important; align-items:stretch !important; margin-top:12px !important; }
 @media(max-width:749px) { .tr-theme .cps-price-wrapper, .tr-theme .cps-actions { flex:0 0 100% !important; width:100%; } }
+
+/* Compact explore-range cards must wrap prices instead of clipping them. */
+.tr-theme .tr-product-mini-card .tr-product-price-row { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 8px; }
+.tr-theme .tr-product-mini-card .tr-product-price-row > span { white-space:nowrap; }
+@media(max-width:749px) { .tr-theme .tr-product-mini-card .tr-price-current { flex-basis:100%; } .tr-theme .tr-product-mini-card .tr-price-compare, .tr-theme .tr-product-mini-card .tr-price-discount { font-size:11px; } }

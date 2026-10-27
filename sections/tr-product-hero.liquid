@@ -688,6 +688,15 @@
           <p class="tr-pdp-subtitle">{{ prod_subtitle }}</p>
         {% endif %}
 
+        {% comment %}USB-C charging input confirmed by store owner for these rechargeable audio models on 27 October 2026.{% endcomment %}
+        {% assign usb_c_confirmed_handles = 'grooves-fire-true-wireless-earbuds-ergonomic-bluetooth-in-ear-headphones-with-dual-tone-charging-case-touch-controls-deep-bass,grooves-fire-earuds,grooves-fire-earuds-white,grooves-ullet-eckad,grooves-ninja-pro2-earbuds,grooves-aximo-neckband,grooves-infinity,grooves-theta-pro,grooves-beat,alpha-100x,grooves-metal-x1,grooves-fort,grooves-robo-x-thunder,grooves-alpha-200-with-anc,grooves-alpha100,grooves-ultra-100,grooves-theta100-pro,grooves-signature2-0,grooves-delta-plus,grooves-metal-blast,grooves-beat-2-0-true-wireless-bluetooth-earbuds-tws-wireless-earbuds-with-charging-case-built-in-mic-for-calls-stereo-sound-comfortable-in-ear-fit-compatible-with-android-ios,grooves-ninja-pro2-tws-true-wireless-bluetooth-earbuds-with-mic-charging-case,grooves-infinity-ultra-luxury-diamond-finish-120-hrs-standby-super-bass-and-adaptive-4-mic-enc-low-latency-calling-with-voice-control-5-3-bluetooth-headset-white-true-wireless,grooves-vibe-2-0,grooves-ultra-earbuds,grooves-metal-earbuds,grooves-delta-2-0' | split: ',' %}
+        {% if usb_c_confirmed_handles contains target_product.handle %}
+          <div class="tr-pdp-specifications">
+            <h2 style="font-size: 16px; margin: 16px 0 6px;">Key specifications</h2>
+            <p class="tr-pdp-subtitle"><strong>Charging input:</strong> USB-C</p>
+          </div>
+        {% endif %}
+
         <!-- Dynamic Price Box -->
         <div class="tr-pdp-price-box">
           <span class="tr-pdp-price" id="tr-pdp-price-val-{{ section.id }}">{{ p_price }}</span>

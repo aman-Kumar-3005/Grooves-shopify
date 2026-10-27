@@ -803,15 +803,6 @@
             "custom_title": ""
           }
         },
-        "video_zWxT8g": {
-          "type": "video",
-          "settings": {
-            "shopify_video": "shopify://files/videos/grooves_audio_1782331211_3926800424393116968_64911717332.mp4",
-            "youtube_id": "",
-            "product": "grooves-bang-60w",
-            "custom_title": ""
-          }
-        },
         "video_aDLzMt": {
           "type": "video",
           "settings": {
@@ -835,7 +826,6 @@
         "video_Rc6MEe",
         "video_3LXF9G",
         "video_dhBPDt",
-        "video_zWxT8g",
         "video_aDLzMt",
         "video_E9mxFB"
       ],
@@ -1004,7 +994,8 @@
         "card_bg": "#FFFFFF",
         "padding_top": 0,
         "padding_bottom": 0
-      }
+      },
+      "disabled": true
     },
     "support_policies": {
       "type": "tr-support-policies",

@@ -614,7 +614,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Explore Grooves</h2>",
+                "text": "<h2>Brand &amp; customer support</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -639,7 +639,7 @@
             "text_4kb7jf": {
               "type": "text",
               "settings": {
-                "text": "<p>Browse the Grooves collection for current product details, prices and availability.</p>",
+                "text": "<p><strong>Brand:</strong> Grooves<br><strong>Website operated by:</strong> Mewalt Electronics Private Limited<br><strong>Customer support:</strong> <a href=\"mailto:support@grooveslifestyle.com\">support@grooveslifestyle.com</a><br><strong>Customer care:</strong> <a href=\"tel:+919216921661\">+91 9216921661</a></p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",

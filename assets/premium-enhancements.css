@@ -862,3 +862,8 @@ body.tr-theme,
  .tr-theme product-card product-price .compare-at-price { font-size:12px; }
  .tr-theme .section-resource-list__header { margin-bottom:18px; }
 }
+
+/* Keep native headings legible and remove the duplicate outer card shell. */
+.tr-theme .section-resource-list__header :is(h2,.text-block) { color:#17243d !important; }
+.tr-theme .resource-list__item.pro-card-wrapper:has(> product-card) { padding:0 !important; border:0 !important; border-radius:0 !important; background:transparent !important; box-shadow:none !important; transform:none !important; }
+.tr-theme product-card .product-card__content > product-price { margin-top:0 !important; flex:1 0 auto; }

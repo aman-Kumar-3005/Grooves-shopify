@@ -16,12 +16,12 @@
       assign discount_text = discount_pct | append: '% OFF'
     else
       assign p_compare = ''
-      assign discount_text = section.settings.discount_badge_text
+      assign discount_text = ''
     endif
   else
-    assign p_price = section.settings.fallback_price | default: "₹1,499"
-    assign p_compare = section.settings.fallback_compare_price | default: "₹4,999"
-    assign discount_text = section.settings.discount_badge_text | default: "70% OFF"
+    assign p_price = ''
+    assign p_compare = ''
+    assign discount_text = ''
   endif
 -%}
 
@@ -809,19 +809,19 @@
         <!-- 4 PDP Trust Badges -->
         <div class="tr-pdp-badges-grid">
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Free Shipping" width="32" height="32" loading="lazy">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Free-Shipping.webp?v=1701524211" alt="Delivery" width="32" height="32" loading="lazy">
             <span>{{ section.settings.badge_1_text | default: 'Free Shipping' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="1 Year Warranty" width="32" height="32" loading="lazy">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="Warranty support" width="32" height="32" loading="lazy">
             <span>{{ section.settings.badge_2_text | default: '1 Year Warranty' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="72Hrs Replacement" width="32" height="32" loading="lazy">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="Replacement support" width="32" height="32" loading="lazy">
             <span>{{ section.settings.badge_3_text | default: '72h Replacement' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="GST Billing" width="32" height="32" loading="lazy">
+            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/GST-Billing.png?v=1717494620" alt="Checkout" width="32" height="32" loading="lazy">
             <span>{{ section.settings.badge_4_text | default: 'GST Billing' }}</span>
           </div>
         </div>

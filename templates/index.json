@@ -171,7 +171,7 @@
         "show_rating_badge": false,
         "price_prefix": "Price",
         "card_radius": 8,
-        "btn_bg_color": "#17243D",
+        "btn_bg_color": "#17243d",
         "btn_text_color": "#ffffff",
         "bg_color": "#ffffff",
         "padding_top": 12,
@@ -404,7 +404,7 @@
         "show_rating_badge": false,
         "price_prefix": "Price",
         "card_radius": 8,
-        "btn_bg_color": "#17243D",
+        "btn_bg_color": "#17243d",
         "btn_text_color": "#ffffff",
         "bg_color": "#ffffff",
         "padding_top": 36,
@@ -663,17 +663,17 @@
         "text_cYrqzw",
         "text_MnXRhM"
       ],
+      "disabled": true,
       "name": "Marquee",
       "settings": {
         "marquee_meta": "",
-        "colorBackground": "#17243D",
+        "colorBackground": "#17243d",
         "marquee_speed": 164,
         "colorText": "#fff",
         "link": "",
         "marquee_height": 46,
         "font_size": 24
-      },
-      "disabled": true
+      }
     },
     "tabbed_tws": {
       "type": "tr-tabbed-tws",
@@ -762,6 +762,7 @@
         "review_qFmPcG",
         "review_hQpydt"
       ],
+      "disabled": true,
       "name": "Customer Testimonials",
       "settings": {
         "heading": "What Our Customers Say",
@@ -770,8 +771,7 @@
         "text_color": "#111111",
         "padding_y": 20,
         "auto_scroll": 0
-      },
-      "disabled": true
+      }
     },
     "shoppabl_videos_npt6gF": {
       "type": "shoppabl-videos",
@@ -982,6 +982,7 @@
         "blog_3",
         "blog_4"
       ],
+      "disabled": true,
       "settings": {
         "badge_title": "Blogs",
         "blog": "news",
@@ -990,12 +991,11 @@
         "enable_desktop_carousel": true,
         "columns_mobile": 2,
         "enable_mobile_carousel": true,
-        "accent_color": "#45A8E8",
-        "card_bg": "#FFFFFF",
+        "accent_color": "#45a8e8",
+        "card_bg": "#ffffff",
         "padding_top": 0,
         "padding_bottom": 0
-      },
-      "disabled": true
+      }
     },
     "support_policies": {
       "type": "tr-support-policies",
@@ -1005,7 +1005,6 @@
           "settings": {
             "title": "6 Month Warranty",
             "subtitle": "Check verified coverage",
-            "image": "",
             "icon_url": "grooves-icon-warranty.png",
             "link": "shopify://pages/track-status"
           }
@@ -1055,7 +1054,6 @@
           "settings": {
             "title": "48 Hours Replacement",
             "subtitle": "Policy terms apply",
-            "image": "",
             "icon_url": "grooves-icon-replacement.png",
             "link": "shopify://pages/contact"
           }
@@ -1134,6 +1132,7 @@
         "logo_item_EnFaVG",
         "logo_item_kxDmYi"
       ],
+      "disabled": true,
       "name": "Brand Marquee Logos",
       "settings": {
         "title": "Best selling brand on...",
@@ -1148,8 +1147,7 @@
         "text_color": "#121212",
         "padding_top": 12,
         "padding_bottom": 12
-      },
-      "disabled": true
+      }
     },
     "section_NcG6nn": {
       "type": "section",
@@ -1437,8 +1435,7 @@
         "card_radius": 8,
         "padding_top": 20,
         "padding_bottom": 20
-      },
-      "disabled": true
+      }
     }
   },
   "order": [

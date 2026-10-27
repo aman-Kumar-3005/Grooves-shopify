@@ -10,27 +10,38 @@
     <div class="tr-support-grid">
       {% for block in section.blocks %}
         {%- liquid
+          assign support_title = block.settings.title
+          assign support_key = support_title | downcase
+          assign support_link = block.settings.link | default: '/pages/contact'
+          if support_key contains 'instagram'
+            assign support_link = 'https://www.instagram.com/grooveslifestyle'
+          elsif support_key contains 'youtube'
+            assign support_link = 'https://www.youtube.com/@grooveslifestyle'
+          elsif support_key contains 'warranty'
+            assign support_title = 'Warranty support'
+          elsif support_key contains 'replacement'
+            assign support_title = 'Replacement support'
+          endif
           if block.settings.image != blank
             assign sup_icon = block.settings.image | image_url: width: 120
-          elsif block.settings.icon_url != blank
-            if block.settings.icon_url contains 'http' or block.settings.icon_url contains '//'
-              assign sup_icon = block.settings.icon_url
-            else
-              assign sup_icon = block.settings.icon_url | replace: 'campaign/', '' | asset_url
-            endif
           else
-            assign sup_icon = 'grooves-icon-support.png' | asset_url
+            assign sup_icon = block.settings.icon_url
           endif
         -%}
-        <a href="{{ block.settings.link | default: '/pages/contact' }}" class="tr-support-card" style="text-decoration: none;" {{ block.shopify_attributes }}>
-          <img 
-            src="{{ sup_icon }}" 
-            alt="{{ block.settings.title }}" 
-            loading="lazy"
-            width="50"
-            height="50"
-          >
-          <h4 class="tr-support-title">{{ block.settings.title }}</h4>
+        <a href="{{ support_link }}" class="tr-support-card" style="text-decoration: none;" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+          <img src="{{ sup_icon }}" alt="" loading="lazy" width="50" height="50">
+          {% else %}
+          <svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#45a8e8;flex-shrink:0">
+            {% if support_key contains "instagram" %}<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/>
+            {% elsif support_key contains "youtube" %}<rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/>
+            {% elsif support_key contains "warranty" %}<path d="m12 2 8 4v6c0 5-8 10-8 10S4 17 4 12V6Z"/><path d="m8 12 3 3 5-6"/>
+            {% elsif support_key contains "replacement" %}<path d="M20 7a9 9 0 1 0 1 8M20 2v5h-5"/>
+            {% elsif support_key contains "faq" %}<circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 0 1 6 0c0 2-3 2-3 4m0 3v1"/>
+            {% else %}<path d="M4 13v-1a8 8 0 0 1 16 0v1M4 12H2v7h4v-7Zm16 0h2v7h-4v-7Zm0 7c0 3-4 3-7 3"/>{% endif %}
+          </svg>
+          {% endif %}
+          <h4 class="tr-support-title">{{ support_title }}</h4>
           {% if block.settings.subtitle != blank %}
             <span style="font-size: 11px; color: #888888;">{{ block.settings.subtitle }}</span>
           {% endif %}
@@ -72,13 +83,13 @@
 
 {% schema %}
 {
-  "name": "Grooves Support & Policies",
+  "name": "TR Support & Policies",
   "settings": [
     {
       "type": "text",
       "id": "badge_title",
       "label": "Badge Title",
-      "default": "GROOVES PROMISE & CUSTOMER CARE"
+      "default": "TR Support"
     },
     {
       "type": "range",
@@ -132,7 +143,7 @@
       "type": "text",
       "id": "policy_2_text",
       "label": "Policy 2 Text",
-      "default": "Warranty support"
+      "default": "1 Year Warranty"
     },
     {
       "type": "text",
@@ -144,7 +155,7 @@
       "type": "text",
       "id": "policy_3_text",
       "label": "Policy 3 Text",
-      "default": "Payment options at checkout"
+      "default": "COD Available"
     },
     {
       "type": "text",
@@ -156,7 +167,7 @@
       "type": "text",
       "id": "policy_4_text",
       "label": "Policy 4 Text",
-      "default": "Replacement support"
+      "default": "72 Hours Replacement"
     },
     {
       "type": "text",
@@ -197,7 +208,7 @@
           "type": "text",
           "id": "icon_url",
           "label": "Or Icon Image URL (Fallback)",
-          "default": "grooves-icon-support.png"
+          "default": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Support.png?v=1745498991"
         },
         {
           "type": "url",
@@ -209,14 +220,14 @@
   ],
   "presets": [
     {
-      "name": "Grooves Support & Policies",
+      "name": "TR Support & Policies",
       "blocks": [
         {
           "type": "support_item",
           "settings": {
             "title": "Customer Support",
             "subtitle": "24/7 Dedicated Help",
-            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/Track-order.png?v=1745498991"
+            "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-Support.png?v=1745498991"
           }
         },
         {
@@ -231,7 +242,7 @@
           "type": "support_item",
           "settings": {
             "title": "Doorstep Warranty",
-            "subtitle": "Check product coverage",
+            "subtitle": "1 Year Free Replacement",
             "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/warranty_7c995ef0-7603-4c91-9e2c-358aa029fbf7.png?v=1745498991"
           }
         },
@@ -254,8 +265,8 @@
         {
           "type": "support_item",
           "settings": {
-            "title": "100% Genuine Tech",
-            "subtitle": "Authentic Grooves Lifestyle",
+            "title": "Made In India",
+            "subtitle": "Proudly Crafted For You",
             "icon_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/corporate_gift.png?v=1745498991"
           }
         }

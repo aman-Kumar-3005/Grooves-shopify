@@ -634,6 +634,10 @@
       padding: 14px 12px;
     }
   }
+#tr-pdp-hero-{{ section.id }} .tr-catalog-spec-list { margin:0; font-size:14px; line-height:1.5; }
+#tr-pdp-hero-{{ section.id }} .tr-catalog-spec-row { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:12px; padding:7px 0; border-bottom:1px solid var(--tr-border); }
+#tr-pdp-hero-{{ section.id }} .tr-catalog-spec-row dt { font-weight:600; }
+#tr-pdp-hero-{{ section.id }} .tr-catalog-spec-row dd { margin:0; overflow-wrap:anywhere; }
 {%- endstyle -%}
 
 <section class="tr-pdp-top-wrapper" id="tr-pdp-hero-{{ section.id }}">
@@ -690,12 +694,49 @@
 
         {% comment %}USB-C charging input confirmed by store owner for these rechargeable audio models on 27 October 2026.{% endcomment %}
         {% assign usb_c_confirmed_handles = 'grooves-fire-true-wireless-earbuds-ergonomic-bluetooth-in-ear-headphones-with-dual-tone-charging-case-touch-controls-deep-bass,grooves-fire-earuds,grooves-fire-earuds-white,grooves-ullet-eckad,grooves-ninja-pro2-earbuds,grooves-aximo-neckband,grooves-infinity,grooves-theta-pro,grooves-beat,alpha-100x,grooves-metal-x1,grooves-fort,grooves-robo-x-thunder,grooves-alpha-200-with-anc,grooves-alpha100,grooves-ultra-100,grooves-theta100-pro,grooves-signature2-0,grooves-delta-plus,grooves-metal-blast,grooves-beat-2-0-true-wireless-bluetooth-earbuds-tws-wireless-earbuds-with-charging-case-built-in-mic-for-calls-stereo-sound-comfortable-in-ear-fit-compatible-with-android-ios,grooves-ninja-pro2-tws-true-wireless-bluetooth-earbuds-with-mic-charging-case,grooves-infinity-ultra-luxury-diamond-finish-120-hrs-standby-super-bass-and-adaptive-4-mic-enc-low-latency-calling-with-voice-control-5-3-bluetooth-headset-white-true-wireless,grooves-vibe-2-0,grooves-ultra-earbuds,grooves-metal-earbuds,grooves-delta-2-0' | split: ',' %}
-        {% if usb_c_confirmed_handles contains target_product.handle %}
-          <div class="tr-pdp-specifications">
-            <h2 style="font-size: 16px; margin: 16px 0 6px;">Key specifications</h2>
-            <p class="tr-pdp-subtitle"><strong>Charging input:</strong> USB-C</p>
-          </div>
-        {% endif %}
+{% comment %}Model-specific specifications from owner-supplied GROOVES catalogue, pages 2, 3, 14 and 15. Different model generations are deliberately excluded. No catalogue prices imported.{% endcomment %}
+{% capture catalogue_spec_rows %}
+{% case target_product.handle %}
+{% when 'grooves-beat', 'grooves-fire-true-wireless-earbuds-ergonomic-bluetooth-in-ear-headphones-with-dual-tone-charging-case-touch-controls-deep-bass' %}
+<div class="tr-catalog-spec-row"><dt>Type</dt><dd>True wireless earbuds (TWS)</dd></div>
+<div class="tr-catalog-spec-row"><dt>Battery capacity</dt><dd>300 mAh</dd></div>
+<div class="tr-catalog-spec-row"><dt>Bluetooth version</dt><dd>5.4</dd></div>
+<div class="tr-catalog-spec-row"><dt>Wireless range</dt><dd>10–15 m</dd></div>
+<div class="tr-catalog-spec-row"><dt>Playback time</dt><dd>5–6 hours</dd></div>
+<div class="tr-catalog-spec-row"><dt>Standby time</dt><dd>150 days</dd></div>
+<div class="tr-catalog-spec-row"><dt>Water resistance rating</dt><dd>IPX5</dd></div>
+{% when 'grooves-fire-earuds', 'grooves-fire-earuds-white' %}
+<div class="tr-catalog-spec-row"><dt>Type</dt><dd>True wireless earbuds (TWS)</dd></div>
+<div class="tr-catalog-spec-row"><dt>Battery capacity</dt><dd>250 mAh</dd></div>
+<div class="tr-catalog-spec-row"><dt>Bluetooth version</dt><dd>5.3</dd></div>
+<div class="tr-catalog-spec-row"><dt>Wireless range</dt><dd>10–15 m</dd></div>
+<div class="tr-catalog-spec-row"><dt>Playback time</dt><dd>20 hours</dd></div>
+<div class="tr-catalog-spec-row"><dt>Standby time</dt><dd>150 hours</dd></div>
+<div class="tr-catalog-spec-row"><dt>Water resistance rating</dt><dd>IPX5</dd></div>
+{% when 'grooves-aximo-neckband', 'grooves-ullet-eckad' %}
+<div class="tr-catalog-spec-row"><dt>Type</dt><dd>Wireless neckband earphones</dd></div>
+<div class="tr-catalog-spec-row"><dt>Bluetooth version</dt><dd>5.4</dd></div>
+<div class="tr-catalog-spec-row"><dt>Wireless range</dt><dd>15 m</dd></div>
+<div class="tr-catalog-spec-row"><dt>Battery</dt><dd>3.7 V, 200 mAh; double IC</dd></div>
+<div class="tr-catalog-spec-row"><dt>Music playback</dt><dd>40 hours at 60% volume</dd></div>
+<div class="tr-catalog-spec-row"><dt>Charging voltage</dt><dd>5 V</dd></div>
+<div class="tr-catalog-spec-row"><dt>Charging</dt><dd>USB-C fast charging</dd></div>
+<div class="tr-catalog-spec-row"><dt>Driver</dt><dd>10 mm copper driver</dd></div>
+<div class="tr-catalog-spec-row"><dt>Chipset</dt><dd>JL7023</dd></div>
+<div class="tr-catalog-spec-row"><dt>Sound</dt><dd>3D surround sound</dd></div>
+<div class="tr-catalog-spec-row"><dt>Wire</dt><dd>4-core copper wire</dd></div>
+{% endcase %}
+{% endcapture %}
+{% assign catalogue_spec_rows = catalogue_spec_rows | strip %}
+{% if usb_c_confirmed_handles contains target_product.handle or catalogue_spec_rows != blank %}
+<div class="tr-pdp-specifications">
+<h2 style="font-size:16px;margin:16px 0 8px;">Key specifications</h2>
+<dl class="tr-catalog-spec-list">
+{{ catalogue_spec_rows }}
+{% if usb_c_confirmed_handles contains target_product.handle %}<div class="tr-catalog-spec-row"><dt>Charging input</dt><dd>USB-C</dd></div>{% endif %}
+</dl>
+</div>
+{% endif %}
 
         <!-- Dynamic Price Box -->
         <div class="tr-pdp-price-box">

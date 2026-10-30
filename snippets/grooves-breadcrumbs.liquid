@@ -1,5 +1,5 @@
 {%- liquid
-  assign breadcrumb_title = product.title | default: article.title | default: collection.title | default: page.title | default: blog.title
+  assign breadcrumb_title = product.title | default: article.title | default: collection.title | default: page.title | default: blog.title | default: page_title
   assign parent_title = blank
   assign parent_url = blank
   if product != blank

@@ -380,13 +380,13 @@
         "prod_wave"
       ],
       "settings": {
-        "section_title": "EXPLORE GROOVES AUDIO RANGE",
+        "section_title": "Explore wireless audio and charging",
         "padding_top": 20,
         "padding_bottom": 40,
         "hero_product": "grooves-robo-x-thunder",
         "hero_image": "grooves-explore-hero.jpg",
         "hero_title": "Grooves 107 Pro - Fast Charging Wireless Earbuds",
-        "hero_tag": "Explore Grooves",
+        "hero_tag": "Featured model",
         "hero_link": "shopify://collections/all",
         "hero_btn_text": "BUY NOW"
       }
@@ -395,7 +395,7 @@
       "type": "custom-product-slider",
       "name": "Dynamic Product Slider",
       "settings": {
-        "title": "Newly In",
+        "title": "More headphones",
         "heading_size": 24,
         "collection": "headphones",
         "products_to_show": 8,
@@ -1161,7 +1161,7 @@
             "video_url": "",
             "video_autoplay": false,
             "video_loop": true,
-            "alt": "",
+            "alt": "Audio and charging product showcase",
             "custom_width": 100,
             "custom_width_mobile": 100,
             "aspect_ratio": "16/9",
@@ -1221,7 +1221,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h3>Engineered for the Ultimate Audio Experience</h3>",
+                "text": "<h2>Audio for everyday listening</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1247,7 +1247,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>We believe music should be felt, not just heard. Designed with cutting-edge acoustics, deep bass technology, and ergonomic comfort, our gear is built to power your daily hustle.</p>",
+                "text": "<p>Explore wireless audio formats for music and calls. Compare fit, connection options and the specifications for the exact model, then contact customer support if you need help choosing.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",

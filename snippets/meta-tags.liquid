@@ -22,7 +22,41 @@
   assign og_title = page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: shop.name
+  assign seo_brand = 'Grooves Lifestyle'
+  assign seo_description = page_description
+  if seo_description == blank
+    case request.page_type
+      when 'product'
+        assign seo_description = 'Explore ' | append: product.title | append: ' from Grooves Lifestyle. Check available options and specifications, or contact Grooves customer support for product help.'
+      when 'collection'
+        assign seo_description = 'Browse ' | append: collection.title | append: ' from Grooves Lifestyle in India. Compare current product details, available options and customer support information.'
+      when 'page'
+        if page.handle == 'contact'
+          assign seo_description = 'Contact Grooves Lifestyle for product, order and warranty assistance. Email support@grooveslifestyle.com or call +91 9216921661.'
+        else
+          assign seo_description = page.content | strip_html | strip_newlines | truncate: 160
+        endif
+      when 'blog'
+        assign seo_description = 'Read ' | append: blog.title | append: ' from Grooves Lifestyle: audio and charging advice, product care and customer support information.'
+      else
+        assign seo_description = 'Read ' | append: page_title | append: ' on the official Grooves Lifestyle website for India.'
+    endcase
+  endif
+  assign og_description = seo_description
+  assign schema_origin = request.origin
+  assign schema_org_id = schema_origin | append: '/#organization'
+  assign schema_website_id = schema_origin | append: '/#website'
+  assign schema_page_id = canonical_url | append: '#webpage'
+  assign schema_page_type = 'WebPage'
+  if request.page_type == 'collection'
+    assign schema_page_type = 'CollectionPage'
+  elsif request.page_type == 'blog'
+    assign schema_page_type = 'Blog'
+  elsif page.handle == 'about-grooves'
+    assign schema_page_type = 'AboutPage'
+  elsif page.handle == 'contact'
+    assign schema_page_type = 'ContactPage'
+  endif
 
   if request.page_type == 'product'
     assign og_type = 'product'
@@ -35,7 +69,7 @@
 
 <meta
   property="og:site_name"
-    content="{{ shop.name | escape }}"
+    content="{{ seo_brand | escape }}"
 >
 <meta
   property="og:url"
@@ -104,10 +138,10 @@
 >
 
 <title>
-  {{ page_title }}
+  {{ page_title | escape }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- unless page_title contains seo_brand %} &ndash; {{ seo_brand }}{% endunless -%}
 </title>
 
 <link
@@ -115,9 +149,21 @@
   href="{{ canonical_url }}"
 >
 
-{% if page_description %}
+{% if seo_description != blank %}
   <meta
     name="description"
-    content="{{ page_description | escape }}"
+    content="{{ seo_description | escape }}"
   >
 {% endif %}
+
+{% comment %}Shared factual brand and page entities. Product and breadcrumb markup are emitted by their visible sections. Do not add unverified reviews, addresses or certifications.{% endcomment %}
+<script type="application/ld+json" id="grooves-entity-schema">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Organization","@id":{{ schema_org_id | json }},"name":"Grooves Lifestyle","legalName":"Mewalt Electronics Private Limited","url":{{ schema_origin | json }},"email":"support@grooveslifestyle.com","telephone":"+919216921661","areaServed":{"@type":"Country","name":"India"},"sameAs":["https://in.linkedin.com/company/grooves-audio"]{% if settings.logo != blank %},"logo":{{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }}{% endif %}},
+    {"@type":"WebSite","@id":{{ schema_website_id | json }},"name":"Grooves Lifestyle","url":{{ schema_origin | json }},"publisher":{"@id":{{ schema_org_id | json }}},"inLanguage":{{ request.locale.iso_code | json }}},
+    {"@type":{{ schema_page_type | json }},"@id":{{ schema_page_id | json }},"url":{{ canonical_url | json }},"name":{{ page_title | json }},"description":{{ seo_description | json }},"inLanguage":{{ request.locale.iso_code | json }},"isPartOf":{"@id":{{ schema_website_id | json }}},"about":{"@id":{{ schema_org_id | json }}}}
+  ]
+}
+</script>

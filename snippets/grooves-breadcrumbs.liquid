@@ -1,104 +1,39 @@
 {%- liquid
   assign breadcrumb_title = product.title | default: collection.title
-  assign breadcrumb_url = product.url | default: collection.url
-  assign breadcrumb_home = 'Home'
   assign parent_collection = blank
-
   if product != blank
     assign parent_collection = product.metafields.custom.primary_collection.value
+    if parent_collection == blank and collection != blank
+      assign parent_collection = collection
+    endif
   endif
-
-  assign parent_title = parent_collection.title | default: collection.title
-  assign parent_url = parent_collection.url | default: collection.url
 -%}
-
+{% if breadcrumb_title != blank %}
 <nav class="grooves-breadcrumbs" aria-label="Breadcrumb">
   <ol>
-    <li><a href="{{ routes.root_url }}">{{ breadcrumb_home }}</a></li>
-    {%- if parent_collection != blank -%}
+    <li><a href="{{ routes.root_url }}">Home</a></li>
+    {% if product != blank %}
       <li aria-hidden="true">/</li>
-      <li><a href="{{ parent_collection.url }}">{{ parent_collection.title | escape }}</a></li>
-    {%- elsif collection != blank and collection.handle != blank -%}
-      <li aria-hidden="true">/</li>
-      <li><a href="{{ collection.url }}">{{ collection.title | escape }}</a></li>
-    {%- endif -%}
-    {%- if breadcrumb_title != blank -%}
-      <li aria-hidden="true">/</li>
-      <li aria-current="page">{{ breadcrumb_title | escape }}</li>
-    {%- endif -%}
+      {% if parent_collection != blank %}<li><a href="{{ parent_collection.url }}">{{ parent_collection.title | escape }}</a></li>{% else %}<li><a href="{{ routes.all_products_collection_url }}">All products</a></li>{% endif %}
+    {% endif %}
+    <li aria-hidden="true">/</li><li aria-current="page">{{ breadcrumb_title | escape }}</li>
   </ol>
 </nav>
-
-{%- if breadcrumb_title != blank -%}
-  {%- capture breadcrumb_json -%}
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": {{ breadcrumb_home | json }},
-          "item": {{ request.origin | append: routes.root_url | json }}
-        }{% if parent_collection != blank or collection != blank %},
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": {{ parent_title | json }},
-          "item": {{ request.origin | append: parent_url | json }}
-        }{% endif %}{% if product != blank %}{% unless parent_collection != blank %},
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": {{ breadcrumb_title | json }},
-          "item": {{ request.origin | append: breadcrumb_url | json }}
-        }{% endunless %}{% if parent_collection != blank %},
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": {{ breadcrumb_title | json }},
-          "item": {{ request.origin | append: breadcrumb_url | json }}
-        }{% endif %}{% endif %}
-      ]
-    }
-  {%- endcapture -%}
-  <script type="application/ld+json">{{ breadcrumb_json | strip }}</script>
-{%- endif -%}
-
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","@id":{{ canonical_url | append: '#breadcrumb' | json }},"itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":{{ request.origin | append: routes.root_url | json }}},
+{% if product != blank %}
+{"@type":"ListItem","position":2,"name":{% if parent_collection != blank %}{{ parent_collection.title | json }}{% else %}"All products"{% endif %},"item":{% if parent_collection != blank %}{{ request.origin | append: parent_collection.url | json }}{% else %}{{ request.origin | append: routes.all_products_collection_url | json }}{% endif %}},
+{"@type":"ListItem","position":3,"name":{{ product.title | json }},"item":{{ request.origin | append: product.url | json }}}
+{% else %}
+{"@type":"ListItem","position":2,"name":{{ collection.title | json }},"item":{{ request.origin | append: collection.url | json }}}
+{% endif %}
+]}
+</script>
+{% endif %}
 {% stylesheet %}
-  .grooves-breadcrumbs {
-    max-width: var(--page-width, 1280px);
-    margin: 0 auto;
-    padding: 12px 24px;
-    font-size: 14px;
-    line-height: 1.4;
-    overflow: hidden;
-  }
-
-  .grooves-breadcrumbs ol {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: baseline;
-    overflow-wrap: anywhere;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .grooves-breadcrumbs a {
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  @media screen and (max-width: 749px) {
-    .grooves-breadcrumbs {
-      padding: 10px 16px;
-      font-size: 12px;
-    }
-
-    .grooves-breadcrumbs ol {
-      gap: 5px;
-    }
-  }
+.grooves-breadcrumbs{max-width:var(--page-width,1280px);margin:0 auto;padding:12px 24px;font-size:14px;line-height:1.4;overflow:hidden}
+.grooves-breadcrumbs ol{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;overflow-wrap:anywhere;margin:0;padding:0;list-style:none}
+.grooves-breadcrumbs a{text-decoration:underline;text-underline-offset:2px}
+@media screen and (max-width:749px){.grooves-breadcrumbs{padding:10px 16px;font-size:12px}.grooves-breadcrumbs ol{gap:5px}}
 {% endstylesheet %}

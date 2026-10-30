@@ -191,6 +191,27 @@
         data-template="{{ template }}"
       >
         {{ content_for_layout }}
+{% if request.page_type == 'index' %}
+{% capture grooves_home_questions %}What products does Grooves Lifestyle offer?|What are TWS earbuds?|How do you choose wireless earbuds?|What is the difference between earbuds and neckbands?|How do you choose a power bank?{% endcapture %}
+{% capture grooves_home_answers %}Grooves Lifestyle offers wireless audio products and mobile charging accessories in India. The range includes TWS earbuds, headphones, neckband earphones, charging adapters and selected combos. Browse the relevant collection and check each product page for the exact model, available options, package contents and specifications before ordering.|TWS means True Wireless Stereo. TWS earbuds use separate left and right earpieces without a cable joining them, and typically come with a charging case. They connect wirelessly to a compatible device. Battery runtime, microphone features, charging connection and water resistance vary by model and should be checked individually.|Choose wireless earbuds by comparing fit, device compatibility, calling needs and playback time per charge. Check whether the stated battery figure includes extra charges from the case. Confirm the charging port and any model-specific water-resistance or noise-cancellation claim. If a required specification is missing, ask support before choosing.|True wireless earbuds have separate earpieces that are usually stored and recharged in a case. Neckband earphones connect the earpieces to a band worn around the neck. The choice depends on comfort, storage and how you prefer to handle the earpieces; neither format guarantees better sound or longer battery life.|Choose a power bank by checking its stated capacity, output power, supported charging protocols and ports against your device requirements. Confirm how the power bank itself is recharged and which cable is needed. Capacity and wattage describe different things, so a larger capacity alone does not establish faster charging.{% endcapture %}
+{% assign grooves_home_questions = grooves_home_questions | split: '|' %}
+{% assign grooves_home_answers = grooves_home_answers | split: '|' %}
+<section class="grooves-answer-guide" aria-label="Audio and charging buying help">
+<p>Find wireless audio products and mobile charging accessories for your everyday setup. Use the guidance below to compare formats, then check the exact model on its product page.</p>
+{% for question in grooves_home_questions %}
+<h2 id="{{ question | handleize }}">{{ question | escape }}</h2>
+<p>{{ grooves_home_answers[forloop.index0] | strip | escape }}</p>
+{% endfor %}
+<h2 id="compare-audio-formats">Compare audio formats</h2>
+<div class="grooves-comparison-scroll"><table><caption>Physical differences between common listening formats</caption><thead><tr><th scope="col">Format</th><th scope="col">How it is worn</th><th scope="col">What to check</th></tr></thead><tbody><tr><th scope="row">TWS earbuds</th><td>Two separate in-ear earpieces, usually with a case</td><td>Earpiece fit, case charging and runtime per charge</td></tr><tr><th scope="row">Neckband earphones</th><td>Earpieces joined to a band around the neck</td><td>Band comfort, controls and charging input</td></tr><tr><th scope="row">Headphones</th><td>A headband with on-ear or over-ear cups</td><td>Wearing style, comfort and supported connections</td></tr></tbody></table></div>
+<h2 id="check-accessory-compatibility">How to check accessory compatibility</h2>
+<ol><li>Identify the exact phone, tablet or other device model.</li><li>Check its supported audio connection or charging protocol in the device documentation.</li><li>Compare the selected accessory and cable specifications with those requirements.</li><li>Ask support about any missing detail before ordering.</li></ol>
+<p>Explore <a href="/collections/earbuds">TWS earbuds</a>, <a href="/collections/neck-band">neckband earphones</a>, <a href="/collections/headphones">headphones</a> and <a href="/collections/adaptor">charging adapters</a>. Read <a href="/pages/about-grooves">about the brand and its operator</a> or <a href="/pages/contact">contact customer support</a>.</p>
+</section>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","@id":{{ canonical_url | append: '#faqs' | json }},"mainEntity":[{% for question in grooves_home_questions %}{% unless forloop.first %},{% endunless %}{"@type":"Question","name":{{ question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ grooves_home_answers[forloop.index0] | strip | json }}}}{% endfor %}]}</script>
+<style>.grooves-answer-guide{max-width:1280px;margin:0 auto;padding:32px 24px;line-height:1.65}.grooves-answer-guide h2{font-size:clamp(20px,3vw,28px);margin:24px 0 12px;scroll-margin-top:100px}.grooves-answer-guide p{margin:0 0 16px}.grooves-comparison-scroll{overflow-x:auto}.grooves-answer-guide table{width:100%;border-collapse:collapse;text-align:left}.grooves-answer-guide th,.grooves-answer-guide td{padding:12px;border:1px solid var(--g-border,#ddd);vertical-align:top}.grooves-answer-guide caption{text-align:left;margin-bottom:10px}.grooves-answer-guide ol{padding-left:24px}@media(max-width:749px){.grooves-answer-guide{padding:24px 16px}.grooves-answer-guide th,.grooves-answer-guide td{padding:8px}}</style>
+{% endif %}
+
       </main>
 
       <footer>

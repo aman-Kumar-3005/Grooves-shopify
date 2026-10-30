@@ -207,8 +207,26 @@
         assign desk_img = block.settings.image
         assign default_hero_asset = 'grooves-audio-desktop-branded.png' | asset_url
         assign desk_url = block.settings.image_url | default: default_hero_asset
+        if desk_img == blank
+          assign hero_filename = desk_url | split: '/' | last | split: '?' | first
+          assign uploaded_hero = images[hero_filename]
+          if uploaded_hero != blank
+            assign desk_img = uploaded_hero
+          endif
+        endif
         assign mob_img = block.settings.mobile_image
         assign mob_url = block.settings.mobile_image_url
+        assign hero_preload = false
+        assign hero_loading = 'lazy'
+        assign hero_priority = 'low'
+        if forloop.first
+          assign hero_loading = 'eager'
+          assign hero_priority = 'high'
+          if mob_img == blank and mob_url == blank
+            assign hero_preload = true
+          endif
+        endif
+        assign hero_alt = block.settings.heading | default: 'Grooves Lifestyle Tech Essentials'
         assign desk_url_separator = '?'
         if desk_url contains '?'
           assign desk_url_separator = '&'
@@ -241,18 +259,7 @@
               {% endif %}
               
               {% if desk_img != blank %}
-                <img 
-                  src="{{ desk_img | image_url: width: 1200 }}"
-                  srcset="{{ desk_img | image_url: width: 480 }} 480w, {{ desk_img | image_url: width: 768 }} 768w, {{ desk_img | image_url: width: 1200 }} 1200w, {{ desk_img | image_url: width: 1600 }} 1600w, {{ desk_img | image_url: width: 2000 }} 2000w"
-                  sizes="100vw"
-                  alt="{{ block.settings.heading | default: 'Grooves Lifestyle Tech Essentials' }}" 
-                  class="tr-hero-img"
-                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                  fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
-                  decoding="{% if forloop.first %}sync{% else %}async{% endif %}"
-                  width="{{ desk_img.width }}"
-                  height="{{ desk_img.height }}"
-                >
+                {{ desk_img | image_url: width: 2000 | image_tag: widths: '480, 768, 1200, 1600, 2000', sizes: '100vw', alt: hero_alt, class: 'tr-hero-img', loading: hero_loading, fetchpriority: hero_priority, decoding: 'async', preload: hero_preload }}
               {% else %}
                 <img 
                   src="{{ desk_url_1200 }}"
@@ -262,7 +269,7 @@
                   class="tr-hero-img"
                   loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                   fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
-                  decoding="{% if forloop.first %}sync{% else %}async{% endif %}"
+                  decoding="async"
                   width="1920"
                   height="1080"
                 >

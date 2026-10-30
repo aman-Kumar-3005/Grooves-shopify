@@ -203,18 +203,21 @@ export class ProductCard extends ProductCardLink {
 
     this.addEventListener('click', this.navigateToProduct);
 
-    // Preload the next image on the slideshow to avoid white flashes on previewImage
-    setTimeout(() => {
-      if (this.refs.slideshow?.isNested) {
-        this.#preloadNextPreviewImage();
-      }
-    });
+    // Keep offscreen secondary images lazy until the customer interacts.
+    this.addEventListener('pointerenter', this.#preparePreview, { once: true });
+    this.addEventListener('focusin', this.#preparePreview, { once: true });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('click', this.navigateToProduct);
+    this.removeEventListener('pointerenter', this.#preparePreview);
+    this.removeEventListener('focusin', this.#preparePreview);
   }
+
+  #preparePreview = () => {
+    if (this.refs.slideshow?.isNested) this.#preloadNextPreviewImage();
+  };
 
   #preloadNextPreviewImage() {
     const currentSlide = this.refs.slideshow?.slides?.[this.refs.slideshow?.current];

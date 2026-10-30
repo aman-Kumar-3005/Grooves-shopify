@@ -8,7 +8,7 @@
 {% endcomment %}
 {% if settings.transition_to_main_product or settings.page_transition_enabled %}
   {% style %}
-    @media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+    @media (prefers-reduced-motion: no-preference) {
       @view-transition {
         navigation: auto;
       }
@@ -18,7 +18,6 @@
     rel="expect"
     href="#MainContent"
     blocking="render"
-    media="(min-width: 769px)"
     id="view-transition-render-blocker"
   >
 {% endif %}

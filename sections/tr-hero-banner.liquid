@@ -188,6 +188,7 @@
 </style>
 
 <section class="tr-hero-slider" id="tr-hero-{{ section.id }}">
+  {% if request.page_type == 'index' %}<h1 class="visually-hidden" id="grooves-lifestyle">Grooves Lifestyle – audio and mobile accessories in India</h1>{% endif %}
   <div class="tr-hero-slides-container">
     {% for block in section.blocks %}
       {%- liquid

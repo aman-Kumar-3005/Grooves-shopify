@@ -690,6 +690,17 @@
 
         <!-- Title & Subtitle -->
         <h1 class="tr-pdp-title" id="product-title-{{ section.id }}">{{ prod_title }}</h1>
+        <details class="grooves-product-share" id="product-share-{{ section.id }}" data-share-title="{{ target_product.title | escape }}" data-share-url="{{ shop.url | append: target_product.url | escape }}">
+          <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg> Share</summary>
+          <div class="grooves-product-share__panel">
+            <button type="button" data-share-device hidden>Share via…</button>
+            <a href="https://wa.me/?text={{ target_product.title | append: ' ' | append: shop.url | append: target_product.url | url_encode }}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <button type="button" data-share-copy>Copy link</button>
+            <label class="grooves-product-share__link">Product link<input type="text" readonly value="{{ shop.url | append: target_product.url | escape }}" aria-label="Product link"></label>
+            <p role="status" aria-live="polite" data-share-status></p>
+          </div>
+        </details>
+
         {% if prod_subtitle != blank %}
           <p class="tr-pdp-subtitle">{{ prod_subtitle }}</p>
         {% endif %}
@@ -1098,6 +1109,53 @@
 }
 </script>
 {% endif %}
+
+
+<style>
+.grooves-product-share{margin:12px 0 20px;color:inherit;font-size:14px;max-width:100%}
+.grooves-product-share summary{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid currentColor;border-radius:8px;cursor:pointer;list-style:none;font-weight:600}
+.grooves-product-share summary::-webkit-details-marker{display:none}
+.grooves-product-share summary:focus-visible,.grooves-product-share button:focus-visible,.grooves-product-share a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.grooves-product-share__panel{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px;padding:14px;border:1px solid #d8dde5;border-radius:10px;background:#fff;color:#17233b;max-width:100%;box-sizing:border-box}
+.grooves-product-share__panel button,.grooves-product-share__panel a{font:inherit;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border:1px solid #ccd3df;border-radius:7px;background:#fff;color:#17233b;text-decoration:none;cursor:pointer;box-sizing:border-box}
+.grooves-product-share__panel [hidden]{display:none!important}
+.grooves-product-share__link{display:block;flex-basis:100%;min-width:0;font-size:12px}
+.grooves-product-share__link input{display:block;margin-top:5px;width:100%;min-width:0;box-sizing:border-box;padding:10px;border:1px solid #ccd3df;border-radius:6px;font:inherit;color:inherit;background:#fff}
+.grooves-product-share [data-share-status]{flex-basis:100%;margin:0;font-size:13px}
+.grooves-product-share [data-share-status]:empty{display:none}
+</style>
+<script>
+(function(){
+  var root=document.getElementById('product-share-{{ section.id }}');
+  if(!root||root.dataset.shareReady)return;
+  root.dataset.shareReady='true';
+  var url=root.dataset.shareUrl,title=root.dataset.shareTitle;
+  var nativeButton=root.querySelector('[data-share-device]');
+  var copyButton=root.querySelector('[data-share-copy]');
+  var input=root.querySelector('input');
+  var status=root.querySelector('[data-share-status]');
+  if(navigator.share){
+    nativeButton.hidden=false;
+    nativeButton.addEventListener('click',async function(){
+      status.textContent='';
+      try{await navigator.share({title:title,url:url});}
+      catch(error){if(error.name!=='AbortError')status.textContent='Choose WhatsApp or copy the product link below.';}
+    });
+  }
+  copyButton.addEventListener('click',async function(){
+    var copied=false;
+    if(navigator.clipboard&&window.isSecureContext){
+      try{await navigator.clipboard.writeText(url);copied=true;}catch(error){}
+    }
+    if(!copied){
+      input.focus();input.select();input.setSelectionRange(0,input.value.length);
+      try{copied=document.execCommand('copy');}catch(error){}
+    }
+    status.textContent=copied?'Link copied!':'Select and copy the product link above.';
+  });
+  root.addEventListener('keydown',function(event){if(event.key==='Escape'){root.open=false;root.querySelector('summary').focus();}});
+})();
+</script>
 
 {% schema %}
 {

@@ -37,6 +37,18 @@
 {% # theme-check-disable-next-line UnknownFilter %}
 <collection-component view-event-payload="{{ collection | standard_event_data: 'view' | escape }}">
   {% render 'grooves-breadcrumbs', collection: collection %}
+{% capture grooves_collection_intro %}{% case collection.handle %}
+{% when 'earbuds' %}Compare Grooves true wireless earbuds for everyday music and calls. Check the specifications for the exact model rather than assuming that battery life, water resistance or noise cancellation is shared across the range.
+{% when 'headphones' %}Browse Grooves headphones and compare their wearing style, connection options and stated battery information. Choose the exact model for your listening setup; features differ between products.
+{% when 'neck-band' %}Explore Grooves neckband earphones for listeners who prefer earpieces connected by a band. Compare the stated playback conditions, charging input and controls for each model.
+{% when 'adaptor' %}Compare Grooves charging adapters by the connection, stated output and charging protocol required by your device. A higher wattage printed on an adapter does not by itself establish compatibility with a particular phone.
+{% when 'accessories' %}Explore the current Grooves accessories selection and open each product for its exact specifications and available options. Compare the connection your device needs before ordering an audio or charging accessory.
+{% when 'combo' %}Compare Grooves combos by the individual products named in each listing. Confirm that every included item meets your needs; one component’s specifications do not automatically describe the other component.
+{% when 'offers' %}Browse the products currently shown in Grooves offers. Compare the live product page and chosen variant for current pricing and availability; the collection does not promise a fixed discount or a permanent offer.
+{% when 'power-bank' %}When choosing a power bank, compare capacity, output, input charging and the connections required by your devices. Products appear here only when listed in this collection; an empty collection does not indicate current availability.
+{% endcase %}{% endcapture %}{% assign grooves_collection_intro = grooves_collection_intro | strip %}
+{% if grooves_collection_intro != blank %}<div class="grooves-collection-guidance"><p>{{ grooves_collection_intro }}</p></div>{% endif %}
+
   <results-list
     class="section product-grid-container{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
     style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
@@ -92,6 +104,36 @@
     </div>
   </results-list>
 </collection-component>
+
+{% capture grooves_collection_answers %}{% case collection.handle %}
+{% when 'earbuds' %}
+<h3 id="earbuds-question-1">How do you choose wireless earbuds?</h3><p>Start with fit, the devices you use, playback time per charge and the charging connection. Check whether a runtime figure includes the charging case, and confirm any feature that is not stated for the exact model.</p>
+<h3 id="earbuds-question-2">Are all earbuds suitable for workouts?</h3><p>Check the model-specific water-resistance rating and fit before choosing earbuds for exercise. Do not assume that the earbuds and charging case have the same protection.</p>
+{% when 'headphones' %}
+<h3 id="headphones-question-1">What should you check before buying Bluetooth headphones?</h3><p>Compare comfort, device connectivity, microphone information and charging requirements. If you need a wired connection or a particular noise-cancellation feature, confirm that the selected model explicitly supports it.</p>
+<h3 id="headphones-question-2">Are headphones or earbuds a better everyday choice?</h3><p>Headphones suit people who prefer an on-ear or over-ear fit, while earbuds are compact. Comfort, portability and your actual use matter more than choosing one format for everyone.</p>
+{% when 'neck-band' %}
+<h3 id="neck-band-question-1">What is the difference between TWS earbuds and neckbands?</h3><p>TWS earbuds have separate left and right earpieces, usually stored in a charging case. Neckband earphones connect the earpieces to a band. Choose the format that is easier to wear, store and keep track of.</p>
+<h3 id="neck-band-question-2">How should neckband battery figures be compared?</h3><p>Compare figures measured under similar conditions. Volume, calling and enabled features can affect runtime; a stated result at 60% volume is not a promise of the same duration in every use.</p>
+{% when 'adaptor' %}
+<h3 id="adaptor-question-1">How do you choose a fast mobile charger?</h3><p>Check your device manufacturer’s supported charging protocol and power requirements, then match both the adapter and cable. Connector shape alone does not establish the supported charging mode.</p>
+<h3 id="adaptor-question-2">Does USB-C always mean the same charging speed?</h3><p>No. USB-C describes a connector; power capability and charging protocols vary. Check the specifications of the device, adapter and cable together.</p>
+{% when 'accessories' %}
+<h3 id="accessories-question-1">How do you check accessory compatibility?</h3><p>Identify your device model and its supported connector or wireless connection. Match these against the exact accessory listing and ask support when a required detail is missing.</p>
+<h3 id="accessories-question-2">Where can I get help choosing an accessory?</h3><p>Contact Grooves support with the device model and the product you are considering. Include the feature or connection you need so the team can check the relevant model.</p>
+{% when 'combo' %}
+<h3 id="combo-question-1">What should you check before buying an electronics combo?</h3><p>Check the exact models included, available variants, charging requirements and stated package contents. Confirm missing component details with support before ordering.</p>
+<h3 id="combo-question-2">Do all products in a combo have identical specifications?</h3><p>No. Each included model has its own specifications and compatibility requirements. Read the component product pages where available and check the selected combo listing for its contents.</p>
+{% when 'offers' %}
+<h3 id="offers-question-1">How do you compare an offer fairly?</h3><p>Compare the exact model, selected variant and included accessories. Check the current payable amount and delivery details at checkout rather than relying only on a percentage discount.</p>
+<h3 id="offers-question-2">Can offer prices and availability change?</h3><p>Yes. Use the selected product and variant information shown when you order. A collection listing or older promotion should not be treated as a guarantee of future stock or pricing.</p>
+{% when 'power-bank' %}
+<h3 id="power-bank-question-1">What should you check before buying a power bank?</h3><p>Check the stated battery capacity, available output modes, input charging requirements and cable requirements. Confirm the exact model and certification information rather than assuming coverage from another product.</p>
+<h3 id="power-bank-question-2">Is battery capacity the same as output power?</h3><p>No. Capacity describes stored charge or energy, while output power describes the rate at which compatible equipment can receive energy. Compare the units and the manufacturer’s stated conditions.</p>
+{% endcase %}{% endcapture %}{% assign grooves_collection_answers = grooves_collection_answers | strip %}
+{% if grooves_collection_answers != blank %}<section class="grooves-collection-guidance" aria-labelledby="collection-buying-help-{{ section.id }}"><h2 id="collection-buying-help-{{ section.id }}">Choosing {{ collection.title | escape }}</h2>{{ grooves_collection_answers }}<p>Explore <a href="{{ routes.all_products_collection_url }}">all Grooves products</a> or <a href="/pages/contact">contact Grooves support</a> for help with a specific model.</p></section>{% endif %}
+<style>.grooves-collection-guidance{max-width:1280px;margin:0 auto;padding:12px 24px;line-height:1.6}.grooves-collection-guidance h2{font-size:clamp(22px,3vw,28px)}.grooves-collection-guidance h3{font-size:18px;margin:20px 0 8px}.grooves-collection-guidance p{margin:8px 0 16px}@media(max-width:749px){.grooves-collection-guidance{padding:10px 16px}}</style>
+
 
 {% schema %}
 {

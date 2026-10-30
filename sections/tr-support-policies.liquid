@@ -2,9 +2,9 @@
   <div class="tr-container">
     {% if section.settings.badge_title != blank %}
       <div class="tr-section-badge-wrap">
-        <span class="tr-section-pill">{{ section.settings.badge_title }}</span>
+        <h2 class="tr-section-pill" id="support-heading-{{ section.id }}" style="margin:0">{{ section.settings.badge_title }}</h2>
       </div>
-    {% endif %}
+    {% else %}<h2 class="visually-hidden" id="support-heading-{{ section.id }}">Customer support</h2>{% endif %}
 
     <!-- Support Cards -->
     <div class="tr-support-grid">
@@ -41,7 +41,7 @@
             {% else %}<path d="M4 13v-1a8 8 0 0 1 16 0v1M4 12H2v7h4v-7Zm16 0h2v7h-4v-7Zm0 7c0 3-4 3-7 3"/>{% endif %}
           </svg>
           {% endif %}
-          <h4 class="tr-support-title">{{ support_title }}</h4>
+          <h3 class="tr-support-title" id="support-{{ block.id }}">{{ support_title }}</h3>
           {% if block.settings.subtitle != blank %}
             <span style="font-size: 11px; color: #888888;">{{ block.settings.subtitle }}</span>
           {% endif %}

@@ -674,7 +674,10 @@
           -%}
           <img 
             id="tr-main-display-img-{{ section.id }}" 
-            src="{{ initial_img }}" 
+            src="{{ initial_img }}"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async" 
             alt="{{ prod_title | escape }}"
             width="600"
             height="600"

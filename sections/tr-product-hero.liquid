@@ -689,7 +689,7 @@
         {% comment %}Unverified template ratings removed. Genuine reviews must come from a verified review provider.{% endcomment %}
 
         <!-- Title & Subtitle -->
-        <h1 class="tr-pdp-title">{{ prod_title }}</h1>
+        <h1 class="tr-pdp-title" id="product-title-{{ section.id }}">{{ prod_title }}</h1>
         {% if prod_subtitle != blank %}
           <p class="tr-pdp-subtitle">{{ prod_subtitle }}</p>
         {% endif %}
@@ -882,6 +882,20 @@
     </div>
   </div>
 </section>
+
+<section class="grooves-product-help" aria-labelledby="product-help-{{ section.id }}" style="max-width:1280px;margin:0 auto;padding:20px 24px;line-height:1.6;">
+<h2 id="product-help-{{ section.id }}" style="font-size:24px;">Product help for {{ product.title | escape }}</h2>
+{% if usb_c_confirmed_handles contains product.handle %}
+<h3 id="product-charging-{{ section.id }}" style="font-size:18px;">How is {{ product.title | escape }} charged?</h3>
+<p>{{ product.title | escape }} uses a USB-C charging input. Follow the model’s charging instructions and confirm the required power input before choosing an adapter.</p>
+{% endif %}
+<h3 id="product-compatibility-help-{{ section.id }}" style="font-size:18px;">How can I confirm compatibility for {{ product.title | escape }}?</h3>
+<p>Check the specifications above for the exact model and selected option. If a required connection or feature is not listed, <a href="/pages/contact">contact Grooves support</a> with your device model before ordering; specifications from another Grooves product should not be assumed to apply.</p>
+<h3 id="product-order-terms-{{ section.id }}" style="font-size:18px;">Which delivery and return terms apply to {{ product.title | escape }}?</h3>
+<p>Review the <a href="/policies/shipping-policy">shipping policy</a> and <a href="/policies/refund-policy">refund policy</a>. Delivery details are shown during checkout. Ask <a href="mailto:support@grooveslifestyle.com">Grooves customer support</a> to confirm warranty coverage and package contents for the exact model if they are not specified.</p>
+<p><a href="{{ routes.all_products_collection_url }}">Explore all Grooves products</a>.</p>
+</section>
+
 
 <script>
 (function() {

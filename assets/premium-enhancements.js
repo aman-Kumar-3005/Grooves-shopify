@@ -43,6 +43,7 @@
   };
 
   const setupMediaMotion = (root = document) => {
+    if (reducedMotion.matches || matchMedia('(max-width: 749px)').matches) return;
     const media = [...root.querySelectorAll([
       '.tr-showcase-banner', '.tr-speaker-card', '.tr-lifestyle-img-wrap',
       '.tr-blog-img-wrap', '.tr-reel-card', '.cps-image-wrapper',

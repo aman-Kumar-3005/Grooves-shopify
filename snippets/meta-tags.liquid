@@ -23,6 +23,7 @@
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
   assign seo_brand = 'Grooves Lifestyle'
+  assign seo_title_brand_check = page_title | downcase
   assign seo_description = page_description
   if seo_description == blank
     case request.page_type
@@ -141,7 +142,7 @@
   {{ page_title | escape }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains seo_brand %} &ndash; {{ seo_brand }}{% endunless -%}
+  {%- unless seo_title_brand_check contains 'grooves' %} &ndash; {{ seo_brand }}{% endunless -%}
 </title>
 
 <link

@@ -732,10 +732,11 @@
 {% endcase %}
 {% endcapture %}
 {% assign catalogue_spec_rows = catalogue_spec_rows | strip %}
-{% if usb_c_confirmed_handles contains target_product.handle or catalogue_spec_rows != blank %}
+{% if target_product != blank %}
 <div class="tr-pdp-specifications">
 <h2 style="font-size:16px;margin:16px 0 8px;">Key specifications</h2>
 <dl class="tr-catalog-spec-list">
+<div class="tr-catalog-spec-row"><dt>Brand warranty</dt><dd>6 Months</dd></div>
 {{ catalogue_spec_rows }}
 {% if usb_c_confirmed_handles contains target_product.handle %}<div class="tr-catalog-spec-row"><dt>Charging input</dt><dd>USB-C</dd></div>{% endif %}
 </dl>
@@ -867,8 +868,8 @@
             <span>{{ section.settings.badge_1_text | default: 'Free Shipping' }}</span>
           </div>
           <div class="tr-pdp-badge-item">
-            <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/365-days-warranty-icon.png?v=1715862240" alt="Warranty support" width="32" height="32" loading="lazy">
-            <span>{{ section.settings.badge_2_text | default: '1 Year Warranty' }}</span>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" role="img" aria-label="6 Months Brand Warranty"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z"/><path d="m8 12 3 3 5-6"/></svg>
+            <span>6 Months Brand Warranty</span>
           </div>
           <div class="tr-pdp-badge-item">
             <img src="https://cdn.shopify.com/s/files/1/0666/4870/3294/files/ACwO-72Hrs-Replacement-Policy.webp?v=1701511254" alt="Replacement support" width="32" height="32" loading="lazy">
@@ -894,7 +895,7 @@
 <h3 id="product-compatibility-help-{{ section.id }}" style="font-size:18px;">How can I confirm compatibility for {{ product.title | escape }}?</h3>
 <p>Check the specifications above for the exact model and selected option. If a required connection or feature is not listed, <a href="/pages/contact">contact Grooves support</a> with your device model before ordering; specifications from another Grooves product should not be assumed to apply.</p>
 <h3 id="product-order-terms-{{ section.id }}" style="font-size:18px;">Which delivery and return terms apply to {{ product.title | escape }}?</h3>
-<p>Review the <a href="/policies/shipping-policy">shipping policy</a> and <a href="/policies/refund-policy">refund policy</a>. Delivery details are shown during checkout. Ask <a href="mailto:support@grooveslifestyle.com">Grooves customer support</a> to confirm warranty coverage and package contents for the exact model if they are not specified.</p>
+<p>Review the <a href="/policies/shipping-policy">shipping policy</a> and <a href="/policies/refund-policy">refund policy</a>. Delivery details are shown during checkout. Ask <a href="mailto:support@grooveslifestyle.com">Grooves customer support</a> for warranty support and to confirm package contents for the exact model. All Grooves products include a 6-month brand warranty.</p>
 <p><a href="{{ routes.all_products_collection_url }}">Explore all Grooves products</a>.</p>
 </section>
 
@@ -1375,7 +1376,7 @@
       "type": "text",
       "id": "badge_2_text",
       "label": "Badge 2 Text",
-      "default": "1 Year Warranty"
+      "default": "6 Months Brand Warranty"
     },
     {
       "type": "text",

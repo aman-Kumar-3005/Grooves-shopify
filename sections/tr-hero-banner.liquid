@@ -185,6 +185,18 @@
       {% endif %}
     }
   }
+/* Keep the mobile LCP image static and immediately paintable. */
+  @media (max-width: 768px) {
+    .tr-theme #tr-hero-{{ section.id }} .tr-hero-img,
+    .tr-theme #tr-hero-{{ section.id }} .tr-hero-slide.active .tr-hero-img {
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+      will-change: auto !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  }
 </style>
 
 <section class="tr-hero-slider" id="tr-hero-{{ section.id }}">

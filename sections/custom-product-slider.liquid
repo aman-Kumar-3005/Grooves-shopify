@@ -229,7 +229,7 @@
 <div class="section-{{ section.id }}-padding">
   <div class="custom-product-slider-wrapper">
     {%- if section.settings.title != blank -%}
-      <h2 class="cps-heading">{{ section.settings.title }}</h2>
+      <h2 class="cps-heading" id="product-selection-{{ section.id }}">{{ section.settings.title }}</h2>
     {%- endif -%}
 
     <div class="cps-track">
@@ -240,7 +240,7 @@
           <div class="cps-card">
             
             <a href="{{ product.url }}" class="cps-image-wrapper">
-              {%- if section.settings.show_new_badge -%}
+              {%- if section.settings.show_new_badge and product.tags contains 'new' -%}
                 <span class="cps-badge-left">{{ section.settings.new_badge_text }}</span>
               {%- endif -%}
               
@@ -273,7 +273,8 @@
               
               <div class="cps-bottom-row">
                 <div class="cps-price-wrapper">
-                  {%- if section.settings.price_prefix != blank -%}
+                  {%- assign price_prefix_normalized = section.settings.price_prefix | downcase | strip -%}
+                  {%- if section.settings.price_prefix != blank and price_prefix_normalized != 'price' -%}
                     <span class="cps-price-prefix">{{ section.settings.price_prefix }}</span>
                   {%- endif -%}
                   <span class="cps-price">{{ product.price | money }}</span>

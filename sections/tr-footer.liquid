@@ -23,6 +23,7 @@
 -%}
 
 <footer class="tr-footer" id="tr-footer-{{ section.id }}">
+  <h2 class="visually-hidden" id="store-information-{{ section.id }}">Store information and support</h2>
   <div class="tr-container">
     <div class="tr-footer-grid">
       <!-- Brand Column -->
@@ -58,7 +59,10 @@
             </div>
           {% endif %}
         </a>
-        <p>{{ section.settings.brand_desc | default: 'Grooves Lifestyle - High Definition Audio, Powerful Fast Chargers & Smart Everyday Gear. Engineered for bass lovers and modern tech enthusiasts.' }}</p>
+        {% assign footer_brand_description = section.settings.brand_desc %}
+        {% if footer_brand_description == blank or footer_brand_description contains 'High Definition Audio' or footer_brand_description contains 'Engineered for everyday hustle' %}{% assign footer_brand_description = 'Wireless audio products and mobile charging accessories for everyday use in India. Compare the exact model specifications before choosing.' %}{% endif %}
+        <p>{{ footer_brand_description | escape }}</p>
+        <p>Operated by Mewalt Electronics Private Limited.</p>
         <div style="margin-top: 16px; display: flex; gap: 14px;">
           <a href="https://instagram.com/grooveslifestyle" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="Instagram">📸</a>
           <a href="https://youtube.com/@grooveslifestyle" target="_blank" rel="noopener" style="color: #888; font-size: 18px;" aria-label="YouTube">▶️</a>
@@ -69,7 +73,7 @@
 
       <!-- Column 1: Main Menu (Connected to Shopify Main Menu) -->
       <div class="tr-footer-col">
-        <h3>{{ section.settings.menu_heading | default: 'Quick Links' }}</h3>
+        <h3 id="footer-links-{{ section.id }}">{{ section.settings.menu_heading | default: 'Quick Links' }}</h3>
         <ul>
           {%- if footer_links != blank and footer_links.size > 0 -%}
             {% for link in footer_links %}
@@ -91,7 +95,7 @@
 
       <!-- Column 2: Customer Support & Policies -->
       <div class="tr-footer-col">
-        <h3>{{ section.settings.footer_menu_heading | default: 'Customer Support' }}</h3>
+        <h3 id="footer-support-{{ section.id }}">{{ section.settings.footer_menu_heading | default: 'Customer Support' }}</h3>
         <div class="tr-support-contact" style="margin: 0 0 16px; color: #888888; font-size: 13px; line-height: 1.55;">
           {%- if section.settings.support_email != blank -%}
             <div style="margin-bottom: 6px;">
@@ -153,7 +157,7 @@
 
       <!-- Column 3: Newsletter -->
       <div class="tr-footer-col">
-        <h3>Newsletter</h3>
+        <h3 id="footer-newsletter-{{ section.id }}">Newsletter</h3>
         <p style="color: #888888; font-size: 13px; margin: 0 0 12px;">
           Subscribe for early product launches, secret discounts, and VIP updates.
         </p>

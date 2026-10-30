@@ -77,7 +77,7 @@
         "desktop_height": 600,
         "desktop_image_fit": "cover",
         "desktop_banner_width": 100,
-        "mobile_height": 180,
+        "mobile_height": 200,
         "mobile_image_fit": "contain",
         "mobile_banner_width": 100,
         "slider_bg": "#000000",

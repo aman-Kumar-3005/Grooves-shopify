@@ -172,6 +172,7 @@
     <div class="shoppable-track">
       {%- for block in section.blocks -%}
         {%- assign product = all_products[block.settings.product] -%}
+        {%- if product == blank and request.design_mode == false -%}{%- continue -%}{%- endif -%}
         {%- liquid
           assign smallest_video_source = blank
           if block.settings.shopify_video != blank

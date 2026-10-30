@@ -190,7 +190,7 @@
         data-product-transition="{{ settings.transition_to_main_product }}"
         data-template="{{ template }}"
       >
-        {% if request.page_type == 'blog' or request.page_type == 'article' %}{% render 'grooves-breadcrumbs' %}{% endif %}
+        {% if request.page_type == 'page' or request.page_type == 'policy' or request.page_type == 'blog' or request.page_type == 'article' %}{% render 'grooves-breadcrumbs' %}{% endif %}
         {{ content_for_layout }}
 {% if request.page_type == 'index' %}
 {% capture grooves_home_questions %}What products does Grooves Lifestyle offer?|What are TWS earbuds?|How do you choose wireless earbuds?|What is the difference between earbuds and neckbands?|How do you choose a power bank?{% endcapture %}

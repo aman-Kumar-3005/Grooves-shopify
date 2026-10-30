@@ -23,15 +23,17 @@
       {% render 'spacing-style', settings: section.settings %}
     "
   >
+    {% render 'grooves-breadcrumbs' %}
     {% content_for 'blocks' %}
 
 {% if page.handle == 'about-grooves' %}
 <section aria-labelledby="grooves-company-information">
-<h2 id="grooves-company-information">Grooves Lifestyle in India</h2>
-<p>Grooves Lifestyle is an audio and mobile-accessories brand serving customers in India. This website is operated by Mewalt Electronics Private Limited.</p>
+<h2 id="grooves-company-information">Who operates Grooves Lifestyle?</h2>
+<p>Grooves Lifestyle is an audio and mobile-accessories brand serving customers in India. The online store at grooveslifestyle.com is operated by Mewalt Electronics Private Limited. Use this website to explore the current product range, compare exact models and find product, order or warranty support from the customer care team.</p>
 <p>Explore <a href="/collections/earbuds">wireless earbuds</a>, <a href="/collections/headphones">headphones</a>, <a href="/collections/neck-band">neckbands</a> and <a href="/collections/adaptor">charging adapters</a>. Specifications, availability and included accessories depend on the exact model.</p>
-<h3 id="grooves-customer-support">How can I contact Grooves support?</h3>
+<h2 id="grooves-customer-support">How can I contact Grooves support?</h2>
 <p>For product, order or warranty questions, email <a href="mailto:support@grooveslifestyle.com">support@grooveslifestyle.com</a> or call <a href="tel:+919216921661">+91 9216921661</a>. Read the <a href="/policies/shipping-policy">shipping policy</a> and <a href="/policies/refund-policy">refund policy</a> for the published terms.</p>
+<h2 id="product-information-and-warranty">Product information and warranty</h2><p>All products carry a 6-month brand warranty. Read the published warranty terms and contact support for a specific claim. Technical specifications and box contents are model-specific; a feature listed for one item does not establish the same feature for another model or generation.</p>
 <p>Official website: <a href="{{ request.origin }}">grooveslifestyle.com</a>. Find Grooves Audio &amp; Lifestyle on <a href="https://in.linkedin.com/company/grooves-audio">LinkedIn</a>.</p>
 </section>
 {% endif %}

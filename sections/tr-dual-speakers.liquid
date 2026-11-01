@@ -1,111 +1,24 @@
-<section class="tr-dual-speakers-section" id="tr-dual-speakers-{{ section.id }}" style="padding-top: {{ section.settings.padding_top | default: 10 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 30 }}px;">
-  <div class="tr-container">
-    <div class="tr-dual-speakers-grid">
-      {% if section.blocks.size > 0 %}
-        {% for block in section.blocks %}
-          {%- liquid
-            assign blk_prod = block.settings.product
-            if block.settings.image != blank
-              assign spk_img = block.settings.image | image_url: width: 800
-            elsif block.settings.image_url != blank
-              if block.settings.image_url contains 'http' or block.settings.image_url contains '//'
-                assign spk_img = block.settings.image_url
-              else
-                assign spk_img = block.settings.image_url | replace: 'campaign/', '' | asset_url
-              endif
-            elsif blk_prod != blank and blk_prod.featured_image
-              assign spk_img = blk_prod.featured_image | image_url: width: 800
-            else
-              assign spk_img = 'grooves-speaker-1.jpg' | asset_url
-            endif
-            if block.settings.link != blank
-              assign spk_link = block.settings.link
-            elsif blk_prod != blank
-              assign spk_link = blk_prod.url
-            else
-              assign spk_link = '/collections/all'
-            endif
-          -%}
-          <div class="tr-speaker-card" {{ block.shopify_attributes }}>
-            <img 
-              src="{{ spk_img }}" 
-              alt="{{ block.settings.title | default: 'Grooves Party Speaker' }}"
-              loading="lazy"
-              width="600"
-              height="400"
-            >
-            <div class="tr-speaker-card-content">
-              <a href="{{ spk_link }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
-                {{ block.settings.button_label | default: 'BUY NOW' }}
-              </a>
-            </div>
-          </div>
-        {% endfor %}
-      {% else %}
-        <!-- Speaker 1 (30W RMS) -->
-        {%- liquid
-          if section.settings.speaker1_img != blank
-            assign spk1_img = section.settings.speaker1_img | image_url: width: 800
-          else
-            assign spk1_raw = section.settings.speaker1_image | default: 'grooves-speaker-1.jpg'
-            if spk1_raw contains 'http' or spk1_raw contains '//'
-              assign spk1_img = spk1_raw
-            else
-              assign spk1_img = spk1_raw | replace: 'campaign/', '' | asset_url
-            endif
-          endif
-        -%}
-        <div class="tr-speaker-card">
-          <img 
-            src="{{ spk1_img }}" 
-            alt="UP TO 30W RMS"
-            loading="lazy"
-            width="600"
-            height="400"
-          >
-          <div class="tr-speaker-card-content">
-            <a href="{{ section.settings.speaker1_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
-              {{ section.settings.speaker1_btn | default: 'BUY NOW' }}
-            </a>
-          </div>
-        </div>
-
-        <!-- Speaker 2 (50W RMS) -->
-        {%- liquid
-          if section.settings.speaker2_img != blank
-            assign spk2_img = section.settings.speaker2_img | image_url: width: 800
-          else
-            assign spk2_raw = section.settings.speaker2_image | default: 'grooves-speaker-2.jpg'
-            if spk2_raw contains 'http' or spk2_raw contains '//'
-              assign spk2_img = spk2_raw
-            else
-              assign spk2_img = spk2_raw | replace: 'campaign/', '' | asset_url
-            endif
-          endif
-        -%}
-        <div class="tr-speaker-card">
-          <img 
-            src="{{ spk2_img }}" 
-            alt="UP TO 50W RMS"
-            loading="lazy"
-            width="600"
-            height="400"
-          >
-          <div class="tr-speaker-card-content">
-            <a href="{{ section.settings.speaker2_link | default: '/collections/all' }}" class="tr-btn tr-btn-accent" style="padding: 10px 32px;">
-              {{ section.settings.speaker2_btn | default: 'BUY NOW' }}
-            </a>
-          </div>
-        </div>
-      {% endif %}
-    </div>
-  </div>
-</section>
-
+<section class="tr-dual-speakers-section upgrade-spotlights"><div class="tr-container"><div class="upgrade-section-head"><div><span class="upgrade-eyebrow">IN FOCUS</span><h2>{{ section.settings.spotlight_heading | escape }}</h2></div></div><div class="upgrade-spotlight-grid">{% assign featured_handles = 'grooves-alpha-200-with-anc,grooves-signature2-0' | split: ',' %}{% for handle in featured_handles %}{% if forloop.first %}{% assign product = section.settings.featured_product_1 %}{% else %}{% assign product = section.settings.featured_product_2 %}{% endif %}{% if product == blank %}{% assign product = all_products[handle] %}{% endif %}{% if product != blank %}<article class="upgrade-spotlight"><div class="upgrade-spotlight-copy"><span class="upgrade-eyebrow">{% if forloop.first %}WIRELESS AUDIO{% else %}HEADPHONES{% endif %}</span><h3>{{ product.title | escape }}</h3><p>{{ product.price | money }}</p><a href="{{ product.url }}" class="upgrade-button">Explore product ↗</a></div><a href="{{ product.url }}" class="upgrade-spotlight-image" aria-label="{{ product.title | escape }}">{{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '320,500,800', sizes: '(max-width:749px) 70vw, 30vw', alt: product.title }}</a></article>{% endif %}{% endfor %}</div></div></section>
 {% schema %}
 {
-  "name": "Grooves Dual Speakers",
+  "name": "Grooves Audio Spotlights",
   "settings": [
+    {
+      "type": "text",
+      "id": "spotlight_heading",
+      "label": "Spotlight heading",
+      "default": "Meet your next everyday essential."
+    },
+    {
+      "type": "product",
+      "id": "featured_product_1",
+      "label": "First spotlight product"
+    },
+    {
+      "type": "product",
+      "id": "featured_product_2",
+      "label": "Second spotlight product"
+    },
     {
       "type": "range",
       "id": "padding_top",

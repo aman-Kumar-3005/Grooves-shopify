@@ -215,7 +215,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h2>Related products</h2>",
+            "text": "<h2>You may also like</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -628,16 +628,16 @@
         "card_max_width": 300,
         "collection": "accessories",
         "layout_type": "carousel",
-        "carousel_on_mobile": false,
+        "carousel_on_mobile": true,
         "max_products": 6,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
-        "columns_gap": 8,
+        "columns_gap": 20,
         "rows_gap": 24,
         "icons_style": "arrow",
         "icons_shape": "circle",
-        "section_width": "full-width",
+        "section_width": "page-width",
         "horizontal_alignment": "center",
         "gap": 28,
         "background_color": "",
@@ -651,37 +651,37 @@
         "text_rYK6MH": {
           "type": "text",
           "settings": {
-            "new_text": "⭐ India’s Fastest Growing Audio Brand | Over 2.5 Crore+ Happy Customers."
+            "new_text": "Find your sound"
           }
         },
         "text_nn3WUA": {
           "type": "text",
           "settings": {
-            "new_text": "🎁 Use Coupon Code PREPAID at Checkout for an Extra 5% OFF!"
+            "new_text": "Explore wireless audio"
           }
         },
         "text_wWdYgJ": {
           "type": "text",
           "settings": {
-            "new_text": "🛡️ 100% Secure Checkout & 24-Hour Easy Replacement Policy."
+            "new_text": "Discover everyday essentials"
           }
         },
         "text_q4VYtA": {
           "type": "text",
           "settings": {
-            "new_text": "⚡ Special Launch Offer: Flat 50% OFF on All Wireless Earbuds & Headphones!"
+            "new_text": "Meet your next Grooves"
           }
         },
         "text_cYrqzw": {
           "type": "text",
           "settings": {
-            "new_text": "🚀 Fast & Secure Delivery: Free Shipping on All Prepaid Orders."
+            "new_text": "Audio & mobile accessories"
           }
         },
         "text_MnXRhM": {
           "type": "text",
           "settings": {
-            "new_text": "🔥 High Demand Alert: Grab Your True Wireless Stereo Before Stock Runs Out!"
+            "new_text": "Find your sound"
           }
         }
       },
@@ -693,23 +693,21 @@
         "text_cYrqzw",
         "text_MnXRhM"
       ],
-      "disabled": true,
       "name": "Marquee",
       "settings": {
         "marquee_meta": "",
         "colorBackground": "#17243d",
-        "marquee_speed": 164,
+        "marquee_speed": 60,
         "colorText": "#fff",
         "link": "",
         "marquee_height": 46,
-        "font_size": 24
+        "font_size": 18
       }
     },
     "tabbed_tws": {
       "type": "tr-tabbed-tws",
-      "disabled": true,
       "settings": {
-        "section_title": "Grooves Earbuds built for seamless sound",
+        "section_title": "Find your listening style.",
         "tabs_list": "All,ANC / ENC,Translucent,Wireless Charging,Dual Mic,Display Earbuds,Gaming",
         "padding_top": 20,
         "padding_bottom": 40,
@@ -726,8 +724,10 @@
     },
     "dual_speakers": {
       "type": "tr-dual-speakers",
-      "disabled": true,
       "settings": {
+        "spotlight_heading": "Meet your next everyday essential.",
+        "featured_product_1": "grooves-alpha-200-with-anc",
+        "featured_product_2": "grooves-signature2-0",
         "padding_top": 10,
         "padding_bottom": 30,
         "speaker1_image": "grooves-speaker-1.jpg",
@@ -792,7 +792,6 @@
         "review_qFmPcG",
         "review_hQpydt"
       ],
-      "disabled": true,
       "name": "Customer Testimonials",
       "settings": {
         "heading": "What Our Customers Say",
@@ -861,8 +860,8 @@
       ],
       "name": "Shoppable VIDEO",
       "settings": {
-        "full_width": true,
-        "title": "Shop the Trends Everyone’s Talking About.",
+        "full_width": false,
+        "title": "See it. Love it. Make it yours.",
         "heading_size": 24,
         "heading_alignment": "left",
         "card_width_desktop": 260,
@@ -877,83 +876,51 @@
     "lifestyle": {
       "type": "tr-lifestyle",
       "blocks": {
-        "lifestyle_item_B8JNBG": {
+        "lifestyle_upgrade_0": {
           "type": "lifestyle_item",
           "settings": {
-            "collection": "",
-            "image": "shopify://shop_images/68619e343b02d_bc5dba57-b45f-45c3-b417-7c5483254001.webp",
-            "title": "Daily Commute & Travel",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281",
+            "collection": "earbuds",
+            "title": "Your daily soundtrack",
+            "image_url": "",
             "link": ""
           }
         },
-        "lifestyle_item_XtCAc6": {
+        "lifestyle_upgrade_1": {
           "type": "lifestyle_item",
           "settings": {
-            "collection": "",
-            "title": "Daily Commute & Travel",
-            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/landing-page-imagesmovie-night.png?v=1782984281",
+            "collection": "headphones",
+            "title": "Make time for music",
+            "image_url": "",
             "link": ""
           }
         },
-        "life_movie": {
+        "lifestyle_upgrade_2": {
           "type": "lifestyle_item",
           "settings": {
-            "collection": "",
-            "title": "Movie Night",
-            "image_url": "grooves-life-movie.jpg",
-            "link": "shopify://collections/all"
+            "collection": "neck-band",
+            "title": "Keep your day connected",
+            "image_url": "",
+            "link": ""
           }
         },
-        "life_news": {
+        "lifestyle_upgrade_3": {
           "type": "lifestyle_item",
           "settings": {
-            "collection": "",
-            "title": "News & Podcasts",
-            "image_url": "grooves-life-news.jpg",
-            "link": "shopify://collections/all"
-          }
-        },
-        "life_innovators": {
-          "type": "lifestyle_item",
-          "settings": {
-            "collection": "",
-            "title": "Innovators",
-            "image_url": "grooves-life-innovators.jpg",
-            "link": "shopify://collections/all"
-          }
-        },
-        "life_workout": {
-          "type": "lifestyle_item",
-          "settings": {
-            "collection": "",
-            "title": "Workout & Fitness",
-            "image_url": "grooves-life-workout.jpg",
-            "link": "shopify://collections/all"
-          }
-        },
-        "life_party": {
-          "type": "lifestyle_item",
-          "settings": {
-            "collection": "",
-            "title": "Party & Travel",
-            "image_url": "grooves-life-party.jpg",
-            "link": "shopify://collections/all"
+            "collection": "adaptor",
+            "title": "Power the everyday",
+            "image_url": "",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "lifestyle_item_B8JNBG",
-        "lifestyle_item_XtCAc6",
-        "life_movie",
-        "life_news",
-        "life_innovators",
-        "life_workout",
-        "life_party"
+        "lifestyle_upgrade_0",
+        "lifestyle_upgrade_1",
+        "lifestyle_upgrade_2",
+        "lifestyle_upgrade_3"
       ],
-      "disabled": true,
       "settings": {
-        "badge_title": "Shop By Lifestyle",
+        "badge_title": "Your day. Your Grooves.",
         "padding_top": 20,
         "padding_bottom": 40
       }
@@ -1012,7 +979,6 @@
         "blog_3",
         "blog_4"
       ],
-      "disabled": true,
       "settings": {
         "badge_title": "Blogs",
         "blog": "news",
@@ -1162,10 +1128,9 @@
         "logo_item_EnFaVG",
         "logo_item_kxDmYi"
       ],
-      "disabled": true,
       "name": "Brand Marquee Logos",
       "settings": {
-        "title": "Best selling brand on...",
+        "title": "Brand showcase",
         "heading_size": 22,
         "heading_alignment": "center",
         "logo_width": 170,

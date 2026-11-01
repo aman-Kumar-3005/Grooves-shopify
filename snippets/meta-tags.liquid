@@ -19,12 +19,21 @@
 >
 
 {%- liquid
+  if request.page_type == 'collection' and collection.handle == 'all'
+    assign page_title = 'All Products: Earbuds, Headphones & Chargers | Grooves Lifestyle'
+    if page_image == blank
+      assign page_image = all_products['grooves-alpha-200-with-anc'].featured_image
+    endif
+  endif
   assign og_title = page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
   assign seo_brand = 'Grooves Lifestyle'
   assign seo_title_brand_check = page_title | downcase
   assign seo_description = page_description
+  if request.page_type == 'collection' and collection.handle == 'all'
+    assign seo_description = 'Shop Grooves earbuds, headphones, neckbands and mobile charging adapters in India. Compare current prices, product specifications and available options.'
+  endif
   if seo_description == blank
     case request.page_type
       when 'product'

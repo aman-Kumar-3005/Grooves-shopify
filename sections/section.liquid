@@ -1,3 +1,31 @@
+{% assign grooves_section_key = section.id | split: '__' | last %}
+{% if request.page_type == 'collection' and collection.handle == 'all' and grooves_section_key == 'section' %}
+<style>
+.grooves-all-hero{background:radial-gradient(ellipse at 88% 15%,#29527a,#17243d 70%);color:#fff;padding:48px clamp(20px,4vw,60px)}
+.grooves-all-hero-inner{max-width:1280px;margin:auto;display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.grooves-all-hero .grooves-all-eyebrow{color:#a9ddf2;font-size:11px;font-weight:700;letter-spacing:.18em;display:block;margin-bottom:16px}
+.tr-theme .grooves-all-hero h1{color:#fff!important;font-size:clamp(34px,3.5vw,52px)!important;line-height:1.06!important;letter-spacing:-.045em;margin:0 0 20px;text-transform:none!important;max-width:620px}
+.grooves-all-hero p{color:#d0dce9;font-size:15px;line-height:1.65;margin:0 0 22px;max-width:550px}
+.grooves-all-actions{display:flex;flex-wrap:wrap;gap:12px}.grooves-all-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;border:1px solid #ffffff50;border-radius:12px;text-decoration:none;color:#fff;font-size:13px;font-weight:650}
+.grooves-all-actions a:first-child{background:#fff;color:#17243d;border-color:#fff}.grooves-all-actions a:hover{background:#bfe8fb;color:#17243d}
+.grooves-all-visual{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:center}
+.grooves-all-visual a{display:flex;flex-direction:column;align-items:center;gap:14px;background:#fff;border:1px solid #ffffff80;border-radius:20px;padding:18px 10px;color:#17243d;text-decoration:none;box-shadow:0 15px 40px #06152d33;transition:transform .25s}
+.grooves-all-visual a:nth-child(2){margin-top:44px}.grooves-all-visual a:hover{transform:translateY(-5px)}.grooves-all-visual img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}.grooves-all-visual span{font-size:11px;font-weight:650;text-align:center}
+.grooves-all-categories{display:flex;gap:10px;flex-wrap:wrap;max-width:1280px;margin:0 auto;padding:22px clamp(20px,4vw,60px);box-sizing:content-box}
+.grooves-all-categories a{display:inline-flex;align-items:center;min-height:44px;border:1px solid #d8e2ec;border-radius:30px;padding:9px 18px;color:#17243d;text-decoration:none;background:#fff;font-size:13px;font-weight:650}.grooves-all-categories a:hover{background:#17243d;color:#fff}
+#MainContent:has(.grooves-all-hero) :is(.facets,.facets__form-wrapper,.facets-controls-wrapper){background:#fff!important;color:#17243d!important;border-color:#dce4ec!important;box-shadow:none!important}
+#MainContent:has(.grooves-all-hero) .facets :is(summary,button,label,span,a,.facets__label,.facets__summary){color:#17243d!important}
+#MainContent:has(.grooves-all-hero) .facets .button{background:#17243d!important;color:#fff!important}
+#MainContent:has(.grooves-all-hero) .facets svg{color:inherit!important}
+#MainContent:has(.grooves-all-hero) .product-grid{gap:20px!important;padding-inline:clamp(16px,3vw,48px)}
+.grooves-all-seo{max-width:1280px;margin:40px auto;padding:40px clamp(20px,4vw,56px);line-height:1.7;background:#f3f6f9;border:1px solid #e0e7ee;border-radius:24px;color:#596779}
+.grooves-all-seo h2{font-size:clamp(25px,2.5vw,34px);line-height:1.2;text-transform:none;letter-spacing:-.035em;color:#17243d;margin:0 0 20px}.grooves-all-seo h3{font-size:19px;line-height:1.35;text-transform:none;letter-spacing:-.025em;color:#17243d;margin:0 0 12px}.grooves-all-seo p{font-size:14px;margin:0 0 18px}.grooves-all-seo a{color:#175b89;text-decoration:underline;text-underline-offset:3px}.grooves-all-seo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin:28px 0}.grooves-all-seo details{border-top:1px solid #d3dde6;padding:16px 0}.grooves-all-seo summary{font-size:15px;min-height:36px;cursor:pointer;font-weight:650;color:#17243d}.grooves-all-seo details p{margin:12px 0 0}
+@media(max-width:749px){.grooves-all-hero{padding:32px 20px}.grooves-all-hero-inner{grid-template-columns:1fr;gap:26px}.tr-theme .grooves-all-hero h1{font-size:34px!important}.grooves-all-hero p{font-size:14px}.grooves-all-visual{gap:10px}.grooves-all-visual a{border-radius:14px;padding:12px 8px;gap:10px}.grooves-all-visual a:nth-child(2){margin-top:20px}.grooves-all-visual span{font-size:10px}.grooves-all-categories{padding:16px 20px;gap:8px;box-sizing:border-box}.grooves-all-categories a{font-size:12px;padding-inline:14px}.grooves-all-seo{margin:24px 16px;padding:28px 20px;border-radius:20px}.grooves-all-seo-grid{grid-template-columns:1fr;gap:12px}#MainContent:has(.grooves-all-hero) .product-grid{gap:12px!important;padding-inline:16px}}
+@media(prefers-reduced-motion:reduce){.grooves-all-visual a{transition:none}}
+</style>
+<section class="grooves-all-hero" aria-labelledby="grooves-all-title"><div class="grooves-all-hero-inner"><div><span class="grooves-all-eyebrow">THE GROOVES COLLECTION</span><h1 id="grooves-all-title">Wireless audio.<br>Everyday essentials.</h1><p>Shop Grooves TWS earbuds, headphones, neckbands and mobile charging accessories in India. Compare models, prices and availability to find the right fit for your everyday setup.</p><div class="grooves-all-actions"><a href="#ResultsList">Explore all products ↓</a><a href="/collections/earbuds">Shop earbuds ↗</a></div></div><div class="grooves-all-visual">{% assign banner_handles = 'grooves-alpha-200-with-anc,alpha-100x,grooves-25-w-pd' | split: ',' %}{% assign banner_labels = 'TWS earbuds,Headphones,Charging adapters' | split: ',' %}{% for handle in banner_handles %}{% assign banner_product = all_products[handle] %}{% if banner_product != blank %}<a href="{{ banner_product.url }}" aria-label="{{ banner_product.title | escape }}">{{ banner_product.featured_image | image_url: width: 480 | image_tag: widths: '160,240,360,480', sizes: '(max-width:749px) 28vw, 16vw', loading: 'eager', alt: banner_product.title }}<span>{{ banner_labels[forloop.index0] }}</span></a>{% endif %}{% endfor %}</div></div></section><nav class="grooves-all-categories" aria-label="Shop product categories">{% assign collection_handles = 'earbuds,headphones,neck-band,adaptor,accessories,combo,offers' | split: ',' %}{% for handle in collection_handles %}{% assign category = collections[handle] %}<a href="{{ category.url }}">{{ category.title | escape }}</a>{% endfor %}<a href="#grooves-all-buying-guide">Buying guide ↓</a></nav>
+
+{% else %}
 {% capture children %}
   {% content_for 'blocks' %}
 {% endcapture %}
@@ -9,6 +37,7 @@
   background_color: section.settings.background_color
 %}
 
+{% endif %}
 {% schema %}
 {
   "name": "t:names.section",

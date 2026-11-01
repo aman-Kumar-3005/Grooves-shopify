@@ -1186,7 +1186,7 @@
 "brand":{"@type":"Brand","name":{{ product.vendor | default: 'Grooves' | json }}},
 "mainEntityOfPage":{"@id":{{ canonical_url | append: '#webpage' | json }}},
 "additionalProperty":[{"@type":"PropertyValue","name":"Brand warranty","value":"6 months"}{% if usb_c_confirmed_handles contains product.handle %},{"@type":"PropertyValue","name":"Charging input","value":"USB-C"}{% endif %}]
-{% if catalogue_spec_rows != blank %}{% assign product_spec_description = catalogue_spec_rows | replace: '</dt><dd>', ': ' | replace: '</dd></div>', '; ' | strip_html | strip_newlines | strip %},"description":{{ product_spec_description | json }}{% endif %}
+{% capture product_schema_description %}{{ product.title }}. Brand warranty: 6 months.{% if usb_c_confirmed_handles contains product.handle %} Charging input: USB-C.{% endif %}{% endcapture %}{% if catalogue_spec_rows != blank %}{% assign product_schema_description = catalogue_spec_rows | replace: '</dt><dd>', ': ' | replace: '</dd></div>', '; ' | strip_html | strip_newlines | strip %}{% endif %},"description":{{ product_schema_description | strip | json }}
 {% if product.type != blank %},"category":{{ product.type | json }}{% endif %}
 {% if product.selected_or_first_available_variant.sku != blank %},"sku":{{ product.selected_or_first_available_variant.sku | json }}{% endif %}
 {% if product.images.size > 0 %},"image":[{% for schema_image in product.images limit: 6 %}{{ schema_image | image_url: width: 1600 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}

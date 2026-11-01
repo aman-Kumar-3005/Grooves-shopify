@@ -316,68 +316,24 @@
 </section>
 
 <script>
-  (function() {
-    const slider = document.getElementById('tr-hero-{{ section.id }}');
-    if (!slider) return;
-    const slides = slider.querySelectorAll('.tr-hero-slide');
-    const dots = slider.querySelectorAll('.tr-hero-dot');
-    let current = 0;
-    let timer = null;
-
-    function showSlide(index) {
-      slides.forEach((s, i) => s.classList.toggle('active', i === index));
-      dots.forEach((d, i) => d.classList.toggle('active', i === index));
-      current = index;
-    }
-
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', (e) => {
-        e.preventDefault();
-        showSlide(idx);
-        resetTimer();
-      });
-    });
-
-    function resetTimer() {
-      if (timer) clearInterval(timer);
-      timer = null;
-      // Swapping to a lazy second banner during Lighthouse's observation window
-      // turns that banner into a very late LCP. Mobile users keep dots and swipe,
-      // while desktop retains the configured autoplay experience.
-      if (window.matchMedia('(max-width: 768px)').matches) return;
-      if (slides.length > 1) {
-        const speed = {{ section.settings.autoplay_speed | default: 5 | times: 1000 }};
-        timer = setInterval(() => {
-          let next = (current + 1) % slides.length;
-          showSlide(next);
-        }, speed);
-      }
-    }
-    resetTimer();
-
-    const mobileQuery = window.matchMedia('(max-width: 768px)');
-    const syncAutoplay = () => resetTimer();
-    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', syncAutoplay);
-    else mobileQuery.addListener(syncAutoplay);
-
-    // Touch swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    slider.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    slider.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX - touchEndX > 50) {
-        showSlide((current + 1) % slides.length);
-        resetTimer();
-      } else if (touchEndX - touchStartX > 50) {
-        showSlide((current - 1 + slides.length) % slides.length);
-        resetTimer();
-      }
-    }, { passive: true });
-  })();
+(() => {
+ const slider=document.getElementById('tr-hero-{{ section.id }}');if(!slider)return;
+ const slides=[...slider.querySelectorAll('.tr-hero-slide')],dots=[...slider.querySelectorAll('.tr-hero-dot')];if(slides.length<2)return;
+ let current=0,timer=null,paused=false,hovered=false,focused=false;
+ const media=matchMedia('(prefers-reduced-motion: reduce)'),mobile=matchMedia('(max-width:768px)');
+ const controls=document.createElement('div');controls.className='upgrade-hero-controls';
+ const previous=document.createElement('button'),next=document.createElement('button'),pause=document.createElement('button'),status=document.createElement('span');
+ previous.textContent='←';next.textContent='→';pause.textContent='Pause';status.className='upgrade-hero-count';
+ [[previous,'Previous banner'],[next,'Next banner'],[pause,'Pause banner autoplay']].forEach(([button,label])=>{button.type='button';button.setAttribute('aria-label',label)});
+ controls.append(previous,status,next,pause);slider.append(controls);slider.setAttribute('aria-roledescription','carousel');slider.setAttribute('aria-label','Grooves highlights');
+ function show(index){current=(index+slides.length)%slides.length;slides.forEach((slide,i)=>{slide.classList.toggle('active',i===current);slide.setAttribute('aria-hidden',String(i!==current));slide.inert=i!==current});dots.forEach((dot,i)=>{dot.classList.toggle('active',i===current);dot.setAttribute('aria-current',i===current?'true':'false')});status.textContent=(current+1)+' / '+slides.length;}
+ function sync(){clearInterval(timer);timer=null;const stopped=paused||media.matches||mobile.matches;pause.textContent=paused?'Play':'Pause';pause.setAttribute('aria-label',paused?'Play banner autoplay':'Pause banner autoplay');pause.hidden=media.matches||mobile.matches;if(!stopped&&!hovered&&!focused&&!document.hidden)timer=setInterval(()=>show(current+1),{{ section.settings.autoplay_speed | default: 5 | times: 1000 }});}
+ previous.addEventListener('click',()=>{show(current-1);sync()});next.addEventListener('click',()=>{show(current+1);sync()});pause.addEventListener('click',()=>{paused=!paused;sync()});dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);sync()}));
+ slider.addEventListener('mouseenter',()=>{hovered=true;sync()});slider.addEventListener('mouseleave',()=>{hovered=false;sync()});slider.addEventListener('focusin',()=>{focused=true;sync()});slider.addEventListener('focusout',event=>{if(!slider.contains(event.relatedTarget)){focused=false;sync()}});
+ slider.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();show(current+(event.key==='ArrowRight'?1:-1));sync()}});
+ let startX=0,startY=0;slider.addEventListener('touchstart',event=>{startX=event.changedTouches[0].screenX;startY=event.changedTouches[0].screenY},{passive:true});slider.addEventListener('touchend',event=>{const dx=event.changedTouches[0].screenX-startX,dy=event.changedTouches[0].screenY-startY;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){show(current+(dx<0?1:-1));sync()}},{passive:true});
+ const visibility=()=>sync();document.addEventListener('visibilitychange',visibility);media.addEventListener('change',sync);mobile.addEventListener('change',sync);document.addEventListener('shopify:section:unload',function cleanup(event){if(event.target.contains(slider)){clearInterval(timer);document.removeEventListener('visibilitychange',visibility);media.removeEventListener('change',sync);mobile.removeEventListener('change',sync);document.removeEventListener('shopify:section:unload',cleanup)}});show(0);sync();
+})();
 </script>
 
 {% schema %}

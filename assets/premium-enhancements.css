@@ -887,3 +887,42 @@ body.tr-theme,
 .tr-theme .tr-product-mini-card .tr-product-price-row { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 8px; }
 .tr-theme .tr-product-mini-card .tr-product-price-row > span { white-space:nowrap; }
 @media(max-width:749px) { .tr-theme .tr-product-mini-card .tr-price-current { flex-basis:100%; } .tr-theme .tr-product-mini-card .tr-price-compare, .tr-theme .tr-product-mini-card .tr-price-discount { font-size:11px; } }
+
+/* UI refinement 2026-11-02: complete banners and consistent shopping cards. */
+.tr-theme #MainContent .tr-hero-slider { height:auto !important; }
+.tr-theme #MainContent .tr-hero-slides-container { height:auto !important; aspect-ratio:5 / 2; }
+.tr-theme #MainContent .tr-hero-slide, .tr-theme #MainContent .tr-hero-slide-link, .tr-theme #MainContent .tr-hero-img-wrap { height:auto !important; }
+.tr-theme #MainContent .tr-hero-slide-link, .tr-theme #MainContent .tr-hero-img-wrap picture { display:block !important; width:100%; height:auto !important; }
+.tr-theme #MainContent .tr-hero-slider .tr-hero-img { width:100%; height:auto !important; object-fit:contain !important; transform:none !important; }
+.tr-theme #MainContent .tr-hero-slider::after { height:12%; background:linear-gradient(transparent,rgba(23,36,61,.18)); }
+.tr-theme #MainContent .tr-hero-dots { bottom:4px !important; }
+.tr-theme .cps-heading, .tr-theme .tr-section-title-box h2 { font-size:clamp(24px,2.6vw,34px) !important; line-height:1.2; letter-spacing:-.02em; text-transform:none; text-wrap:balance; }
+.tr-theme .tr-section-title-box { background:transparent !important; border:0 !important; box-shadow:none !important; padding:0 !important; max-width:100%; }
+.tr-theme .tr-section-title-box h2 { color:#17243d !important; white-space:normal; }
+.tr-theme .cps-track { align-items:stretch; scroll-snap-type:x proximity; }
+.tr-theme .cps-card { scroll-snap-align:start; }
+.tr-theme .cps-info { flex:1; gap:12px; }
+.tr-theme .cps-title { font-size:15px !important; line-height:1.4; min-height:2.8em; }
+.tr-theme .cps-bottom-row { flex-direction:column !important; margin-top:auto !important; gap:12px; }
+.tr-theme .cps-price-wrapper { flex:0 0 auto !important; width:100%; }
+.tr-theme .cps-actions { display:grid !important; grid-template-columns:1fr 1fr; flex:0 0 auto !important; width:100%; gap:8px; align-items:stretch; }
+.tr-theme .cps-actions > * { min-width:0; width:100%; }
+.tr-theme .cps-actions > :only-child { grid-column:1 / -1; }
+.tr-theme .cps-actions .cps-add-btn { min-height:44px !important; height:100%; border-radius:9px !important; font-size:12px; box-shadow:none !important; }
+.tr-theme .cps-actions .cps-add-btn:not(.cps-buy-btn):not(:disabled) { background:#fff !important; color:#17243d !important; border:1px solid #17243d !important; }
+.tr-theme .cps-actions .cps-add-btn:disabled { opacity:1; background:#eef0f4 !important; color:#667085 !important; }
+.tr-theme .cps-actions form { height:100%; }
+.tr-theme .tr-header :is(button,a):focus-visible, .tr-theme .cps-add-btn:focus-visible, .tr-theme .tr-category-card:focus-visible { outline:3px solid #45a8e8; outline-offset:4px; }
+@media(max-width:749px) {
+ .tr-theme .tr-categories-section { padding-block:24px !important; }
+ .tr-theme .tr-categories-grid { grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:18px 10px !important; }
+ .tr-theme .tr-category-card { min-width:0; }
+ .tr-theme .tr-category-icon-box { width:min(100%,88px) !important; height:auto !important; aspect-ratio:1; margin-inline:auto; }
+ .tr-theme .tr-category-name { font-size:12px !important; line-height:1.35; overflow-wrap:anywhere; }
+ .tr-theme .cps-heading { margin-bottom:20px !important; }
+ .tr-theme .cps-actions { grid-template-columns:1fr; grid-auto-rows:44px; align-content:start; min-height:96px; }
+ .tr-theme .tr-pdp-top-wrapper :is(.tr-btn-buy-now,.tr-btn-add-cart) { min-height:48px; font-size:14px; }
+ .tr-theme button[aria-label="Open navigation menu"] { min-width:44px; min-height:44px; }
+}
+
+.tr-theme #MainContent .tr-hero-slides-container, .tr-theme #MainContent .tr-hero-img-wrap, .tr-theme #MainContent .tr-hero-img { max-height:none !important; }

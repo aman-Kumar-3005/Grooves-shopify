@@ -829,12 +829,13 @@
         <!-- Pincode Delivery Check -->
         {% if section.settings.show_pincode %}
           <div class="tr-pincode-block">
-            <label style="font-size: 13px; font-weight: 700; margin-bottom: 8px; display: block;">{{ section.settings.pincode_label | default: 'Check Estimated Delivery Date' }}</label>
+            <label for="tr-pincode-input-{{ section.id }}" style="font-size: 13px; font-weight: 700; margin-bottom: 8px; display: block;">Delivery PIN code</label>
             <div class="tr-pincode-wrap">
-              <input type="text" class="tr-pincode-input" id="tr-pincode-input-{{ section.id }}" placeholder="Enter 6-Digit Delivery Pincode" maxlength="6" inputmode="numeric">
-              <button type="button" class="tr-btn-check" id="tr-pincode-btn-{{ section.id }}">CHECK</button>
+              <input type="text" class="tr-pincode-input" id="tr-pincode-input-{{ section.id }}" placeholder="Enter 6-Digit Delivery Pincode" maxlength="6" inputmode="numeric" autocomplete="postal-code" aria-describedby="tr-pincode-help-{{ section.id }} tr-pincode-msg-{{ section.id }}">
+              <button type="button" class="tr-btn-check" id="tr-pincode-btn-{{ section.id }}">CHECK PIN</button>
             </div>
-            <div id="tr-pincode-msg-{{ section.id }}" style="font-size: 12.5px; margin-top: 8px; font-weight: 600; display: none;"></div>
+            <p id="tr-pincode-help-{{ section.id }}" style="font-size:12.5px;line-height:1.5;margin:8px 0 0;">Shipping availability, charges and delivery estimates are confirmed after entering your full address at checkout. <a href="/policies/shipping-policy">Shipping policy</a></p>
+            <div id="tr-pincode-msg-{{ section.id }}" role="status" aria-live="polite" style="font-size: 12.5px; margin-top: 8px; font-weight: 600; display: none;"></div>
           </div>
         {% endif %}
 
@@ -917,7 +918,7 @@
 {% when 'grooves-metal-x1' %}<p>Explore Grooves Metal X1 in the Grooves headphone range. Compare the model information and selected option below.</p>
 {% when 'grooves-fort' %}<p>Explore Grooves Fort from the Grooves audio range. The highlights below show the details currently confirmed for this exact listing.</p>
 {% when 'grooves-robo-x-thunder' %}<p>Explore Grooves Robo X Thunder in the Grooves headphone range. Compare the model information and selected option below.</p>
-{% when 'grooves-alpha-200-with-anc' %}<p>Explore Grooves Alpha 200 with ANC in the Grooves headphone range. Compare the model information and selected option below.</p>
+{% when 'grooves-alpha-200-with-anc' %}<p>Explore Grooves Alpha 200 with ANC earbuds with a charging case. Compare the model information and selected option below.</p>
 {% when 'grooves-alpha100' %}<p>Explore GROOVES Alpha100 in the Grooves headphone range. Compare the model information and selected option below.</p>
 {% when 'grooves-ultra-100' %}<p>Explore Grooves Ultra 100 from the Grooves audio range. The highlights below show the details currently confirmed for this exact listing.</p>
 {% when 'grooves-theta100-pro' %}<p>Explore GROOVES Theta100 Pro from the Grooves audio range. The highlights below show the details currently confirmed for this exact listing.</p>
@@ -990,6 +991,7 @@
 {% endif %}
 <h3 id="product-compatibility-help-{{ section.id }}" style="font-size:18px;">How can I confirm compatibility for {{ product.title | escape }}?</h3>
 <p>Check the specifications above for the exact model and selected option. If a required connection or feature is not listed, <a href="/pages/contact">contact Grooves support</a> with your device model before ordering; specifications from another Grooves product should not be assumed to apply.</p>
+{% if product.handle == 'grooves-alpha-200-with-anc' or product.handle == 'alpha-100x' or product.handle == 'grooves-metal-x1' %}<p>Choosing your listening style? Read our <a href="/blogs/news/grooves-earbuds-vs-headphones-buying-guide">earbuds vs headphones buying guide</a> to compare fit and what to check before ordering.</p>{% endif %}
 <h3 id="product-order-terms-{{ section.id }}" style="font-size:18px;">Which delivery and return terms apply to {{ product.title | escape }}?</h3>
 <p>Review the <a href="/policies/shipping-policy">shipping policy</a> and <a href="/policies/refund-policy">refund policy</a>. Delivery details are shown during checkout. Ask <a href="mailto:support@grooveslifestyle.com">Grooves customer support</a> for warranty support and to confirm package contents for the exact model. All Grooves products include a 6-month brand warranty.</p>
 <p><a href="{{ routes.all_products_collection_url }}">Explore all Grooves products</a>.</p>
@@ -1085,7 +1087,7 @@
       if (/^[1-9][0-9]{5}$/.test(val)) {
         pinMsg.style.display = 'block';
         pinMsg.style.color = 'var(--tr-accent)';
-        pinMsg.textContent = '✓ Delivery expected in 2-4 business days to ' + val + '. Free shipping eligible!';
+        pinMsg.textContent = 'PIN code format looks valid. Enter your full address at checkout to view available shipping options and charges.';
       } else {
         pinMsg.style.display = 'block';
         pinMsg.style.color = '#ff4d4d';

@@ -313,6 +313,17 @@
   })();
 </script>
 
+
+<style>
+  /* Keep the complete header group inside the storefront scroll container. */
+  #header-group {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-shrink: 0;
+  }
+</style>
+
 {% schema %}
 {
   "name": "Grooves Header",

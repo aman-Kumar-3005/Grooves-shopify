@@ -12,6 +12,20 @@
     "hero_slider": {
       "type": "tr-hero-banner",
       "blocks": {
+        "slide_HhtEiN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Sound_That_Moves_You.png",
+            "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187",
+            "mobile_image_url": "",
+            "button_link": "shopify://collections/all",
+            "show_text_overlay": false,
+            "badge_text": "FLAT 10% OFF | USE CODE: GROOVES10",
+            "heading": "Grooves Pulse Pro ANC",
+            "subheading": "Dual Drivers & Wireless Fast Charging",
+            "button_label": "EXPLORE AUDIO"
+          }
+        },
         "slide_eabjGj": {
           "type": "slide",
           "settings": {
@@ -20,31 +34,31 @@
             "mobile_image": "shopify://shop_images/Exactcharcoallogoongreen-litcase.png",
             "mobile_image_url": "",
             "button_link": "shopify://collections/all",
-            "show_text_overlay": false,
+            "show_text_overlay": true,
             "badge_text": "",
-            "heading": "",
-            "subheading": "",
-            "button_label": ""
+            "heading": "Grooves Wireless Earbuds",
+            "subheading": "Take your playlist with you",
+            "button_label": "Explore Grooves"
           }
         },
         "slide_swirl": {
           "type": "slide",
-          "disabled": true,
           "settings": {
-            "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_25_44_AM.png?v=1790117888",
+            "image": "shopify://shop_images/product678e73fca9c29.webp",
+            "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_25_44_AM.png?v=1790117888https://cdn.shopify.com/s/files/1/0607/9401/1781/files/product678e73fca9c29.webp?v=1790163446&width=72https://cdn.shopify.com/s/files/1/0607/9401/1781/files/product678e73fca9c29.webp?v=1790163446&width=720",
             "mobile_image_url": "",
             "button_link": "shopify://collections/all",
-            "show_text_overlay": false,
+            "show_text_overlay": true,
             "badge_text": "",
-            "heading": "",
-            "subheading": "",
-            "button_label": ""
+            "heading": "Grooves Alpha 100X",
+            "subheading": "Headphones for your daily playlist",
+            "button_label": "Explore Grooves"
           }
         },
         "slide_bold": {
           "type": "slide",
-          "disabled": true,
           "settings": {
+            "image": "shopify://shop_images/Grooves_Beat_2.0_Earbuds_Advertisement.png",
             "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_26_53_AM.png?v=1790117887",
             "mobile_image_url": "",
             "button_link": "shopify://collections/all",
@@ -57,6 +71,7 @@
         }
       },
       "block_order": [
+        "slide_HhtEiN",
         "slide_eabjGj",
         "slide_swirl",
         "slide_bold"

@@ -79,9 +79,9 @@
       "custom_css": [
         "h2{font-size:32px}",
         ".tr-hero-slide{position:absolute!important;inset:0}",
-        ".tr-hero-slide .tr-hero-img{height:40vw!important;max-height:40vw!important;object-fit:contain!important}",
-        "@media(max-width:1024px){.tr-hero-slides-container{aspect-ratio:4/3!important}.tr-hero-slide .tr-hero-img{height:74vw!important;max-height:74vw!important}}",
-        "@media(max-width:600px){.tr-hero-slides-container{aspect-ratio:1!important}.tr-hero-slide .tr-hero-img{height:97vw!important;max-height:97vw!important}}"
+        ".tr-hero-slide .tr-hero-img{max-height:39.5vw!important;object-fit:contain!important}",
+        "@media(max-width:1024px){.tr-hero-slides-container{aspect-ratio:4/3!important}.tr-hero-slide .tr-hero-img{max-height:73vw!important}}",
+        "@media(max-width:600px){.tr-hero-slides-container{aspect-ratio:1!important}.tr-hero-slide .tr-hero-img{max-height:96vw!important}}"
       ],
       "settings": {
         "desktop_height": 600,

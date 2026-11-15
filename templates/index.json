@@ -15,9 +15,9 @@
         "slide_eabjGj": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/exec-77f5756f-3611-4e75-9608-f9619c519c20.png",
+            "image": "shopify://shop_images/Exactcharcoallogoongreen-litcase.png",
             "image_url": "",
-            "mobile_image": "shopify://shop_images/exec-8be5ffd0-b9ef-4349-8b6c-ec2819874a63.png",
+            "mobile_image": "shopify://shop_images/Exactcharcoallogoongreen-litcase.png",
             "mobile_image_url": "",
             "button_link": "shopify://collections/all",
             "show_text_overlay": false,
@@ -63,7 +63,7 @@
       ],
       "settings": {
         "desktop_height": 600,
-        "desktop_image_fit": "cover",
+        "desktop_image_fit": "contain",
         "desktop_banner_width": 100,
         "mobile_height": 200,
         "mobile_image_fit": "contain",

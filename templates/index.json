@@ -77,10 +77,12 @@
         "slide_bold"
       ],
       "custom_css": [
-        ".tr-hero-slide,.tr-hero-slide-link,.tr-hero-img-wrap,picture{height:100%;}",
+        "h2{font-size:32px;}",
+        ".tr-hero-slide{position:absolute!important;inset:0;}",
+        ".tr-hero-slide,.tr-hero-slide-link,.tr-hero-img-wrap,picture{height:100%!important;}",
         ".tr-hero-img{display:block;width:100%;height:100%!important;object-fit:contain!important;}",
-        "@media(max-width:1024px){.tr-hero-slides-container{aspect-ratio:4/3;}}",
-        "@media(max-width:600px){.tr-hero-slides-container{aspect-ratio:1;}}"
+        "@media(max-width:1024px){.tr-hero-slides-container{aspect-ratio:4/3!important;}}",
+        " @media(max-width:600px){.tr-hero-slides-container{aspect-ratio:1!important;}}"
       ],
       "settings": {
         "desktop_height": 600,

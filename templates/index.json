@@ -27,20 +27,6 @@
             "button_label": ""
           }
         },
-        "slide_dEHeYb": {
-          "type": "slide",
-          "disabled": true,
-          "settings": {
-            "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/exec-2f259758-7d03-44ec-ab9c-43743cf57f3e.png?v=1793386311",
-            "mobile_image_url": "",
-            "button_link": "shopify://collections/all",
-            "show_text_overlay": false,
-            "badge_text": "FLAT 10% OFF | USE CODE: GROOVES10",
-            "heading": "Grooves Pulse Pro ANC",
-            "subheading": "Dual Drivers & Wireless Fast Charging",
-            "button_label": "EXPLORE AUDIO"
-          }
-        },
         "slide_swirl": {
           "type": "slide",
           "disabled": true,
@@ -72,7 +58,6 @@
       },
       "block_order": [
         "slide_eabjGj",
-        "slide_dEHeYb",
         "slide_swirl",
         "slide_bold"
       ],

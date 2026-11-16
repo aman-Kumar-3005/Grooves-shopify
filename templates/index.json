@@ -17,6 +17,7 @@
           "settings": {
             "image": "shopify://shop_images/Sound_That_Moves_You.png",
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187",
+            "mobile_image": "shopify://shop_images/Sound_That_Moves_You.png",
             "mobile_image_url": "",
             "button_link": "shopify://collections/all",
             "show_text_overlay": false,
@@ -46,6 +47,7 @@
           "settings": {
             "image": "shopify://shop_images/product678e73fca9c29.webp",
             "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_25_44_AM.png?v=1790117888https://cdn.shopify.com/s/files/1/0607/9401/1781/files/product678e73fca9c29.webp?v=1790163446&width=72https://cdn.shopify.com/s/files/1/0607/9401/1781/files/product678e73fca9c29.webp?v=1790163446&width=720",
+            "mobile_image": "shopify://shop_images/product678e73fca9c29.webp",
             "mobile_image_url": "",
             "button_link": "shopify://collections/all",
             "show_text_overlay": true,
@@ -58,8 +60,9 @@
         "slide_bold": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Grooves_Beat_2.0_Earbuds_Advertisement.png",
+            "image": "shopify://shop_images/exec-f39ef3e2-a0ff-4e60-89e3-0f93475aa465.png",
             "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_26_53_AM.png?v=1790117887",
+            "mobile_image": "shopify://shop_images/Grooves_Beat_2.0_Earbuds_Advertisement.png",
             "mobile_image_url": "",
             "button_link": "shopify://collections/all",
             "show_text_overlay": false,
@@ -80,9 +83,9 @@
         "h2{font-size:32px}",
         ".tr-hero-slider,.tr-hero-img-wrap{background:#fff!important}",
         ".tr-hero-slider{container-type:inline-size;--h:41.65cqw}",
-        ".tr-hero-slider .tr-hero-slides-container,.tr-hero-slide img.tr-hero-img{height:var(--h)!important}",
-        ".tr-hero-slider .tr-hero-slide img.tr-hero-img{max-height:var(--h)!important;object-fit:var(--fit,fill)!important;padding-bottom:58px}",
-        "@media(max-width:767px){.tr-hero-slider{--h:84.4cqw;--fit:contain}.tr-hero-slide img.tr-hero-img{padding-bottom:0}}"
+        ".tr-hero-slider :is(.tr-hero-slides-container,img.tr-hero-img){height:var(--h)!important;max-height:var(--h)!important}",
+        "@media(max-width:767px){.tr-hero-slider{--h:84.4cqw}}",
+        "@media(min-width:768px){.tr-hero-slider .tr-hero-slide img.tr-hero-img{object-fit:cover!important;padding-bottom:58px}.tr-hero-overlay{display:none!important}}"
       ],
       "settings": {
         "desktop_height": 600,

@@ -15,7 +15,7 @@
         "slide_HhtEiN": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Sound_That_Moves_You.png",
+            "image": "shopify://shop_images/exec-0e65d270-9c05-4c60-8c05-3fc2e455d741.png",
             "image_url": "https://cdn.shopify.com/s/files/1/0666/4870/3294/files/WEB_Hompage_SwIRL_Powerwebp.webp?v=1789044187",
             "mobile_image": "shopify://shop_images/Sound_That_Moves_You.png",
             "mobile_image_url": "",
@@ -30,7 +30,7 @@
         "slide_eabjGj": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Exactcharcoallogoongreen-litcase.png",
+            "image": "shopify://shop_images/exec-1bb77e0e-9b0f-445b-a02d-77a404125ec7.png",
             "image_url": "",
             "mobile_image": "shopify://shop_images/Exactcharcoallogoongreen-litcase.png",
             "mobile_image_url": "",
@@ -45,7 +45,7 @@
         "slide_swirl": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/product678e73fca9c29.webp",
+            "image": "shopify://shop_images/exec-2dc7d636-75f1-42df-ac56-6bdd712f5548.png",
             "image_url": "https://cdn.shopify.com/s/files/1/0607/9401/1781/files/ChatGPT_Image_Sep_23_2026_04_25_44_AM.png?v=1790117888https://cdn.shopify.com/s/files/1/0607/9401/1781/files/product678e73fca9c29.webp?v=1790163446&width=72https://cdn.shopify.com/s/files/1/0607/9401/1781/files/product678e73fca9c29.webp?v=1790163446&width=720",
             "mobile_image": "shopify://shop_images/product678e73fca9c29.webp",
             "mobile_image_url": "",
@@ -80,12 +80,12 @@
         "slide_bold"
       ],
       "custom_css": [
-        "h2{font-size:32px}",
-        ".tr-hero-slider,.tr-hero-img-wrap{background:#fff!important}",
-        ".tr-hero-slider{container-type:inline-size;--h:41.65cqw}",
-        ".tr-hero-slider :is(.tr-hero-slides-container,img.tr-hero-img){height:var(--h)!important;max-height:var(--h)!important}",
-        "@media(max-width:767px){.tr-hero-slider{--h:84.4cqw}}",
-        "@media(min-width:768px){.tr-hero-slider .tr-hero-slide img.tr-hero-img{object-fit:cover!important;padding-bottom:58px}.tr-hero-overlay{display:none!important}}"
+        "h2 {font-size: 32px;}",
+        ".tr-hero-slider,.tr-hero-img-wrap {background: #fff !important;}",
+        ".tr-hero-slider {container-type: inline-size; --h: 41.65cqw;}",
+        ".tr-hero-slider :is(.tr-hero-slides-container, img.tr-hero-img) {height: var(--h) !important; max-height: var(--h) !important;}",
+        "@media (max-width: 767px) {.tr-hero-slider {--h: 84.4cqw; }}",
+        "@media (min-width: 768px) {.tr-hero-slider .tr-hero-slide img.tr-hero-img {object-fit: cover !important; padding-bottom: 58px; } .tr-hero-overlay {display: none !important; }}"
       ],
       "settings": {
         "desktop_height": 600,

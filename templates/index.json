@@ -78,11 +78,12 @@
       ],
       "custom_css": [
         "h2{font-size:32px}",
-        ".tr-hero-slider{background:#fff!important;container-type:inline-size;--hero-h:41.65cqw}",
-        ".tr-hero-slider .tr-hero-slides-container{height:var(--hero-h)!important;max-height:none!important}",
-        ".tr-hero-img-wrap{background:#fff!important}",
-        ".tr-hero-slide .tr-hero-img{width:100%!important;height:var(--hero-h)!important;max-height:var(--hero-h)!important;object-fit:contain!important}",
-        "@media(max-width:767px){.tr-hero-slider{--hero-h:84.4cqw}}"
+        ".tr-hero-slider,.tr-hero-img-wrap{background:#fff!important}",
+        ".tr-hero-slider{container-type:inline-size;--h:41.65cqw}",
+        ".tr-hero-slider .tr-hero-slides-container,.tr-hero-slide .tr-hero-img{height:var(--h)!important;max-height:none!important}",
+        ".tr-hero-slide .tr-hero-img{width:100%!important;max-height:var(--h)!important;object-fit:contain!important}",
+        "@media(max-width:767px){.tr-hero-slider{--h:84.4cqw}}",
+        "@media(min-width:768px){.tr-hero-img{box-sizing:border-box;padding-bottom:58px}}"
       ],
       "settings": {
         "desktop_height": 600,

@@ -79,7 +79,7 @@
       "custom_css": [
         "h2{font-size:32px}",
         ".tr-hero-slider,.tr-hero-img-wrap{background:#fff!important}",
-        ".tr-hero-slider,.tr-hero-slides-container{aspect-ratio:auto!important;height:auto!important;min-height:0!important;max-height:none!important}",
+        ".tr-hero-slider,.tr-hero-slider .tr-hero-slides-container{aspect-ratio:auto!important;height:auto!important;min-height:0!important;max-height:none!important}",
         ".tr-hero-img{display:block;width:100%;height:auto!important;object-fit:contain!important}",
         "@media(min-width:1025px){.tr-hero-slide .tr-hero-img{width:auto!important;max-height:min(52vh,560px)!important;margin-inline:auto}}"
       ],

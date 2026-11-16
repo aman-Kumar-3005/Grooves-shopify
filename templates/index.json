@@ -80,10 +80,9 @@
         "h2{font-size:32px}",
         ".tr-hero-slider,.tr-hero-img-wrap{background:#fff!important}",
         ".tr-hero-slider{container-type:inline-size;--h:41.65cqw}",
-        ".tr-hero-slider .tr-hero-slides-container,.tr-hero-slide .tr-hero-img{height:var(--h)!important;max-height:none!important}",
-        ".tr-hero-slide .tr-hero-img{width:100%!important;max-height:var(--h)!important;object-fit:contain!important}",
-        "@media(max-width:767px){.tr-hero-slider{--h:84.4cqw}}",
-        "@media(min-width:768px){.tr-hero-img{box-sizing:border-box;padding-bottom:58px}}"
+        ".tr-hero-slider .tr-hero-slides-container,.tr-hero-slide .tr-hero-img{height:var(--h)!important}",
+        ".tr-hero-slide .tr-hero-img{width:100%;max-height:var(--h)!important;object-fit:fill!important;padding-bottom:58px}",
+        "@media(max-width:767px){.tr-hero-slider{--h:84.4cqw}.tr-hero-slide .tr-hero-img{object-fit:contain!important;padding-bottom:0}}"
       ],
       "settings": {
         "desktop_height": 600,

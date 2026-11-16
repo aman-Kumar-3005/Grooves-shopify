@@ -81,7 +81,7 @@
         ".tr-hero-slider,.tr-hero-img-wrap{background:#fff!important}",
         ".tr-hero-slider{container-type:inline-size;--h:41.65cqw}",
         ".tr-hero-slider .tr-hero-slides-container,.tr-hero-slide img.tr-hero-img{height:var(--h)!important}",
-        ".tr-hero-slide img.tr-hero-img{max-height:var(--h)!important;object-fit:var(--fit,fill)!important;padding-bottom:58px}",
+        ".tr-hero-slider .tr-hero-slide img.tr-hero-img{max-height:var(--h)!important;object-fit:var(--fit,fill)!important;padding-bottom:58px}",
         "@media(max-width:767px){.tr-hero-slider{--h:84.4cqw;--fit:contain}.tr-hero-slide img.tr-hero-img{padding-bottom:0}}"
       ],
       "settings": {

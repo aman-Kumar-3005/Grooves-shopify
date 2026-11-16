@@ -21,10 +21,10 @@
             "mobile_image_url": "",
             "button_link": "shopify://collections/all",
             "show_text_overlay": false,
-            "badge_text": "FLAT 10% OFF | USE CODE: GROOVES10",
-            "heading": "Grooves Pulse Pro ANC",
-            "subheading": "Dual Drivers & Wireless Fast Charging",
-            "button_label": "EXPLORE AUDIO"
+            "badge_text": "",
+            "heading": "",
+            "subheading": "",
+            "button_label": ""
           }
         },
         "slide_eabjGj": {
@@ -52,9 +52,9 @@
             "button_link": "shopify://collections/all",
             "show_text_overlay": true,
             "badge_text": "",
-            "heading": "Grooves Alpha 100X",
-            "subheading": "Headphones for your daily playlist",
-            "button_label": "Explore Grooves"
+            "heading": "",
+            "subheading": "",
+            "button_label": ""
           }
         },
         "slide_bold": {

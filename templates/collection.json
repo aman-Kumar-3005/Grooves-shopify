@@ -50,6 +50,10 @@
       "block_order": [
         "text_tqQTNE"
       ],
+      "custom_css": [
+        ".text-block,.text-block *,h1,h2,h3,.h1,.h2,.h3 {color: #fff !important; text-shadow: 0 2px 18px #0008;}",
+        "h1,h2,h3 {font-size: clamp(28px, 4vw, 52px); line-height: 1.12;}"
+      ],
       "name": "t:names.heading",
       "settings": {
         "content_direction": "row",
@@ -357,6 +361,14 @@
           ]
         }
       },
+      "custom_css": [
+        ".collection-wrapper{padding-block:12px 32px!important}",
+        ".facets,.facets-controls-wrapper,.facets__form-wrapper,.facets-mobile-wrapper{background:#fff!important;color:#17243d!important;border-radius:12px;box-shadow:none}",
+        ".facets *{color:#17243d!important}",
+        ".grooves-collection-guidance{padding-block:8px!important}",
+        ".grooves-collection-guidance p{margin:8px 0!important}",
+        ".product-grid{gap:16px!important}"
+      ],
       "settings": {
         "layout_type": "grid",
         "product_card_size": "large",

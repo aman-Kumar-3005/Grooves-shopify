@@ -100,6 +100,11 @@
         "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
         "disabled": false,
         "settings": {}
+      },
+      "13417815402603211594": {
+        "type": "shopify://apps/uppush-email-marketing/blocks/push-notification/89fcbaff-b715-4dc6-a755-6fdb7b790bee",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_palette": {

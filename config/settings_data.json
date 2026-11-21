@@ -181,5 +181,11 @@
         "color3": "#E8ECF2"
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".page-width-content,.page-width-content>.section-content-wrapper,main :has(.gr-contact),main :has(.gr-page){background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important}",
+      ".page-width-content>.section-content-wrapper{padding-inline:0!important}"
+    ]
   }
 }

@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "section": {
       "type": "main-blog-post",
@@ -26,6 +27,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -42,10 +44,14 @@
           "settings": {
             "show_date": true,
             "show_author": false,
+            "type_preset": "",
             "alignment": "center",
+            "text_color": "",
             "show_alignment": true,
             "padding-block-start": 0,
-            "padding-block-end": 0
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -54,6 +60,7 @@
           "name": "t:names.featured_image",
           "settings": {
             "image": "{{ article.image }}",
+            "link": "",
             "image_ratio": "adapt",
             "width": "fill",
             "custom_width": 100,
@@ -63,6 +70,7 @@
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -73,7 +81,9 @@
         },
         "blog-post-content": {
           "type": "_blog-post-content",
-          "settings": {},
+          "settings": {
+            "text_color": ""
+          },
           "blocks": {}
         }
       },
@@ -90,9 +100,21 @@
         "padding-block-start": 40,
         "padding-block-end": 80
       }
+    },
+    "custom_liquid_XtLJnm": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "{% if article != blank %}{% assign post_link = shop.url | append: article.url %}{% assign post_link_encoded = post_link | url_encode %}{% assign wa_text = article.title | append: ' ' | append: post_link | url_encode %}<section id=\"blog-tools-{{ section.id }}\" class=\"gr-blog-tools\" aria-label=\"Article publication and sharing\"><p class=\"gr-published\">Published <time datetime=\"{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}\" data-unix=\"{{ article.published_at | date: '%s' }}\">{{ article.published_at | date: '%d %b %Y, %I:%M %p %z' }}</time></p><h2>Share this guide</h2><div class=\"gr-share-links\"><a href=\"https://wa.me/?text={{ wa_text }}\" target=\"_blank\" rel=\"noopener noreferrer\">WhatsApp</a><a href=\"https://www.facebook.com/sharer/sharer.php?u={{ post_link_encoded }}\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook</a><a href=\"https://www.linkedin.com/sharing/share-offsite/?url={{ post_link_encoded }}\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a><button type=\"button\" data-copy>Copy link</button></div><p class=\"gr-share-status\" role=\"status\" aria-live=\"polite\"></p><input class=\"gr-share-fallback\" value=\"{{ post_link | escape }}\" readonly aria-label=\"Article link to copy\" hidden></section><style>.gr-blog-tools{box-sizing:border-box;width:calc(100% - 32px);max-width:1120px;margin:24px auto 48px;padding:24px 0;border-top:1px solid #dce4ed;color:#17243d}.gr-blog-tools .gr-published{font-size:14px;line-height:1.6;margin:0 0 14px;overflow-wrap:anywhere}.gr-blog-tools h2{font-size:22px;line-height:1.3;margin:0 0 16px}.gr-share-links{display:flex;flex-wrap:wrap;gap:10px}.gr-share-links a,.gr-share-links button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid #cbd6e3;border-radius:10px;background:#fff;color:#17243d;text-decoration:none;font:inherit;font-size:15px;cursor:pointer}.gr-share-links a:hover,.gr-share-links button:hover{background:#eaf5ff}.gr-share-links :focus-visible{outline:3px solid #1685ce;outline-offset:3px}.gr-share-status{font-size:14px;min-height:22px;margin:12px 0 0}.gr-share-fallback{box-sizing:border-box;max-width:100%;width:100%;padding:12px;border:1px solid #cbd6e3;border-radius:8px}@media(max-width:599px){.gr-share-links>a,.gr-share-links>button{flex:1 1 130px}.gr-blog-tools{margin-bottom:32px}}</style><script>(()=>{const root=document.getElementById('blog-tools-{{ section.id }}');if(!root||root.dataset.ready)return;root.dataset.ready='1';const stamp=root.querySelector('time');const seconds=Number(stamp.dataset.unix);if(seconds){stamp.textContent=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:true}).format(new Date(seconds*1000))+' IST';}root.querySelector('[data-copy]').addEventListener('click',async()=>{const fallback=root.querySelector('input');const status=root.querySelector('[role=status]');try{await navigator.clipboard.writeText(fallback.value);status.textContent='Link copied';}catch(e){fallback.hidden=false;fallback.focus();fallback.select();status.textContent='Select and copy the link below.'}});})();</script>{% endif %}",
+        "background_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
-    "section"
+    "section",
+    "custom_liquid_XtLJnm"
   ]
 }

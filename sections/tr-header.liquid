@@ -17,6 +17,11 @@
   endif
 -%}
 
+<style>
+/* Single clean navigation treatment; retain keyboard focus outlines. */
+.tr-header .tr-nav-link,.tr-header .tr-nav-link:hover,.tr-header .tr-nav-link:focus-visible{ text-decoration:none!important;border-bottom:0!important;box-shadow:none!important;background-image:none!important;}
+.tr-header .tr-nav-link::before,.tr-header .tr-nav-link::after{content:none!important;display:none!important;}
+</style>
 <header class="tr-header" id="tr-header-{{ section.id }}" style="--tr-logo-w-desk: {{ logo_w_desk }}px; --tr-logo-w-mob: {{ logo_w_mob }}px;">
   <div class="tr-container">
     <div class="tr-header-inner">
@@ -122,7 +127,7 @@
             {% for link in nav_links %}
               <a 
                 href="{{ link.url }}" 
-                class="tr-nav-link {% if link.current or forloop.first %}active{% endif %}"
+                class="tr-nav-link {% if link.current %}active{% endif %}"
               >
                 {{ link.title }}
               </a>
@@ -132,7 +137,7 @@
               {% if block.type == 'nav_item' %}
                 <a 
                   href="{{ block.settings.url | default: '/collections/all' }}" 
-                  class="tr-nav-link {% if block.settings.is_active or forloop.first %}active{% endif %}"
+                  class="tr-nav-link {% if block.settings.is_active %}active{% endif %}"
                 >
                   {{ block.settings.title }}
                 </a>

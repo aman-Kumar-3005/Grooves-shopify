@@ -1467,10 +1467,17 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "grooves_store_intro": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section class=\"gr-store-intro\" aria-labelledby=\"gr-store-intro-title\"><div class=\"gr-store-intro-wrap\"><h2 id=\"gr-store-intro-title\">Find your everyday essentials</h2><p>Grooves Lifestyle offers wireless earbuds, headphones, neckbands and mobile charging accessories in India. Compare the exact model, wearing style, charging requirements and current availability before choosing. Our buying guides explain key terms, and the support team can help with product questions.</p><nav aria-label=\"Explore shopping and buying help\"><a href=\"/collections/earbuds\">Shop earbuds</a><a href=\"/collections/headphones\">Explore headphones</a><a href=\"/collections/adaptor\">Compare chargers</a><a href=\"#grooves-buying-help\">Read buying help</a></nav></div></section><style>.gr-store-intro{background:#f3f7fc;color:#17243d}.gr-store-intro-wrap{max-width:1280px;margin:auto;padding:22px 24px}.gr-store-intro h2{font-size:clamp(20px,2vw,26px);line-height:1.2;margin:0 0 10px}.gr-store-intro p{max-width:100ch;font-size:15px;line-height:1.65;margin:0}.gr-store-intro nav{display:flex;gap:12px 24px;flex-wrap:wrap;margin-top:12px}.gr-store-intro a{font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:4px}.gr-store-intro a:focus-visible{outline:2px solid #2164c4;outline-offset:4px}@media(max-width:749px){.gr-store-intro-wrap{padding:20px 16px}.gr-store-intro nav{gap:12px 18px}}</style>"
+      }
     }
   },
   "order": [
     "hero_slider",
+    "grooves_store_intro",
     "categories",
     "custom_product_slider_x9FpRN",
     "product_recommendations_TMJdaG",

@@ -190,6 +190,7 @@
 {% assign grooves_home_questions = grooves_home_questions | split: '|' %}
 {% assign grooves_home_answers = grooves_home_answers | split: '|' %}
 <section class="grooves-answer-guide" id="grooves-buying-help" aria-label="Audio and charging buying help">
+<p class="grooves-guide-byline author">Buying guidance by <a href="/pages/about-grooves" rel="author">Grooves Lifestyle</a>.</p>
 <p>Find wireless audio products and mobile charging accessories for your everyday setup. Use the guidance below to compare formats, then check the exact model on its product page.</p>
 {% for question in grooves_home_questions %}
 <h2 id="{{ question | handleize }}">{{ question | escape }}</h2>
@@ -202,7 +203,7 @@
 <ol><li>Identify the exact phone, tablet or other device model.</li><li>Check its supported audio connection or charging protocol in the device documentation.</li><li>Compare the selected accessory and cable specifications with those requirements.</li><li>Ask support about any missing detail before ordering.</li></ol>
 <p>Explore <a href="/collections/earbuds">TWS earbuds</a>, <a href="/collections/neck-band">neckband earphones</a>, <a href="/collections/headphones">headphones</a> and <a href="/collections/adaptor">charging adapters</a>. Read <a href="/pages/about-grooves">about the brand and its operator</a> or <a href="/pages/contact">contact customer support</a>.</p>
 </section>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","description":"Answers to common questions about wireless audio formats and mobile charging accessory compatibility.","@id":{{ canonical_url | append: '#faqs' | json }},"mainEntity":[{% for question in grooves_home_questions %}{% unless forloop.first %},{% endunless %}{"@type":"Question","name":{{ question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ grooves_home_answers[forloop.index0] | strip | json }}}}{% endfor %}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","description":"Answers to common questions about wireless audio formats and mobile charging accessory compatibility.","@id":{{ canonical_url | append: '#faqs' | json }},"mainEntity":[{% for question in grooves_home_questions %}{% unless forloop.first %},{% endunless %}{"@type":"Question","name":{{ question | json }},"text":{{ question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ grooves_home_answers[forloop.index0] | strip | json }}}}{% endfor %}]}</script>
 <style>.grooves-answer-guide{max-width:1280px;margin:0 auto;padding:32px 24px;line-height:1.65}.grooves-answer-guide h2{font-size:clamp(20px,3vw,28px);margin:24px 0 12px;scroll-margin-top:100px}.grooves-answer-guide p{margin:0 0 16px}.grooves-comparison-scroll{overflow-x:auto}.grooves-answer-guide table{width:100%;border-collapse:collapse;text-align:left}.grooves-answer-guide th,.grooves-answer-guide td{padding:12px;border:1px solid var(--g-border,#ddd);vertical-align:top}.grooves-answer-guide caption{text-align:left;margin-bottom:10px}.grooves-answer-guide ol{padding-left:24px}@media(max-width:749px){.grooves-answer-guide{padding:24px 16px}.grooves-answer-guide th,.grooves-answer-guide td{padding:8px}}</style>
 {% endif %}
 

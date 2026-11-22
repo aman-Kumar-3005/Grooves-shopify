@@ -192,6 +192,7 @@
 <section class="grooves-answer-guide" id="grooves-buying-help" aria-label="Audio and charging buying help">
 <p class="grooves-guide-byline author">Buying guidance by <a href="/pages/about-grooves" rel="author">Grooves Lifestyle</a>.</p>
 <p>Find wireless audio products and mobile charging accessories for your everyday setup. Use the guidance below to compare formats, then check the exact model on its product page.</p>
+<nav class="grooves-guide-toc" aria-label="On this page"><strong>On this page</strong><ul>{% for question in grooves_home_questions %}<li><a href="#{{ question | handleize }}">{{ question | escape }}</a></li>{% endfor %}<li><a href="#audio-terms">Audio and charging terms</a></li><li><a href="#compare-audio-formats">Compare audio formats</a></li><li><a href="#check-accessory-compatibility">Check accessory compatibility</a></li></ul></nav>
 {% for question in grooves_home_questions %}
 <h2 id="{{ question | handleize }}">{{ question | escape }}</h2>
 <p>{{ grooves_home_answers[forloop.index0] | strip | escape }}</p>

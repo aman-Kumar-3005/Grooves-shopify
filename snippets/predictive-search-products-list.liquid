@@ -23,6 +23,7 @@
       ref="recentlyViewedWrapper"
     >
       <h2
+        id="predictive-recently-viewed-{{ products_test_id | default: 'results' | handleize }}"
         class="predictive-search-results__title"
         ref="recentlyViewedTitle[]"
       >
@@ -83,7 +84,7 @@
       </ul>
     </div>
   {% else %}
-    <h2 class="predictive-search-results__title">
+    <h2 id="predictive-products-heading-{{ products_test_id | default: 'results' | handleize }}" class="predictive-search-results__title">
       {{ title }}
     </h2>
     <ul

@@ -20,6 +20,11 @@
     {%- endif -%}
 
     {%- render 'meta-tags' -%}
+    {% comment %}Permit large search previews for public storefront content without overriding indexing directives.{% endcomment %}
+    {% if request.page_type == 'index' or request.page_type == 'product' or request.page_type == 'collection' or request.page_type == 'page' or request.page_type == 'blog' or request.page_type == 'article' %}
+      <meta name="robots" content="max-image-preview:large">
+    {% endif %}
+
     {%- render 'stylesheets' -%}
     {%- render 'card-hover-effect-styles' -%}
     {%- render 'fonts' -%}
